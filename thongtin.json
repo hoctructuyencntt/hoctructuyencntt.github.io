@@ -1,10 +1,13 @@
 [{
-        "doc": "<a href='https://hoctructuyencntt.github.io/NNLT/Baimodau.html'>NGÔN NGỮ LẬP TRÌNH C</a>"
+        "doc": "<a href='https://hoctructuyencntt.github.io/NNLT/Baimodau.html'>NGÔN NGỮ LẬP TRÌNH C</a>", 
+        "cat": "Nền tảng"
     },
     {
-       "doc": "<a href='https://hoctructuyencntt.github.io/TKWEB/Bai01.html'>NHẬP MÔN THIẾT KẾ WEB</a>"
+       "doc": "<a href='https://hoctructuyencntt.github.io/TKWEB/Bai01.html'>NHẬP MÔN THIẾT KẾ WEB</a>",
+        "cat": "Front-end"
     },
     {
-       "doc": "<a href='https://hoctructuyencntt.github.io/React/Bai01.html'>NHẬP MÔN REACT, REDUX</a>"
+       "doc": "<a href='https://hoctructuyencntt.github.io/React/Bai01.html'>NHẬP MÔN REACT, REDUX</a>",
+        "cat": "Front-end"
     }
 ]
