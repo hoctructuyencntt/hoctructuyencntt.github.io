@@ -66,12 +66,13 @@
       padding: 20px;
       text-align: center;
     }
-h1 {
-  text-align: center;
-  margin: 35px 0 20px 0 !important;
-}
+
+    h1 {
+      text-align: center;
+      margin: 35px 0 20px 0 !important;
+    }
   </style>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -81,35 +82,40 @@ h1 {
 
   <nav>
     <ul>
+      <li><a href="timkiem.html">Tìm Tài Liệu</a></li>
       <li><a href="nentang.html">Nền Tảng</a></li>
       <li><a href="frontend.html">Front-End</a></li>
+      <li><a href="backend.html">Back-End</a></li>
+      <li><a href="didong.html">Mobile Development</a></li>
       <li><a href="thongtin.html">Về Website</a></li>
-       <li><a href="lienhe.html">Liên Hệ</a></li>
+      <li><a href="lienhe.html">Liên Hệ</a></li>
     </ul>
   </nav>
 
   <main>
     <div class="container">
-  <h1>NỘP BÀI</h1>
-  <form target="_blank" action="https://formsubmit.co/9294e58fe48002076f80c45c4cbc99d5" method="POST">
-    <div class="form-group">
-      <div class="form-row">
-        <div class="col">
-          <input type="text" name="name" class="form-control" placeholder="Họ và tên (Lớp)" required>
+      <h1>NỘP BÀI</h1>
+      <form target="_blank" action="https://formsubmit.co/ngocminhtranit@gmail.com" method="POST">
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col">
+              <input type="text" name="name" class="form-control" placeholder="Họ và tên (Lớp)" required>
+            </div>
+            <div class="col">
+              <input type="url" name="link" class="form-control"
+                placeholder="Đường dẫn dự án, bài tập (Ví dụ: https://github.com/TranNgocMinh)" required>
+            </div>
+          </div>
         </div>
-        <div class="col">
-          <input type="url" name="link" class="form-control" placeholder="Đường dẫn dự án, bài tập (Ví dụ: https://github.com/TranNgocMinh)" required>
+        <div class="form-group">
+          <textarea placeholder="Mô tả ngắn gọn về bài tập, dự án của bạn." class="form-control" name="message"
+            rows="10" required></textarea>
         </div>
-      </div>
+        <button type="submit" class="btn btn-lg btn-dark btn-block">Nộp bài</button>
+        <input type="hidden" name="_next" value="https://hoctructuyencntt.github.io/thanhcong.html">
+        <input type="hidden" name="_captcha" value="false">
+      </form>
     </div>
-    <div class="form-group">
-      <textarea placeholder="Mô tả ngắn gọn về bài tập, dự án của bạn." class="form-control" name="message" rows="10" required></textarea>
-    </div>
-    <button type="submit" class="btn btn-lg btn-dark btn-block">Nộp bài</button>
-  <input type="hidden" name="_next" value="https://hoctructuyencntt.github.io/thanhcong.html">
-          <input type="hidden" name="_captcha" value="false">
- </form>
-</div>
   </main>
 
   <footer>

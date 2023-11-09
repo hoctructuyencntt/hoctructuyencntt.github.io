@@ -1,13 +1,16 @@
 [{
-        "doc": "<a href='https://hoctructuyencntt.github.io/NNLT/Baimodau.html'>NGÔN NGỮ LẬP TRÌNH C</a>", 
-        "cat": "<a href='https://hoctructuyencntt.github.io/nentang.html'>Nền tảng</a>"
+        "doc": "<a href='https://hoctructuyencntt.github.io/NNLT/Baimodau.html'>NGÔN NGỮ LẬP TRÌNH C</a>"
     },
     {
-       "doc": "<a href='https://hoctructuyencntt.github.io/TKWEB/Bai01.html'>NHẬP MÔN THIẾT KẾ WEB</a>",
-        "cat": "<a href='https://hoctructuyencntt.github.io/frontend.html'>Front-end</a>"
+       "doc": "<a href='https://hoctructuyencntt.github.io/TKWEB/Bai01.html'>THIẾT KẾ WEB</a>"
     },
     {
-       "doc": "<a href='https://hoctructuyencntt.github.io/React/Bai01.html'>NHẬP MÔN REACT, REDUX</a>",
-        "cat": "<a href='https://hoctructuyencntt.github.io/frontend.html'>Front-end</a>"
+       "doc": "<a href='https://hoctructuyencntt.github.io/React/Bai01.html'>REACT, REDUX</a>"
+    },
+{
+       "doc": "<a href='https://hoctructuyencntt.github.io/ReactNative/Bai01.html'>REACT NATIVE</a>"
+    },
+{
+       "doc": "<a href='https://hoctructuyencntt.github.io/NodeJS/Bai01.html'>NODEJS, MONGODB, EXPRESS</a>"
     }
 ]

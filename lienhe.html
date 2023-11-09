@@ -66,12 +66,13 @@
       padding: 20px;
       text-align: center;
     }
-h1 {
-  text-align: center;
-  margin: 35px 0 20px 0 !important;
-}
+
+    h1 {
+      text-align: center;
+      margin: 35px 0 20px 0 !important;
+    }
   </style>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -81,35 +82,38 @@ h1 {
 
   <nav>
     <ul>
+      <li><a href="timkiem.html">Tìm Tài Liệu</a></li>
       <li><a href="nentang.html">Nền Tảng</a></li>
       <li><a href="frontend.html">Front-End</a></li>
+      <li><a href="backend.html">Back-End</a></li>
+      <li><a href="didong.html">Mobile Development</a></li>
       <li><a href="thongtin.html">Về Website</a></li>
-       <li><a href="lienhe.html">Liên Hệ</a></li>
+      <li><a href="lienhe.html">Liên Hệ</a></li>
     </ul>
   </nav>
 
   <main>
     <div class="container">
-  <h1>Bạn có vấn đề gì?</h1>
-  <form target="_blank" action="https://formsubmit.co/e4460bfd5f71883ead7f1df32e4143e5" method="POST">
-    <div class="form-group">
-      <div class="form-row">
-        <div class="col">
-          <input type="text" name="name" class="form-control" placeholder="Họ và tên" required>
+      <h1>Bạn có vấn đề gì?</h1>
+      <form target="_blank" action="https://formsubmit.co/tranngocminhcdn@gmail.com" method="POST">
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col">
+              <input type="text" name="name" class="form-control" placeholder="Họ và tên" required>
+            </div>
+            <div class="col">
+              <input type="email" name="email" class="form-control" placeholder="Hộp thư điện tử" required>
+            </div>
+          </div>
         </div>
-        <div class="col">
-          <input type="email" name="email" class="form-control" placeholder="Hộp thư điện tử" required>
+        <div class="form-group">
+          <textarea placeholder="Thông điệp của bạn" class="form-control" name="message" rows="10" required></textarea>
         </div>
-      </div>
+        <button type="submit" class="btn btn-lg btn-dark btn-block">Liên hệ</button>
+        <input type="hidden" name="_next" value="https://hoctructuyencntt.github.io/camon.html">
+        <input type="hidden" name="_captcha" value="false">
+      </form>
     </div>
-    <div class="form-group">
-      <textarea placeholder="Thông điệp của bạn" class="form-control" name="message" rows="10" required></textarea>
-    </div>
-    <button type="submit" class="btn btn-lg btn-dark btn-block">Liên hệ</button>
-  <input type="hidden" name="_next" value="https://hoctructuyencntt.github.io/camon.html">
-          <input type="hidden" name="_captcha" value="false">
- </form>
-</div>
   </main>
 
   <footer>

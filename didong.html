@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VỀ WEBSITE</title>
+  <title>MOBILE APPLICATION DEVELOPMENT</title>
   <style>
     /* Reset default styles */
     body,
@@ -59,33 +59,42 @@
       background-color: #f7f7f7;
     }
 
-    /* About page styles */
-    .about {
-      max-width: 800px;
-      margin: 0 auto;
+    /* Course and category styles */
+    .course {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    .about h2 {
+    .course img {
+      width: 120px;
+      height: 80px;
+      margin-right: 10px;
+    }
+
+    .course h3 {
+      margin: 0;
+      font-size: 18px;
       color: #000;
-      font-size: 24px;
-      margin-bottom: 20px;
     }
 
-    .about p {
+    .course p {
+      margin: 5px 0;
       color: #666;
-      line-height: 1.6;
-      margin-bottom: 10px;
     }
 
-    .about ul {
-      padding-left: 20px;
-      margin-bottom: 20px;
-    }
-
-    .about li {
-      color: #666;
-      line-height: 1.6;
-      margin-bottom: 5px;
+    .category {
+      display: inline-block;
+      background-color: #000;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      margin-right: 5px;
+      font-size: 14px;
     }
 
     /* Footer styles */
@@ -116,19 +125,27 @@
   </nav>
 
   <main>
-    <div class="about">
-      <h2>Tài liệu trực tuyến</h2>
-      <p>Cung cấp các tài liệu trực tuyến về các chủ đề Công nghệ thông tin. Ưu điểm các tài liệu này:</p>
-      <ul>
-        <li>Đọc một cách dễ dàng trên tất cả các thiết bị như máy tính để bàn, laptop, máy tính bảng hay điện thoại
-          thông minh.</li>
-        <li>Tích hợp đa phương tiện như âm thanh, hình ảnh (động và tĩnh), video,…giúp nội dung trở nên trực quan, sinh
-          động.</li>
-        <li>Tương tác giữa người đọc và nội dung tài liệu. Ví dụ thay vì cài đặt các phần mềm, người học có thể tương
-          tác các ví dụ một cách trực tiếp.</li>
-      </ul>
 
+    <h3>MOBILE APPLICATION DEVELOPMENT</h3>
+    <div class="course">
+      <img src="img/reactnative.png" alt="Thiết kế web">
+      <div>
+        <h3>REACT NATIVE</h3>
+        <p>Khám phá nền tảng phát triển ứng dụng di động phổ biến nhất thế giới hiện nay.</p>
+        <p><a style="color:blue;text-decoration: none;"
+            href="https://hoctructuyencntt.github.io/ReactNative/Bai01.html">Xem
+            chi tiết ></a></p>
+        <div class="category">react</div>
+        <div class="category">react native</div>
+        <div class="category">mobile app</div>
+        <div class="category">mobile development</div>
+        <div class="category">hybrid app development</div>
+      </div>
     </div>
+
+
+
+
   </main>
 
   <footer>
