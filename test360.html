@@ -3,21 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nhúng Video YouTube</title>
+    <title>YouTube Embed Example</title>
+    <style>
+    a {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #ff0000;
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    a:hover {
+        background-color: #cc0000;
+    }
+</style>
+
 </head>
 <body>
-    <h1>Video YouTube Nhúng 360</h1>
-    <div style="text-align: center;">
-        <!-- Thay "VIDEO_ID" b?ng ID c?a video YouTube -->
-        <iframe 
-            width="560" 
-            height="315" 
-            src="https://www.youtube.com/embed/QOskQl-yObg?si=I-5S2GNILLxnyKBT&vr=1" 
-            title="YouTube video player" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;vr" 
-            allowfullscreen>
-        </iframe>
+    <div id="video-container">
+        <!-- Nội dung video sẽ được hiển thị tại đây -->
     </div>
+
+    <script>
+        // Hàm kiểm tra thiết bị
+        function isMobileDevice() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        // Hàm hiển thị nội dung
+        function displayVideo() {
+            const container = document.getElementById('video-container');
+            const youtubeLink = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'; // Thay bằng URL video YouTube của bạn
+
+            if (isMobileDevice()) {
+                // Hiển thị nút điều hướng trên thiết bị di động
+                container.innerHTML = `
+                    <a href="${youtubeLink}" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #ff0000; color: #fff; text-decoration: none; font-size: 18px; border-radius: 5px;">
+                        Xem Video trên YouTube
+                    </a>
+                `;
+            } else {
+                // Nhúng video trên desktop/laptop
+                container.innerHTML = `
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                        title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                    </iframe>
+                `;
+            }
+        }
+
+        // Gọi hàm hiển thị video
+        displayVideo();
+    </script>
 </body>
 </html>
