@@ -3,73 +3,1397 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Scratch C Studio - Nested Blocks</title>
+<title>Scratch C Studio - Clean Real Runner</title>
+
 <style>
-:root{--bg1:#ecfeff;--bg2:#f8fafc;--ink:#0f172a;--muted:#64748b;--teal:#14b8a6;--teal2:#0f766e;--line:#dbeafe;--panel:rgba(255,255,255,.92);--shadow:0 24px 60px rgba(15,23,42,.10)}
-*{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:"Segoe UI",Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at 8% 8%,rgba(20,184,166,.18),transparent 28%),radial-gradient(circle at 95% 10%,rgba(124,58,237,.12),transparent 28%),linear-gradient(135deg,var(--bg1),var(--bg2))}button,select,input,textarea{font-family:inherit}.app{min-height:100vh;padding:18px}.hero{max-width:1600px;margin:0 auto 16px;padding:18px 20px;border:1px solid rgba(255,255,255,.7);background:linear-gradient(135deg,rgba(255,255,255,.86),rgba(236,254,255,.72));border-radius:30px;box-shadow:var(--shadow);backdrop-filter:blur(16px);display:flex;justify-content:space-between;gap:18px;align-items:center;flex-wrap:wrap}.brand{display:flex;gap:14px;align-items:center}.logo{width:58px;height:58px;border-radius:18px;background:linear-gradient(135deg,#0f766e,#14b8a6,#67e8f9);box-shadow:0 15px 35px rgba(20,184,166,.35);display:grid;place-items:center;color:white;font-weight:1000;font-size:26px}.hero h1{margin:0;font-size:30px;color:#0f766e;letter-spacing:-.5px}.hero p{margin:6px 0 0;color:var(--muted);line-height:1.5;font-size:15px}.toolbar{display:flex;flex-wrap:wrap;gap:10px}.btn{border:none;border-radius:999px;padding:11px 15px;font-weight:900;cursor:pointer;font-size:14px;transition:.18s;display:inline-flex;align-items:center;gap:7px}.btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(15,118,110,.18)}.btn-primary{background:linear-gradient(135deg,#0f766e,#14b8a6);color:white}.btn-run{background:linear-gradient(135deg,#2563eb,#7c3aed);color:white}.btn-soft{background:#e2e8f0;color:#334155}.btn-dark{background:#0f172a;color:white}.btn-danger{background:#fb7185;color:white}.btn-ghost{background:white;color:#0f766e;border:1px solid #99f6e4}.layout{max-width:1600px;margin:0 auto;display:grid;grid-template-columns:345px minmax(520px,1fr) 540px;gap:16px;align-items:start}.panel{background:var(--panel);border:1px solid rgba(219,234,254,.92);border-radius:28px;overflow:hidden;box-shadow:var(--shadow);backdrop-filter:blur(14px)}.panel-header{padding:14px 17px;color:white;font-weight:1000;letter-spacing:.2px;background:linear-gradient(90deg,#0f766e,#14b8a6)}.panel-body{padding:15px}.hint{background:linear-gradient(135deg,#ecfeff,#f0fdfa);border:1px solid #99f6e4;color:#155e75;border-radius:18px;padding:12px 13px;line-height:1.55;font-size:14px;margin-bottom:12px}.search{width:100%;border:1px solid #99f6e4;border-radius:18px;padding:12px 14px;outline:none;font-size:14px;margin-bottom:11px;background:white}.search:focus{box-shadow:0 0 0 4px rgba(20,184,166,.14)}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.tab{border:1px solid #e2e8f0;border-radius:999px;background:white;color:#334155;padding:7px 10px;font-weight:900;cursor:pointer;font-size:12px}.tab.active{background:linear-gradient(135deg,#0f766e,#14b8a6);color:white;border-color:transparent}.palette{display:grid;gap:10px;max-height:69vh;overflow:auto;padding-right:3px}.palette::-webkit-scrollbar,.tree-scroll::-webkit-scrollbar,.code-output::-webkit-scrollbar{width:10px}.palette::-webkit-scrollbar-thumb,.tree-scroll::-webkit-scrollbar-thumb,.code-output::-webkit-scrollbar-thumb{background:#14b8a6;border-radius:999px}.c-block{position:relative;padding:12px 13px;color:white;border-radius:18px;cursor:grab;user-select:none;border:2px solid rgba(255,255,255,.36);box-shadow:0 10px 22px rgba(15,23,42,.12);transition:.18s;overflow:hidden}.c-block:before{content:"";position:absolute;inset:-40% auto auto -20%;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.18)}.c-block:hover{transform:translateY(-2px) scale(1.01)}.c-title{position:relative;font-family:Consolas,Monaco,monospace;font-weight:1000;font-size:13px}.c-desc{position:relative;display:block;font-size:12px;opacity:.92;margin-top:4px;line-height:1.35}.b-core{background:linear-gradient(135deg,#0ea5e9,#2563eb)}.b-var{background:linear-gradient(135deg,#6366f1,#8b5cf6)}.b-io{background:linear-gradient(135deg,#f59e0b,#ea580c)}.b-op{background:linear-gradient(135deg,#22c55e,#16a34a)}.b-if{background:linear-gradient(135deg,#fb923c,#f97316)}.b-loop{background:linear-gradient(135deg,#2563eb,#0891b2)}.b-func{background:linear-gradient(135deg,#7c3aed,#a855f7)}.b-array{background:linear-gradient(135deg,#0369a1,#0284c7)}.b-str{background:linear-gradient(135deg,#a855f7,#ec4899)}.b-ptr{background:linear-gradient(135deg,#e11d48,#be123c)}.b-struct{background:linear-gradient(135deg,#0f766e,#047857)}.b-raw{background:linear-gradient(135deg,#64748b,#334155)}.workspace-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px}.statbar{display:flex;flex-wrap:wrap;gap:8px}.stat{background:white;border:1px solid #ccfbf1;color:#0f766e;border-radius:999px;padding:7px 10px;font-weight:900;font-size:12px}.tree-scroll{max-height:68vh;overflow:auto;padding:4px 3px 4px 0}.root-zone{border:1px solid #dbeafe;background:linear-gradient(135deg,#f8fafc,#ffffff);border-radius:24px;margin-bottom:14px;padding:12px}.root-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px;font-weight:1000;color:#0f766e}.zone-pill{background:#ccfbf1;color:#0f766e;border-radius:999px;padding:5px 10px;font-size:12px}.drop-slot{min-height:76px;border:2px dashed #cbd5e1;border-radius:20px;padding:10px;display:grid;gap:10px;background:rgba(248,250,252,.78);transition:.15s}.drop-slot.drag-over{border-color:#f97316;background:#fff7ed;box-shadow:inset 0 0 0 4px rgba(249,115,22,.12)}.slot-empty{text-align:center;color:#94a3b8;padding:14px;line-height:1.4;font-size:13px}.node{border-radius:20px;background:white;border:1px solid #dbeafe;box-shadow:0 10px 20px rgba(15,23,42,.06);animation:nodeIn .18s ease-out;overflow:hidden}@keyframes nodeIn{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}.node-head{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;padding:10px;border-bottom:1px solid #eef2ff}.node-chip{padding:8px 10px;border-radius:14px;color:white;font-weight:1000;font-family:Consolas,Monaco,monospace;font-size:12px;white-space:nowrap}.node-meta{min-width:0}.node-name{font-weight:1000;color:#0f172a;font-size:13px}.node-kind{font-size:12px;color:#64748b;margin-top:2px}.node-actions{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}.mini{border:none;border-radius:11px;padding:7px 9px;background:#e2e8f0;color:#334155;font-weight:1000;cursor:pointer}.mini:hover{filter:brightness(.97)}.del{background:#fee2e2;color:#be123c}.addkid{background:#ccfbf1;color:#0f766e}.node-edit{padding:10px;background:#fbfdff}.node-edit label{display:block;color:#475569;font-size:12px;font-weight:900;margin:5px 0}.node-edit textarea,.node-edit input{width:100%;border:1px solid #cbd5e1;border-radius:14px;padding:10px;outline:none;font-family:Consolas,Monaco,monospace;font-size:13px;line-height:1.45;background:white}.node-edit textarea:focus,.node-edit input:focus{border-color:#14b8a6;box-shadow:0 0 0 4px rgba(20,184,166,.12)}.container-body{padding:10px 10px 12px;background:linear-gradient(135deg,#f8fafc,#ffffff)}.slot-label{font-size:12px;color:#0f766e;font-weight:1000;margin:3px 0 7px;display:flex;justify-content:space-between}.depth-badge{color:#64748b;font-weight:800}.config{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.config label{background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:10px;color:#475569;font-size:13px;font-weight:800}.config input{margin-right:6px}.stdin-box{width:100%;min-height:72px;resize:vertical;border:1px solid #99f6e4;border-radius:18px;padding:12px;font-family:Consolas,Monaco,monospace;font-size:14px;outline:none;background:#f0fdfa;color:#0f172a}.code-output{min-height:310px;max-height:39vh;overflow:auto;background:#020617;color:#dbeafe;border-radius:22px;padding:16px;font-family:Consolas,Monaco,monospace;font-size:13px;line-height:1.65;white-space:pre-wrap;border:1px solid #1e293b}.screen{min-height:135px;background:#0f172a;color:#e2e8f0;border-radius:22px;padding:15px;font-family:Consolas,Monaco,monospace;line-height:1.6;white-space:pre-wrap;border:5px solid #334155}.side-title{margin:14px 0 8px;color:#0f766e}.analysis-box{margin-top:12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:20px;padding:13px;color:#475569;line-height:1.55;font-size:14px}.analysis-box b{color:#0f766e}.mem{margin-top:12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:20px;padding:13px;font-size:13px}.mem h3{margin:0 0 8px;color:#0f766e}.mem table{width:100%;border-collapse:collapse;font-family:Consolas,Monaco,monospace;margin-bottom:10px}.mem th,.mem td{border:1px solid #e2e8f0;padding:7px;text-align:left}.mem th{background:#ccfbf1;color:#0f766e}.cell{display:inline-block;min-width:48px;margin:4px;padding:8px;border-radius:12px;background:#ccfbf1;border:1px solid #5eead4;text-align:center;font-family:Consolas,monospace}.idx{display:block;font-size:11px;color:#0f766e;font-weight:900}.warn,.ok{border-radius:16px;padding:11px 12px;margin-top:10px;line-height:1.5}.warn{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412}.ok{background:#dcfce7;border:1px solid #86efac;color:#166534}.toast{position:fixed;right:20px;bottom:20px;background:#0f172a;color:white;padding:12px 16px;border-radius:16px;box-shadow:0 20px 40px rgba(15,23,42,.28);opacity:0;transform:translateY(12px);transition:.2s;z-index:50}.toast.show{opacity:1;transform:translateY(0)}.api-box{display:grid;grid-template-columns:1fr 130px;gap:10px;margin:0 0 12px}.api-box label{background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:10px;color:#475569;font-size:13px;font-weight:800}.api-box input{width:100%;margin-top:7px;border:1px solid #cbd5e1;border-radius:12px;padding:9px 10px;outline:none;background:white}.api-box input:focus{border-color:#14b8a6;box-shadow:0 0 0 4px rgba(20,184,166,.12)}@media(max-width:1250px){.layout{grid-template-columns:1fr}.tree-scroll,.palette{max-height:none}.workspace-top{align-items:flex-start;flex-direction:column}}@media(max-width:640px){.hero h1{font-size:23px}.node-head{grid-template-columns:1fr}.node-actions{justify-content:flex-start}.config,.api-box{grid-template-columns:1fr}}
+:root{
+  --bg1:#ecfeff;
+  --bg2:#f8fafc;
+  --ink:#0f172a;
+  --muted:#64748b;
+  --teal:#14b8a6;
+  --teal2:#0f766e;
+  --line:#dbeafe;
+  --panel:rgba(255,255,255,.94);
+  --shadow:0 24px 60px rgba(15,23,42,.10);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:"Segoe UI",Arial,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 8% 8%,rgba(20,184,166,.18),transparent 28%),
+    radial-gradient(circle at 95% 10%,rgba(124,58,237,.12),transparent 28%),
+    linear-gradient(135deg,var(--bg1),var(--bg2));
+}
+button,input,textarea{font-family:inherit}
+.app{min-height:100vh;padding:18px}
+.hero{
+  max-width:1600px;
+  margin:0 auto 16px;
+  padding:18px 20px;
+  border:1px solid rgba(255,255,255,.72);
+  background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(236,254,255,.72));
+  border-radius:30px;
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(16px);
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.brand{display:flex;gap:14px;align-items:center}
+.logo{
+  width:58px;
+  height:58px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#0f766e,#14b8a6,#67e8f9);
+  box-shadow:0 15px 35px rgba(20,184,166,.35);
+  display:grid;
+  place-items:center;
+  color:white;
+  font-weight:1000;
+  font-size:26px;
+}
+.hero h1{margin:0;font-size:30px;color:#0f766e;letter-spacing:-.5px}
+.hero p{margin:6px 0 0;color:var(--muted);line-height:1.5;font-size:15px}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px}
+.btn{
+  border:none;
+  border-radius:999px;
+  padding:11px 15px;
+  font-weight:900;
+  cursor:pointer;
+  font-size:14px;
+  transition:.18s;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(15,118,110,.18)}
+.btn-run{background:linear-gradient(135deg,#2563eb,#7c3aed);color:white}
+.btn-soft{background:#e2e8f0;color:#334155}
+.btn-dark{background:#0f172a;color:white}
+.btn-danger{background:#fb7185;color:white}
+.btn-ghost{background:white;color:#0f766e;border:1px solid #99f6e4}
+
+.layout{
+  max-width:1600px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:345px minmax(520px,1fr) 540px;
+  gap:16px;
+  align-items:start;
+}
+.panel{
+  background:var(--panel);
+  border:1px solid rgba(219,234,254,.92);
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(14px);
+}
+.panel-header{
+  padding:14px 17px;
+  color:white;
+  font-weight:1000;
+  letter-spacing:.2px;
+  background:linear-gradient(90deg,#0f766e,#14b8a6);
+}
+.panel-body{padding:15px}
+.hint{
+  background:linear-gradient(135deg,#ecfeff,#f0fdfa);
+  border:1px solid #99f6e4;
+  color:#155e75;
+  border-radius:18px;
+  padding:12px 13px;
+  line-height:1.55;
+  font-size:14px;
+  margin-bottom:12px;
+}
+.search{
+  width:100%;
+  border:1px solid #99f6e4;
+  border-radius:18px;
+  padding:12px 14px;
+  outline:none;
+  font-size:14px;
+  margin-bottom:11px;
+  background:white;
+}
+.search:focus{box-shadow:0 0 0 4px rgba(20,184,166,.14)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.tab{
+  border:1px solid #e2e8f0;
+  border-radius:999px;
+  background:white;
+  color:#334155;
+  padding:7px 10px;
+  font-weight:900;
+  cursor:pointer;
+  font-size:12px;
+}
+.tab.active{
+  background:linear-gradient(135deg,#0f766e,#14b8a6);
+  color:white;
+  border-color:transparent;
+}
+.palette{
+  display:grid;
+  gap:10px;
+  max-height:69vh;
+  overflow:auto;
+  padding-right:3px;
+}
+.palette::-webkit-scrollbar,
+.tree-scroll::-webkit-scrollbar,
+.code-output::-webkit-scrollbar{width:10px}
+.palette::-webkit-scrollbar-thumb,
+.tree-scroll::-webkit-scrollbar-thumb,
+.code-output::-webkit-scrollbar-thumb{
+  background:#14b8a6;
+  border-radius:999px;
+}
+.c-block{
+  position:relative;
+  padding:12px 13px;
+  color:white;
+  border-radius:18px;
+  cursor:grab;
+  user-select:none;
+  border:2px solid rgba(255,255,255,.36);
+  box-shadow:0 10px 22px rgba(15,23,42,.12);
+  transition:.18s;
+  overflow:hidden;
+}
+.c-block:before{
+  content:"";
+  position:absolute;
+  inset:-40% auto auto -20%;
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  background:rgba(255,255,255,.18);
+}
+.c-block:hover{transform:translateY(-2px) scale(1.01)}
+.c-title{
+  position:relative;
+  font-family:Consolas,Monaco,monospace;
+  font-weight:1000;
+  font-size:13px;
+}
+.c-desc{
+  position:relative;
+  display:block;
+  font-size:12px;
+  opacity:.92;
+  margin-top:4px;
+  line-height:1.35;
+}
+.b-core{background:linear-gradient(135deg,#0ea5e9,#2563eb)}
+.b-var{background:linear-gradient(135deg,#6366f1,#8b5cf6)}
+.b-io{background:linear-gradient(135deg,#f59e0b,#ea580c)}
+.b-op{background:linear-gradient(135deg,#22c55e,#16a34a)}
+.b-if{background:linear-gradient(135deg,#fb923c,#f97316)}
+.b-loop{background:linear-gradient(135deg,#2563eb,#0891b2)}
+.b-func{background:linear-gradient(135deg,#7c3aed,#a855f7)}
+.b-array{background:linear-gradient(135deg,#0369a1,#0284c7)}
+.b-str{background:linear-gradient(135deg,#a855f7,#ec4899)}
+.b-ptr{background:linear-gradient(135deg,#e11d48,#be123c)}
+.b-struct{background:linear-gradient(135deg,#0f766e,#047857)}
+.b-raw{background:linear-gradient(135deg,#64748b,#334155)}
+
+.workspace-top{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  margin-bottom:12px;
+  flex-wrap:wrap;
+}
+.statbar{display:flex;flex-wrap:wrap;gap:8px}
+.stat{
+  background:white;
+  border:1px solid #ccfbf1;
+  color:#0f766e;
+  border-radius:999px;
+  padding:7px 10px;
+  font-weight:900;
+  font-size:12px;
+}
+.tree-scroll{
+  max-height:68vh;
+  overflow:auto;
+  padding:4px 3px 4px 0;
+}
+.root-zone{
+  border:1px solid #dbeafe;
+  background:linear-gradient(135deg,#f8fafc,#ffffff);
+  border-radius:24px;
+  margin-bottom:14px;
+  padding:12px;
+}
+.root-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:9px;
+  font-weight:1000;
+  color:#0f766e;
+  gap:10px;
+}
+.zone-pill{
+  background:#ccfbf1;
+  color:#0f766e;
+  border-radius:999px;
+  padding:5px 10px;
+  font-size:12px;
+}
+.drop-slot{
+  min-height:76px;
+  border:2px dashed #cbd5e1;
+  border-radius:20px;
+  padding:10px;
+  display:grid;
+  gap:10px;
+  background:rgba(248,250,252,.78);
+  transition:.15s;
+}
+.drop-slot.drag-over{
+  border-color:#f97316;
+  background:#fff7ed;
+  box-shadow:inset 0 0 0 4px rgba(249,115,22,.12);
+}
+.slot-empty{
+  text-align:center;
+  color:#94a3b8;
+  padding:14px;
+  line-height:1.4;
+  font-size:13px;
+}
+.node{
+  border-radius:20px;
+  background:white;
+  border:1px solid #dbeafe;
+  box-shadow:0 10px 20px rgba(15,23,42,.06);
+  animation:nodeIn .18s ease-out;
+  overflow:hidden;
+}
+@keyframes nodeIn{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+.node-head{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:8px;
+  align-items:center;
+  padding:10px;
+  border-bottom:1px solid #eef2ff;
+}
+.node-chip{
+  padding:8px 10px;
+  border-radius:14px;
+  color:white;
+  font-weight:1000;
+  font-family:Consolas,Monaco,monospace;
+  font-size:12px;
+  white-space:nowrap;
+}
+.node-meta{min-width:0}
+.node-name{font-weight:1000;color:#0f172a;font-size:13px}
+.node-kind{font-size:12px;color:#64748b;margin-top:2px}
+.node-actions{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.mini{
+  border:none;
+  border-radius:11px;
+  padding:7px 9px;
+  background:#e2e8f0;
+  color:#334155;
+  font-weight:1000;
+  cursor:pointer;
+}
+.mini:hover{filter:brightness(.97)}
+.del{background:#fee2e2;color:#be123c}
+.addkid{background:#ccfbf1;color:#0f766e}
+.node-edit{padding:10px;background:#fbfdff}
+.node-edit label{
+  display:block;
+  color:#475569;
+  font-size:12px;
+  font-weight:900;
+  margin:5px 0;
+}
+.node-edit textarea,
+.node-edit input{
+  width:100%;
+  border:1px solid #cbd5e1;
+  border-radius:14px;
+  padding:10px;
+  outline:none;
+  font-family:Consolas,Monaco,monospace;
+  font-size:13px;
+  line-height:1.45;
+  background:white;
+}
+.node-edit textarea:focus,
+.node-edit input:focus{
+  border-color:#14b8a6;
+  box-shadow:0 0 0 4px rgba(20,184,166,.12);
+}
+.container-body{
+  padding:10px 10px 12px;
+  background:linear-gradient(135deg,#f8fafc,#ffffff);
+}
+.slot-label{
+  font-size:12px;
+  color:#0f766e;
+  font-weight:1000;
+  margin:3px 0 7px;
+  display:flex;
+  justify-content:space-between;
+}
+.depth-badge{color:#64748b;font-weight:800}
+.config{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:12px;
+}
+.config label{
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:16px;
+  padding:10px;
+  color:#475569;
+  font-size:13px;
+  font-weight:800;
+}
+.config input{margin-right:6px}
+.stdin-box{
+  width:100%;
+  min-height:72px;
+  resize:vertical;
+  border:1px solid #99f6e4;
+  border-radius:18px;
+  padding:12px;
+  font-family:Consolas,Monaco,monospace;
+  font-size:14px;
+  outline:none;
+  background:#f0fdfa;
+  color:#0f172a;
+}
+.code-output{
+  min-height:310px;
+  max-height:42vh;
+  overflow:auto;
+  background:#020617;
+  color:#dbeafe;
+  border-radius:22px;
+  padding:16px;
+  font-family:Consolas,Monaco,monospace;
+  font-size:13px;
+  line-height:1.65;
+  white-space:pre-wrap;
+  border:1px solid #1e293b;
+}
+.screen{
+  min-height:210px;
+  background:#0f172a;
+  color:#e2e8f0;
+  border-radius:22px;
+  padding:15px;
+  font-family:Consolas,Monaco,monospace;
+  line-height:1.6;
+  white-space:pre-wrap;
+  border:5px solid #334155;
+}
+.side-title{margin:14px 0 8px;color:#0f766e}
+.analysis-box{
+  margin-top:12px;
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:20px;
+  padding:13px;
+  color:#475569;
+  line-height:1.55;
+  font-size:14px;
+}
+.analysis-box b{color:#0f766e}
+.warn,.ok{
+  border-radius:16px;
+  padding:11px 12px;
+  margin-top:10px;
+  line-height:1.5;
+}
+.warn{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412}
+.ok{background:#dcfce7;border:1px solid #86efac;color:#166534}
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#0f172a;
+  color:white;
+  padding:12px 16px;
+  border-radius:16px;
+  box-shadow:0 20px 40px rgba(15,23,42,.28);
+  opacity:0;
+  transform:translateY(12px);
+  transition:.2s;
+  z-index:50;
+}
+.toast.show{opacity:1;transform:translateY(0)}
+@media(max-width:1250px){
+  .layout{grid-template-columns:1fr}
+  .tree-scroll,.palette{max-height:none}
+  .workspace-top{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:640px){
+  .hero h1{font-size:23px}
+  .node-head{grid-template-columns:1fr}
+  .node-actions{justify-content:flex-start}
+  .config{grid-template-columns:1fr}
+}
 </style>
 </head>
+
 <body>
 <div class="app">
-  <header class="hero"><div class="brand"><div class="logo">C</div><div><h1>Scratch C Studio</h1><p>Kéo thả khối C chuyên nghiệp, lồng rẽ nhánh/vòng lặp/hàm đến cấp 5, sinh mã C tổng quát và trực quan hóa dữ liệu.</p></div></div><div class="toolbar"><button class="btn btn-run" onclick="runRealC()">⚙ Chạy mã</button><button class="btn btn-soft" onclick="validateProgram()">✓ Kiểm tra</button><button class="btn btn-dark" onclick="copyCode()">🌐 Sao chép & Chạy mã</button><button class="btn btn-danger" onclick="clearAll()">Xóa mã</button></div></header>
-  <main class="layout">
-    <section class="panel"><div class="panel-header">🎨 Thư viện khối lệnh</div><div class="panel-body"><div class="hint">Kéo khối vào <b>Trước main</b>, <b>Trong main</b> hoặc thả vào vùng con của khối lồng. Nhấp đúp để thêm nhanh vào main.</div><input id="searchBox" class="search" placeholder="Tìm: if, for, hàm, mảng 2D, con trỏ, struct..." oninput="renderPalette()" /><div id="tabs" class="tabs"></div><div id="palette" class="palette"></div></div></section>
-    <section class="panel"><div class="panel-header">🧩 Không gian lắp ghép</div><div class="panel-body"><div class="workspace-top"><div class="statbar"><span class="stat" id="countBlocks">0 khối lệnh</span><span class="stat" id="depthInfo">Lồng tối đa: 5</span></div><div class="toolbar"></div></div><div class="tree-scroll"><div class="root-zone"><div class="root-title">Trước main <span class="zone-pill">include / struct / hàm</span></div><div id="preRoot"></div></div><div class="root-zone"><div class="root-title">Trong main <span class="zone-pill">lệnh thực thi</span></div><div id="mainRoot"></div></div></div><div class="config"><label><input type="checkbox" id="autoMain" checked onchange="renderAll()">Tự sinh `int main()`</label><label><input type="checkbox" id="autoReturn" checked onchange="renderAll()">Tự thêm `return 0;`</label><label><input type="checkbox" id="lineNumbers" onchange="renderAll()">Hiện số dòng</label><label><input type="checkbox" id="strictMode" checked>Kiểm tra chặt hơn</label></div><div id="validateBox"></div></div></section>
-    <section class="panel"><div class="panel-header">💻 Mã C và mô phỏng</div><div class="panel-body"><div class="hint">Mã sinh ra có thể chạy ngay. Nếu gặp lỗi có thể dùng <b>Sao chép & Chạy mã</b>.</div><h3 class="side-title">Stdin Inputs</h3><textarea id="stdinInput" class="stdin-box" placeholder="Ví dụ: 5 7 5 15 3 8"></textarea><h3 class="side-title">Mã C sinh ra</h3><div id="codeOutput" class="code-output"></div><h3 class="side-title">Màn hình mô phỏng</h3><div id="screen" class="screen">Chưa chạy chương trình.</div><div id="analysisBox" class="analysis-box"><b>Giảng giải:</b> Hãy kéo khối để bắt đầu xây dựng chương trình C.</div><div class="mem"><h3>Bộ nhớ / mảng / chuỗi / struct</h3><div id="memoryBox">Chưa có dữ liệu.</div></div></div></section>
-  </main>
-</div><div id="toast" class="toast"></div>
-<script>
-const MAX_DEPTH=5;
-const categories=[["all","Tất cả"],["core","Cấu trúc"],["var","Biến"],["io","Nhập xuất"],["op","Phép toán"],["branch","Rẽ nhánh"],["loop","Lặp"],["func","Hàm"],["array","Mảng"],["string","Chuỗi"],["pointer","Con trỏ"],["struct","Struct"],["raw","Tự do"]];
-const defs=[
-{id:"inc_stdio",cat:"core",cls:"b-core",label:"#include <stdio.h>",desc:"Thư viện nhập xuất",root:"pre",kind:"simple",code:"#include <stdio.h>"},{id:"inc_stdlib",cat:"core",cls:"b-core",label:"#include <stdlib.h>",desc:"malloc/calloc/free",root:"pre",kind:"simple",code:"#include <stdlib.h>"},{id:"inc_string",cat:"core",cls:"b-core",label:"#include <string.h>",desc:"strlen/strcpy/strcmp",root:"pre",kind:"simple",code:"#include <string.h>"},{id:"define",cat:"core",cls:"b-core",label:"#define",desc:"Hằng tiền xử lý",root:"pre",kind:"simple",code:"#define MAX 100"},{id:"scope",cat:"core",cls:"b-core",label:"khối { }",desc:"Tạo phạm vi lệnh con",root:"main",kind:"container",header:"{",middle:"",footer:"}",slots:["body"]},{id:"comment",cat:"core",cls:"b-core",label:"// chú thích",desc:"Ghi chú giải thích",root:"main",kind:"simple",code:"// Ghi chú: giải thích thuật toán"},
-{id:"decl_any",cat:"var",cls:"b-var",label:"khai báo biến",desc:"int/float/double/char tùy ý",root:"main",kind:"simple",code:"int n = 0, i = 0, s = 0;"},{id:"decl_multi",cat:"var",cls:"b-var",label:"nhiều kiểu dữ liệu",desc:"Kiểu dữ liệu tổng quát",root:"main",kind:"simple",code:"int a = 0;\nfloat x = 0.0f;\ndouble y = 0.0;\nchar ch = 'A';"},{id:"assign",cat:"op",cls:"b-op",label:"gán / cập nhật",desc:"Sửa biểu thức tùy ý",root:"main",kind:"simple",code:"s = s + i;"},{id:"arithmetic",cat:"op",cls:"b-op",label:"phép toán",desc:"+ - * / % và biểu thức",root:"main",kind:"simple",code:"int kq = (a + b) * c - d % 2;"},{id:"logic",cat:"op",cls:"b-op",label:"logic",desc:"&& || ! < > ==",root:"main",kind:"simple",code:"int hopLe = (n > 0) && (n <= MAX);"},
-{id:"printf",cat:"io",cls:"b-io",label:"printf tùy ý",desc:"In chuỗi, số, biểu thức",root:"main",kind:"simple",code:"printf(\"Ket qua = %d\\n\", s);"},{id:"scanf",cat:"io",cls:"b-io",label:"scanf tùy ý",desc:"Nhập một hoặc nhiều biến",root:"main",kind:"simple",code:"scanf(\"%d%d\", &a, &b);"},{id:"fgets",cat:"io",cls:"b-io",label:"fgets",desc:"Nhập cả dòng có khoảng trắng",root:"main",kind:"simple",code:"fgets(str, sizeof(str), stdin);"},{id:"puts",cat:"io",cls:"b-io",label:"puts",desc:"In chuỗi",root:"main",kind:"simple",code:"puts(str);"},
-{id:"if",cat:"branch",cls:"b-if",label:"if",desc:"Khối điều kiện lồng được",root:"main",kind:"container",header:"if (n > 0) {",middle:"",footer:"}",slots:["body"]},{id:"ifelse",cat:"branch",cls:"b-if",label:"if / else",desc:"Hai nhánh lệnh",root:"main",kind:"container",header:"if (n % 2 == 0) {",middle:"} else {",footer:"}",slots:["then","else"]},{id:"elseif",cat:"branch",cls:"b-if",label:"if / else if / else",desc:"Nhiều mức điều kiện",root:"main",kind:"container",header:"if (diem >= 8) {",middle:"} else if (diem >= 6.5) {\n    printf(\"Kha\\n\");\n} else {",footer:"}",slots:["then","else"]},{id:"switch",cat:"branch",cls:"b-if",label:"switch",desc:"Chọn case",root:"main",kind:"container",header:"switch (ch) {\n    case 'A':",middle:"        break;\n    default:",footer:"        break;\n}",slots:["caseA","default"]},
-{id:"for",cat:"loop",cls:"b-loop",label:"for",desc:"Lặp có biến điều khiển",root:"main",kind:"container",header:"for (i = 0; i < n; i++) {",middle:"",footer:"}",slots:["body"]},{id:"while",cat:"loop",cls:"b-loop",label:"while",desc:"Kiểm tra trước khi lặp",root:"main",kind:"container",header:"while (n > 0) {",middle:"",footer:"}",slots:["body"]},{id:"dowhile",cat:"loop",cls:"b-loop",label:"do / while",desc:"Chạy ít nhất một lần",root:"main",kind:"container",header:"do {",middle:"",footer:"} while (n <= 0);",slots:["body"]},{id:"break",cat:"loop",cls:"b-loop",label:"break",desc:"Thoát vòng lặp",root:"main",kind:"simple",code:"break;"},{id:"continue",cat:"loop",cls:"b-loop",label:"continue",desc:"Bỏ qua lượt hiện tại",root:"main",kind:"simple",code:"continue;"},
-{id:"func_def",cat:"func",cls:"b-func",label:"định nghĩa hàm",desc:"Tên, kiểu trả về, tham số tùy ý",root:"pre",kind:"container",header:"int tenHam(int n) {",middle:"",footer:"}",slots:["body"]},{id:"void_func",cat:"func",cls:"b-func",label:"hàm void",desc:"Không trả về giá trị",root:"pre",kind:"container",header:"void hienThi(int x) {",middle:"",footer:"}",slots:["body"]},{id:"func_proto",cat:"func",cls:"b-func",label:"khai báo prototype",desc:"Khai báo hàm trước main",root:"pre",kind:"simple",code:"int tenHam(int n);"},{id:"return",cat:"func",cls:"b-func",label:"return",desc:"Trả kết quả",root:"main",kind:"simple",code:"return s;"},{id:"call_func",cat:"func",cls:"b-func",label:"gọi hàm",desc:"Gọi hàm tùy ý",root:"main",kind:"simple",code:"s = tenHam(n);"},
-{id:"array1d",cat:"array",cls:"b-array",label:"mảng 1D tùy ý",desc:"Đổi kiểu, tên, kích thước",root:"main",kind:"simple",code:"int a[100];"},{id:"array2d",cat:"array",cls:"b-array",label:"mảng 2D tùy ý",desc:"Hàng/cột tùy ý",root:"main",kind:"simple",code:"int m[3][4];"},{id:"arraynd",cat:"array",cls:"b-array",label:"mảng nhiều chiều",desc:"Ví dụ 3D, sửa tùy ý",root:"main",kind:"simple",code:"int tensor[2][3][4];"},{id:"array_input",cat:"array",cls:"b-array",label:"nhập mảng",desc:"Có thể lồng vòng lặp",root:"main",kind:"container",header:"for (i = 0; i < n; i++) {",middle:"",footer:"}",slots:["body"],starter:"scanf(\"%d\", &a[i]);"},{id:"array_print",cat:"array",cls:"b-array",label:"xuất mảng",desc:"Duyệt và in",root:"main",kind:"container",header:"for (i = 0; i < n; i++) {",middle:"",footer:"}",slots:["body"],starter:"printf(\"%d \", a[i]);"},
-{id:"string_decl",cat:"string",cls:"b-str",label:"chuỗi char[]",desc:"Khai báo chuỗi",root:"main",kind:"simple",code:"char str[100];"},{id:"string_init",cat:"string",cls:"b-str",label:"khởi tạo chuỗi",desc:"Chuỗi kết thúc bằng \\0",root:"main",kind:"simple",code:"char str[100] = \"Hello C\";"},{id:"string_ops",cat:"string",cls:"b-str",label:"xử lý chuỗi",desc:"strlen/strcpy/strcat/strcmp",root:"main",kind:"simple",code:"int len = strlen(str);\nstrcpy(str, \"Ngoc\");\nstrcat(str, \" Minh\");\nprintf(\"%s co do dai %d\\n\", str, len);"},
-{id:"ptr_decl",cat:"pointer",cls:"b-ptr",label:"con trỏ",desc:"Khai báo và gán địa chỉ",root:"main",kind:"simple",code:"int *p;\np = &x;"},{id:"ptr_deref",cat:"pointer",cls:"b-ptr",label:"*p và &x",desc:"Truy cập gián tiếp",root:"main",kind:"simple",code:"*p = 99;\nprintf(\"%d\\n\", *p);"},{id:"malloc",cat:"pointer",cls:"b-ptr",label:"malloc/free",desc:"Cấp phát động",root:"main",kind:"simple",code:"int *p = (int*)malloc(n * sizeof(int));\nif (p == NULL) return 1;\nfree(p);"},{id:"swap_ptr",cat:"pointer",cls:"b-ptr",label:"hàm con trỏ",desc:"Thay đổi biến gốc",root:"pre",kind:"container",header:"void hoanvi(int *a, int *b) {",middle:"",footer:"}",slots:["body"],starter:"int t = *a;\n*a = *b;\n*b = t;"},
-{id:"struct_def",cat:"struct",cls:"b-struct",label:"struct tùy ý",desc:"Định nghĩa kiểu dữ liệu",root:"pre",kind:"simple",code:"struct SinhVien {\n    char ten[50];\n    int tuoi;\n    float diem;\n};"},{id:"typedef_struct",cat:"struct",cls:"b-struct",label:"typedef struct",desc:"Tên kiểu ngắn gọn",root:"pre",kind:"simple",code:"typedef struct SinhVien SINHVIEN;"},{id:"struct_var",cat:"struct",cls:"b-struct",label:"biến struct",desc:"Truy cập bằng dấu chấm",root:"main",kind:"simple",code:"SINHVIEN sv;\nstrcpy(sv.ten, \"An\");\nsv.tuoi = 18;\nsv.diem = 8.5;"},{id:"struct_array",cat:"struct",cls:"b-struct",label:"mảng struct",desc:"Danh sách đối tượng",root:"main",kind:"simple",code:"SINHVIEN ds[100];\nds[0].tuoi = 18;"},
-{id:"raw_pre",cat:"raw",cls:"b-raw",label:"mã trước main",desc:"Tự viết bất kỳ",root:"pre",kind:"simple",code:"// Mã tự do trước main"},{id:"raw_main",cat:"raw",cls:"b-raw",label:"mã trong main",desc:"Tự viết bất kỳ",root:"main",kind:"simple",code:"// Mã tự do trong main"}
-];
-let activeCat="all",uid=1,collapsed=new Set();const tree={pre:[],main:[]};const tabs=document.getElementById("tabs"),palette=document.getElementById("palette"),preRoot=document.getElementById("preRoot"),mainRoot=document.getElementById("mainRoot"),codeOutput=document.getElementById("codeOutput"),validateBox=document.getElementById("validateBox"),screenBox=document.getElementById("screen"),memoryBox=document.getElementById("memoryBox"),analysisBox=document.getElementById("analysisBox");
-function init(){renderTabs();renderPalette();renderAll()}function renderTabs(){tabs.innerHTML=categories.map(([id,name])=>`<button class="tab ${id===activeCat?'active':''}" onclick="setCat('${id}')">${name}</button>`).join("")}function setCat(id){activeCat=id;renderTabs();renderPalette()}function renderPalette(){const q=document.getElementById("searchBox").value.toLowerCase().trim();const list=defs.filter(d=>(activeCat==="all"||d.cat===activeCat)&&(!q||(d.label+d.desc+d.cat+(d.code||d.header||"")).toLowerCase().includes(q)));palette.innerHTML=list.map(d=>`<div class="c-block ${d.cls}" draggable="true" data-id="${d.id}" ondblclick="quickAdd('${d.id}')"><span class="c-title">${escapeHtml(d.label)}</span><span class="c-desc">${escapeHtml(d.desc)} · ${d.root==="pre"?"Trước main":"Trong main"}</span></div>`).join("");palette.querySelectorAll(".c-block").forEach(el=>{el.addEventListener("dragstart",e=>e.dataTransfer.setData("blockId",el.dataset.id))})}function quickAdd(id){const d=getDef(id);addNode(id,d.root,null)}function getDef(id){return defs.find(d=>d.id===id)}
-function createNode(def){const node={uid:uid++,id:def.id,label:def.label,cat:def.cat,cls:def.cls,kind:def.kind,code:def.code||"",header:def.header||"",middle:def.middle||"",footer:def.footer||"",slots:{}};if(def.kind==="container"){def.slots.forEach(s=>node.slots[s]=[]);if(def.starter){node.slots[def.slots[0]].push({uid:uid++,id:"starter",label:"lệnh mẫu",cat:"raw",cls:"b-raw",kind:"simple",code:def.starter,header:"",middle:"",footer:"",slots:{}})}}return node}function addNode(blockId,rootName,parentUid,slotName){const def=getDef(blockId);if(!def)return;const parentDepth=parentUid?getDepth(parentUid):-1;const newDepth=parentDepth+1;if(def.kind==="container"&&newDepth>MAX_DEPTH){toast("Không thể lồng quá cấp "+MAX_DEPTH);return}const node=createNode(def);getTargetArray(rootName,parentUid,slotName).push(node);renderAll()}function getTargetArray(rootName,parentUid,slotName){if(!parentUid)return tree[rootName];const p=findNode(parentUid);return p.node.slots[slotName]}function findNode(uidToFind,arrs=[tree.pre,tree.main],parent=null,slot=null){for(const arr of arrs){for(let i=0;i<arr.length;i++){const n=arr[i];if(n.uid===uidToFind)return{node:n,parent,slot,index:i,arr};for(const [slotName,children] of Object.entries(n.slots||{})){const r=findNode(uidToFind,[children],n,slotName);if(r)return r}}}return null}function getDepth(uidToFind,arrs=[tree.pre,tree.main],depth=0){for(const arr of arrs){for(const n of arr){if(n.uid===uidToFind)return depth;for(const children of Object.values(n.slots||{})){const d=getDepth(uidToFind,[children],depth+1);if(d!==-1)return d}}}return -1}function countNodes(arrs=[tree.pre,tree.main]){let c=0;for(const arr of arrs){for(const n of arr){c++;for(const children of Object.values(n.slots||{}))c+=countNodes([children])}}return c}function maxDepth(arrs=[tree.pre,tree.main],depth=0){let m=0;for(const arr of arrs){for(const n of arr){m=Math.max(m,depth);for(const children of Object.values(n.slots||{}))m=Math.max(m,maxDepth([children],depth+1))}}return m}
-function renderAll(){preRoot.innerHTML=renderSlot(tree.pre,"pre",null,"root",0,"Thả include, struct, prototype, hàm vào đây");mainRoot.innerHTML=renderSlot(tree.main,"main",null,"root",0,"Thả lệnh thực thi vào đây");document.getElementById("countBlocks").textContent=countNodes()+" khối";document.getElementById("depthInfo").textContent="Độ sâu hiện tại: "+maxDepth()+"/"+MAX_DEPTH;bindDropZones();renderCode()}function renderSlot(items,rootName,parentUid,slotName,depth,emptyText){const html=items.map((n,idx)=>renderNode(n,rootName,parentUid,slotName,depth,idx)).join("");return`<div class="drop-slot" data-root="${rootName}" data-parent="${parentUid||""}" data-slot="${slotName}">${html||`<div class="slot-empty">${escapeHtml(emptyText||"Thả khối vào đây")}</div>`}</div>`}function renderNode(n,rootName,parentUid,slotName,depth,index){const isCollapsed=collapsed.has(n.uid),depthText="cấp "+depth;let editor="";if(n.kind==="container"){editor=`<div class="node-edit" ${isCollapsed?"style='display:none'":""}><label>Dòng mở khối</label><textarea oninput="updateField(${n.uid},'header',this.value)">${escapeHtml(n.header)}</textarea>${n.middle?`<label>Dòng chuyển nhánh</label><textarea oninput="updateField(${n.uid},'middle',this.value)">${escapeHtml(n.middle)}</textarea>`:""}<label>Dòng đóng khối</label><input oninput="updateField(${n.uid},'footer',this.value)" value="${escapeAttr(n.footer)}" /></div>`}else{editor=`<div class="node-edit" ${isCollapsed?"style='display:none'":""}><label>Mã C của khối</label><textarea oninput="updateField(${n.uid},'code',this.value)">${escapeHtml(n.code)}</textarea></div>`}let children="";if(n.kind==="container"&&!isCollapsed){const slots=Object.keys(n.slots);children=`<div class="container-body">`+slots.map(s=>`<div class="slot-label">Vùng lệnh: ${slotVi(s)} <span class="depth-badge">${depthText}</span></div>${renderSlot(n.slots[s],rootName,n.uid,s,depth+1,"Thả lệnh con vào đây · lồng tối đa cấp 5")}`).join("")+`</div>`}return`<div class="node"><div class="node-head"><div class="node-chip ${n.cls}">${escapeHtml(n.label)}</div><div class="node-meta"><div class="node-name">${n.kind==="container"?"Khối có thể lồng lệnh":"Lệnh đơn / khai báo tổng quát"}</div><div class="node-kind">${depthText} · ${n.kind}</div></div><div class="node-actions"><button class="mini" onclick="moveNode(${n.uid},-1)">↑</button><button class="mini" onclick="moveNode(${n.uid},1)">↓</button><button class="mini addkid" onclick="toggleCollapse(${n.uid})">${isCollapsed?"Mở":"Gọn"}</button><button class="mini del" onclick="deleteNode(${n.uid})">X</button></div></div>${editor}${children}</div>`}function slotVi(s){return{root:"gốc",body:"thân khối",then:"nhánh đúng",else:"nhánh sai",caseA:"case",default:"default"}[s]||s}
-function bindDropZones(){document.querySelectorAll(".drop-slot").forEach(el=>{el.addEventListener("dragover",e=>{e.preventDefault();el.classList.add("drag-over")});el.addEventListener("dragleave",e=>{if(!el.contains(e.relatedTarget))el.classList.remove("drag-over")});el.addEventListener("drop",e=>{e.preventDefault();e.stopPropagation();el.classList.remove("drag-over");const id=e.dataTransfer.getData("blockId");if(!id)return;const root=el.dataset.root,parent=el.dataset.parent?Number(el.dataset.parent):null,slot=el.dataset.slot;addNode(id,root,parent,slot);e.dataTransfer.clearData()})})}function updateField(uid,field,value){const r=findNode(uid);if(!r)return;r.node[field]=value;renderCode()}function deleteNode(uid){const r=findNode(uid);if(!r)return;r.arr.splice(r.index,1);collapsed.delete(uid);renderAll()}function moveNode(uid,dir){const r=findNode(uid);if(!r)return;const ni=r.index+dir;if(ni<0||ni>=r.arr.length)return;[r.arr[r.index],r.arr[ni]]=[r.arr[ni],r.arr[r.index]];renderAll()}function toggleCollapse(uid){if(collapsed.has(uid))collapsed.delete(uid);else collapsed.add(uid);renderAll()}function collapseAll(){function walk(arr){arr.forEach(n=>{if(n.kind==="container")collapsed.add(n.uid);Object.values(n.slots||{}).forEach(walk)})}walk(tree.pre);walk(tree.main);renderAll()}function expandAll(){collapsed.clear();renderAll()}
-function generateNode(n,level){if(n.kind==="simple")return indentLines(n.code,level);const slots=Object.keys(n.slots);let out=[];out.push(indentLines(n.header,level));out.push(generateList(n.slots[slots[0]]||[],level+1));if(n.middle&&slots[1]){out.push(indentLines(n.middle,level));out.push(generateList(n.slots[slots[1]]||[],level+1))}out.push(indentLines(n.footer,level));return out.filter(Boolean).join("\n")}function generateList(arr,level){return arr.map(n=>generateNode(n,level)).filter(Boolean).join("\n")}function indentLines(text,level){const pad="    ".repeat(level);return String(text||"").split("\n").map(line=>line.trim()?pad+line:line).join("\n")}function renderCode(){const autoMain=document.getElementById("autoMain")?.checked??true,autoReturn=document.getElementById("autoReturn")?.checked??true,lineNumbers=document.getElementById("lineNumbers")?.checked??false;let pre=generateList(tree.pre,0),main=generateList(tree.main,1),code="";if(pre.trim())code+=pre.trim()+"\n\n";if(autoMain){code+="int main()\n{\n";code+=main;if(autoReturn&&!/\breturn\s+0\s*;/.test(main)){if(main.trim())code+="\n";code+="    return 0;"}code+="\n}"}else{code+=generateList(tree.main,0)}if(lineNumbers)code=code.split("\n").map((l,i)=>String(i+1).padStart(3," ")+" | "+l).join("\n");codeOutput.textContent=code.trim()||"/* Mã C sẽ xuất hiện ở đây */";return code.trim()}
-function validateProgram(){const code=renderCode(),warnings=[],errors=[];if((/printf|scanf|puts|fgets/.test(code))&&!/#include\s*<stdio\.h>/.test(code))warnings.push("Nên thêm #include <stdio.h> khi dùng nhập/xuất.");if((/strlen|strcpy|strcat|strcmp|strchr/.test(code))&&!/#include\s*<string\.h>/.test(code))warnings.push("Nên thêm #include <string.h> khi dùng xử lý chuỗi.");if((/malloc|calloc|realloc|free/.test(code))&&!/#include\s*<stdlib\.h>/.test(code))warnings.push("Nên thêm #include <stdlib.h> khi dùng cấp phát động.");if((code.match(/\{/g)||[]).length!==(code.match(/\}/g)||[]).length)errors.push("Số dấu { và } chưa cân bằng.");if(maxDepth()>MAX_DEPTH)errors.push("Độ sâu lồng vượt quá "+MAX_DEPTH+".");if(document.getElementById("strictMode").checked&&!/\bint\s+main\s*\(/.test(code))errors.push("Chưa thấy hàm int main().");validateBox.innerHTML=errors.length?`<div class="warn"><b>Lỗi cần sửa:</b><ol>${errors.map(e=>`<li>${escapeHtml(e)}</li>`).join("")}</ol></div>`:warnings.length?`<div class="warn"><b>Gợi ý:</b><ol>${warnings.map(w=>`<li>${escapeHtml(w)}</li>`).join("")}</ol></div>`:`<div class="ok"><b>Ổn:</b> Cấu trúc chương trình hợp lý. Có thể bấm “Chạy C thật” để gửi mã đến Judge0.</div>`}
-function addStarter(){clearAll(false);["inc_stdio","decl_any","scanf","ifelse","printf"].forEach(id=>quickAdd(id))}function addAdvancedStarter(){clearAll(false);["inc_stdio","inc_string","inc_stdlib","define","struct_def","typedef_struct","func_def"].forEach(id=>quickAdd(id));["decl_any","array1d","array_input","array_print","string_init","string_ops","ptr_decl","struct_var","printf"].forEach(id=>quickAdd(id))}function clearAll(confirmIt=true){if(confirmIt&&!confirm("Xóa toàn bộ cây lệnh hiện tại?"))return;tree.pre=[];tree.main=[];collapsed.clear();screenBox.textContent="Chưa chạy chương trình.";memoryBox.textContent="Chưa có dữ liệu.";validateBox.innerHTML="";renderAll()}
-function runProgram(){const code=renderCode(),input=document.getElementById("stdinInput").value.trim(),tokens=input?input.split(/\s+/):[],state={vars:{},arrays:{},strings:{},ptrs:{},structs:{},heap:{},out:[],trace:[]};if(/\bint\s+n\b/.test(code))state.vars.n=Number(tokens[0]||5);if(/\bint\s+i\b/.test(code))state.vars.i=0;if(/\bint\s+s\b/.test(code))state.vars.s=0;if(/\bscanf\s*\(/.test(code))state.trace.push("scanf đọc dữ liệu từ Stdin Inputs.");if(/\bprintf\s*\(/.test(code))state.out.push("printf: mô phỏng xuất dữ liệu ra màn hình.");if(/int\s+a\s*\[|a\s*\[i\]|a\[j\]/.test(code)){const n=Number(tokens[0]||5),arr=tokens.length>1?tokens.slice(1,1+n).map(Number):[7,5,15,3,8];state.arrays.a=arr;state.vars.n=arr.length;if(/a\[j\]\s*>\s*a\[j\s*\+\s*1\]/.test(code)){state.arrays.a=[...arr].sort((a,b)=>a-b);state.out.push("Mảng sau sắp xếp: "+state.arrays.a.join(" "))}else state.out.push("Mảng a: "+arr.join(" "));state.trace.push("Mảng dùng chỉ số từ 0 đến n-1.")}if(/char\s+str\s*\[|strlen|strcpy|strcat|strcmp|strchr|fgets/.test(code)){let s="Hello C";const m=code.match(/char\s+str\s*\[[^\]]*\]\s*=\s*"([^"]*)"/);if(m)s=m[1];if(/fgets\s*\(/.test(code)&&input)s=input;const strcpy=code.match(/strcpy\s*\(\s*str\s*,\s*"([^"]*)"/);if(strcpy)s=strcpy[1];const strcat=code.match(/strcat\s*\(\s*str\s*,\s*"([^"]*)"/);if(strcat)s+=strcat[1];state.strings.str=s;if(/strlen/.test(code))state.vars.len=s.length;state.out.push("Chuỗi str = "+s);state.trace.push("Chuỗi C là mảng char kết thúc bằng \\0.")}if(/int\s+\*p|malloc|calloc|realloc|free|\*p|&x/.test(code)){state.vars.x=/\*p\s*=/.test(code)?99:10;state.ptrs.p="địa chỉ của x hoặc vùng heap";if(/malloc|calloc/.test(code))state.heap.p=Array(Number(state.vars.n||5)).fill(/calloc/.test(code)?0:null);if(/free\s*\(\s*p\s*\)/.test(code))state.heap.p="đã free";state.out.push("Con trỏ p đã được mô phỏng.");state.trace.push("& lấy địa chỉ, * truy cập giá trị tại địa chỉ.")}if(/struct\s+\w+|typedef\s+struct|SINHVIEN|sv\.|PHANSO|ps\./.test(code)){state.structs.sv={ten:"An",tuoi:18,diem:8.5};state.out.push("Struct sv: An, 18 tuổi, điểm 8.5");state.trace.push("Struct gom nhiều trường dữ liệu thành một kiểu mới.")}if(/\bif\s*\(/.test(code))state.trace.push("if/else tạo nhánh điều kiện.");if(/\bfor\s*\(/.test(code))state.trace.push("for lặp với biến điều khiển.");if(/\bwhile\s*\(/.test(code))state.trace.push("while kiểm tra điều kiện trước khi lặp.");if(/\bdo\s*\{/.test(code))state.trace.push("do/while chạy thân ít nhất một lần.");if(/\bint\s+\w+\s*\([^)]*\)\s*\{|\bvoid\s+\w+\s*\([^)]*\)\s*\{/.test(code))state.trace.push("Hàm giúp chia chương trình thành mô-đun.");screenBox.textContent=state.out.length?state.out.join("\n"):"Chương trình đã được tạo. Mô phỏng chưa nhận diện đầu ra cụ thể.";analysisBox.innerHTML="<b>Giảng giải:</b> "+(state.trace.length?state.trace.join(" "):"Cây lệnh đã sinh mã C tổng quát.");renderMemory(state)}
-function renderMemory(state){let html="";const vars=Object.entries(state.vars);if(vars.length){html+="<b>Biến</b><table><tbody>"+vars.map(([k,v])=>`<tr><th>${escapeHtml(k)}</th><td>${escapeHtml(String(v))}</td></tr>`).join("")+"</tbody></table>"}Object.entries(state.arrays).forEach(([name,arr])=>{html+=`<b>Mảng ${escapeHtml(name)}</b><div>`+arr.map((v,i)=>`<span class="cell"><span class="idx">[${i}]</span>${escapeHtml(String(v))}</span>`).join("")+"</div><br>"});Object.entries(state.strings).forEach(([name,s])=>{html+=`<b>Chuỗi ${escapeHtml(name)}</b><div>`+[...s].map((ch,i)=>`<span class="cell"><span class="idx">[${i}]</span>${escapeHtml(ch)}</span>`).join("")+`<span class="cell"><span class="idx">[${s.length}]</span>\\0</span></div><br>`});const ptrs=Object.entries(state.ptrs);if(ptrs.length){html+="<b>Con trỏ</b><table><tbody>"+ptrs.map(([k,v])=>`<tr><th>${escapeHtml(k)}</th><td>${escapeHtml(String(v))}</td></tr>`).join("")+"</tbody></table>"}Object.entries(state.heap).forEach(([name,h])=>{html+=`<b>Heap ${escapeHtml(name)}</b><div>`+(Array.isArray(h)?h.map((v,i)=>`<span class="cell"><span class="idx">heap[${i}]</span>${escapeHtml(String(v))}</span>`).join(""):`<span class="cell">${escapeHtml(String(h))}</span>`)+"</div><br>"});Object.entries(state.structs).forEach(([name,obj])=>{html+=`<b>Struct ${escapeHtml(name)}</b><table><tbody>`+Object.entries(obj).map(([k,v])=>`<tr><th>${escapeHtml(k)}</th><td>${escapeHtml(String(v))}</td></tr>`).join("")+"</tbody></table>"});memoryBox.innerHTML=html||"Chưa có dữ liệu."}
+  <header class="hero">
+    <div class="brand">
+      <div class="logo">C</div>
+      <div>
+        <h1>Scratch C Studio</h1> 
+        <p>Học lập trình C vui hơn, dễ hiểu hơn, trực quan hơn!</p>
+      </div>
+    </div>
+    <div class="toolbar">
+      <button class="btn btn-run" onclick="runRealC()">⚙ Chạy mã</button>
+      <button class="btn btn-soft" onclick="validateProgram()">✓ Kiểm tra</button>
+      <button class="btn btn-dark" onclick="copyCode()">🌐 Sao chép & Chạy mã</button>
+      <button class="btn btn-danger" onclick="clearAll()">Xóa mã</button>
+    </div>
+  </header>
 
-async function runRealC(){const codeRaw=renderCode(),code=document.getElementById("lineNumbers").checked?stripLineNumbers(codeRaw):codeRaw,stdin=document.getElementById("stdinInput").value||"",baseUrl=document.getElementById("judge0Url").value.trim().replace(/\/+$/,""),languageId=Number(document.getElementById("languageId").value||50);screenBox.textContent="Đang gửi mã C đến Judge0 để biên dịch và chạy thật...";analysisBox.innerHTML="<b>Chạy C thật:</b> Đang gửi source_code và stdin đến API. Vui lòng chờ.";try{if(!baseUrl)throw new Error("Chưa nhập Judge0 API URL.");const payload={language_id:languageId,source_code:encodeBase64(code),stdin:encodeBase64(stdin),cpu_time_limit:2,wall_time_limit:5,memory_limit:128000};let res=await fetch(baseUrl+"/submissions?base64_encoded=true&wait=true",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});if(!res.ok){const text=await res.text();throw new Error("HTTP "+res.status+": "+text)}let data=await res.json();if(data.token&&(!data.status||data.status.id===1||data.status.id===2))data=await pollJudge0(baseUrl,data.token);showJudge0Result(data)}catch(err){screenBox.textContent="Không chạy C thật được.\n\nNguyên nhân thường gặp:\n1. Judge0 CE public bị giới hạn hoặc quá tải.\n2. Trình duyệt chặn CORS.\n3. Máy không có Internet.\n4. Endpoint Judge0 yêu cầu API key.\n5. Language ID không khớp với máy chủ Judge0.\n\nChi tiết lỗi:\n"+err.message;analysisBox.innerHTML="<b>Chạy C thật thất bại:</b> Gọi API trực tiếp từ HTML phụ thuộc dịch vụ bên ngoài. Nếu lỗi lặp lại, nên đổi Judge0 API URL hoặc dùng backend trung gian."}}
-async function pollJudge0(baseUrl,token){for(let i=0;i<12;i++){await sleep(1200);const res=await fetch(baseUrl+"/submissions/"+encodeURIComponent(token)+"?base64_encoded=true");if(!res.ok){const text=await res.text();throw new Error("Polling HTTP "+res.status+": "+text)}const data=await res.json();if(data.status&&data.status.id!==1&&data.status.id!==2)return data}throw new Error("Quá thời gian chờ kết quả từ Judge0.")}
-function showJudge0Result(data){const stdout=decodeBase64(data.stdout),stderr=decodeBase64(data.stderr),compileOutput=decodeBase64(data.compile_output),message=decodeBase64(data.message);let result="";result+="=== TRẠNG THÁI ===\n";result+=(data.status&&data.status.description?data.status.description:"Không rõ")+"\n\n";if(compileOutput)result+="=== COMPILE OUTPUT ===\n"+compileOutput+"\n";if(stdout)result+="=== STDOUT ===\n"+stdout+"\n";if(stderr)result+="=== STDERR ===\n"+stderr+"\n";if(message)result+="=== MESSAGE ===\n"+message+"\n";if(!stdout&&!stderr&&!compileOutput&&!message)result+="Chương trình chạy xong nhưng không có dữ liệu xuất ra.\n";result+="\n=== THÔNG TIN THỰC THI ===\n";result+="Time: "+(data.time||"N/A")+"s\n";result+="Memory: "+(data.memory||"N/A")+" KB\n";result+="Token: "+(data.token||"N/A")+"\n";screenBox.textContent=result;analysisBox.innerHTML="<b>Chạy C thật:</b> Kết quả này đến từ trình biên dịch/thực thi C trên Judge0. Nếu có lỗi cú pháp, xem COMPILE OUTPUT. Nếu chương trình lỗi khi chạy, xem STDERR hoặc MESSAGE."}
-function stripLineNumbers(code){return code.split("\n").map(line=>line.replace(/^\s*\d+\s+\|\s?/,"")).join("\n")}
-function sleep(ms){return new Promise(resolve=>setTimeout(resolve,ms))}
-function encodeBase64(str){const bytes=new TextEncoder().encode(str);let binary="";const chunkSize=0x8000;for(let i=0;i<bytes.length;i+=chunkSize){const chunk=bytes.subarray(i,i+chunkSize);binary+=String.fromCharCode.apply(null,chunk)}return btoa(binary)}
-function decodeBase64(str){if(!str)return"";try{const binary=atob(str),bytes=new Uint8Array(binary.length);for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);return new TextDecoder().decode(bytes)}catch(e){return str||""}}
+  <main class="layout">
+    <section class="panel">
+      <div class="panel-header">🎨 Thư viện khối lệnh</div>
+      <div class="panel-body">
+        <div class="hint">
+          Kéo khối vào <b>Trước main</b>, <b>Trong main</b> hoặc thả vào vùng con của khối lồng. Nhấp đúp để thêm nhanh.
+        </div>
+        <input id="searchBox" class="search" placeholder="Tìm: if, for, hàm, mảng 2D, con trỏ, struct..." oninput="renderPalette()" />
+        <div id="tabs" class="tabs"></div>
+        <div id="palette" class="palette"></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">🧩 Không gian lắp ghép</div>
+      <div class="panel-body">
+        <div class="workspace-top">
+          <div class="statbar">
+            <span class="stat" id="countBlocks">0 khối lệnh</span>
+            <span class="stat" id="depthInfo">Lồng tối đa: 5</span>
+          </div>
+          <div class="toolbar">
+            <button class="btn btn-ghost" onclick="addStarter()">✨ Mẫu cơ bản</button>
+            <button class="btn btn-ghost" onclick="addAdvancedStarter()">🚀 Mẫu nâng cao</button>
+            <button class="btn btn-ghost" onclick="expandAll()">Mở rộng</button>
+            <button class="btn btn-ghost" onclick="collapseAll()">Thu gọn</button>
+          </div>
+        </div>
+
+        <div class="tree-scroll">
+          <div class="root-zone">
+            <div class="root-title">
+              Trước main <span class="zone-pill">include / struct / hàm</span>
+            </div>
+            <div id="preRoot"></div>
+          </div>
+
+          <div class="root-zone">
+            <div class="root-title">
+              Trong main <span class="zone-pill">lệnh thực thi</span>
+            </div>
+            <div id="mainRoot"></div>
+          </div>
+        </div>
+
+        <div class="config">
+          <label><input type="checkbox" id="autoMain" checked onchange="renderAll()">Tự sinh <code>int main()</code></label>
+          <label><input type="checkbox" id="autoReturn" checked onchange="renderAll()">Tự thêm <code>return 0;</code></label>
+          <label><input type="checkbox" id="lineNumbers" onchange="renderAll()">Hiện số dòng</label>
+          <label><input type="checkbox" id="strictMode" checked>Kiểm tra chặt hơn</label>
+        </div>
+
+        <div id="validateBox"></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">💻 Mã C và kết quả</div>
+      <div class="panel-body">
+        <div class="hint">
+          Mã C sinh ra và kết quả sau khi nhấn nút <b>Chạy mã</b>. Nếu nút <b>Chạy mã</b> không hoạt động, dùng <b>Sao chép & Chạy mã</b> để mở W3Schools và dán mã vào chạy. Nhấn nút <b>Xóa mã</b> để xóa tất cả mã vừa tạo.
+        </div>
+
+        <h3 class="side-title">Stdin Inputs</h3>
+        <textarea id="stdinInput" class="stdin-box" placeholder="Ví dụ: 5 7 5 15 3 8"></textarea>
+
+        <h3 class="side-title">Mã C sinh ra</h3>
+        <div id="codeOutput" class="code-output"></div>
+
+        <h3 class="side-title">Kết quả chạy mã</h3>
+        <div id="screen" class="screen">Chưa chạy chương trình.</div>
+
+        <div id="analysisBox" class="analysis-box">
+          <b>Giảng giải:</b> Hãy kéo khối để bắt đầu xây dựng chương trình C.
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+const MAX_DEPTH = 5;
+const JUDGE0_URL = "https://ce.judge0.com";
+const C_LANGUAGE_ID = 50;
+
+const categories = [
+  ["all","Tất cả"],
+  ["core","Cấu trúc"],
+  ["var","Biến"],
+  ["io","Nhập xuất"],
+  ["op","Phép toán"],
+  ["branch","Rẽ nhánh"],
+  ["loop","Lặp"],
+  ["func","Hàm"],
+  ["array","Mảng"],
+  ["string","Chuỗi"],
+  ["pointer","Con trỏ"],
+  ["struct","Struct"],
+  ["raw","Tự do"]
+];
+
+const defs = [
+  {id:"inc_stdio",cat:"core",cls:"b-core",label:"#include <stdio.h>",desc:"Thư viện nhập xuất",root:"pre",kind:"simple",code:"#include <stdio.h>"},
+  {id:"inc_stdlib",cat:"core",cls:"b-core",label:"#include <stdlib.h>",desc:"malloc/calloc/free",root:"pre",kind:"simple",code:"#include <stdlib.h>"},
+  {id:"inc_string",cat:"core",cls:"b-core",label:"#include <string.h>",desc:"strlen/strcpy/strcmp",root:"pre",kind:"simple",code:"#include <string.h>"},
+  {id:"define",cat:"core",cls:"b-core",label:"#define",desc:"Hằng tiền xử lý",root:"pre",kind:"simple",code:"#define MAX 100"},
+  {id:"scope",cat:"core",cls:"b-core",label:"khối { }",desc:"Tạo phạm vi lệnh con",root:"main",kind:"container",header:"{",middle:"",footer:"}",slots:["body"]},
+  {id:"comment",cat:"core",cls:"b-core",label:"// chú thích",desc:"Ghi chú giải thích",root:"main",kind:"simple",code:"// Ghi chú: giải thích thuật toán"},
+
+  {id:"decl_any",cat:"var",cls:"b-var",label:"khai báo biến",desc:"int/float/double/char tùy ý",root:"main",kind:"simple",code:"int n = 0, i = 0, s = 0;"},
+  {id:"decl_multi",cat:"var",cls:"b-var",label:"nhiều kiểu dữ liệu",desc:"Kiểu dữ liệu tổng quát",root:"main",kind:"simple",code:"int a = 0;\nfloat x = 0.0f;\ndouble y = 0.0;\nchar ch = 'A';"},
+
+  {id:"assign",cat:"op",cls:"b-op",label:"gán / cập nhật",desc:"Sửa biểu thức tùy ý",root:"main",kind:"simple",code:"s = s + i;"},
+  {id:"arithmetic",cat:"op",cls:"b-op",label:"phép toán",desc:"+ - * / % và biểu thức",root:"main",kind:"simple",code:"int kq = (a + b) * c - d % 2;"},
+  {id:"logic",cat:"op",cls:"b-op",label:"logic",desc:"&& || ! < > ==",root:"main",kind:"simple",code:"int hopLe = (n > 0) && (n <= MAX);"},
+
+  {id:"printf",cat:"io",cls:"b-io",label:"printf tùy ý",desc:"In chuỗi, số, biểu thức",root:"main",kind:"simple",code:"printf(\"Ket qua = %d\\n\", s);"},
+  {id:"printf_text",cat:"io",cls:"b-io",label:"printf chữ",desc:"In chuỗi thông báo",root:"main",kind:"simple",code:"printf(\"Xin chao C!\\n\");"},
+  {id:"scanf",cat:"io",cls:"b-io",label:"scanf tùy ý",desc:"Nhập một hoặc nhiều biến",root:"main",kind:"simple",code:"scanf(\"%d\", &n);"},
+  {id:"scanf_many",cat:"io",cls:"b-io",label:"scanf nhiều biến",desc:"Nhập nhiều biến",root:"main",kind:"simple",code:"scanf(\"%d%d\", &a, &b);"},
+  {id:"fgets",cat:"io",cls:"b-io",label:"fgets",desc:"Nhập cả dòng có khoảng trắng",root:"main",kind:"simple",code:"fgets(str, sizeof(str), stdin);"},
+  {id:"puts",cat:"io",cls:"b-io",label:"puts",desc:"In chuỗi",root:"main",kind:"simple",code:"puts(str);"},
+
+  {id:"if",cat:"branch",cls:"b-if",label:"if",desc:"Khối điều kiện lồng được",root:"main",kind:"container",header:"if (n > 0) {",middle:"",footer:"}",slots:["body"]},
+  {id:"ifelse",cat:"branch",cls:"b-if",label:"if / else",desc:"Hai nhánh lệnh",root:"main",kind:"container",header:"if (n % 2 == 0) {",middle:"} else {",footer:"}",slots:["then","else"]},
+  {id:"elseif",cat:"branch",cls:"b-if",label:"if / else if / else",desc:"Nhiều mức điều kiện",root:"main",kind:"container",header:"if (diem >= 8) {",middle:"} else if (diem >= 6.5) {\n    printf(\"Kha\\n\");\n} else {",footer:"}",slots:["then","else"]},
+  {id:"switch",cat:"branch",cls:"b-if",label:"switch",desc:"Chọn case",root:"main",kind:"container",header:"switch (ch) {\n    case 'A':",middle:"        break;\n    default:",footer:"        break;\n}",slots:["caseA","default"]},
+
+  {id:"for",cat:"loop",cls:"b-loop",label:"for",desc:"Lặp có biến điều khiển",root:"main",kind:"container",header:"for (i = 0; i < n; i++) {",middle:"",footer:"}",slots:["body"]},
+  {id:"while",cat:"loop",cls:"b-loop",label:"while",desc:"Kiểm tra trước khi lặp",root:"main",kind:"container",header:"while (n > 0) {",middle:"",footer:"}",slots:["body"]},
+  {id:"dowhile",cat:"loop",cls:"b-loop",label:"do / while",desc:"Chạy ít nhất một lần",root:"main",kind:"container",header:"do {",middle:"",footer:"} while (n <= 0);",slots:["body"]},
+  {id:"break",cat:"loop",cls:"b-loop",label:"break",desc:"Thoát vòng lặp",root:"main",kind:"simple",code:"break;"},
+  {id:"continue",cat:"loop",cls:"b-loop",label:"continue",desc:"Bỏ qua lượt hiện tại",root:"main",kind:"simple",code:"continue;"},
+
+  {id:"func_def",cat:"func",cls:"b-func",label:"định nghĩa hàm",desc:"Tên, kiểu trả về, tham số tùy ý",root:"pre",kind:"container",header:"int tenHam(int n) {",middle:"",footer:"}",slots:["body"]},
+  {id:"void_func",cat:"func",cls:"b-func",label:"hàm void",desc:"Không trả về giá trị",root:"pre",kind:"container",header:"void hienThi(int x) {",middle:"",footer:"}",slots:["body"]},
+  {id:"func_proto",cat:"func",cls:"b-func",label:"khai báo prototype",desc:"Khai báo hàm trước main",root:"pre",kind:"simple",code:"int tenHam(int n);"},
+  {id:"return",cat:"func",cls:"b-func",label:"return",desc:"Trả kết quả",root:"main",kind:"simple",code:"return s;"},
+  {id:"return0",cat:"func",cls:"b-func",label:"return 0",desc:"Kết thúc main",root:"main",kind:"simple",code:"return 0;"},
+  {id:"call_func",cat:"func",cls:"b-func",label:"gọi hàm",desc:"Gọi hàm tùy ý",root:"main",kind:"simple",code:"s = tenHam(n);"},
+
+  {id:"array1d",cat:"array",cls:"b-array",label:"mảng 1D tùy ý",desc:"Đổi kiểu, tên, kích thước",root:"main",kind:"simple",code:"int a[100];"},
+  {id:"array2d",cat:"array",cls:"b-array",label:"mảng 2D tùy ý",desc:"Hàng/cột tùy ý",root:"main",kind:"simple",code:"int m[3][4];"},
+  {id:"arraynd",cat:"array",cls:"b-array",label:"mảng nhiều chiều",desc:"Ví dụ 3D, sửa tùy ý",root:"main",kind:"simple",code:"int tensor[2][3][4];"},
+  {id:"array_input",cat:"array",cls:"b-array",label:"nhập mảng",desc:"Có thể lồng vòng lặp",root:"main",kind:"container",header:"for (i = 0; i < n; i++) {",middle:"",footer:"}",slots:["body"],starter:"scanf(\"%d\", &a[i]);"},
+  {id:"array_print",cat:"array",cls:"b-array",label:"xuất mảng",desc:"Duyệt và in",root:"main",kind:"container",header:"for (i = 0; i < n; i++) {",middle:"",footer:"}",slots:["body"],starter:"printf(\"%d \", a[i]);"},
+  {id:"bubble",cat:"array",cls:"b-array",label:"Bubble Sort",desc:"Sắp xếp tăng dần",root:"main",kind:"container",header:"for (i = 0; i < n - 1; i++) {",middle:"",footer:"}",slots:["body"],starter:"for (int j = 0; j < n - i - 1; j++) {\n    if (a[j] > a[j + 1]) {\n        int t = a[j];\n        a[j] = a[j + 1];\n        a[j + 1] = t;\n    }\n}"},
+
+  {id:"string_decl",cat:"string",cls:"b-str",label:"chuỗi char[]",desc:"Khai báo chuỗi",root:"main",kind:"simple",code:"char str[100];"},
+  {id:"string_init",cat:"string",cls:"b-str",label:"khởi tạo chuỗi",desc:"Chuỗi kết thúc bằng \\0",root:"main",kind:"simple",code:"char str[100] = \"Hello C\";"},
+  {id:"string_ops",cat:"string",cls:"b-str",label:"xử lý chuỗi",desc:"strlen/strcpy/strcat/strcmp",root:"main",kind:"simple",code:"int len = strlen(str);\nstrcpy(str, \"Ngoc\");\nstrcat(str, \" Minh\");\nprintf(\"%s co do dai %d\\n\", str, len);"},
+
+  {id:"ptr_decl",cat:"pointer",cls:"b-ptr",label:"con trỏ",desc:"Khai báo và gán địa chỉ",root:"main",kind:"simple",code:"int x = 10;\nint *p;\np = &x;"},
+  {id:"ptr_deref",cat:"pointer",cls:"b-ptr",label:"*p và &x",desc:"Truy cập gián tiếp",root:"main",kind:"simple",code:"*p = 99;\nprintf(\"%d\\n\", *p);"},
+  {id:"malloc",cat:"pointer",cls:"b-ptr",label:"malloc/free",desc:"Cấp phát động",root:"main",kind:"simple",code:"int *p = (int*)malloc(n * sizeof(int));\nif (p == NULL) return 1;\nfree(p);"},
+  {id:"swap_ptr",cat:"pointer",cls:"b-ptr",label:"hàm con trỏ",desc:"Thay đổi biến gốc",root:"pre",kind:"container",header:"void hoanvi(int *a, int *b) {",middle:"",footer:"}",slots:["body"],starter:"int t = *a;\n*a = *b;\n*b = t;"},
+
+  {id:"struct_def",cat:"struct",cls:"b-struct",label:"struct tùy ý",desc:"Định nghĩa kiểu dữ liệu",root:"pre",kind:"simple",code:"struct SinhVien {\n    char ten[50];\n    int tuoi;\n    float diem;\n};"},
+  {id:"typedef_struct",cat:"struct",cls:"b-struct",label:"typedef struct",desc:"Tên kiểu ngắn gọn",root:"pre",kind:"simple",code:"typedef struct SinhVien SINHVIEN;"},
+  {id:"struct_var",cat:"struct",cls:"b-struct",label:"biến struct",desc:"Truy cập bằng dấu chấm",root:"main",kind:"simple",code:"SINHVIEN sv;\nstrcpy(sv.ten, \"An\");\nsv.tuoi = 18;\nsv.diem = 8.5;"},
+  {id:"struct_array",cat:"struct",cls:"b-struct",label:"mảng struct",desc:"Danh sách đối tượng",root:"main",kind:"simple",code:"SINHVIEN ds[100];\nds[0].tuoi = 18;"},
+
+  {id:"raw_pre",cat:"raw",cls:"b-raw",label:"mã trước main",desc:"Tự viết bất kỳ",root:"pre",kind:"simple",code:"// Mã tự do trước main"},
+  {id:"raw_main",cat:"raw",cls:"b-raw",label:"mã trong main",desc:"Tự viết bất kỳ",root:"main",kind:"simple",code:"// Mã tự do trong main"}
+];
+
+let activeCat = "all";
+let uid = 1;
+let collapsed = new Set();
+const tree = {pre:[], main:[]};
+
+const tabs = document.getElementById("tabs");
+const palette = document.getElementById("palette");
+const preRoot = document.getElementById("preRoot");
+const mainRoot = document.getElementById("mainRoot");
+const codeOutput = document.getElementById("codeOutput");
+const validateBox = document.getElementById("validateBox");
+const screenBox = document.getElementById("screen");
+const analysisBox = document.getElementById("analysisBox");
+
+function init(){
+  renderTabs();
+  renderPalette();
+  renderAll();
+}
+
+function renderTabs(){
+  tabs.innerHTML = categories.map(([id,name]) =>
+    `<button class="tab ${id===activeCat?'active':''}" onclick="setCat('${id}')">${name}</button>`
+  ).join("");
+}
+
+function setCat(id){
+  activeCat = id;
+  renderTabs();
+  renderPalette();
+}
+
+function renderPalette(){
+  const q = document.getElementById("searchBox").value.toLowerCase().trim();
+
+  const list = defs.filter(d =>
+    (activeCat === "all" || d.cat === activeCat) &&
+    (!q || (d.label + d.desc + d.cat + (d.code || d.header || "")).toLowerCase().includes(q))
+  );
+
+  palette.innerHTML = list.map(d => `
+    <div class="c-block ${d.cls}" draggable="true" data-id="${d.id}" ondblclick="quickAdd('${d.id}')">
+      <span class="c-title">${escapeHtml(d.label)}</span>
+      <span class="c-desc">${escapeHtml(d.desc)} · ${d.root==="pre" ? "Trước main" : "Trong main"}</span>
+    </div>
+  `).join("");
+
+  palette.querySelectorAll(".c-block").forEach(el => {
+    el.addEventListener("dragstart", e => {
+      e.dataTransfer.setData("blockId", el.dataset.id);
+    });
+  });
+}
+
+function quickAdd(id){
+  const d = getDef(id);
+  if(!d) return;
+  addNode(id,d.root,null,"root");
+}
+
+function getDef(id){
+  return defs.find(d => d.id === id);
+}
+
+function createNode(def){
+  const node = {
+    uid:uid++,
+    id:def.id,
+    label:def.label,
+    cat:def.cat,
+    cls:def.cls,
+    kind:def.kind,
+    code:def.code || "",
+    header:def.header || "",
+    middle:def.middle || "",
+    footer:def.footer || "",
+    slots:{}
+  };
+
+  if(def.kind === "container"){
+    def.slots.forEach(s => node.slots[s] = []);
+
+    if(def.starter){
+      node.slots[def.slots[0]].push({
+        uid:uid++,
+        id:"starter",
+        label:"lệnh mẫu",
+        cat:"raw",
+        cls:"b-raw",
+        kind:"simple",
+        code:def.starter,
+        header:"",
+        middle:"",
+        footer:"",
+        slots:{}
+      });
+    }
+  }
+
+  return node;
+}
+
+function addNode(blockId,rootName,parentUid,slotName){
+  const def = getDef(blockId);
+  if(!def) return;
+
+  const parentDepth = parentUid ? getDepth(parentUid) : -1;
+  const newDepth = parentDepth + 1;
+
+  if(def.kind === "container" && newDepth > MAX_DEPTH){
+    toast("Không thể lồng quá cấp " + MAX_DEPTH);
+    return;
+  }
+
+  const node = createNode(def);
+  getTargetArray(rootName,parentUid,slotName).push(node);
+  renderAll();
+}
+
+function getTargetArray(rootName,parentUid,slotName){
+  if(!parentUid) return tree[rootName];
+
+  const p = findNode(parentUid);
+  if(!p || !p.node.slots[slotName]) return tree[rootName];
+
+  return p.node.slots[slotName];
+}
+
+function findNode(uidToFind,arrs=[tree.pre,tree.main],parent=null,slot=null){
+  for(const arr of arrs){
+    for(let i=0;i<arr.length;i++){
+      const n = arr[i];
+
+      if(n.uid === uidToFind){
+        return {node:n,parent,slot,index:i,arr};
+      }
+
+      for(const [slotName,children] of Object.entries(n.slots || {})){
+        const r = findNode(uidToFind,[children],n,slotName);
+        if(r) return r;
+      }
+    }
+  }
+
+  return null;
+}
+
+function getDepth(uidToFind,arrs=[tree.pre,tree.main],depth=0){
+  for(const arr of arrs){
+    for(const n of arr){
+      if(n.uid === uidToFind) return depth;
+
+      for(const children of Object.values(n.slots || {})){
+        const d = getDepth(uidToFind,[children],depth+1);
+        if(d !== -1) return d;
+      }
+    }
+  }
+
+  return -1;
+}
+
+function countNodes(arrs=[tree.pre,tree.main]){
+  let c = 0;
+
+  for(const arr of arrs){
+    for(const n of arr){
+      c++;
+
+      for(const children of Object.values(n.slots || {})){
+        c += countNodes([children]);
+      }
+    }
+  }
+
+  return c;
+}
+
+function maxDepth(arrs=[tree.pre,tree.main],depth=0){
+  let m = 0;
+
+  for(const arr of arrs){
+    for(const n of arr){
+      m = Math.max(m,depth);
+
+      for(const children of Object.values(n.slots || {})){
+        m = Math.max(m,maxDepth([children],depth+1));
+      }
+    }
+  }
+
+  return m;
+}
+
+function renderAll(){
+  preRoot.innerHTML = renderSlot(tree.pre,"pre",null,"root",0,"Thả include, struct, prototype, hàm vào đây");
+  mainRoot.innerHTML = renderSlot(tree.main,"main",null,"root",0,"Thả lệnh thực thi vào đây");
+
+  document.getElementById("countBlocks").textContent = countNodes() + " khối";
+  document.getElementById("depthInfo").textContent = "Độ sâu hiện tại: " + maxDepth() + "/" + MAX_DEPTH;
+
+  bindDropZones();
+  renderCode();
+}
+
+function renderSlot(items,rootName,parentUid,slotName,depth,emptyText){
+  const html = items.map((n,idx) => renderNode(n,rootName,parentUid,slotName,depth,idx)).join("");
+
+  return `
+    <div class="drop-slot" data-root="${rootName}" data-parent="${parentUid || ""}" data-slot="${slotName}">
+      ${html || `<div class="slot-empty">${escapeHtml(emptyText || "Thả khối vào đây")}</div>`}
+    </div>
+  `;
+}
+
+function renderNode(n,rootName,parentUid,slotName,depth,index){
+  const isCollapsed = collapsed.has(n.uid);
+  const depthText = "cấp " + depth;
+  let editor = "";
+
+  if(n.kind === "container"){
+    editor = `
+      <div class="node-edit" ${isCollapsed ? "style='display:none'" : ""}>
+        <label>Dòng mở khối</label>
+        <textarea oninput="updateField(${n.uid},'header',this.value)">${escapeHtml(n.header)}</textarea>
+        ${n.middle ? `
+          <label>Dòng chuyển nhánh</label>
+          <textarea oninput="updateField(${n.uid},'middle',this.value)">${escapeHtml(n.middle)}</textarea>
+        ` : ""}
+        <label>Dòng đóng khối</label>
+        <input oninput="updateField(${n.uid},'footer',this.value)" value="${escapeAttr(n.footer)}" />
+      </div>
+    `;
+  }else{
+    editor = `
+      <div class="node-edit" ${isCollapsed ? "style='display:none'" : ""}>
+        <label>Mã C của khối</label>
+        <textarea oninput="updateField(${n.uid},'code',this.value)">${escapeHtml(n.code)}</textarea>
+      </div>
+    `;
+  }
+
+  let children = "";
+
+  if(n.kind === "container" && !isCollapsed){
+    const slots = Object.keys(n.slots);
+
+    children = `
+      <div class="container-body">
+        ${slots.map(s => `
+          <div class="slot-label">
+            Vùng lệnh: ${slotVi(s)}
+            <span class="depth-badge">${depthText}</span>
+          </div>
+          ${renderSlot(n.slots[s],rootName,n.uid,s,depth+1,"Thả lệnh con vào đây · lồng tối đa cấp 5")}
+        `).join("")}
+      </div>
+    `;
+  }
+
+  return `
+    <div class="node">
+      <div class="node-head">
+        <div class="node-chip ${n.cls}">${escapeHtml(n.label)}</div>
+        <div class="node-meta">
+          <div class="node-name">${n.kind === "container" ? "Khối có thể lồng lệnh" : "Lệnh đơn / khai báo tổng quát"}</div>
+          <div class="node-kind">${depthText} · ${n.kind}</div>
+        </div>
+        <div class="node-actions">
+          <button class="mini" onclick="moveNode(${n.uid},-1)">↑</button>
+          <button class="mini" onclick="moveNode(${n.uid},1)">↓</button>
+          <button class="mini addkid" onclick="toggleCollapse(${n.uid})">${isCollapsed ? "Mở" : "Gọn"}</button>
+          <button class="mini del" onclick="deleteNode(${n.uid})">X</button>
+        </div>
+      </div>
+      ${editor}
+      ${children}
+    </div>
+  `;
+}
+
+function slotVi(s){
+  return {
+    root:"gốc",
+    body:"thân khối",
+    then:"nhánh đúng",
+    else:"nhánh sai",
+    caseA:"case",
+    default:"default"
+  }[s] || s;
+}
+
+function bindDropZones(){
+  document.querySelectorAll(".drop-slot").forEach(el => {
+    el.addEventListener("dragover", e => {
+      e.preventDefault();
+      el.classList.add("drag-over");
+    });
+
+    el.addEventListener("dragleave", e => {
+      if(!el.contains(e.relatedTarget)){
+        el.classList.remove("drag-over");
+      }
+    });
+
+    el.addEventListener("drop", e => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      el.classList.remove("drag-over");
+
+      const id = e.dataTransfer.getData("blockId");
+      if(!id) return;
+
+      const root = el.dataset.root;
+      const parent = el.dataset.parent ? Number(el.dataset.parent) : null;
+      const slot = el.dataset.slot;
+
+      addNode(id,root,parent,slot);
+      e.dataTransfer.clearData();
+    });
+  });
+}
+
+function updateField(uid,field,value){
+  const r = findNode(uid);
+  if(!r) return;
+
+  r.node[field] = value;
+  renderCode();
+}
+
+function deleteNode(uid){
+  const r = findNode(uid);
+  if(!r) return;
+
+  r.arr.splice(r.index,1);
+  collapsed.delete(uid);
+  renderAll();
+}
+
+function moveNode(uid,dir){
+  const r = findNode(uid);
+  if(!r) return;
+
+  const ni = r.index + dir;
+  if(ni < 0 || ni >= r.arr.length) return;
+
+  [r.arr[r.index], r.arr[ni]] = [r.arr[ni], r.arr[r.index]];
+  renderAll();
+}
+
+function toggleCollapse(uid){
+  if(collapsed.has(uid)) collapsed.delete(uid);
+  else collapsed.add(uid);
+
+  renderAll();
+}
+
+function collapseAll(){
+  function walk(arr){
+    arr.forEach(n => {
+      if(n.kind === "container") collapsed.add(n.uid);
+      Object.values(n.slots || {}).forEach(walk);
+    });
+  }
+
+  walk(tree.pre);
+  walk(tree.main);
+  renderAll();
+}
+
+function expandAll(){
+  collapsed.clear();
+  renderAll();
+}
+
+function generateNode(n,level){
+  if(n.kind === "simple") return indentLines(n.code,level);
+
+  const slots = Object.keys(n.slots);
+  let out = [];
+
+  out.push(indentLines(n.header,level));
+  out.push(generateList(n.slots[slots[0]] || [],level+1));
+
+  if(n.middle && slots[1]){
+    out.push(indentLines(n.middle,level));
+    out.push(generateList(n.slots[slots[1]] || [],level+1));
+  }
+
+  out.push(indentLines(n.footer,level));
+
+  return out.filter(Boolean).join("\n");
+}
+
+function generateList(arr,level){
+  return arr.map(n => generateNode(n,level)).filter(Boolean).join("\n");
+}
+
+function indentLines(text,level){
+  const pad = "    ".repeat(level);
+
+  return String(text || "").split("\n").map(line =>
+    line.trim() ? pad + line : line
+  ).join("\n");
+}
+
+function renderCode(){
+  const autoMain = document.getElementById("autoMain")?.checked ?? true;
+  const autoReturn = document.getElementById("autoReturn")?.checked ?? true;
+  const lineNumbers = document.getElementById("lineNumbers")?.checked ?? false;
+
+  let pre = generateList(tree.pre,0);
+  let main = generateList(tree.main,1);
+  let code = "";
+
+  if(pre.trim()) code += pre.trim() + "\n\n";
+
+  if(autoMain){
+    code += "int main()\n{\n";
+    code += main;
+
+    if(autoReturn && !/\breturn\s+0\s*;/.test(main)){
+      if(main.trim()) code += "\n";
+      code += "    return 0;";
+    }
+
+    code += "\n}";
+  }else{
+    code += generateList(tree.main,0);
+  }
+
+  if(lineNumbers){
+    code = code.split("\n").map((l,i) =>
+      String(i+1).padStart(3," ") + " | " + l
+    ).join("\n");
+  }
+
+  codeOutput.textContent = code.trim() || "/* Mã C sẽ xuất hiện ở đây */";
+  return code.trim();
+}
+
+function validateProgram(){
+  const code = getCleanCode();
+  const warnings = [];
+  const errors = [];
+
+  if((/printf|scanf|puts|fgets/.test(code)) && !/#include\s*<stdio\.h>/.test(code)){
+    warnings.push("Nên thêm #include <stdio.h> khi dùng nhập/xuất.");
+  }
+
+  if((/strlen|strcpy|strcat|strcmp|strchr/.test(code)) && !/#include\s*<string\.h>/.test(code)){
+    warnings.push("Nên thêm #include <string.h> khi dùng xử lý chuỗi.");
+  }
+
+  if((/malloc|calloc|realloc|free/.test(code)) && !/#include\s*<stdlib\.h>/.test(code)){
+    warnings.push("Nên thêm #include <stdlib.h> khi dùng cấp phát động.");
+  }
+
+  if((code.match(/\{/g) || []).length !== (code.match(/\}/g) || []).length){
+    errors.push("Số dấu { và } chưa cân bằng.");
+  }
+
+  if(maxDepth() > MAX_DEPTH){
+    errors.push("Độ sâu lồng vượt quá " + MAX_DEPTH + ".");
+  }
+
+  if(document.getElementById("strictMode").checked && !/\bint\s+main\s*\(/.test(code)){
+    errors.push("Chưa thấy hàm int main().");
+  }
+
+  validateBox.innerHTML = errors.length
+    ? `<div class="warn"><b>Lỗi cần sửa:</b><ol>${errors.map(e=>`<li>${escapeHtml(e)}</li>`).join("")}</ol></div>`
+    : warnings.length
+      ? `<div class="warn"><b>Gợi ý:</b><ol>${warnings.map(w=>`<li>${escapeHtml(w)}</li>`).join("")}</ol></div>`
+      : `<div class="ok"><b>Ổn:</b> Cấu trúc chương trình hợp lý. Có thể bấm “Chạy mã”.</div>`;
+}
+
+function addStarter(){
+  clearAll(false);
+
+  ["inc_stdio","decl_any","scanf","for","printf"].forEach(id => quickAdd(id));
+}
+
+function addAdvancedStarter(){
+  clearAll(false);
+
+  ["inc_stdio","inc_string","inc_stdlib","define","struct_def","typedef_struct","func_def"].forEach(id => quickAdd(id));
+  ["decl_any","array1d","array_input","array_print","string_init","string_ops","ptr_decl","struct_var","printf"].forEach(id => quickAdd(id));
+}
+
+function clearAll(confirmIt=true){
+  if(confirmIt && !confirm("Xóa toàn bộ cây lệnh hiện tại?")) return;
+
+  tree.pre = [];
+  tree.main = [];
+  collapsed.clear();
+
+  screenBox.textContent = "Chưa chạy chương trình.";
+  analysisBox.innerHTML = "<b>Giảng giải:</b> Hãy kéo khối để bắt đầu xây dựng chương trình C.";
+  validateBox.innerHTML = "";
+
+  renderAll();
+}
+
+function getCleanCode(){
+  const codeRaw = renderCode();
+
+  if(document.getElementById("lineNumbers") && document.getElementById("lineNumbers").checked){
+    return stripLineNumbers(codeRaw);
+  }
+
+  return codeRaw;
+}
+
+async function runRealC(){
+  const code = getCleanCode();
+  const stdin = document.getElementById("stdinInput").value || "";
+
+  if(!code.trim() || code.includes("/* Mã C sẽ xuất hiện ở đây */")){
+    toast("Chưa có mã C để chạy");
+    return;
+  }
+
+  screenBox.textContent = "Đang gửi mã C đến Judge0 để biên dịch và chạy thật...";
+  analysisBox.innerHTML = "<b>Chạy mã:</b> Đang gửi source_code và stdin đến Judge0. Vui lòng chờ.";
+
+  try{
+    const payload = {
+      language_id:C_LANGUAGE_ID,
+      source_code:encodeBase64(code),
+      stdin:encodeBase64(stdin),
+      cpu_time_limit:2,
+      wall_time_limit:5,
+      memory_limit:128000
+    };
+
+    let res = await fetch(JUDGE0_URL + "/submissions?base64_encoded=true&wait=true",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(payload)
+    });
+
+    if(!res.ok){
+      const text = await res.text();
+      throw new Error("HTTP " + res.status + ": " + text);
+    }
+
+    let data = await res.json();
+
+    if(data.token && (!data.status || data.status.id === 1 || data.status.id === 2)){
+      data = await pollJudge0(data.token);
+    }
+
+    showJudge0Result(data);
+  }catch(err){
+    screenBox.textContent =
+      "Không chạy C thật được.\n\n" +
+      "Nguyên nhân thường gặp:\n" +
+      "1. Judge0 CE public bị giới hạn hoặc quá tải.\n" +
+      "2. Trình duyệt chặn CORS.\n" +
+      "3. Máy không có Internet.\n" +
+      "4. Endpoint Judge0 yêu cầu API key.\n" +
+      "5. Language ID không khớp với máy chủ Judge0.\n\n" +
+      "Cách dự phòng:\n" +
+      "Bấm nút “Sao chép & Chạy mã” để mở W3Schools, sau đó Ctrl+A và Ctrl+V vào editor.\n\n" +
+      "Chi tiết lỗi:\n" + err.message;
+
+    analysisBox.innerHTML =
+      "<b>Chạy mã thất bại:</b> Gọi API trực tiếp từ HTML phụ thuộc dịch vụ bên ngoài. " +
+      "Nếu lỗi lặp lại, hãy dùng nút Sao chép & Chạy mã để chạy trên W3Schools.";
+  }
+}
+
+async function pollJudge0(token){
+  for(let i=0;i<12;i++){
+    await sleep(1200);
+
+    const res = await fetch(JUDGE0_URL + "/submissions/" + encodeURIComponent(token) + "?base64_encoded=true");
+
+    if(!res.ok){
+      const text = await res.text();
+      throw new Error("Polling HTTP " + res.status + ": " + text);
+    }
+
+    const data = await res.json();
+
+    if(data.status && data.status.id !== 1 && data.status.id !== 2){
+      return data;
+    }
+  }
+
+  throw new Error("Quá thời gian chờ kết quả từ Judge0.");
+}
+
+function showJudge0Result(data){
+  const stdout = decodeBase64(data.stdout);
+  const stderr = decodeBase64(data.stderr);
+  const compileOutput = decodeBase64(data.compile_output);
+  const message = decodeBase64(data.message);
+
+  let result = "";
+
+  result += "=== TRẠNG THÁI ===\n";
+  result += (data.status && data.status.description ? data.status.description : "Không rõ") + "\n\n";
+
+  if(compileOutput){
+    result += "=== COMPILE OUTPUT ===\n" + compileOutput + "\n";
+  }
+
+  if(stdout){
+    result += "=== STDOUT ===\n" + stdout + "\n";
+  }
+
+  if(stderr){
+    result += "=== STDERR ===\n" + stderr + "\n";
+  }
+
+  if(message){
+    result += "=== MESSAGE ===\n" + message + "\n";
+  }
+
+  if(!stdout && !stderr && !compileOutput && !message){
+    result += "Chương trình chạy xong nhưng không có dữ liệu xuất ra.\n";
+  }
+
+  result += "\n=== THÔNG TIN THỰC THI ===\n";
+  result += "Time: " + (data.time || "N/A") + "s\n";
+  result += "Memory: " + (data.memory || "N/A") + " KB\n";
+  result += "Token: " + (data.token || "N/A") + "\n";
+
+  screenBox.textContent = result;
+
+  analysisBox.innerHTML =
+    "<b>Chạy mã:</b> Kết quả này đến từ trình biên dịch/thực thi C. " +
+    "Nếu có lỗi cú pháp, xem COMPILE OUTPUT. Nếu chương trình lỗi khi chạy, xem STDERR hoặc MESSAGE.";
+}
+
 async function copyCode(){
-  const codeRaw=renderCode();
-  const code=document.getElementById("lineNumbers")&&document.getElementById("lineNumbers").checked?stripLineNumbers(codeRaw):codeRaw;
-  const w3Url="https://www.w3schools.com/c/tryc.php?filename=demo_helloworld";
-  const w3Tab=window.open(w3Url,"_blank","noopener,noreferrer");
+  const code = getCleanCode();
+  const w3Url = "https://www.w3schools.com/c/tryc.php?filename=demo_helloworld";
+  const w3Tab = window.open(w3Url,"_blank","noopener,noreferrer");
+
   try{
     await navigator.clipboard.writeText(code);
+
     toast("Đã copy mã C và mở W3Schools");
-    screenBox.textContent="Đã copy mã C hiện tại vào clipboard.\n\nĐã mở W3Schools C Tryit.\n\nCách chạy trên W3Schools:\n1. Click vào vùng code bên trái.\n2. Nhấn Ctrl+A để chọn toàn bộ code mẫu.\n3. Nhấn Ctrl+V để dán mã vừa copy.\n4. Bấm Run để chạy chương trình.\n\nLưu ý: Trình duyệt không cho trang này tự động dán code vào editor của W3Schools vì khác domain.";
-    analysisBox.innerHTML="<b>Copy code + W3Schools:</b> Mã C đã được copy vào clipboard và W3Schools C Tryit đã được mở. Vì bảo mật cross-origin, hệ thống không thể tự dán code vào editor của W3Schools; người học cần dán thủ công bằng Ctrl+V.";
-    if(!w3Tab)toast("Popup bị chặn, hãy cho phép mở tab mới");
+
+    screenBox.textContent =
+      "Đã copy mã C hiện tại vào clipboard.\n\n" +
+      "Đã mở W3Schools C Tryit.\n\n" +
+      "Cách chạy trên W3Schools:\n" +
+      "1. Click vào vùng code bên trái.\n" +
+      "2. Nhấn Ctrl+A để chọn toàn bộ code mẫu.\n" +
+      "3. Nhấn Ctrl+V để dán mã vừa copy.\n" +
+      "4. Bấm Run để chạy chương trình.\n\n" +
+      "Lưu ý: Trình duyệt không cho trang này tự động dán code vào editor của W3Schools vì khác domain.";
+
+    analysisBox.innerHTML =
+      "<b>Sao chép & Chạy mã:</b> Mã C đã được copy vào clipboard và W3Schools C Tryit đã được mở. " +
+      "Vì bảo mật cross-origin, hệ thống không thể tự dán code vào editor của W3Schools; người học cần dán thủ công bằng Ctrl+V.";
+
+    if(!w3Tab) toast("Popup bị chặn, hãy cho phép mở tab mới");
   }catch(err){
     toast("Không copy tự động được");
-    screenBox.textContent="Không copy tự động được do quyền clipboard của trình duyệt.\n\nW3Schools C Tryit vẫn đã được mở nếu trình duyệt không chặn popup.\n\nCách xử lý thủ công:\n1. Bôi đen mã C trong vùng 'Mã C sinh ra'.\n2. Nhấn Ctrl+C để copy.\n3. Sang W3Schools, click vào editor.\n4. Nhấn Ctrl+A rồi Ctrl+V.\n5. Bấm Run.\n\nChi tiết lỗi:\n"+err.message;
-    analysisBox.innerHTML="<b>Copy code + W3Schools:</b> Trình duyệt có thể chặn clipboard nếu file mở bằng file:// hoặc quyền clipboard chưa được cấp. Có thể copy thủ công từ vùng mã C sinh ra rồi dán vào W3Schools.";
-    if(!w3Tab)toast("Popup bị chặn, hãy cho phép mở tab mới");
+
+    screenBox.textContent =
+      "Không copy tự động được do quyền clipboard của trình duyệt.\n\n" +
+      "W3Schools C Tryit vẫn đã được mở nếu trình duyệt không chặn popup.\n\n" +
+      "Cách xử lý thủ công:\n" +
+      "1. Bôi đen mã C trong vùng 'Mã C sinh ra'.\n" +
+      "2. Nhấn Ctrl+C để copy.\n" +
+      "3. Sang W3Schools, click vào editor.\n" +
+      "4. Nhấn Ctrl+A rồi Ctrl+V.\n" +
+      "5. Bấm Run.\n\n" +
+      "Chi tiết lỗi:\n" + err.message;
+
+    analysisBox.innerHTML =
+      "<b>Sao chép & Chạy mã:</b> Trình duyệt có thể chặn clipboard nếu file mở bằng file:// hoặc quyền clipboard chưa được cấp. " +
+      "Có thể copy thủ công từ vùng mã C sinh ra rồi dán vào W3Schools.";
+
+    if(!w3Tab) toast("Popup bị chặn, hãy cho phép mở tab mới");
   }
-}function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800)}function escapeHtml(s){return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")}function escapeAttr(s){return escapeHtml(s).replaceAll('"',"&quot;")}init();
+}
+
+function stripLineNumbers(code){
+  return code.split("\n").map(line =>
+    line.replace(/^\s*\d+\s+\|\s?/,"")
+  ).join("\n");
+}
+
+function sleep(ms){
+  return new Promise(resolve => setTimeout(resolve,ms));
+}
+
+function encodeBase64(str){
+  const bytes = new TextEncoder().encode(str);
+  let binary = "";
+  const chunkSize = 0x8000;
+
+  for(let i=0;i<bytes.length;i+=chunkSize){
+    const chunk = bytes.subarray(i,i+chunkSize);
+    binary += String.fromCharCode.apply(null,chunk);
+  }
+
+  return btoa(binary);
+}
+
+function decodeBase64(str){
+  if(!str) return "";
+
+  try{
+    const binary = atob(str);
+    const bytes = new Uint8Array(binary.length);
+
+    for(let i=0;i<binary.length;i++){
+      bytes[i] = binary.charCodeAt(i);
+    }
+
+    return new TextDecoder().decode(bytes);
+  }catch(e){
+    return str || "";
+  }
+}
+
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+
+  setTimeout(() => t.classList.remove("show"),1800);
+}
+
+function escapeHtml(s){
+  return String(s)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;");
+}
+
+function escapeAttr(s){
+  return escapeHtml(s).replaceAll('"',"&quot;");
+}
+
+init();
 </script>
 </body>
 </html>
