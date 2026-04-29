@@ -1,126 +1,553 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NỘP BÀI</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Nộp bài sinh viên</title>
+
   <style>
-    /* Reset default styles */
-    body,
-    html {
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #667085;
+      --border: #e5e7eb;
+      --primary: #7c3aed;
+      --primary-dark: #5b21b6;
+      --primary-soft: #ede9fe;
+      --green: #16a34a;
+      --red: #dc2626;
+      --orange: #f97316;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
       margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(124, 58, 237, 0.16), transparent 28rem),
+        radial-gradient(circle at top right, rgba(6, 182, 212, 0.14), transparent 26rem),
+        var(--bg);
+      color: var(--text);
     }
 
-    /* Header styles */
-    header {
-      background-color: #000;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
+    .page {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 28px;
     }
 
-    header h1 {
+    .shell {
+      width: min(1120px, 100%);
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .hero {
+      border-radius: var(--radius);
+      padding: 34px;
+      color: white;
+      background: linear-gradient(135deg, #7c3aed, #2563eb);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -90px;
+      top: -90px;
+      width: 280px;
+      height: 280px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .hero h1 {
+      margin: 0 0 14px;
+      font-size: clamp(30px, 5vw, 48px);
+      letter-spacing: -0.05em;
+      line-height: 1.05;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero p {
       margin: 0;
-      font-size: 24px;
-      font-weight: bold;
+      line-height: 1.75;
+      opacity: 0.95;
+      position: relative;
+      z-index: 1;
     }
 
-    /* Navigation styles */
-    nav {
-      background-color: #000;
-      color: #fff;
-      padding: 10px;
+    .steps {
+      margin-top: 28px;
+      display: grid;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 18px;
+      padding: 14px;
+      line-height: 1.5;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(229, 231, 235, 0.95);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 26px;
+    }
+
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 26px;
+      letter-spacing: -0.03em;
+    }
+
+    .sub {
+      margin: 0 0 22px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 800;
+      color: #334155;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid #d7dce5;
+      background: white;
+      border-radius: 15px;
+      padding: 12px 14px;
+      outline: none;
+      transition: 0.2s;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #8b5cf6;
+      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.14);
+    }
+
+    input[type="datetime-local"] {
+      min-width: 0;
+      font-size: 14px;
+    }
+
+    .drop {
+      border: 2px dashed #c4b5fd;
+      background: #f5f3ff;
+      border-radius: 20px;
+      padding: 22px;
       text-align: center;
+      cursor: pointer;
+      transition: 0.2s;
     }
 
-    nav ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
+    .drop:hover {
+      background: #ede9fe;
     }
 
-    nav ul li {
-      display: inline-block;
-      margin-right: 10px;
+    .drop strong {
+      color: var(--primary-dark);
+      display: block;
+      margin-bottom: 6px;
     }
 
-    nav ul li a {
-      color: #fff;
-      text-decoration: none;
-      padding: 5px 10px;
+    .drop span {
+      color: var(--muted);
+      font-size: 14px;
     }
 
-    /* Main content styles */
-    main {
-      padding: 20px;
-      background-color: #f7f7f7;
+    .notice {
+      grid-column: 1 / -1;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      color: #9a3412;
+      border-radius: 16px;
+      padding: 12px 14px;
+      line-height: 1.6;
+      font-size: 14px;
     }
 
-    /* Footer styles */
-    footer {
-      background-color: #000;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
+    .actions {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 8px;
     }
 
-    h1 {
-      text-align: center;
-      margin: 35px 0 20px 0 !important;
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 18px;
+      cursor: pointer;
+      font-weight: 900;
+      transition: 0.2s;
+      font: inherit;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #7c3aed, #4f46e5);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: #f8fafc;
+      color: #334155;
+      border: 1px solid var(--border);
+    }
+
+    .message {
+      grid-column: 1 / -1;
+      display: none;
+      border-radius: 16px;
+      padding: 14px;
+      line-height: 1.6;
+      font-weight: 700;
+    }
+
+    .message.success {
+      background: #ecfdf5;
+      border: 1px solid #bbf7d0;
+      color: #047857;
+    }
+
+    .message.error {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #b91c1c;
+    }
+
+    .loading {
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    iframe {
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      .shell {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 </head>
 
 <body>
-  <header>
-    <h1>Học trực tuyến Công nghệ thông tin</h1>
-  </header>
+  <main class="page">
+    <section class="shell">
+      <aside class="hero">
+        <h1>Nộp bài</h1>
+        <p>
+          Sinh viên có thể nộp file mã nguồn, file nén hoặc dán link bài làm.
+          Hệ thống sẽ tự xử lý theo đúng hình thức nộp bài.
+        </p>
 
-  <nav>
-    <ul>
-      <li><a href="timkiem.html">Tìm Tài Liệu</a></li>
-      <li><a href="nentang.html">Nền Tảng</a></li>
-      <li><a href="frontend.html">Front-End</a></li>
-      <li><a href="backend.html">Back-End</a></li>
-      <li><a href="didong.html">Mobile Development</a></li>
-      <li><a href="thongtin.html">Về Website</a></li>
-      <li><a href="lienhe.html">Liên Hệ</a></li>
-    </ul>
-  </nav>
+        <div class="steps">
+          <div class="step"><b>1.</b> Nhập thông tin sinh viên.</div>
+          <div class="step"><b>2.</b> Chọn file hoặc dán link bài làm.</div>
+          <div class="step"><b>3.</b> Bấm nộp bài và chờ thông báo thành công.</div>
+        </div>
+      </aside>
 
-  <main>
-    <div class="container">
-      <h1>NỘP BÀI</h1>
-      <form target="_blank" action="https://formsubmit.co/ngocminhtranit@gmail.com" method="POST">
-        <div class="form-group">
-          <div class="form-row">
-            <div class="col">
-              <input type="text" name="name" class="form-control" placeholder="Họ và tên (Lớp)" required>
-            </div>
-            <div class="col">
-              <input type="url" name="link" class="form-control"
-                placeholder="Đường dẫn dự án, bài tập (Ví dụ: https://github.com/TranNgocMinh)" required>
-            </div>
+      <section class="card">
+        <h2>Phiếu nộp bài</h2>
+        <p class="sub">
+         Sinh viên nhập đầy đủ thông tin cá nhân và bài nộp (theo hướng dẫn nhà giáo nếu cần).
+        </p>
+
+        <form id="submitForm" class="form-grid" method="POST" target="hiddenFrame">
+          <input type="hidden" name="action" value="submit" />
+          <input type="hidden" id="fileBase64" name="fileBase64" />
+          <input type="hidden" id="fileName" name="fileName" />
+          <input type="hidden" id="fileMimeType" name="fileMimeType" />
+          <input type="hidden" id="submittedAtClient" name="submittedAtClient" />
+
+          <div class="field">
+            <label for="lessonTitle">Tên bài học / bài tập *</label>
+            <input id="lessonTitle" name="lessonTitle" required placeholder="Ví dụ: Bài 1 - Các thành phần cơ bản trong C" />
           </div>
-        </div>
-        <div class="form-group">
-          <textarea placeholder="Mô tả ngắn gọn về bài tập, dự án của bạn." class="form-control" name="message"
-            rows="10" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-lg btn-dark btn-block">Nộp bài</button>
-        <input type="hidden" name="_next" value="https://hoctructuyencntt.github.io/thanhcong.html">
-        <input type="hidden" name="_captcha" value="false">
-      </form>
-    </div>
+
+          <div class="field">
+            <label for="studentClass">Lớp *</label>
+            <input id="studentClass" name="studentClass" required placeholder="Ví dụ: CĐ CNTT K18A" />
+          </div>
+
+          <div class="field">
+            <label for="studentName">Họ và tên *</label>
+            <input id="studentName" name="studentName" required placeholder="Ví dụ: Nguyễn Văn An" />
+          </div>
+
+          <div class="field">
+            <label for="studentId">Mã số sinh viên *</label>
+            <input id="studentId" name="studentId" required placeholder="Ví dụ: 230001" />
+          </div>
+
+          <div class="field">
+            <label for="studentEmail">Email sinh viên</label>
+            <input id="studentEmail" name="studentEmail" type="email" placeholder="Ví dụ: student@gmail.com" />
+          </div>
+
+          <div class="field">
+            <label for="submissionType">Hình thức nộp</label>
+            <select id="submissionType" name="submissionType">
+              <option value="auto">Tự động theo file/link đã nộp</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="submittedAtInput">Ngày giờ nộp bài</label>
+            <input id="submittedAtInput" type="datetime-local" title="Sinh viên có thể chọn ngày giờ nộp bài. Mặc định là thời điểm hiện tại." />
+          </div>
+
+          <div class="field full">
+            <label>File bài làm</label>
+            <div class="drop" onclick="document.getElementById('assignmentFile').click()">
+              <strong id="fileText">Chọn file bài làm</strong>
+              <span>Hỗ trợ: .c, .cpp, .zip, .rar, .pdf, .docx, .html, .js. Tối đa 10MB.</span>
+            </div>
+            <input id="assignmentFile" type="file" accept=".c,.cpp,.zip,.rar,.pdf,.docx,.html,.js" hidden />
+          </div>
+
+          <div class="field full">
+            <label for="submissionLink">Link bài làm</label>
+            <input id="submissionLink" name="submissionLink" placeholder="Dán link Google Drive, GitHub, website demo..." />
+          </div>
+
+          <div class="field full">
+            <label for="note">Ghi chú</label>
+            <textarea id="note" name="note" placeholder="Ví dụ: Em gửi file zip gồm mã nguồn và ảnh chụp kết quả chạy chương trình."></textarea>
+          </div>
+
+          <div class="notice">
+            Lưu ý: Nếu nộp link Googe Drive phải chọn chia sẻ đến mọi người và có thể chỉnh sửa được.
+          </div>
+
+          <div id="successMessage" class="message success"></div>
+          <div id="errorMessage" class="message error"></div>
+
+          <div class="actions">
+            <button class="btn-primary" type="submit">📤 Nộp bài</button>
+            <button class="btn-secondary" type="button" onclick="resetForm()">Làm lại</button>
+          </div>
+        </form>
+
+        <iframe name="hiddenFrame" id="hiddenFrame"></iframe>
+      </section>
+    </section>
   </main>
 
-  <footer>
-    <p>&copy; 2023 Học trực tuyến Công nghệ thông tin.</p>
-  </footer>
-</body>
+  <script>
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw1HlO245IyXVzYTrZyYMJZOhrzK9H5hsah7rGmIKSaiA4tHEzQ5nyQS64mFbm0OEsT/exec";
+    const MAX_FILE_MB = 10;
 
+    const form = document.getElementById("submitForm");
+    const fileInput = document.getElementById("assignmentFile");
+    const fileText = document.getElementById("fileText");
+    const successMessage = document.getElementById("successMessage");
+    const errorMessage = document.getElementById("errorMessage");
+
+    let submittedOnce = false;
+
+    setSubmissionTime();
+    document.getElementById("submittedAtInput").addEventListener("change", () => setSubmissionTime(false));
+
+    fileInput.addEventListener("change", () => {
+      const file = fileInput.files[0];
+
+      if (!file) {
+        fileText.textContent = "Chọn file bài làm";
+        return;
+      }
+
+      const sizeMB = file.size / 1024 / 1024;
+
+      if (sizeMB > MAX_FILE_MB) {
+        showError(`File vượt quá ${MAX_FILE_MB}MB. Vui lòng chọn file nhỏ hơn hoặc nộp bằng link.`);
+        fileInput.value = "";
+        fileText.textContent = "Chọn file bài làm";
+        return;
+      }
+
+      fileText.textContent = `${file.name} (${sizeMB.toFixed(2)}MB)`;
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      hideMessages();
+
+      if (WEB_APP_URL.includes("DAN_WEB_APP_URL")) {
+        showError("Chưa cấu hình WEB_APP_URL trong file HTML.");
+        return;
+      }
+
+      const file = fileInput.files[0];
+      const link = document.getElementById("submissionLink").value.trim();
+
+      if (!file && !link) {
+        showError("Vui lòng chọn file hoặc dán link bài làm.");
+        return;
+      }
+
+      try {
+        setSubmissionTime();
+        form.classList.add("loading");
+
+        document.getElementById("fileBase64").value = "";
+        document.getElementById("fileName").value = "";
+        document.getElementById("fileMimeType").value = "";
+
+        if (file) {
+          const base64 = await fileToBase64(file);
+          document.getElementById("fileBase64").value = base64.split(",")[1];
+          document.getElementById("fileName").value = file.name;
+          document.getElementById("fileMimeType").value = file.type || "application/octet-stream";
+        }
+
+        form.action = WEB_APP_URL;
+        submittedOnce = true;
+        form.submit();
+
+        setTimeout(() => {
+          form.classList.remove("loading");
+          showSuccess("Đã gửi bài nộp. Hệ thống sẽ xử lý file/link theo cấu hình của giáo viên.");
+        }, 1200);
+
+      } catch (error) {
+        console.error(error);
+        form.classList.remove("loading");
+        showError("Có lỗi khi xử lý file. Vui lòng thử lại.");
+      }
+    });
+
+    document.getElementById("hiddenFrame").addEventListener("load", () => {
+      if (!submittedOnce) return;
+      form.classList.remove("loading");
+      showSuccess("Bài nộp đã được gửi thành công.");
+    });
+
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function resetForm() {
+      form.reset();
+      fileInput.value = "";
+      fileText.textContent = "Chọn file bài làm";
+      document.getElementById("fileBase64").value = "";
+      document.getElementById("fileName").value = "";
+      document.getElementById("fileMimeType").value = "";
+      hideMessages();
+      setSubmissionTime(true);
+    }
+
+    function setSubmissionTime(forceNow = false) {
+      const input = document.getElementById("submittedAtInput");
+      const hidden = document.getElementById("submittedAtClient");
+
+      if (forceNow || !input.value) {
+        input.value = toDateTimeLocalValue(new Date());
+      }
+
+      hidden.value = localDateTimeToIso(input.value) || new Date().toISOString();
+    }
+
+    function toDateTimeLocalValue(date) {
+      const pad = value => String(value).padStart(2, "0");
+      const year = date.getFullYear();
+      const month = pad(date.getMonth() + 1);
+      const day = pad(date.getDate());
+      const hour = pad(date.getHours());
+      const minute = pad(date.getMinutes());
+
+      return `${year}-${month}-${day}T${hour}:${minute}`;
+    }
+
+    function localDateTimeToIso(value) {
+      if (!value) return "";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return "";
+      return date.toISOString();
+    }
+
+    function showSuccess(message) {
+      successMessage.textContent = message;
+      successMessage.style.display = "block";
+      errorMessage.style.display = "none";
+    }
+
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.style.display = "block";
+      successMessage.style.display = "none";
+    }
+
+    function hideMessages() {
+      successMessage.style.display = "none";
+      errorMessage.style.display = "none";
+    }
+  </script>
+</body>
 </html>
