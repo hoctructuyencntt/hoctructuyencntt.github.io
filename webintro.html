@@ -146,7 +146,206 @@ function completeTask(idx,resultText){const st=topicState(current);if(!st.tasks[
 function completeTopicIfReady(){const st=topicState(current);if(st.tasks.every(Boolean)&&!st.completedAt){st.completedAt=nowVN();if(current+1<TOPICS.length)progress.unlocked[current+1]=true;recordEvent(TOPICS[current].title,'Hoàn thành nội dung','Mở khóa nội dung tiếp theo',false);saveProgress();renderPath();renderTimeline();syncNow()}}
 function recordEvent(topic,task,result,first){if(!student)return;const ev={time:nowVN(),name:student.name,code:student.code,course:COURSE_NAME,topic,task,result,xp:progress.xp||0,percent:Math.round(completedCount()/TOPICS.length*100),topicPercent:topicPercent(current)};progress.events.push(ev);progress.pending.push(ev);saveProgress()}
 function syncNow(){if(!student||!progress.pending.length)return;if(!APPS_SCRIPT_URL){botSay('☁️ Chưa cấu hình Server, tiến trình lưu trên trình duyệt.');return}const payload={action:'saveEvents',events:progress.pending};try{navigator.sendBeacon(APPS_SCRIPT_URL,new Blob([JSON.stringify(payload)],{type:'text/plain'}));progress.pending=[];saveProgress();botSay('☁️ Đã gửi tiến trình lên Server.')}catch(e){botSay('⚠️ Chưa đồng bộ được với Server. Tiến trình vẫn lưu trên trình duyệt.')}}
-function restoreFromServer(){botSay('♻️ Phiên bản này giữ chức năng khôi phục ở mức cục bộ. Hãy đăng nhập đúng họ tên và mã làm bài để tiếp tục tiến trình đã lưu trên trình duyệt. Nếu cần khôi phục từ Google Sheet, cần dùng đúng Code.gs đọc dữ liệu theo định dạng mới gồm GitHub và Pages.')}
+function buildServerReadUrl(callbackName){
+  const base=String(APPS_SCRIPT_URL||'').trim().replace(/\/dev(\?.*)?$/,'/exec').replace(/\?.*$/,'');
+  const sep=base.includes('?')?'&':'?';
+  return base+sep+'action=read&callback='+encodeURIComponent(callbackName)+'&t='+Date.now();
+}
+function extractUrlsFromText(text){
+  const found=String(text||'').match(/https?:\/\/[^\s<>"')]+/gi)||[];
+  return [...new Set(found.map(x=>x.trim().replace(/[.,;]+$/,'')))];
+}
+function extractRestoreLinks(row){
+  const text=[
+    row.github,row.githubLink,row.repo,row.repoLink,
+    row.pages,row.pagesLink,row.githubPages,row.githubPagesLink,
+    row.link,row.url,row.result,row.task
+  ].filter(Boolean).join(' ');
+  const urls=extractUrlsFromText(text);
+  let github='';
+  let pages='';
+  urls.forEach(u=>{
+    const l=u.toLowerCase();
+    if(!pages && l.includes('github.io')) pages=u;
+    else if(!github && l.includes('github.com') && !l.includes('gist.github.com')) github=u;
+  });
+  return {github,pages};
+}
+function taskIndexFromServerTask(task){
+  const s=normalize(task);
+  let m=s.match(/trac nghiem\s*(\d+)/);
+  if(m) return Math.max(0,Math.min(QUIZ_COUNT-1,Number(m[1])-1));
+  m=s.match(/scratch(?:\s*web)?\s*(\d+)/);
+  if(m) return QUIZ_COUNT+Math.max(0,Math.min(SCRATCH_COUNT-1,Number(m[1])-1));
+  m=s.match(/editor\s*(\d+)/);
+  if(m) return QUIZ_COUNT+SCRATCH_COUNT+Math.max(0,Math.min(EDITOR_COUNT-1,Number(m[1])-1));
+  if(s.includes('mini-project')||s.includes('mini project')) return PROJECT_INDEX;
+  return -1;
+}
+function topicIndexFromServerTopic(topic){
+  const s=normalize(topic);
+  let idx=TOPICS.findIndex(t=>normalize(t.title)===s || normalize(t.id)===s);
+  if(idx>=0) return idx;
+  idx=TOPICS.findIndex(t=>s.includes(normalize(t.title).slice(0,16)) || normalize(t.title).includes(s.slice(0,16)));
+  if(idx>=0) return idx;
+  idx=TOPICS.findIndex(t=>s.includes(normalize(t.id)));
+  return idx;
+}
+function isCurrentStudentServerRow(row){
+  if(!student) return false;
+  const sameName=normalize(row.name)===normalize(student.name);
+  const sameCode=String(row.code||'').trim()===String(student.code||'').trim();
+  if(!sameName||!sameCode) return false;
+  const course=normalize(row.course||'');
+  const topic=normalize(row.topic||'');
+  const courseOk=!course || course.includes('web intro') || course.includes('bai mo dau') || course.includes('thiet ke web');
+  const topicOk=topicIndexFromServerTopic(row.topic)>=0 || topic.includes('he thong') || topic.includes('dang nhap');
+  return courseOk || topicOk;
+}
+function rowsToProgress(serverRows){
+  const restored=freshProgress();
+  let matched=0;
+  let maxXp=0;
+  let latestPercent=0;
+
+  serverRows.forEach(row=>{
+    if(!isCurrentStudentServerRow(row)) return;
+    matched++;
+    maxXp=Math.max(maxXp,Number(row.xp)||0);
+    latestPercent=Math.max(latestPercent,Number(row.percent)||0);
+
+    const topicIndex=topicIndexFromServerTopic(row.topic);
+    if(topicIndex<0) return;
+
+    const st=restored.topics[TOPICS[topicIndex].id]||(restored.topics[TOPICS[topicIndex].id]={
+      tasks:Array(TASKS_PER_TOPIC).fill(false),
+      times:Array(TASKS_PER_TOPIC).fill(null),
+      links:Array(EDITOR_COUNT+PROJECT_COUNT).fill(null),
+      completedAt:null
+    });
+
+    const idx=taskIndexFromServerTask(row.task);
+    if(idx>=0){
+      st.tasks[idx]=true;
+      st.times[idx]=st.times[idx]||row.time||nowVN();
+
+      if(idx>=QUIZ_COUNT+SCRATCH_COUNT){
+        const slot=idx-QUIZ_COUNT-SCRATCH_COUNT;
+        const linkPair=extractRestoreLinks(row);
+        if(linkPair.github||linkPair.pages){
+          const old=st.links[slot]||{github:'',pages:''};
+          st.links[slot]={
+            github:linkPair.github||old.github||'',
+            pages:linkPair.pages||old.pages||''
+          };
+        }
+      }
+    }
+
+    const taskText=normalize(row.task);
+    const resultText=normalize(row.result);
+    if(taskText.includes('hoan thanh noi dung') || resultText.includes('mo khoa noi dung tiep theo')){
+      st.completedAt=st.completedAt||row.time||nowVN();
+      if(topicIndex+1<TOPICS.length) restored.unlocked[topicIndex+1]=true;
+    }
+  });
+
+  TOPICS.forEach((t,i)=>{
+    const st=restored.topics[t.id];
+    if(st && st.tasks.every(Boolean)){
+      st.completedAt=st.completedAt||nowVN();
+      if(i+1<TOPICS.length) restored.unlocked[i+1]=true;
+    }
+  });
+
+  restored.xp=maxXp;
+  restored.events=serverRows.filter(isCurrentStudentServerRow);
+  restored.pending=[];
+  restored.unlocked[0]=true;
+
+  return {restored,matched,latestPercent};
+}
+function restoreFromServer(){
+  if(!student){
+    alert('Vui lòng đăng nhập người học trước khi khôi phục từ Server.');
+    return;
+  }
+
+  const base=String(APPS_SCRIPT_URL||'').trim().replace(/\/dev(\?.*)?$/,'/exec').replace(/\?.*$/,'');
+  if(!base || !base.includes('script.google.com') || !base.endsWith('/exec')){
+    alert('Chưa cấu hình đúng APPS_SCRIPT_URL. URL phải là Web App URL và kết thúc bằng /exec.');
+    return;
+  }
+
+  botSay('♻️ Đang chuẩn bị khôi phục tiến trình từ Server. Nội dung chat không lưu trên Server nên chỉ khôi phục mốc hoàn thành, XP, thời gian và link GitHub/GitHub Pages.');
+
+  if(!confirm('Khôi phục tiến trình từ Server cho người học hiện tại? Tiến trình cục bộ của người học này sẽ được thay bằng dữ liệu trên Google Sheets.')){
+    return;
+  }
+
+  const cb='restoreCallback_'+Date.now()+'_'+Math.floor(Math.random()*100000);
+  const script=document.createElement('script');
+  let finished=false;
+
+  const timer=setTimeout(()=>{
+    if(finished) return;
+    finished=true;
+    cleanup();
+    botSay('❌ Quá thời gian khôi phục từ Server. Hãy kiểm tra Web App URL, quyền Anyone và hàm doGet(e) trong Apps Script.');
+    alert('Không khôi phục được từ Server. Kiểm tra URL /exec, quyền Anyone và doGet(e) hỗ trợ action=read&callback=...');
+  },15000);
+
+  function cleanup(){
+    clearTimeout(timer);
+    try{delete window[cb];}catch(e){window[cb]=undefined;}
+    if(script.parentNode) script.parentNode.removeChild(script);
+  }
+
+  window[cb]=function(data){
+    if(finished) return;
+    finished=true;
+    cleanup();
+
+    if(!data || data.ok===false || !Array.isArray(data.rows)){
+      botSay('⚠️ Server có phản hồi nhưng dữ liệu không đúng định dạng. Cần trả về { ok:true, rows:[...] }.');
+      alert('Server có phản hồi nhưng dữ liệu không đúng định dạng.');
+      return;
+    }
+
+    const result=rowsToProgress(data.rows);
+    if(!result.matched){
+      botSay(`⚠️ Không tìm thấy tiến trình trên Server cho <strong>${escapeHtml(student.name)}</strong> - mã <strong>${escapeHtml(student.code)}</strong>.`);
+      alert('Không tìm thấy tiến trình trên Server cho họ tên và mã làm bài hiện tại.');
+      return;
+    }
+
+    progress=result.restored;
+    saveProgress();
+    selectCurrentForProgress();
+    workspace=[];
+    pendingQuizAnswer=null;
+    pendingScratchOk=false;
+    quizAttempts={};
+
+    if(els.submitGithub) els.submitGithub.value='';
+    if(els.submitPages) els.submitPages.value='';
+    if(els.editor) els.editor.value='';
+
+    renderAll();
+    botSay(`✅ Đã khôi phục tiến trình từ Server: <strong>${result.matched}</strong> dòng dữ liệu. Bạn có thể tiếp tục học từ nội dung hiện tại.`);
+  };
+
+  script.onerror=function(){
+    if(finished) return;
+    finished=true;
+    cleanup();
+    botSay('❌ Không kết nối được Server. Kiểm tra URL triển khai Web App hoặc quyền truy cập Anyone.');
+    alert('Không kết nối được Server. Kiểm tra URL triển khai Web App hoặc quyền truy cập Anyone.');
+  };
+
+  script.src=buildServerReadUrl(cb);
+  document.body.appendChild(script);
+}
 function showHint(){const t=TOPICS[current];if(stage==='theory'){const q=t.quiz[quizIndex];botSay('💡 Gợi ý đọc PDF: '+escapeHtml(q[4]||'xem lại mục liên quan.'))}else if(stage==='scratch')botSay('💡 '+escapeHtml(t.scratch[scratchIndex].hint));else if(stage==='project')botSay('💡 '+escapeHtml(t.project.hint));else botSay('💡 '+escapeHtml(t.editor[editorIndex].hint))}
 function resetProgress(){if(!student){alert('Chưa đăng nhập.');return}if(!confirm('Xóa tiến trình và lịch sử chatbot của người học hiện tại trên trình duyệt này?'))return;localStorage.removeItem(profileKey());localStorage.removeItem(chatKey());progress=freshProgress();current=0;stage='theory';quizIndex=0;scratchIndex=0;editorIndex=0;workspace=[];pendingQuizAnswer=null;pendingScratchOk=false;quizAttempts={};els.chatBody.innerHTML='';renderAll()}
 init();
