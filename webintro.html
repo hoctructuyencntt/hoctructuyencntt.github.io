@@ -13,7 +13,7 @@
 <div class="app">
 <header class="topbar"><div class="brand"><div class="logo">WEB</div><div><h1>Web Intro Learning Lab</h1><p>Bài mở đầu: tổng quan Web, client-server, HTML/CSS/JS và môi trường thiết kế</p></div></div><div class="stats"><div class="pill user">👤 <span id="studentName">Chưa đăng nhập</span></div><div class="pill xp">⚡ XP: <span id="xp">0</span></div><div class="pill mode">🎯 <span id="modeLabel">Lý thuyết</span></div><div class="pill">✅ <span id="doneCount">0/11</span></div><button class="btn ghost" onclick="syncNow()">☁️ Đồng bộ</button><button class="btn success" onclick="restoreFromServer()">♻️ Khôi phục từ Server</button><button class="btn danger" onclick="logoutOnly()">Đổi người học</button></div></header>
 <section class="card path"><div class="path-head"><div><h2>🗺️ Lộ trình Bài mở đầu thiết kế web</h2><div class="small">Mỗi nội dung có 21 thử thách: 10 câu trắc nghiệm giới hạn 2 lần/câu, 5 bài ghép khối kèm mô tả luồng, 5 bài editor dạng TODO và 1 mini-project cuối bài. Editor gõ code không cho dán; bài nộp phải có link GitHub mã nguồn và link GitHub Pages không trùng trước đó.</div></div><button class="btn ghost" onclick="resetProgress()">↻ Xóa tiến trình người học này</button></div><div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div><div class="topic-strip" id="topicStrip"></div></section>
-<main class="workspace"><section class="card"><div class="screen-head"><div><h2 id="screenTitle">🤖 Mentor Chat</h2><p id="screenSub">Học lý thuyết và vượt qua thử thách theo PDF bài mở đầu.</p></div><div class="actions"><button class="btn secondary" onclick="showHint()">💡 Gợi ý</button><button class="btn ghost" onclick="goTheory()">Lý thuyết</button><button class="btn ghost" onclick="goScratch()">Scratch</button><button class="btn ghost" onclick="goEditor()">Editor</button><button class="btn ghost" onclick="goProject()">Mini-project</button></div></div><div class="main-body"><section class="mentor-panel"><div class="chat-body" id="chatBody"></div></section><section id="theoryBox" class="question-card"></section><section id="scratchBox" class="lab" style="display:none"><div class="panel"><div class="panel-title"><h3>🎨 Kho khối lệnh</h3><span>Bấm hoặc kéo</span></div><div class="block-bank" id="blockBank"></div></div><div class="panel"><div class="panel-title"><h3>🧱 Vùng ghép chương trình</h3><span>Bấm khối đã ghép để xóa</span></div><div class="builder"><div class="dropzone empty" id="dropzone"></div><div class="code-box"><div class="code-title"><span>Code JS được tạo</span><span id="lineCount">0 khối</span></div><pre id="codePreview">// Chưa có khối nào.</pre></div><div class="feedback" id="scratchFeedback">Hãy ghép đúng thứ tự các khối.</div><div class="actions"><button class="btn ghost" onclick="resetWorkspace()">Xóa vùng ghép</button><button class="btn" onclick="checkScratch()">Kiểm tra Scratch</button></div></div></div></section><section id="editorBox" style="display:none"><div class="question-card"><h3 id="editorTitle">Editor</h3><p id="editorTask" class="small"></p><div class="code-box"><div class="code-title"><span id="editorFileLabel">index.html</span><span>kiểm tra theo yêu cầu bài</span></div><textarea class="editor" id="editor"></textarea></div><div class="feedback" id="editorFeedback">Hãy hoàn thiện mã theo TODO, chạy online, nộp link và bấm kiểm tra.</div><div class="actions" style="margin-top:12px"><button class="btn ghost" onclick="loadStarterCode()">Nạp mã mẫu</button><button class="btn ghost" onclick="copyCode()">Copy code</button><button class="btn secondary" onclick="openOnlineEditor()">Mở editor online</button><button class="btn" id="editorCheckBtn" onclick="checkEditor()">Kiểm tra & nộp link</button></div><div class="link-submit">
+<main class="workspace"><section class="card"><div class="screen-head"><div><h2 id="screenTitle">🤖 Mentor Chat</h2><p id="screenSub">Học lý thuyết và vượt qua thử thách theo PDF bài mở đầu.</p></div><div class="actions"><button class="btn secondary" onclick="showHint()">💡 Gợi ý</button><button class="btn ghost" onclick="goTheory()">Lý thuyết</button><button class="btn ghost" onclick="goScratch()">Scratch</button><button class="btn ghost" onclick="goEditor()">Editor</button><button class="btn ghost" onclick="goProject()">Mini-project</button></div></div><div class="main-body"><section class="mentor-panel"><div class="chat-body" id="chatBody"></div></section><section id="theoryBox" class="question-card"></section><section id="scratchBox" class="lab" style="display:none"><div class="panel"><div class="panel-title"><h3>🎨 Kho khối lệnh</h3><span>Bấm hoặc kéo</span></div><div class="block-bank" id="blockBank"></div></div><div class="panel"><div class="panel-title"><h3>🧱 Vùng ghép chương trình</h3><span>Bấm khối đã ghép để xóa</span></div><div class="builder"><div class="dropzone empty" id="dropzone"></div><div class="code-box"><div class="code-title"><span>Luồng được tạo</span><span id="lineCount">0 khối</span></div><pre id="codePreview">// Chưa có khối nào.</pre></div><div class="feedback" id="scratchFeedback">Hãy ghép đúng thứ tự các khối.</div><div class="actions"><button class="btn ghost" onclick="resetWorkspace()">Xóa vùng ghép</button><button class="btn" onclick="checkScratch()">Kiểm tra Scratch</button></div></div></div></section><section id="editorBox" style="display:none"><div class="question-card"><h3 id="editorTitle">Editor</h3><p id="editorTask" class="small"></p><div class="code-box"><div class="code-title"><span id="editorFileLabel">index.html</span><span>kiểm tra theo yêu cầu bài</span></div><textarea class="editor" id="editor"></textarea></div><div class="feedback" id="editorFeedback">Hãy hoàn thiện mã theo TODO, chạy online, nộp link và bấm kiểm tra.</div><div class="actions" style="margin-top:12px"><button class="btn ghost" onclick="loadStarterCode()">Nạp mã mẫu</button><button class="btn ghost" onclick="copyCode()">Copy code</button><button class="btn secondary" onclick="openOnlineEditor()">Mở editor online</button><button class="btn" id="editorCheckBtn" onclick="checkEditor()">Kiểm tra & nộp link</button></div><div class="link-submit">
 <label for="submitGithub">🔗 Link GitHub chia sẻ mã nguồn</label>
 <input id="submitGithub" placeholder="Ví dụ: https://github.com/ten-cua-ban/web-intro-lab" autocomplete="off">
 <label for="submitPages">🌐 Link GitHub Pages</label>
@@ -348,6 +348,354 @@ function restoreFromServer(){
 }
 function showHint(){const t=TOPICS[current];if(stage==='theory'){const q=t.quiz[quizIndex];botSay('💡 Gợi ý đọc PDF: '+escapeHtml(q[4]||'xem lại mục liên quan.'))}else if(stage==='scratch')botSay('💡 '+escapeHtml(t.scratch[scratchIndex].hint));else if(stage==='project')botSay('💡 '+escapeHtml(t.project.hint));else botSay('💡 '+escapeHtml(t.editor[editorIndex].hint))}
 function resetProgress(){if(!student){alert('Chưa đăng nhập.');return}if(!confirm('Xóa tiến trình và lịch sử chatbot của người học hiện tại trên trình duyệt này?'))return;localStorage.removeItem(profileKey());localStorage.removeItem(chatKey());progress=freshProgress();current=0;stage='theory';quizIndex=0;scratchIndex=0;editorIndex=0;workspace=[];pendingQuizAnswer=null;pendingScratchOk=false;quizAttempts={};els.chatBody.innerHTML='';renderAll()}
+
+/* =========================================================
+   BỔ SUNG 2026: đồng bộ snapshot đầy đủ + khôi phục Server
+   - Không thay đổi UI chính
+   - Ghi số ký tự gõ trong editor
+   - Ghi số lần logout do sai trắc nghiệm 2 lần
+   - Ghi số lần mở link PDF
+   - Gửi snapshot tiến trình kèm mỗi lần đồng bộ để Teacher không bị thiếu log
+========================================================= */
+function freshProgress(){
+  return {
+    xp:0,
+    unlocked:Array(TOPICS.length).fill(false).map((_,i)=>i===0),
+    topics:{},
+    events:[],
+    pending:[],
+    meta:{
+      editorTypedChars:0,
+      quizLogoutCount:0,
+      pdfOpenCount:0,
+      lastSnapshotAt:'',
+      lastSyncAt:''
+    }
+  };
+}
+function ensureMeta(){
+  if(!progress) progress=freshProgress();
+  if(!progress.meta) progress.meta={editorTypedChars:0,quizLogoutCount:0,pdfOpenCount:0,lastSnapshotAt:'',lastSyncAt:''};
+  ['editorTypedChars','quizLogoutCount','pdfOpenCount'].forEach(k=>{
+    progress.meta[k]=Number(progress.meta[k]||0);
+  });
+  return progress.meta;
+}
+function taskCounts(){
+  const out={quizDone:0,scratchDone:0,editorDone:0,projectDone:0,topicDone:0,totalDone:0};
+  TOPICS.forEach((t,i)=>{
+    const st=topicState(i);
+    out.quizDone += st.tasks.slice(0,QUIZ_COUNT).filter(Boolean).length;
+    out.scratchDone += st.tasks.slice(QUIZ_COUNT,QUIZ_COUNT+SCRATCH_COUNT).filter(Boolean).length;
+    out.editorDone += st.tasks.slice(QUIZ_COUNT+SCRATCH_COUNT,PROJECT_INDEX).filter(Boolean).length;
+    out.projectDone += st.tasks[PROJECT_INDEX]?1:0;
+    out.totalDone += st.tasks.filter(Boolean).length;
+    if(st.tasks.every(Boolean)) out.topicDone++;
+  });
+  return out;
+}
+function snapshotFields(){
+  const meta=ensureMeta();
+  const c=taskCounts();
+  return {
+    editorTypedChars:meta.editorTypedChars,
+    quizLogoutCount:meta.quizLogoutCount,
+    pdfOpenCount:meta.pdfOpenCount,
+    quizDone:c.quizDone,
+    scratchDone:c.scratchDone,
+    editorDone:c.editorDone,
+    projectDone:c.projectDone,
+    topicDone:c.topicDone,
+    totalDone:c.totalDone,
+    currentTopic:TOPICS[current]?TOPICS[current].title:'',
+    currentStage:stage,
+    canOpenEditor:topicState(current).tasks.slice(QUIZ_COUNT,QUIZ_COUNT+SCRATCH_COUNT).every(Boolean) ? 'yes' : 'no',
+    snapshotAt:nowVN()
+  };
+}
+function snapshotText(fields){
+  return `SNAPSHOT | quizDone=${fields.quizDone} | scratchDone=${fields.scratchDone} | editorDone=${fields.editorDone} | projectDone=${fields.projectDone} | topicDone=${fields.topicDone} | totalDone=${fields.totalDone} | editorTypedChars=${fields.editorTypedChars} | quizLogoutCount=${fields.quizLogoutCount} | pdfOpenCount=${fields.pdfOpenCount} | currentStage=${fields.currentStage} | canOpenEditor=${fields.canOpenEditor}`;
+}
+function makeSnapshotEvent(){
+  const f=snapshotFields();
+  ensureMeta().lastSnapshotAt=f.snapshotAt;
+  return {
+    time:f.snapshotAt,
+    name:student?student.name:'',
+    code:student?student.code:'',
+    course:COURSE_NAME,
+    topic:'Tổng quan tiến trình',
+    task:'Snapshot tiến trình',
+    result:snapshotText(f),
+    xp:progress.xp||0,
+    percent:Math.round(completedCount()/TOPICS.length*100),
+    topicPercent:topicPercent(current),
+    ...f
+  };
+}
+function recordEvent(topic,task,result,first){
+  if(!student)return;
+  const f=snapshotFields();
+  const ev={
+    time:nowVN(),
+    name:student.name,
+    code:student.code,
+    course:COURSE_NAME,
+    topic,
+    task,
+    result,
+    xp:progress.xp||0,
+    percent:Math.round(completedCount()/TOPICS.length*100),
+    topicPercent:topicPercent(current),
+    ...f
+  };
+  progress.events.push(ev);
+  progress.pending.push(ev);
+  saveProgress();
+}
+function trackPdfOpen(){
+  if(!student){
+    window.open(PDF_SOURCE,'_blank','noopener');
+    return false;
+  }
+  const meta=ensureMeta();
+  meta.pdfOpenCount += 1;
+  recordEvent('Tài liệu PDF','Kích hoạt link đọc tài liệu PDF',`Mở PDF lần ${meta.pdfOpenCount}`);
+  saveProgress();
+  syncNow({silent:true,forceSnapshot:true});
+  window.open(PDF_SOURCE,'_blank','noopener');
+  return false;
+}
+function setupNoPaste(){
+  setTimeout(()=>{
+    if(!els.editor || els.editor.dataset.enhancedTracking==='1') return;
+    els.editor.dataset.enhancedTracking='1';
+    els.editor.addEventListener('paste',e=>{
+      e.preventDefault();
+      botSay('⛔ Ô gõ code chính không cho dán. Hãy tự gõ theo TODO. Sau khi tự gõ xong, bạn được copy sang editor online để chạy thử.');
+    });
+    els.editor.addEventListener('drop',e=>{
+      e.preventDefault();
+      botSay('⛔ Không kéo-thả văn bản vào editor chính.');
+    });
+    els.editor.addEventListener('beforeinput',e=>{
+      if(!student) return;
+      if(e.inputType && e.inputType.startsWith('insert')){
+        let add=0;
+        if(typeof e.data==='string') add=e.data.length;
+        else if(e.inputType==='insertParagraph' || e.inputType==='insertLineBreak') add=1;
+        else if(e.inputType==='insertFromPaste' || e.inputType==='insertFromDrop') add=0;
+        if(add>0){
+          const meta=ensureMeta();
+          meta.editorTypedChars += add;
+          saveProgress();
+          if(!els.editor.dataset.lastCharSync || Date.now()-Number(els.editor.dataset.lastCharSync)>8000){
+            els.editor.dataset.lastCharSync=String(Date.now());
+            recordEvent('Editor','Gõ ký tự trong editor',`Tổng ký tự đã gõ: ${meta.editorTypedChars}`);
+            syncNow({silent:true,forceSnapshot:true});
+          }
+        }
+      }
+    });
+  },200);
+}
+function init(){
+  const u=users();
+  const count=Object.keys(u).length;
+  if(count)$('loginNotice').textContent=`Trình duyệt này đang có ${count} hồ sơ người học. Nhập đúng họ tên và mã để làm tiếp.`;
+  ensureMeta();
+  document.getElementById('login').classList.remove('hide');
+  setupNoPaste();
+  if(!window.__webIntroPagehideSync){
+    window.__webIntroPagehideSync=true;
+    window.addEventListener('pagehide',()=>{try{syncNow({silent:true,forceSnapshot:true,useBeacon:true});}catch(e){}});
+    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'){try{syncNow({silent:true,forceSnapshot:true,useBeacon:true});}catch(e){}}});
+  }
+}
+function loadProgress(){
+  progress=freshProgress();
+  const raw=localStorage.getItem(profileKey());
+  if(raw){
+    try{
+      const loaded=JSON.parse(raw);
+      progress={...freshProgress(),...loaded};
+      progress.meta={...freshProgress().meta,...(loaded.meta||{})};
+      progress.unlocked[0]=true;
+    }catch(e){}
+  }
+  ensureMeta();
+}
+function renderBrief(){
+  const t=TOPICS[current];
+  els.briefTitle.textContent=`${t.icon} ${t.title}`;
+  els.briefText.textContent=t.desc;
+  els.sourceLink.innerHTML=`Nguồn học: <a href="${t.source}" target="_blank" rel="noopener" onclick="return trackPdfOpen()">PDF Bài mở đầu TK Web</a>`;
+}
+function answerQuiz(i,btn){
+  const q=TOPICS[current].quiz[quizIndex];
+  [...document.querySelectorAll('.choice')].forEach(b=>b.disabled=true);
+  userSay(btn.textContent);
+  const key=`${TOPICS[current].id}_${quizIndex}`;
+  if(i===q[2]){
+    btn.classList.add('correct');
+    pendingQuizAnswer={index:quizIndex,explain:q[3]};
+    quizAttempts[key]=0;
+    botSay(`✅ Đúng. Hãy giải thích ngắn theo cách hiểu của bạn, không copy nguyên văn: ${escapeHtml(q[3])}`);
+    els.theoryBox.insertAdjacentHTML('beforeend',`<div class="reflect-box"><b>✍️ Giải thích ngắn</b><div class="small">Tối thiểu 30 ký tự.</div><textarea id="quizExplain" placeholder="Em chọn đáp án này vì..."></textarea><div class="actions"><button class="btn success" onclick="submitQuizExplain()">Nộp giải thích</button></div></div>`);
+    return;
+  }
+  btn.classList.add('wrong');
+  quizAttempts[key]=(quizAttempts[key]||0)+1;
+  if(quizAttempts[key]>=2){
+    const meta=ensureMeta();
+    meta.quizLogoutCount += 1;
+    recordEvent(TOPICS[current].title,`Logout quiz do sai 2 lần - Trắc nghiệm ${quizIndex+1}`,`Sai 2 lần, logout lần ${meta.quizLogoutCount}. Gợi ý đọc: ${q[4]||'mục liên quan trong PDF'}`);
+    saveProgress();
+    syncNow({silent:true,forceSnapshot:true});
+    botSay(`❌ Sai lần 2. Hãy đọc lại PDF: ${escapeHtml(q[4]||'xem lại mục liên quan')}.`);
+    setTimeout(logoutForRetry,1100);
+  }else{
+    recordEvent(TOPICS[current].title,`Sai trắc nghiệm lần 1 - Trắc nghiệm ${quizIndex+1}`,`Gợi ý đọc: ${q[4]||'mục liên quan trong PDF'}`);
+    syncNow({silent:true,forceSnapshot:true});
+    botSay(`❌ Chưa đúng. Gợi ý đọc lại: <strong>${escapeHtml(q[4]||'mục liên quan trong PDF')}</strong>. Hệ thống không cung cấp đáp án chính xác ở lượt sai.`);
+    setTimeout(renderTheory,1200);
+  }
+}
+function syncNow(options){
+  options=options||{};
+  if(!student) return Promise.resolve(false);
+  ensureMeta();
+  if(!APPS_SCRIPT_URL){
+    if(!options.silent) botSay('☁️ Chưa cấu hình Server, tiến trình lưu trên trình duyệt.');
+    return Promise.resolve(false);
+  }
+
+  const snapshot=makeSnapshotEvent();
+  const pending=(progress.pending||[]).slice();
+  const shouldSend=options.forceSnapshot || pending.length>0;
+  if(!shouldSend) return Promise.resolve(false);
+
+  const events=pending.concat([snapshot]);
+  const payload={action:'saveEvents',events,snapshot};
+  const url=String(APPS_SCRIPT_URL||'').trim();
+  const body=JSON.stringify(payload);
+
+  function markSynced(){
+    const meta=ensureMeta();
+    meta.lastSyncAt=nowVN();
+    progress.pending=[];
+    saveProgress();
+    if(!options.silent) botSay('☁️ Đã đồng bộ tiến trình và snapshot đầy đủ lên Server.');
+    return true;
+  }
+
+  if(options.useBeacon && navigator.sendBeacon){
+    const ok=navigator.sendBeacon(url,new Blob([body],{type:'text/plain'}));
+    if(ok) markSynced();
+    return Promise.resolve(ok);
+  }
+
+  return fetch(url,{method:'POST',mode:'no-cors',body})
+    .then(()=>markSynced())
+    .catch(()=>{
+      progress.pending=pending.concat([snapshot]);
+      saveProgress();
+      if(!options.silent) botSay('⚠️ Chưa đồng bộ được với Server. Tiến trình vẫn lưu trên trình duyệt và sẽ gửi lại lần sau.');
+      return false;
+    });
+}
+function extractMetricFromResult(row,key){
+  const text=String((row&&row.result)||'');
+  const re=new RegExp(key+'\\s*=\\s*([^|]+)','i');
+  const m=text.match(re);
+  return m?String(m[1]).trim():'';
+}
+function rowsToProgress(serverRows){
+  const restored=freshProgress();
+  let matched=0;
+  let maxXp=0;
+  let latestSnapshotTime='';
+  let latestMeta=null;
+
+  function rowTimeValue(r){
+    const raw=String(r.time||'');
+    const d=new Date(raw);
+    return isNaN(d.getTime())?0:d.getTime();
+  }
+
+  serverRows.forEach(row=>{
+    if(!isCurrentStudentServerRow(row)) return;
+    matched++;
+    maxXp=Math.max(maxXp,Number(row.xp)||0);
+
+    const isSnapshot=normalize(row.task).includes('snapshot');
+    if(isSnapshot){
+      const candidate={
+        editorTypedChars:Number(row.editorTypedChars||extractMetricFromResult(row,'editorTypedChars')||0),
+        quizLogoutCount:Number(row.quizLogoutCount||extractMetricFromResult(row,'quizLogoutCount')||0),
+        pdfOpenCount:Number(row.pdfOpenCount||extractMetricFromResult(row,'pdfOpenCount')||0),
+        time:row.time||''
+      };
+      if(!latestMeta || rowTimeValue(row)>=rowTimeValue({time:latestSnapshotTime})){
+        latestMeta=candidate;
+        latestSnapshotTime=row.time||'';
+      }
+    }
+
+    const topicIndex=topicIndexFromServerTopic(row.topic);
+    if(topicIndex<0) return;
+
+    const st=restored.topics[TOPICS[topicIndex].id]||(restored.topics[TOPICS[topicIndex].id]={
+      tasks:Array(TASKS_PER_TOPIC).fill(false),
+      times:Array(TASKS_PER_TOPIC).fill(null),
+      links:Array(EDITOR_COUNT+PROJECT_COUNT).fill(null),
+      completedAt:null
+    });
+
+    const idx=taskIndexFromServerTask(row.task);
+    if(idx>=0){
+      st.tasks[idx]=true;
+      st.times[idx]=st.times[idx]||row.time||nowVN();
+
+      if(idx>=QUIZ_COUNT+SCRATCH_COUNT){
+        const slot=idx-QUIZ_COUNT-SCRATCH_COUNT;
+        const linkPair=extractRestoreLinks(row);
+        if(linkPair.github||linkPair.pages){
+          const old=st.links[slot]||{github:'',pages:''};
+          st.links[slot]={
+            github:linkPair.github||old.github||'',
+            pages:linkPair.pages||old.pages||''
+          };
+        }
+      }
+    }
+
+    const taskText=normalize(row.task);
+    const resultText=normalize(row.result);
+    if(taskText.includes('hoan thanh noi dung') || resultText.includes('mo khoa noi dung tiep theo')){
+      st.completedAt=st.completedAt||row.time||nowVN();
+      if(topicIndex+1<TOPICS.length) restored.unlocked[topicIndex+1]=true;
+    }
+  });
+
+  TOPICS.forEach((t,i)=>{
+    const st=restored.topics[t.id];
+    if(st && st.tasks.every(Boolean)){
+      st.completedAt=st.completedAt||nowVN();
+      if(i+1<TOPICS.length) restored.unlocked[i+1]=true;
+    }
+  });
+
+  restored.xp=maxXp;
+  restored.events=serverRows.filter(isCurrentStudentServerRow);
+  restored.pending=[];
+  restored.unlocked[0]=true;
+  if(latestMeta){
+    restored.meta={...restored.meta,...latestMeta};
+  }
+  return {restored,matched,latestPercent:0};
+}
+
 init();
 </script>
 </body>
