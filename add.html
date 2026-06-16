@@ -1,292 +1,468 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Toán 2 - Trang 76–78 | Phép cộng có nhớ</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toán 2 V2 Game Sketchnote - Phép cộng có nhớ</title>
 <style>
-  :root{
-    --ink:#1f2937;--paper:#fffdf4;--line:#d8e3c2;--green:#13a36c;--lime:#bfe3a2;--red:#ef4444;--orange:#f59e0b;--blue:#38bdf8;--pink:#ec4899;--purple:#8b5cf6;--shadow:rgba(31,41,55,.18);
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    margin:0;color:var(--ink);font-family:"Comic Sans MS","Segoe Print","Trebuchet MS",system-ui,sans-serif;
-    background:
-      repeating-linear-gradient(0deg,rgba(49,116,173,.08) 0 1px,transparent 1px 38px),
-      linear-gradient(135deg,#f7ffe8 0%,#fff9e8 42%,#eef9ff 100%);
-    overflow-x:hidden;
-  }
-  .wrap{max-width:1200px;margin:auto;padding:18px}
-  header.hero{
-    position:relative;margin:10px auto 18px;padding:22px 24px;border:4px solid #111;border-radius:28px;background:var(--paper);
-    box-shadow:9px 10px 0 #111;overflow:hidden;
-  }
-  .hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 9% 20%,rgba(255,214,10,.38),transparent 14%),radial-gradient(circle at 88% 16%,rgba(56,189,248,.25),transparent 16%);pointer-events:none}
-  .topline{position:relative;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-  .badge{display:inline-flex;align-items:center;gap:8px;padding:9px 15px;border:3px solid #111;border-radius:999px;background:#fff3b0;font-weight:900;box-shadow:4px 5px 0 #111;transform:rotate(-2deg)}
-  h1{position:relative;margin:16px 0 8px;text-align:center;font-size:clamp(34px,7vw,76px);letter-spacing:1px;line-height:1;color:#111;text-shadow:4px 4px 0 #fee2e2}
-  .underline{height:10px;max-width:520px;margin:0 auto 12px;border-bottom:6px solid var(--red);border-radius:50%;transform:rotate(-1deg)}
-  .subtitle{position:relative;text-align:center;font-size:clamp(17px,2.3vw,24px);font-weight:800;color:#0f766e}
-  .nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:20px 0}
-  .nav button,.btn{cursor:pointer;border:3px solid #111;background:#fff;border-radius:16px;padding:10px 14px;font-weight:900;box-shadow:4px 5px 0 #111;transition:.15s; font-family:inherit}
-  .nav button:hover,.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 7px 0 #111}
-  .nav button.active{background:#d9f99d}
-  .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}
-  @media(max-width:880px){.grid{grid-template-columns:1fr}.sticky{position:static!important}.hero{box-shadow:5px 6px 0 #111}.mini-tools{justify-content:center}}
-  .card{
-    background:rgba(255,253,244,.94);border:3px solid #111;border-radius:24px;padding:18px;box-shadow:6px 7px 0 #111;position:relative;margin-bottom:18px;
-  }
-  .card h2{margin:0 0 10px;font-size:clamp(24px,3vw,36px);color:#111;display:flex;align-items:center;gap:10px}
-  .card h3{margin:12px 0 8px;font-size:22px;color:#0f766e}
-  .tag{display:inline-block;background:#fef08a;border:2px solid #111;border-radius:10px;padding:2px 8px;transform:rotate(-1deg);font-weight:900}
-  .note{border:3px dashed #111;border-radius:20px;background:#fff7ed;padding:12px;margin:10px 0;font-weight:800}
-  .small{font-size:14px;opacity:.82}.big{font-size:28px;font-weight:900}.center{text-align:center}
-  .lesson-box{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start;justify-content:center;margin-top:12px}
-  .placevalue{display:grid;grid-template-columns:1fr 1fr;gap:0;border:3px solid #111;border-radius:16px;overflow:hidden;background:#fff;min-width:330px;box-shadow:4px 4px 0 #ddd}
-  .placevalue>div{padding:10px;border-right:2px solid #111;min-height:160px}.placevalue>div:last-child{border-right:0}.headcell{font-weight:900;text-align:center;background:#dcfce7;margin:-10px -10px 10px;padding:8px;border-bottom:2px solid #111}
-  .tens,.ones{display:flex;gap:6px;flex-wrap:wrap;align-items:flex-end;justify-content:center;min-height:110px}
-  .rod{width:18px;height:86px;border:2px solid #166534;border-radius:8px;background:repeating-linear-gradient(0deg,#84cc16 0 7px,#bef264 7px 9px);box-shadow:1px 2px 0 #14532d;animation:pop .35s ease both}
-  .one{width:18px;height:18px;border:2px solid #0369a1;border-radius:50%;background:#7dd3fc;box-shadow:1px 2px 0 #075985;animation:pop .35s ease both}
-  @keyframes pop{from{transform:scale(.3) rotate(-20deg);opacity:0}to{transform:scale(1);opacity:1}}
-  .carry{outline:4px dashed #ec4899;outline-offset:3px;animation:pulse 1s infinite}.carry-label{color:#be185d;font-weight:900;text-align:center;margin-top:8px}
-  @keyframes pulse{50%{transform:scale(1.06)}}
-  .vertical{font-family:"Trebuchet MS",sans-serif;font-size:34px;line-height:1.05;display:inline-grid;grid-template-columns:auto auto;gap:2px 10px;background:#fff;border:3px solid #111;border-radius:16px;padding:14px 20px;box-shadow:4px 5px 0 #111}
-  .vertical .bar{grid-column:1/3;border-top:4px solid #111;height:0}.muted{color:#94a3b8}.remember{color:#e11d48;font-size:16px;align-self:end}.result{font-weight:900;color:#059669}
-  .toolbox{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}.pill{border:2px solid #111;border-radius:999px;padding:6px 10px;background:#f8fafc;font-weight:900}
-  .practice-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}.task{background:#fff;border:3px solid #111;border-radius:18px;padding:12px;box-shadow:4px 5px 0 #111;min-height:120px}.task.correct{background:#dcfce7}.task.wrong{background:#fee2e2;animation:shake .25s}.task input{width:86px;border:3px solid #111;border-radius:12px;padding:8px;text-align:center;font-size:22px;font-weight:900;font-family:inherit;background:#fffbeb}.task .eq{font-size:25px;font-weight:900}.feedback{min-height:24px;font-weight:900;margin-top:8px}.ok{color:#059669}.no{color:#dc2626}
-  @keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
-  .ship-sea{background:linear-gradient(#e0f2fe,#bae6fd);border:3px solid #111;border-radius:22px;padding:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.ship{cursor:pointer;text-align:center;border:3px solid #111;border-radius:18px;background:#fff;padding:10px;box-shadow:4px 5px 0 #111;transition:.15s}.ship:hover{transform:translateY(-3px)}.boat{font-size:54px;display:block}.ship.selected{background:#fef08a}.ship.correct{background:#bbf7d0}.ship.wrong{background:#fecaca}
-  .match-area{display:grid;grid-template-columns:1fr 1fr;gap:14px}.scale,.package{border:3px solid #111;border-radius:18px;background:#fff;padding:12px;text-align:center;font-weight:900;box-shadow:4px 4px 0 #111}.package{cursor:grab}.package.dragging{opacity:.55}.drop{min-height:50px;border:3px dashed #111;border-radius:14px;margin-top:8px;display:flex;align-items:center;justify-content:center;background:#f8fafc}.drop.filled{background:#dcfce7}
-  .maze{position:relative;min-height:300px;border:4px solid #16a34a;border-radius:20px;background:#ecfccb;overflow:hidden}.maze svg{width:100%;height:300px;display:block}.acorn{cursor:pointer;filter:drop-shadow(2px 3px 0 rgba(0,0,0,.25))}.acorn text{font-weight:900;font-size:20px;fill:#111}.acorn.on circle{fill:#fde68a;stroke:#111;stroke-width:3}.path-line{stroke:#22c55e;stroke-width:12;fill:none;stroke-linecap:round}.path-line.on{stroke:#ef4444}.total-box{font-size:26px;font-weight:900;padding:8px 12px;background:#fff;border:3px solid #111;border-radius:16px;display:inline-block;box-shadow:4px 5px 0 #111}
-  .road-choice{display:grid;grid-template-columns:1fr;gap:10px}.choice{cursor:pointer;border:3px solid #111;border-radius:16px;background:#fff;padding:10px;font-weight:900;box-shadow:4px 4px 0 #111}.choice.correct{background:#dcfce7}.choice.wrong{background:#fee2e2}.route{display:flex;align-items:center;gap:10px}.line{height:12px;border-radius:99px;flex:1;border:2px solid #111}.red{background:#ef4444}.blue{background:#3b82f6}.black{background:#374151}.sublist li{margin:7px 0;font-weight:900}.sortable{display:flex;gap:10px;flex-wrap:wrap}.subcard{cursor:grab;border:3px solid #111;border-radius:18px;background:#dbeafe;padding:10px 14px;font-weight:900;box-shadow:4px 4px 0 #111}.subcard span{font-size:26px}
-  .final-quiz .qrow{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:2px dashed #111;padding:10px 0;flex-wrap:wrap}.final-quiz input{width:90px;border:3px solid #111;border-radius:12px;padding:7px;text-align:center;font-size:22px;font-weight:900;font-family:inherit;background:#fff7ed}
-  .sticky{position:sticky;top:12px}.progress{height:22px;background:#fff;border:3px solid #111;border-radius:999px;overflow:hidden}.bar{height:100%;background:linear-gradient(90deg,#86efac,#fef08a,#fdba74);width:0;transition:.3s}.stars{font-size:28px;letter-spacing:3px;margin:8px 0}.mini-tools{display:flex;gap:8px;flex-wrap:wrap}.robot{font-size:70px;text-align:center;animation:float 2.5s ease-in-out infinite}.speech{background:#fff;border:3px solid #111;border-radius:22px;padding:12px;position:relative}.speech:after{content:"";position:absolute;right:34px;bottom:-18px;border-width:18px 7px 0 22px;border-style:solid;border-color:#111 transparent transparent transparent}.speech p{margin:0;font-weight:800}
-  @keyframes float{50%{transform:translateY(-8px) rotate(2deg)}}
-  .doodle{position:absolute;pointer-events:none;opacity:.28}.d1{right:18px;top:16px;font-size:60px;transform:rotate(15deg)}.d2{left:10px;bottom:8px;font-size:48px;transform:rotate(-12deg)}
-  .section{display:none}.section.active{display:block;animation:fade .25s ease}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-  .confetti{position:fixed;inset:0;pointer-events:none;z-index:99}.confetti i{position:absolute;width:10px;height:16px;background:#f59e0b;top:-20px;animation:fall 1.8s linear forwards}@keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:0}}
-  footer{margin:30px 0 10px;text-align:center;font-weight:800;color:#475569}.print-note{display:none}@media print{.nav,.mini-tools,.btn{display:none}.section{display:block}.sticky{position:static}.card{break-inside:avoid;box-shadow:none}.print-note{display:block}}
+:root{
+  --ink:#172033;--paper:#fffdf2;--line:#b9d3ff;--red:#ef4444;--orange:#f59e0b;--yellow:#fde68a;
+  --green:#22c55e;--blue:#38bdf8;--pink:#ec4899;--purple:#8b5cf6;--shadow:#111827;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--ink);
+  font-family:"Comic Sans MS","Segoe Print","Trebuchet MS",system-ui,sans-serif;
+  background:
+    radial-gradient(circle at 10% 7%,rgba(253,230,138,.65),transparent 16%),
+    radial-gradient(circle at 88% 12%,rgba(56,189,248,.28),transparent 18%),
+    repeating-linear-gradient(0deg,rgba(56,189,248,.13) 0 1px,transparent 1px 38px),
+    linear-gradient(135deg,#fff7ed 0%,#f0fdf4 48%,#eff6ff 100%);
+  overflow-x:hidden;
+}
+.wrap{max-width:1240px;margin:auto;padding:16px}
+.hero{
+  position:relative;overflow:hidden;background:var(--paper);border:4px solid #111;border-radius:30px;
+  box-shadow:10px 12px 0 #111;padding:22px 20px;margin:10px 0 18px;
+}
+.hero:before{content:"";position:absolute;inset:-30px;background:
+  radial-gradient(circle at 12% 28%,rgba(251,191,36,.42),transparent 13%),
+  radial-gradient(circle at 78% 18%,rgba(236,72,153,.20),transparent 15%),
+  radial-gradient(circle at 90% 82%,rgba(34,197,94,.20),transparent 20%);pointer-events:none}
+.badges{position:relative;display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.badge,.coin{
+  display:inline-flex;align-items:center;gap:8px;background:#fff;border:3px solid #111;border-radius:999px;
+  padding:8px 13px;font-weight:900;box-shadow:4px 5px 0 #111;
+}
+.badge:nth-child(1){background:#dcfce7;transform:rotate(-2deg)}
+.badge:nth-child(2){background:#fef3c7;transform:rotate(1deg)}
+h1{position:relative;text-align:center;margin:12px 0 6px;font-size:clamp(34px,6.4vw,78px);line-height:1;color:#111;text-shadow:4px 4px 0 #fee2e2}
+.subtitle{position:relative;text-align:center;font-size:clamp(17px,2.3vw,24px);font-weight:900;color:#0f766e}
+.handline{height:14px;width:min(650px,78%);margin:4px auto 0;border-bottom:7px solid var(--red);border-radius:50%;transform:rotate(-1deg)}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:18px 0}
+button,.btn{
+  font-family:inherit;cursor:pointer;border:3px solid #111;background:#fff;border-radius:18px;padding:10px 14px;
+  font-weight:900;box-shadow:4px 5px 0 #111;transition:.16s;font-size:16px;
+}
+button:hover,.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 7px 0 #111}
+button.active{background:#bbf7d0}
+.gamegrid{display:grid;grid-template-columns:1fr 340px;gap:18px}
+@media(max-width:980px){.gamegrid{grid-template-columns:1fr}.side{position:static!important}.hero{box-shadow:5px 6px 0 #111}}
+.card{
+  background:rgba(255,253,242,.95);border:3px solid #111;border-radius:26px;padding:18px;margin-bottom:18px;
+  box-shadow:7px 8px 0 #111;position:relative;
+}
+.card h2{margin:0 0 10px;font-size:clamp(25px,3.2vw,38px);display:flex;align-items:center;gap:8px;color:#111}
+.card h3{margin:12px 0 8px;font-size:22px;color:#0f766e}
+.tag{display:inline-block;background:#fef08a;border:2px solid #111;border-radius:12px;padding:3px 9px;font-weight:900;transform:rotate(-1deg)}
+.note{background:#fff7ed;border:3px dashed #111;border-radius:20px;padding:12px;font-weight:900;margin:10px 0}
+.small{font-size:14px;opacity:.82}.big{font-size:28px;font-weight:900}.center{text-align:center}
+.screen{display:none}.screen.active{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.side{position:sticky;top:12px}
+.robot{font-size:76px;text-align:center;animation:float 2.5s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-8px) rotate(2deg)}}
+.speech{background:#fff;border:3px solid #111;border-radius:22px;padding:12px;font-weight:900}
+.meters{display:grid;gap:10px}
+.meter{height:22px;background:#fff;border:3px solid #111;border-radius:999px;overflow:hidden}
+.meter>div{height:100%;width:0%;background:linear-gradient(90deg,#86efac,#fde68a,#fdba74);transition:.3s}
+.stars{font-size:26px;letter-spacing:2px}
+.map{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:14px 0}
+.island{
+  border:3px solid #111;border-radius:22px;min-height:92px;background:#fff;box-shadow:4px 5px 0 #111;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-weight:900;cursor:pointer;transition:.15s;
+}
+.island:nth-child(1){background:#dcfce7}.island:nth-child(2){background:#dbeafe}.island:nth-child(3){background:#fef3c7}.island:nth-child(4){background:#fce7f3}.island:nth-child(5){background:#ede9fe}
+.island:hover{transform:translateY(-4px)}
+.island .ico{font-size:38px}
+@media(max-width:720px){.map{grid-template-columns:repeat(2,1fr)}}
+.lesson{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+@media(max-width:820px){.lesson{grid-template-columns:1fr}}
+.pv{display:grid;grid-template-columns:1fr 1fr;border:3px solid #111;border-radius:18px;overflow:hidden;background:#fff;box-shadow:4px 5px 0 #111}
+.pv>div{padding:10px;min-height:170px;border-right:2px solid #111}.pv>div:last-child{border-right:none}
+.head{margin:-10px -10px 10px;padding:8px;text-align:center;font-weight:900;background:#dcfce7;border-bottom:2px solid #111}
+.tens,.ones{display:flex;gap:6px;flex-wrap:wrap;align-items:flex-end;justify-content:center;min-height:118px}
+.rod{width:18px;height:88px;border:2px solid #166534;border-radius:9px;background:repeating-linear-gradient(0deg,#84cc16 0 7px,#bef264 7px 9px);box-shadow:1px 2px 0 #14532d}
+.one{width:20px;height:20px;border:2px solid #0369a1;border-radius:50%;background:#7dd3fc;box-shadow:1px 2px 0 #075985}
+.pulse{outline:4px dashed #ec4899;outline-offset:3px;animation:pulse 1s infinite}
+@keyframes pulse{50%{transform:scale(1.08)}}
+.vertical{
+  display:inline-grid;grid-template-columns:auto auto;gap:2px 12px;align-items:end;
+  font-family:"Trebuchet MS",sans-serif;font-size:38px;line-height:1.05;background:#fff;border:3px solid #111;border-radius:18px;
+  padding:15px 24px;box-shadow:5px 6px 0 #111;min-width:154px;
+}
+.vertical .bar{grid-column:1/3;border-top:4px solid #111;height:0}.remember{font-size:16px;color:#e11d48;font-weight:900}.muted{color:#94a3b8}.result{color:#059669;font-weight:900}
+.problemPanel{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:13px}
+.task{background:#fff;border:3px solid #111;border-radius:20px;padding:12px;box-shadow:4px 5px 0 #111;min-height:126px}
+.task.correct{background:#dcfce7}.task.wrong{background:#fee2e2;animation:shake .25s}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+input,select{
+  font-family:inherit;border:3px solid #111;border-radius:13px;padding:8px;background:#fff7ed;font-size:21px;font-weight:900;
+}
+input[type=range]{border:none;box-shadow:none;background:transparent;padding:0;width:150px}
+.ans{width:90px;text-align:center}
+.feedback{min-height:26px;font-weight:900;margin-top:8px}.ok{color:#059669}.no{color:#dc2626}.warn{color:#b45309}
+.table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border:3px solid #111;border-radius:18px;background:#fff}
+.table th,.table td{border-right:2px solid #111;border-bottom:2px solid #111;padding:9px;text-align:center;font-weight:900}
+.table tr:last-child td{border-bottom:0}.table th:last-child,.table td:last-child{border-right:0}.table th{background:#bae6fd}
+.flash{
+  min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  background:linear-gradient(135deg,#fff,#fef3c7);border:4px solid #111;border-radius:28px;box-shadow:6px 7px 0 #111;
+}
+.flash .expr{font-size:clamp(42px,8vw,72px);font-weight:900}
+.options{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin-top:12px}
+.opt{background:#fff;border:3px solid #111;border-radius:18px;padding:13px;text-align:center;font-size:24px;font-weight:900;box-shadow:4px 4px 0 #111;cursor:pointer}
+.opt.good{background:#bbf7d0}.opt.bad{background:#fecaca}
+.dragzone{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.drop,.pkg{
+  border:3px solid #111;border-radius:18px;background:#fff;padding:12px;text-align:center;font-weight:900;box-shadow:4px 4px 0 #111;min-height:68px
+}
+.pkg{cursor:grab;background:#fef3c7}.drop{background:#eff6ff}.drop.filled{background:#dcfce7}
+.train{display:flex;gap:10px;align-items:center;overflow:auto;padding:10px}
+.car{
+  min-width:135px;background:#fff;border:3px solid #111;border-radius:18px;padding:10px;text-align:center;font-weight:900;box-shadow:4px 5px 0 #111;cursor:pointer;
+}
+.car.selected{background:#fef08a}.car.correct{background:#bbf7d0}.car.wrong{background:#fecaca}
+.sortable{display:flex;gap:10px;flex-wrap:wrap}.sortItem{cursor:grab;border:3px solid #111;border-radius:18px;background:#dbeafe;padding:12px 15px;font-weight:900;box-shadow:4px 4px 0 #111}
+.wordGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:99}.confetti i{position:absolute;width:10px;height:16px;top:-20px;animation:fall 1.8s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:0}}
+.footer{text-align:center;font-weight:900;color:#475569;margin:30px 0 10px}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="hero">
-    <div class="doodle d1">➕</div><div class="doodle d2">🌟</div>
-    <div class="topline"><span class="badge">📘 SGK Toán 2 • Tập 1</span><span class="badge">Trang 76–78</span></div>
-    <h1>PHÉP CỘNG CÓ NHỚ</h1>
-    <div class="underline"></div>
-    <div class="subtitle">Cộng số có hai chữ số với số có hai chữ số — học bằng que tính, hình vẽ, trò chơi và tự kiểm tra</div>
+    <div class="badges"><span class="badge">📘 SGK Toán 2 • Tập 1</span><span class="badge">Trang 76–78</span><span class="coin">🪙 Xu: <b id="coins">0</b></span></div>
+    <h1>ĐẢO CỘNG CÓ NHỚ</h1>
+    <div class="handline"></div>
+    <div class="subtitle">V2 Game Sketchnote: số thay đổi liên tục, nhiều bài đặt tính, nhiệm vụ như trò chơi cho bé 7 tuổi</div>
   </header>
 
-  <nav class="nav" id="nav">
-    <button class="active" data-go="learn">1. Khám phá</button>
-    <button data-go="column">2. Đặt tính</button>
-    <button data-go="games">3. Trò chơi</button>
-    <button data-go="word">4. Bài toán</button>
-    <button data-go="final">5. Kiểm tra nhanh</button>
-  </nav>
+  <div class="toolbar" id="nav">
+    <button class="active" data-screen="map">🗺️ Bản đồ</button>
+    <button data-screen="learn">🔍 Khám phá</button>
+    <button data-screen="practice">✍️ Đặt tính</button>
+    <button data-screen="speed">⚡ Tốc độ</button>
+    <button data-screen="games">🎮 Game</button>
+    <button data-screen="word">💬 Bài toán</button>
+    <button data-screen="boss">🏆 Boss cuối</button>
+  </div>
 
-  <div class="grid">
+  <div class="gamegrid">
     <main>
-      <section id="learn" class="section active">
+      <section id="map" class="screen active">
         <div class="card">
-          <h2>🔍 Từ 36 + 17 đến 53</h2>
-          <div class="note">Ý chính: cộng <b>đơn vị trước</b>. Nếu đơn vị được 10 hoặc hơn, ta <b>đổi 10 đơn vị thành 1 chục</b>, gọi là <span class="tag">nhớ 1</span>.</div>
-          <div class="lesson-box">
-            <div class="placevalue" aria-label="Bảng chục đơn vị">
-              <div><div class="headcell">Chục</div><div class="tens" id="tensBox"></div><div class="carry-label" id="carryText"></div></div>
-              <div><div class="headcell">Đơn vị</div><div class="ones" id="onesBox"></div></div>
-            </div>
+          <h2>🗺️ Bản đồ nhiệm vụ</h2>
+          <div class="note">Mỗi đảo luyện một kỹ năng: hiểu “nhớ 1”, đặt tính, tính nhanh, kéo thả, bài toán lời văn. Hoàn thành nhiệm vụ để nhận xu và sao.</div>
+          <div class="map">
+            <div class="island" onclick="go('learn')"><div class="ico">🔍</div>Đảo Khám phá<br><small>36 + 17</small></div>
+            <div class="island" onclick="go('practice')"><div class="ico">✍️</div>Đảo Đặt tính<br><small>nhiều bài</small></div>
+            <div class="island" onclick="go('speed')"><div class="ico">⚡</div>Đảo Tốc độ<br><small>chọn nhanh</small></div>
+            <div class="island" onclick="go('games')"><div class="ico">🎮</div>Đảo Trò chơi<br><small>kéo thả</small></div>
+            <div class="island" onclick="go('boss')"><div class="ico">🏆</div>Boss cuối<br><small>10 câu</small></div>
+          </div>
+          <h3>🎯 Mục tiêu bài học</h3>
+          <ul class="note">
+            <li>Biết cộng số có hai chữ số với số có hai chữ số có nhớ.</li>
+            <li>Hiểu: <b>10 đơn vị đổi thành 1 chục</b>.</li>
+            <li>Đặt tính đúng: đơn vị thẳng đơn vị, chục thẳng chục.</li>
+            <li>Giải bài toán lời văn dạng “cả hai”, “tất cả”, “đường đi gồm hai đoạn”.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="learn" class="screen">
+        <div class="card">
+          <h2>🔍 Máy đổi số: cộng có nhớ</h2>
+          <div class="note">Bé bấm <span class="tag">Đổi số</span>, máy sẽ tạo phép cộng có nhớ. Hãy quan sát đơn vị: nếu từ 10 trở lên thì đổi thành 1 chục.</div>
+          <div class="lesson">
             <div>
-              <div class="vertical" id="verticalDemo"></div>
-              <div class="toolbox">
-                <button class="btn" onclick="prevStep()">⬅ Lùi</button>
-                <button class="btn" onclick="nextStep()">Tiếp ➜</button>
-                <button class="btn" onclick="autoDemo()">▶ Tự chạy</button>
+              <div class="pv">
+                <div><div class="head">Chục</div><div class="tens" id="tensBox"></div><div id="carryText" class="center tag" style="display:none;margin-top:8px"></div></div>
+                <div><div class="head">Đơn vị</div><div class="ones" id="onesBox"></div></div>
               </div>
             </div>
+            <div class="center">
+              <div class="vertical" id="verticalDemo"></div>
+              <div class="toolbar">
+                <button onclick="stepBack()">⬅ Lùi</button>
+                <button onclick="stepNext()">Tiếp ➜</button>
+                <button onclick="newLearn()">🎲 Đổi số</button>
+                <button onclick="autoLearn()">▶ Tự chạy</button>
+              </div>
+              <div class="big" id="stepText"></div>
+            </div>
           </div>
-          <p id="stepExplain" class="big center"></p>
         </div>
         <div class="card">
-          <h2>🧠 Bé nhớ 3 bước</h2>
-          <div class="practice-grid">
-            <div class="task"><div class="big">1️⃣ Cộng đơn vị</div><p>6 + 7 = 13, viết 3, nhớ 1.</p></div>
-            <div class="task"><div class="big">2️⃣ Cộng chục</div><p>3 + 1 + 1 nhớ = 5.</p></div>
-            <div class="task"><div class="big">3️⃣ Viết kết quả</div><p>36 + 17 = <span class="tag">53</span>.</p></div>
+          <h2>🧠 3 câu thần chú</h2>
+          <div class="problemPanel">
+            <div class="task"><div class="big">1️⃣ Đơn vị trước</div><p>Ví dụ: 6 + 7 = 13.</p></div>
+            <div class="task"><div class="big">2️⃣ Viết – nhớ</div><p>Viết 3 ở hàng đơn vị, nhớ 1 sang hàng chục.</p></div>
+            <div class="task"><div class="big">3️⃣ Chục sau</div><p>3 + 1 + 1 nhớ = 5, được 53.</p></div>
           </div>
         </div>
       </section>
 
-      <section id="column" class="section">
+      <section id="practice" class="screen">
         <div class="card">
-          <h2>✍️ Luyện đặt tính rồi tính</h2>
-          <p class="small">Gõ kết quả vào ô. Bấm “Gợi ý” khi cần. Các phép tính bám nội dung trang 76–78.</p>
-          <div class="practice-grid" id="columnTasks"></div>
-          <div class="toolbox"><button class="btn" onclick="checkAllColumn()">✅ Kiểm tra tất cả</button><button class="btn" onclick="resetColumn()">🔄 Làm lại</button></div>
+          <h2>✍️ Trại luyện đặt tính</h2>
+          <div class="toolbar">
+            <button onclick="makePractice('sgk')">📗 Bài SGK</button>
+            <button onclick="makePractice('random')">🎲 12 bài mới</button>
+            <button onclick="makePractice('hard')">🔥 20 bài thử thách</button>
+            <button onclick="checkPractice()">✅ Chấm bài</button>
+            <button onclick="showAnswersPractice()">👀 Hiện đáp án</button>
+          </div>
+          <div class="problemPanel" id="practiceBox"></div>
+          <div id="practiceFeedback" class="feedback big"></div>
         </div>
         <div class="card">
-          <h2>🪄 Tự tạo phép cộng</h2>
-          <p>Kéo thanh để tạo phép cộng có nhớ, sau đó bấm kiểm tra.</p>
-          <div class="toolbox"><span class="pill">Số 1: <b id="aVal">36</b></span><input id="aRange" type="range" min="10" max="99" value="36" oninput="updateBuilder()"><span class="pill">Số 2: <b id="bVal">17</b></span><input id="bRange" type="range" min="10" max="99" value="17" oninput="updateBuilder()"></div>
-          <div class="center"><div class="vertical" id="buildVertical"></div></div>
-          <div class="center" style="margin-top:12px"><input id="buildAns" style="width:110px;border:3px solid #111;border-radius:12px;padding:8px;font-size:24px;text-align:center;font-weight:900" placeholder="?"> <button class="btn" onclick="checkBuilder()">Kiểm tra</button></div>
-          <div id="buildFeedback" class="feedback center"></div>
+          <h2>🪄 Tự chỉnh số bằng thanh kéo</h2>
+          <div class="toolbar">
+            <span class="tag">Số 1: <b id="aTxt">36</b></span><input id="aRange" type="range" min="10" max="99" value="36" oninput="updateBuilder()">
+            <span class="tag">Số 2: <b id="bTxt">17</b></span><input id="bRange" type="range" min="10" max="99" value="17" oninput="updateBuilder()">
+            <button onclick="forceCarry()">🎯 Tạo có nhớ</button>
+          </div>
+          <div class="center"><div class="vertical" id="builder"></div></div>
+          <p class="center"><input id="builderAns" class="ans" inputmode="numeric" placeholder="?"> <button onclick="checkBuilder()">Kiểm tra</button></p>
+          <div id="builderFeedback" class="feedback center"></div>
         </div>
       </section>
 
-      <section id="games" class="section">
+      <section id="speed" class="screen">
         <div class="card">
-          <h2>🚢 Tàu nào ghi phép tính đúng?</h2>
-          <div class="ship-sea" id="shipGame"></div>
-          <div class="toolbox"><button class="btn" onclick="checkShips()">Kiểm tra tàu</button><button class="btn" onclick="resetShips()">Chơi lại</button></div>
+          <h2>⚡ Đấu trường tính nhanh</h2>
+          <div class="note">Chọn đáp án đúng. Mỗi lượt số sẽ thay đổi. Bé nên nói thầm: “đơn vị trước, nhớ 1”.</div>
+          <div class="flash">
+            <div class="expr" id="flashExpr">36 + 17</div>
+            <div class="options" id="flashOptions"></div>
+          </div>
+          <div class="toolbar"><button onclick="newFlash()">🎲 Câu khác</button><button onclick="startSpeedRound()">⏱️ 60 giây</button><span class="tag">Đúng: <b id="speedRight">0</b></span><span class="tag">Thời gian: <b id="timer">60</b>s</span></div>
+          <div id="speedFeedback" class="feedback big"></div>
+        </div>
+      </section>
+
+      <section id="games" class="screen">
+        <div class="card">
+          <h2>🚢 Cảng tàu phép tính đúng</h2>
+          <p>Chọn các tàu ghi phép tính đúng.</p>
+          <div class="train" id="shipBox"></div>
+          <div class="toolbar"><button onclick="checkShips()">Kiểm tra tàu</button><button onclick="setupShips()">Xáo tàu</button></div>
           <div id="shipFeedback" class="feedback"></div>
         </div>
+
         <div class="card">
-          <h2>⚖️ Ghép cân với thùng hàng</h2>
-          <p class="small">Kéo thùng hàng đúng vào phép tính trên cân.</p>
-          <div class="match-area" id="matchArea"></div>
-          <div class="toolbox"><button class="btn" onclick="checkMatch()">Kiểm tra ghép</button><button class="btn" onclick="setupMatch()">Xáo lại</button></div>
+          <h2>⚖️ Kéo thùng hàng vào cân</h2>
+          <p>Kéo kết quả đúng vào phép tính.</p>
+          <div class="dragzone" id="matchBox"></div>
+          <div class="toolbar"><button onclick="checkMatch()">Kiểm tra ghép</button><button onclick="setupMatch()">Xáo lại</button></div>
           <div id="matchFeedback" class="feedback"></div>
         </div>
+
         <div class="card">
-          <h2>🐿️ Chú sóc nhặt hạt dẻ</h2>
-          <p>Chọn các hạt trên đường đi: <b>1 → 0 → 5</b>. Tổng là bao nhiêu?</p>
-          <div class="maze" id="maze"></div>
-          <div style="margin-top:10px">Tổng đã chọn: <span class="total-box" id="mazeTotal">0</span> <button class="btn" onclick="checkMaze()">Kiểm tra</button></div>
-          <div id="mazeFeedback" class="feedback"></div>
-        </div>
-        <div class="card">
-          <h2>🐜 Con đường ngắn nhất</h2>
-          <p>Kiến vàng muốn đến hạt gạo. Tính tổng độ dài từng đường rồi chọn đường ngắn nhất.</p>
-          <div class="road-choice" id="roadGame"></div>
-          <div id="roadFeedback" class="feedback"></div>
-        </div>
-        <div class="card">
-          <h2>🚤 Sắp xếp tàu ngầm từ bé đến lớn</h2>
-          <p>Kéo thả theo thứ tự kết quả từ bé đến lớn.</p>
-          <div class="sortable" id="subSort"></div>
-          <div class="toolbox"><button class="btn" onclick="checkSubs()">Kiểm tra thứ tự</button><button class="btn" onclick="setupSubs()">Xáo lại</button></div>
-          <div id="subFeedback" class="feedback"></div>
+          <h2>🚤 Sắp xếp tàu ngầm</h2>
+          <p>Kéo thả tàu theo kết quả từ bé đến lớn.</p>
+          <div class="sortable" id="sortBox"></div>
+          <div class="toolbar"><button onclick="checkSort()">Kiểm tra</button><button onclick="setupSort()">Xáo lại</button></div>
+          <div id="sortFeedback" class="feedback"></div>
         </div>
       </section>
 
-      <section id="word" class="section">
+      <section id="word" class="screen">
         <div class="card">
-          <h2>💌 Bài toán bưu thiếp</h2>
-          <div class="note">Ngày thứ nhất, Mai làm được <b>29</b> tấm bưu thiếp. Ngày thứ hai, Mai làm được <b>31</b> tấm bưu thiếp. Hỏi cả hai ngày Mai làm được bao nhiêu tấm bưu thiếp?</div>
-          <div class="practice-grid">
-            <div class="task"><b>Bước 1: Chọn phép tính</b><div class="toolbox"><button class="choice" onclick="wordPick(this,false)">31 − 29</button><button class="choice" onclick="wordPick(this,true)">29 + 31</button><button class="choice" onclick="wordPick(this,false)">29 + 29</button></div></div>
-            <div class="task"><b>Bước 2: Tính</b><p><span class="eq">29 + 31 = </span><input id="postAns"></p><button class="btn" onclick="checkPostcard()">Kiểm tra</button><div id="postFeedback" class="feedback"></div></div>
-            <div class="task"><b>Bước 3: Trả lời</b><p>Mai làm được <input id="postSentence" style="width:70px"> tấm bưu thiếp.</p><button class="btn" onclick="checkSentence()">Xong</button><div id="sentenceFeedback" class="feedback"></div></div>
-          </div>
-        </div>
-        <div class="card">
-          <h2>🐜 Kiến đỏ đi vòng qua bụi cỏ</h2>
-          <p>Đường đi gồm hai đoạn: <span class="tag">37 cm</span> và <span class="tag">54 cm</span>. Kiến đỏ phải bò bao nhiêu xăng-ti-mét?</p>
-          <div class="center"><span class="eq">37 + 54 = </span><input id="antAns" style="width:100px;border:3px solid #111;border-radius:12px;padding:8px;font-size:24px;text-align:center;font-weight:900"> cm <button class="btn" onclick="checkAnt()">Kiểm tra</button></div>
-          <div id="antFeedback" class="feedback center"></div>
+          <h2>💬 Nhiệm vụ lời văn</h2>
+          <div class="wordGrid" id="wordBox"></div>
+          <div class="toolbar"><button onclick="checkWords()">Chấm bài lời văn</button><button onclick="setupWords()">Đổi số bài toán</button></div>
+          <div id="wordFeedback" class="feedback big"></div>
         </div>
       </section>
 
-      <section id="final" class="section">
-        <div class="card final-quiz">
-          <h2>🏁 Kiểm tra nhanh 8 câu</h2>
-          <div id="finalQuiz"></div>
-          <div class="toolbox"><button class="btn" onclick="checkFinal()">Nộp bài</button><button class="btn" onclick="resetFinal()">Làm lại</button></div>
-          <div id="finalFeedback" class="feedback big"></div>
+      <section id="boss" class="screen">
+        <div class="card">
+          <h2>🏆 Boss cuối: 10 câu hỗn hợp</h2>
+          <div id="bossBox" class="problemPanel"></div>
+          <div class="toolbar"><button onclick="checkBoss()">Nộp bài</button><button onclick="setupBoss()">Tạo đề mới</button></div>
+          <div id="bossFeedback" class="feedback big"></div>
         </div>
       </section>
     </main>
 
-    <aside class="sticky">
+    <aside class="side">
       <div class="card">
         <div class="robot">🤖</div>
-        <div class="speech"><p id="coach">Chào bé! Hôm nay mình học cộng có nhớ. Hãy bắt đầu ở mục Khám phá nhé.</p></div>
-        <h3>Tiến độ</h3>
-        <div class="progress"><div class="bar" id="progressBar"></div></div>
-        <div class="stars" id="stars">☆☆☆☆☆</div>
-        <div class="mini-tools">
-          <button class="btn" onclick="speakCoach()">🔊 Đọc lời nhắc</button>
-          <button class="btn" onclick="toggleBigText()">🔎 Chữ to</button>
-          <button class="btn" onclick="resetAll()">🧽 Xóa điểm</button>
+        <div class="speech" id="coach">Chào bé! Hãy vào Bản đồ rồi chọn một hòn đảo để bắt đầu.</div>
+        <h3>🌟 Tiến độ game</h3>
+        <div class="meters">
+          <div><b>Kinh nghiệm</b><div class="meter"><div id="xpBar"></div></div></div>
+          <div class="stars" id="starLine">☆☆☆☆☆</div>
+          <div><span class="tag">Cấp: <b id="level">1</b></span> <span class="tag">Chuỗi đúng: <b id="streak">0</b></span></div>
         </div>
-        <p class="small">Mẹo cho phụ huynh: để bé nói thành lời “đơn vị trước, nhớ 1, cộng chục” trước khi nhập đáp án.</p>
+        <div class="toolbar">
+          <button onclick="speakCoach()">🔊 Đọc</button>
+          <button onclick="toggleBig()">🔎 Chữ to</button>
+          <button onclick="resetGame()">🧽 Reset</button>
+        </div>
       </div>
       <div class="card">
-        <h3>📌 Công thức mini</h3>
-        <p><span class="tag">36 + 17</span></p>
-        <p>6 + 7 = 13 → viết 3, nhớ 1.</p>
-        <p>3 + 1 + 1 = 5 → kết quả 53.</p>
+        <h3>📌 Mẹo nhớ</h3>
+        <p><span class="tag">Đơn vị trước</span></p>
+        <p>7 + 6 = 13 → viết 3, nhớ 1.</p>
+        <p><span class="tag">Chục sau</span></p>
+        <p>Nhớ 1 phải cộng vào hàng chục.</p>
       </div>
     </aside>
   </div>
-  <footer>Nội dung được chuyển hóa thành hoạt động tương tác từ các bài trang 76–78, SGK Toán 2 Kết nối tri thức với cuộc sống, Tập 1.</footer>
+
+  <div class="footer">V2 chuyển hóa nội dung SGK Toán 2 Kết nối tri thức Tập 1, trang 76–78 thành trò chơi học phép cộng có nhớ.</div>
 </div>
 <div class="confetti" id="confetti"></div>
+
 <script>
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-let score=Number(localStorage.getItem('math76Score')||0); let bigText=false;
-function setCoach(t){$('#coach').textContent=t}
-function addScore(n=1){score=Math.min(20,score+n);localStorage.setItem('math76Score',score);renderProgress(); if(n>0) confetti(18)}
-function renderProgress(){let p=Math.min(100,score*5);$('#progressBar').style.width=p+'%';$('#stars').textContent='★★★★★☆☆☆☆☆'.slice(5-Math.min(5,Math.floor(score/4)),10-Math.min(5,Math.floor(score/4)))}
-renderProgress();
-$$('#nav button').forEach(b=>b.onclick=()=>{ $$('#nav button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); $$('.section').forEach(s=>s.classList.remove('active')); $('#'+b.dataset.go).classList.add('active'); setCoach({learn:'Quan sát que tính: khi có 13 đơn vị, ta đổi 10 đơn vị thành 1 chục.',column:'Nhớ viết đơn vị thẳng đơn vị, chục thẳng chục nhé.',games:'Chơi chậm mà chắc. Tính trước rồi mới chọn.',word:'Bài toán hỏi “cả hai ngày” nên ta nghĩ đến phép cộng.',final:'Sẵn sàng kiểm tra nhanh chưa?'}[b.dataset.go])});
-function speakCoach(){speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance($('#coach').textContent); u.lang='vi-VN'; u.rate=.88; speechSynthesis.speak(u)}
-function toggleBigText(){bigText=!bigText;document.body.style.fontSize=bigText?'125%':''}
-function resetAll(){score=0;localStorage.removeItem('math76Score');renderProgress();setCoach('Đã xóa điểm. Mình cùng học lại từ đầu nhé!')}
-function confetti(n=30){const c=$('#confetti'); for(let i=0;i<n;i++){const e=document.createElement('i');e.style.left=Math.random()*100+'vw';e.style.background=['#ef4444','#f59e0b','#22c55e','#38bdf8','#ec4899'][i%5];e.style.animationDelay=Math.random()*.4+'s';c.appendChild(e);setTimeout(()=>e.remove(),2100)}}
+const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
+let state={coins:+localStorage.getItem('coins76v2')||0,xp:+localStorage.getItem('xp76v2')||0,streak:0,big:false};
+function save(){localStorage.setItem('coins76v2',state.coins);localStorage.setItem('xp76v2',state.xp)}
+function coach(t){$('#coach').textContent=t}
+function reward(n=1){state.coins+=n;state.xp=Math.min(100,state.xp+n*5);state.streak++;save();renderHUD();confetti(14+n*2)}
+function miss(){state.streak=0;renderHUD()}
+function renderHUD(){ $('#coins').textContent=state.coins; $('#xpBar').style.width=state.xp+'%'; $('#level').textContent=1+Math.floor(state.xp/25); $('#streak').textContent=state.streak; let stars=Math.min(5,Math.floor(state.xp/20)); $('#starLine').textContent='★★★★★'.slice(0,stars)+'☆☆☆☆☆'.slice(0,5-stars)}
+function confetti(n=20){const c=$('#confetti');for(let i=0;i<n;i++){let e=document.createElement('i');e.style.left=Math.random()*100+'vw';e.style.background=['#ef4444','#f59e0b','#22c55e','#38bdf8','#ec4899','#8b5cf6'][i%6];e.style.animationDelay=Math.random()*.35+'s';c.appendChild(e);setTimeout(()=>e.remove(),2000)}}
+function speakCoach(){speechSynthesis.cancel();let u=new SpeechSynthesisUtterance($('#coach').textContent);u.lang='vi-VN';u.rate=.88;speechSynthesis.speak(u)}
+function toggleBig(){state.big=!state.big;document.body.style.fontSize=state.big?'125%':''}
+function resetGame(){state={coins:0,xp:0,streak:0,big:state.big};save();renderHUD();coach('Đã reset điểm. Mình chơi lại từ đầu nhé!')}
+renderHUD();
 
-let step=0,timer=null;
-const steps=[
- {ones:13,tens:4,carry:false,html:'<span></span><span class="remember">đơn vị</span><span>36</span><span></span><span>+17</span><span></span><span class="bar"></span><span></span><span class="muted">?</span><span></span>',text:'Bước 1: cộng đơn vị 6 + 7 = 13.'},
- {ones:3,tens:5,carry:true,html:'<span class="remember">nhớ 1</span><span></span><span>36</span><span></span><span>+17</span><span></span><span class="bar"></span><span></span><span class="muted">3</span><span></span>',text:'Bước 2: 13 đơn vị đổi thành 1 chục và 3 đơn vị. Viết 3, nhớ 1.'},
- {ones:3,tens:5,carry:false,html:'<span class="remember">+1</span><span></span><span>36</span><span></span><span>+17</span><span></span><span class="bar"></span><span></span><span class="result">53</span><span></span>',text:'Bước 3: cộng chục 3 + 1 + 1 nhớ = 5. Vậy 36 + 17 = 53.'}
-];
-function renderDemo(){const s=steps[step];$('#tensBox').innerHTML='';$('#onesBox').innerHTML='';for(let i=0;i<s.tens;i++){let r=document.createElement('div');r.className='rod '+(s.carry&&i==s.tens-1?'carry':'');r.style.animationDelay=i*.03+'s';$('#tensBox').appendChild(r)}for(let i=0;i<s.ones;i++){let o=document.createElement('div');o.className='one';o.style.animationDelay=i*.02+'s';$('#onesBox').appendChild(o)}$('#carryText').textContent=s.carry?'đổi 10 đơn vị → 1 chục':'';$('#verticalDemo').innerHTML=s.html;$('#stepExplain').textContent=s.text}
-function nextStep(){step=(step+1)%steps.length;renderDemo()} function prevStep(){step=(step+steps.length-1)%steps.length;renderDemo()} function autoDemo(){clearInterval(timer);step=0;renderDemo();timer=setInterval(()=>{nextStep(); if(step==2) clearInterval(timer)},1500)} renderDemo();
+function go(id){$$('.screen').forEach(s=>s.classList.remove('active'));$('#'+id).classList.add('active');$$('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));coach({map:'Chọn một đảo để luyện từng kỹ năng.',learn:'Quan sát que tính: đủ 10 đơn vị thì đổi thành 1 chục.',practice:'Đặt tính cẩn thận: đơn vị thẳng đơn vị, chục thẳng chục.',speed:'Tính nhanh nhưng đừng quên nhớ 1.',games:'Vừa chơi vừa tính. Chọn hoặc kéo thả sau khi tính.',word:'Đọc kĩ câu hỏi: cả hai, tất cả, gồm hai đoạn thường dùng phép cộng.',boss:'Boss cuối kiểm tra tổng hợp. Bình tĩnh nhé!'}[id]||'')}
+$$('#nav button').forEach(b=>b.onclick=()=>go(b.dataset.screen));
 
-const colData=[['17 + 24',41,'Cộng 7 + 4 = 11, viết 1 nhớ 1.'],['37 + 36',73,'7 + 6 = 13, viết 3 nhớ 1.'],['42 + 48',90,'2 + 8 = 10, viết 0 nhớ 1.'],['59 + 25',84,'9 + 5 = 14, viết 4 nhớ 1.'],['23 + 67',90,'3 + 7 = 10, viết 0 nhớ 1.'],['46 + 18',64,'6 + 8 = 14, viết 4 nhớ 1.'],['59 + 21',80,'9 + 1 = 10, viết 0 nhớ 1.'],['64 + 19',83,'4 + 9 = 13, viết 3 nhớ 1.']];
-function setupColumn(){const box=$('#columnTasks');box.innerHTML='';colData.forEach((d,i)=>{box.insertAdjacentHTML('beforeend',`<div class="task" id="ct${i}"><div class="eq">${d[0]} = <input data-i="${i}" inputmode="numeric"></div><div class="toolbox"><button class="btn" onclick="hintColumn(${i})">💡 Gợi ý</button><button class="btn" onclick="checkColumn(${i})">Kiểm tra</button></div><div class="feedback"></div></div>`)})}
-function hintColumn(i){setCoach(colData[i][2]); $('#ct'+i+' .feedback').innerHTML='<span class="no">Gợi ý: '+colData[i][2]+'</span>'}
-function checkColumn(i){let t=$('#ct'+i), v=Number(t.querySelector('input').value); if(v===colData[i][1]){t.className='task correct';t.querySelector('.feedback').innerHTML='<span class="ok">Đúng rồi!</span>';addScore(1)}else{t.className='task wrong';t.querySelector('.feedback').innerHTML='<span class="no">Chưa đúng. Hãy cộng đơn vị trước.</span>'}}
-function checkAllColumn(){colData.forEach((_,i)=>checkColumn(i))} function resetColumn(){setupColumn()} setupColumn();
-function updateBuilder(){let a=+$('#aRange').value,b=+$('#bRange').value;$('#aVal').textContent=a;$('#bVal').textContent=b;let sum=a+b;$('#buildVertical').innerHTML=`<span></span><span>${a}</span><span>+</span><span>${b}</span><span class="bar"></span><span></span><span class="muted">?</span>`;$('#buildFeedback').textContent=''}
-function checkBuilder(){let a=+$('#aRange').value,b=+$('#bRange').value,v=+$('#buildAns').value;if(v===a+b){$('#buildFeedback').innerHTML='<span class="ok">Tuyệt! '+a+' + '+b+' = '+v+'</span>';addScore(1)}else $('#buildFeedback').innerHTML='<span class="no">Thử lại: cộng đơn vị rồi cộng chục.</span>'} updateBuilder();
+function rint(a,b){return Math.floor(Math.random()*(b-a+1))+a}
+function makeCarryPair(){let a,b;do{a=rint(10,89);b=rint(10,89)}while(a%10+b%10<10||a+b>99);return [a,b]}
+function makeNonCarryPair(){let a,b;do{a=rint(10,89);b=rint(10,89)}while(a%10+b%10>=10||a+b>99);return [a,b]}
+function verticalHTML(a,b,show=false){let sum=a+b;let carry=(a%10+b%10)>=10;return `<span class="remember">${carry?'nhớ 1':''}</span><span></span><span>${a}</span><span></span><span>+</span><span>${b}</span><span class="bar"></span><span></span><span class="${show?'result':'muted'}">${show?sum:'?'}</span>`}
 
-const ships=[['65 + 5 = 71',false,'🚢'],['23 + 18 = 41',true,'⛴️'],['5 + 41 = 47',false,'🛳️']];
-function setupShips(){const s=$('#shipGame');s.innerHTML='';ships.forEach((x,i)=>s.insertAdjacentHTML('beforeend',`<div class="ship" data-i="${i}" onclick="this.classList.toggle('selected')"><span class="boat">${x[2]}</span><b>${x[0]}</b></div>`));$('#shipFeedback').textContent=''}
-function checkShips(){let ok=true;$$('.ship').forEach(el=>{let data=ships[+el.dataset.i];let sel=el.classList.contains('selected');el.classList.remove('correct','wrong'); if(sel===data[1]) el.classList.add('correct'); else {el.classList.add('wrong');ok=false}}); if(ok){$('#shipFeedback').innerHTML='<span class="ok">Đúng! Chỉ tàu 23 + 18 = 41 là đúng.</span>';addScore(2)}else $('#shipFeedback').innerHTML='<span class="no">Có tàu bị chọn nhầm. Tính lại từng tàu nhé.</span>'}
-function resetShips(){setupShips()} setupShips();
+/* LEARN */
+let learn={a:36,b:17,step:0,timer:null};
+function renderLearn(){
+  const a=learn.a,b=learn.b,u=a%10+b%10,t=Math.floor(a/10)+Math.floor(b/10),carry=u>=10;
+  let ones = learn.step===0 ? u : u%10;
+  let tens = learn.step<2 ? t : t+(carry?1:0);
+  $('#tensBox').innerHTML='';$('#onesBox').innerHTML='';
+  for(let i=0;i<tens;i++){let d=document.createElement('div');d.className='rod '+(learn.step===1&&carry&&i===tens-1?'pulse':'');$('#tensBox').appendChild(d)}
+  for(let i=0;i<ones;i++){let d=document.createElement('div');d.className='one';$('#onesBox').appendChild(d)}
+  $('#carryText').style.display=(learn.step===1&&carry)?'inline-block':'none'; $('#carryText').textContent='10 đơn vị → 1 chục';
+  let html=verticalHTML(a,b,learn.step===2);
+  if(learn.step===1){html=`<span class="remember">${carry?'nhớ 1':''}</span><span></span><span>${a}</span><span></span><span>+</span><span>${b}</span><span class="bar"></span><span></span><span class="muted">${u%10}</span>`}
+  $('#verticalDemo').innerHTML=html;
+  let msg= learn.step===0?`Bước 1: cộng đơn vị ${a%10} + ${b%10} = ${u}.`
+    : learn.step===1?`Bước 2: viết ${u%10}, nhớ ${carry?1:0}.`
+    :`Bước 3: cộng chục ${Math.floor(a/10)} + ${Math.floor(b/10)} + ${carry?1:0} = ${Math.floor((a+b)/10)}. Kết quả ${a+b}.`;
+  $('#stepText').textContent=msg;
+}
+function stepNext(){learn.step=(learn.step+1)%3;renderLearn()} function stepBack(){learn.step=(learn.step+2)%3;renderLearn()}
+function newLearn(){[learn.a,learn.b]=makeCarryPair();learn.step=0;renderLearn();coach('Số đã thay đổi. Bé hãy xem hàng đơn vị có đủ 10 không.')}
+function autoLearn(){clearInterval(learn.timer);learn.step=0;renderLearn();learn.timer=setInterval(()=>{stepNext();if(learn.step===2)clearInterval(learn.timer)},1300)}
+renderLearn();
 
-const matches=[['15 kg + 35 kg',50],['76 kg + 17 kg',93],['21 kg + 39 kg',60],['28 kg + 28 kg',56]];
-function setupMatch(){const area=$('#matchArea');area.innerHTML='';let values=[50,93,60,56].sort(()=>Math.random()-.5);matches.forEach((m,i)=>area.insertAdjacentHTML('beforeend',`<div class="scale" data-ans="${m[1]}">⚖️ ${m[0]}<div class="drop" ondragover="event.preventDefault()" ondrop="dropPkg(event)">Thả thùng ở đây</div></div>`));values.forEach(v=>area.insertAdjacentHTML('beforeend',`<div class="package" draggable="true" data-val="${v}" ondragstart="dragPkg(event)">📦 ${v} kg</div>`));$('#matchFeedback').textContent=''}
-function dragPkg(e){e.dataTransfer.setData('text/plain',e.target.dataset.val)} function dropPkg(e){let val=e.dataTransfer.getData('text/plain');e.currentTarget.textContent='📦 '+val+' kg';e.currentTarget.dataset.val=val;e.currentTarget.classList.add('filled')}
-function checkMatch(){let ok=true;$$('.scale').forEach(sc=>{let d=sc.querySelector('.drop'); if(+d.dataset.val!==+sc.dataset.ans) ok=false}); if(ok){$('#matchFeedback').innerHTML='<span class="ok">Ghép đúng hết rồi!</span>';addScore(2)}else $('#matchFeedback').innerHTML='<span class="no">Còn thùng chưa đúng. Tính lại tổng trên cân.</span>'} setupMatch();
+/* PRACTICE */
+const sgkPairs=[[17,24],[37,36],[42,48],[59,25],[23,67],[46,18],[59,21],[64,19],[29,31],[37,54],[15,35],[76,17],[21,39],[28,28],[15,82],[40,50],[6,90],[34,57]];
+let practice=[];
+function makePractice(mode='sgk'){
+  practice = mode==='sgk' ? sgkPairs.slice(0,12) : Array.from({length: mode==='hard'?20:12},()=>makeCarryPair());
+  const box=$('#practiceBox');box.innerHTML='';
+  practice.forEach(([a,b],i)=>box.insertAdjacentHTML('beforeend',`<div class="task" id="p${i}">
+    <div class="center"><div class="vertical">${verticalHTML(a,b,false)}</div></div>
+    <p class="center"><input class="ans" inputmode="numeric" data-i="${i}" placeholder="?"></p>
+    <div class="feedback"></div></div>`));
+  $('#practiceFeedback').textContent='';coach(mode==='sgk'?'Đây là các phép tính bám bài SGK.':'Đã tạo bộ số mới có nhớ.');
+}
+function checkPractice(){
+  let right=0;practice.forEach(([a,b],i)=>{let card=$('#p'+i),v=+card.querySelector('input').value;card.classList.remove('correct','wrong');
+    if(v===a+b){right++;card.classList.add('correct');card.querySelector('.feedback').innerHTML='<span class="ok">✓ Đúng</span>'}
+    else{card.classList.add('wrong');card.querySelector('.feedback').innerHTML=`<span class="no">Chưa đúng. ${a}+${b}=${a+b}</span>`}
+  });
+  $('#practiceFeedback').innerHTML=`Đúng ${right}/${practice.length} bài.`;
+  if(right===practice.length) reward(4); else if(right>=Math.ceil(practice.length*.7)) reward(2); else miss();
+}
+function showAnswersPractice(){practice.forEach(([a,b],i)=>{$('#p'+i).querySelector('input').value=a+b})}
+makePractice('sgk');
 
-function setupMaze(){const nums=[1,0,5,4,9,38,6,7,2];const pos=[[8,12],[55,12],[88,12],[8,40],[35,48],[28,62],[58,62],[72,62],[90,76]];let svg=`<svg viewBox="0 0 100 100"><path class="path-line" d="M2 82 H26 V68 H13 V51 H30 M4 12 H58 V37 H44 V50 H86 V76 H98"/><text x="4" y="90" font-size="7">🐿️ xuất phát</text><text x="80" y="14" font-size="7">🏠 nhà</text>`;nums.forEach((n,i)=>{svg+=`<g class="acorn" data-n="${n}" onclick="toggleAcorn(this)" transform="translate(${pos[i][0]},${pos[i][1]})"><circle r="4" fill="#92400e"/><text x="-2.8" y="2.5">${n}</text></g>`});svg+='</svg>';$('#maze').innerHTML=svg;updateMaze()}
-function toggleAcorn(g){g.classList.toggle('on');updateMaze()} function updateMaze(){let total=$$('.acorn.on').reduce((a,e)=>a+(+e.dataset.n),0);$('#mazeTotal').textContent=total}
-function checkMaze(){let arr=$$('.acorn.on').map(e=>+e.dataset.n).sort((a,b)=>a-b).join(','); if(arr==='0,1,5' && +$('#mazeTotal').textContent===6){$('#mazeFeedback').innerHTML='<span class="ok">Đúng! 1 + 0 + 5 = 6.</span>';addScore(2)}else $('#mazeFeedback').innerHTML='<span class="no">Hãy chọn đúng ba hạt 1, 0 và 5 trên đường về nhà.</span>'} setupMaze();
+/* BUILDER */
+function updateBuilder(){let a=+$('#aRange').value,b=+$('#bRange').value;$('#aTxt').textContent=a;$('#bTxt').textContent=b;$('#builder').innerHTML=verticalHTML(a,b,false);$('#builderFeedback').textContent=''}
+function forceCarry(){let [a,b]=makeCarryPair();$('#aRange').value=a;$('#bRange').value=b;updateBuilder()}
+function checkBuilder(){let a=+$('#aRange').value,b=+$('#bRange').value,v=+$('#builderAns').value;if(v===a+b){$('#builderFeedback').innerHTML=`<span class="ok">Đúng! ${a}+${b}=${v}</span>`;$('#builder').innerHTML=verticalHTML(a,b,true);reward(1)}else{$('#builderFeedback').innerHTML='<span class="no">Thử lại: cộng đơn vị trước nhé.</span>';miss()}}
+updateBuilder();
 
-const roads=[['Đường màu đỏ',48+32,'red'],['Đường màu xanh',34+34,'blue'],['Đường màu đen',32+48,'black']];
-function setupRoad(){const box=$('#roadGame');box.innerHTML='';roads.forEach((r,i)=>box.insertAdjacentHTML('beforeend',`<div class="choice" onclick="pickRoad(this,${i})"><div class="route"><b>${r[0]}</b><div class="line ${r[2]}"></div><span>${r[1]} cm</span></div></div>`))}
-function pickRoad(el,i){$$('#roadGame .choice').forEach(x=>x.classList.remove('correct','wrong')); if(roads[i][2]==='blue'){el.classList.add('correct');$('#roadFeedback').innerHTML='<span class="ok">Đúng! Đường xanh dài 68 cm, ngắn nhất.</span>';addScore(2)}else{el.classList.add('wrong');$('#roadFeedback').innerHTML='<span class="no">Chưa đúng. So sánh 80 cm, 68 cm, 80 cm.</span>'}} setupRoad();
+/* SPEED */
+let flash={},speedOn=false,speedRight=0,timerId=null,time=60;
+function newFlash(){
+  let [a,b]=makeCarryPair();let ans=a+b;let opts=[ans,ans+rint(1,5),ans-rint(1,5),ans+10].filter(x=>x>0&&x<120);
+  opts=[...new Set(opts)].sort(()=>Math.random()-.5);while(opts.length<4){let x=ans+rint(-12,12);if(x>0&&!opts.includes(x))opts.push(x)}
+  flash={a,b,ans};$('#flashExpr').textContent=`${a} + ${b}`;$('#flashOptions').innerHTML='';
+  opts.slice(0,4).forEach(o=>$('#flashOptions').insertAdjacentHTML('beforeend',`<div class="opt" onclick="pickFlash(this,${o})">${o}</div>`));
+  $('#speedFeedback').textContent='';
+}
+function pickFlash(el,o){$$('.opt').forEach(x=>x.classList.remove('good','bad'));if(o===flash.ans){el.classList.add('good');$('#speedFeedback').innerHTML='<span class="ok">Đúng!</span>';speedRight++;$('#speedRight').textContent=speedRight;reward(speedOn?1:0);setTimeout(newFlash,500)}else{el.classList.add('bad');$('#speedFeedback').innerHTML=`<span class="no">Chưa đúng. Đáp án là ${flash.ans}.</span>`;miss()}}
+function startSpeedRound(){speedOn=true;speedRight=0;time=60;$('#speedRight').textContent=0;$('#timer').textContent=time;clearInterval(timerId);newFlash();timerId=setInterval(()=>{time--;$('#timer').textContent=time;if(time<=0){clearInterval(timerId);speedOn=false;$('#speedFeedback').innerHTML=`<span class="ok">Hết giờ! Bé đúng ${speedRight} câu.</span>`;if(speedRight>=10)reward(4);else if(speedRight>=5)reward(2)}},1000)}
+newFlash();
 
-const subs=[['A','15 + 82',97],['B','40 + 50',90],['C','6 + 90',96],['D','34 + 57',91]];
-function setupSubs(){const box=$('#subSort');box.innerHTML='';subs.slice().sort(()=>Math.random()-.5).forEach(s=>box.insertAdjacentHTML('beforeend',`<div class="subcard" draggable="true" data-name="${s[0]}" ondragstart="dragSub(event)" ondragover="event.preventDefault()" ondrop="dropSub(event)"><span>🚤 ${s[0]}</span><br>${s[1]}</div>`));$('#subFeedback').textContent=''}
-let dragged=null;function dragSub(e){dragged=e.target} function dropSub(e){e.preventDefault(); if(dragged&&dragged!==e.currentTarget){const p=e.currentTarget.parentNode; p.insertBefore(dragged,e.currentTarget)}}
-function checkSubs(){const order=$$('#subSort .subcard').map(e=>e.dataset.name).join(''); if(order==='BDCA'){ $('#subFeedback').innerHTML='<span class="ok">Đúng thứ tự: B 90, D 91, C 96, A 97.</span>';addScore(2)} else $('#subFeedback').innerHTML='<span class="no">Thứ tự chưa đúng. Tính kết quả từng tàu ngầm rồi sắp xếp.</span>'} setupSubs();
+/* GAMES */
+function setupShips(){
+  const base=[[65,5,71,false],[23,18,41,true],[5,41,47,false],[37,36,73,true],[42,48,90,true],[59,25,83,false]];
+  $('#shipBox').innerHTML='';
+  base.sort(()=>Math.random()-.5).forEach((x,i)=>$('#shipBox').insertAdjacentHTML('beforeend',`<div class="car" data-ok="${x[3]}" onclick="this.classList.toggle('selected')">🚢<br>${x[0]} + ${x[1]} = ${x[2]}</div>`));
+  $('#shipFeedback').textContent='';
+}
+function checkShips(){let ok=true;$$('#shipBox .car').forEach(c=>{let good=c.dataset.ok==='true',sel=c.classList.contains('selected');c.classList.remove('correct','wrong');if(good===sel)c.classList.add('correct');else{c.classList.add('wrong');ok=false}});if(ok){$('#shipFeedback').innerHTML='<span class="ok">Cảng tàu chính xác!</span>';reward(3)}else{$('#shipFeedback').innerHTML='<span class="no">Có tàu chọn nhầm hoặc bỏ sót.</span>';miss()}}
+setupShips();
 
-function wordPick(el,good){el.parentElement.querySelectorAll('.choice').forEach(x=>x.classList.remove('correct','wrong'));el.classList.add(good?'correct':'wrong'); if(good){setCoach('Đúng: hỏi cả hai ngày nên lấy 29 cộng 31.');addScore(1)}else setCoach('Chưa đúng. Từ khóa “cả hai ngày” thường dùng phép cộng.')}
-function checkPostcard(){let v=+$('#postAns').value;if(v===60){$('#postFeedback').innerHTML='<span class="ok">Đúng: 29 + 31 = 60.</span>';addScore(1)}else $('#postFeedback').innerHTML='<span class="no">Cộng 9 + 1 = 10, viết 0 nhớ 1.</span>'}
-function checkSentence(){let v=+$('#postSentence').value;if(v===60){$('#sentenceFeedback').innerHTML='<span class="ok">Câu trả lời hoàn chỉnh rồi!</span>';addScore(1)}else $('#sentenceFeedback').innerHTML='<span class="no">Hãy điền số bằng kết quả vừa tính.</span>'}
-function checkAnt(){let v=+$('#antAns').value;if(v===91){$('#antFeedback').innerHTML='<span class="ok">Đúng! 37 + 54 = 91 cm.</span>';addScore(1)}else $('#antFeedback').innerHTML='<span class="no">Gợi ý: 7 + 4 = 11, viết 1 nhớ 1.</span>'}
+const matchData=[[15,35,50],[76,17,93],[21,39,60],[28,28,56],[37,54,91],[29,31,60]];
+function setupMatch(){
+  let rows=matchData.slice().sort(()=>Math.random()-.5).slice(0,4), vals=rows.map(r=>r[2]).sort(()=>Math.random()-.5), box=$('#matchBox');box.innerHTML='';
+  rows.forEach(r=>box.insertAdjacentHTML('beforeend',`<div class="drop" data-ans="${r[2]}" ondragover="event.preventDefault()" ondrop="dropPkg(event)">⚖️ ${r[0]} + ${r[1]}<br><small>Thả kết quả</small></div>`));
+  vals.forEach(v=>box.insertAdjacentHTML('beforeend',`<div class="pkg" draggable="true" data-val="${v}" ondragstart="dragPkg(event)">📦 ${v}</div>`));
+  $('#matchFeedback').textContent='';
+}
+function dragPkg(e){e.dataTransfer.setData('text/plain',e.currentTarget.dataset.val)}
+function dropPkg(e){let val=e.dataTransfer.getData('text/plain');e.currentTarget.dataset.val=val;e.currentTarget.innerHTML='📦 '+val;e.currentTarget.classList.add('filled')}
+function checkMatch(){let ok=true;$$('.drop').forEach(d=>{if(+d.dataset.val!==+d.dataset.ans)ok=false});if(ok){$('#matchFeedback').innerHTML='<span class="ok">Ghép đúng hết!</span>';reward(3)}else{$('#matchFeedback').innerHTML='<span class="no">Còn thùng chưa đúng.</span>';miss()}}
+setupMatch();
 
-const finalQs=[['36 + 36',72],['73 + 17',90],['28 + 53',81],['25 + 35',60],['23 + 27 + 1',51],['45 + 45 + 2',92],['58 + 12 + 3',73],['69 + 11 + 4',84]];
-function setupFinal(){const box=$('#finalQuiz');box.innerHTML='';finalQs.forEach((q,i)=>box.insertAdjacentHTML('beforeend',`<div class="qrow"><span class="eq">${i+1}. ${q[0]} = </span><input inputmode="numeric" data-i="${i}"><span class="feedback"></span></div>`))}
-function checkFinal(){let right=0;$$('#finalQuiz .qrow').forEach((r,i)=>{let v=+r.querySelector('input').value;let fb=r.querySelector('.feedback'); if(v===finalQs[i][1]){fb.innerHTML='<span class="ok">✓</span>';right++}else fb.innerHTML='<span class="no">Đáp án: '+finalQs[i][1]+'</span>'});$('#finalFeedback').innerHTML=right>=7?`<span class="ok">Xuất sắc! Đúng ${right}/8 câu.</span>`:`<span class="no">Đúng ${right}/8 câu. Hãy ôn lại bước nhớ 1.</span>`; if(right>=7)addScore(3); else if(right>=5)addScore(1)}
-function resetFinal(){setupFinal();$('#finalFeedback').textContent=''} setupFinal();
+const sortData=[['A','15+82',97],['B','40+50',90],['C','6+90',96],['D','34+57',91]];
+function setupSort(){const box=$('#sortBox');box.innerHTML='';sortData.slice().sort(()=>Math.random()-.5).forEach(s=>box.insertAdjacentHTML('beforeend',`<div class="sortItem" draggable="true" data-val="${s[2]}" ondragstart="dragSort(event)" ondragover="event.preventDefault()" ondrop="dropSort(event)">🚤 ${s[0]}<br>${s[1]}</div>`));$('#sortFeedback').textContent=''}
+let dragged=null;function dragSort(e){dragged=e.currentTarget} function dropSort(e){e.preventDefault();if(dragged&&dragged!==e.currentTarget)e.currentTarget.parentNode.insertBefore(dragged,e.currentTarget)}
+function checkSort(){let vals=$$('#sortBox .sortItem').map(x=>+x.dataset.val), ok=vals.every((v,i)=>!i||vals[i-1]<=v);if(ok){$('#sortFeedback').innerHTML='<span class="ok">Đúng thứ tự bé đến lớn!</span>';reward(3)}else{$('#sortFeedback').innerHTML='<span class="no">Chưa đúng. Tính từng tàu rồi sắp lại.</span>';miss()}}
+setupSort();
+
+/* WORDS */
+let wordProblems=[];
+function setupWords(){
+  wordProblems=[
+    {txt:'Mai làm 29 tấm bưu thiếp ngày thứ nhất và 31 tấm ngày thứ hai. Cả hai ngày Mai làm được bao nhiêu tấm?',expr:'29 + 31',ans:60,unit:'tấm'},
+    {txt:'Kiến đỏ đi hai đoạn đường 37 cm và 54 cm. Kiến đỏ bò tất cả bao nhiêu xăng-ti-mét?',expr:'37 + 54',ans:91,unit:'cm'},
+    {txt:`Lan có ${rint(18,49)} viên bi, mẹ cho thêm ${rint(12,39)} viên. Lan có tất cả bao nhiêu viên bi?`,expr:'',ans:0,unit:'viên'},
+    {txt:`Một hộp có ${rint(23,49)} cái kẹo, hộp khác có ${rint(12,39)} cái kẹo. Hai hộp có tất cả bao nhiêu cái kẹo?`,expr:'',ans:0,unit:'cái'}
+  ];
+  wordProblems.forEach(w=>{if(!w.expr){let ns=w.txt.match(/\d+/g).map(Number);w.expr=ns[0]+' + '+ns[1];w.ans=ns[0]+ns[1]}})
+  const box=$('#wordBox');box.innerHTML='';
+  wordProblems.forEach((w,i)=>box.insertAdjacentHTML('beforeend',`<div class="task" id="w${i}"><b>Bài ${i+1}</b><p>${w.txt}</p><p><span class="tag">${w.expr} = </span> <input class="ans" inputmode="numeric"></p><div class="feedback"></div></div>`));
+  $('#wordFeedback').textContent='';
+}
+function checkWords(){let right=0;wordProblems.forEach((w,i)=>{let c=$('#w'+i),v=+c.querySelector('input').value;c.classList.remove('correct','wrong');if(v===w.ans){right++;c.classList.add('correct');c.querySelector('.feedback').innerHTML=`<span class="ok">Đúng: ${w.ans} ${w.unit}</span>`}else{c.classList.add('wrong');c.querySelector('.feedback').innerHTML=`<span class="no">Đáp án: ${w.ans} ${w.unit}</span>`}});$('#wordFeedback').textContent=`Đúng ${right}/${wordProblems.length} bài.`;if(right===wordProblems.length)reward(4);else if(right>=2)reward(1);else miss()}
+setupWords();
+
+/* BOSS */
+let boss=[];
+function setupBoss(){
+  boss=[];
+  for(let i=0;i<10;i++) boss.push(makeCarryPair());
+  const box=$('#bossBox');box.innerHTML='';
+  boss.forEach(([a,b],i)=>box.insertAdjacentHTML('beforeend',`<div class="task" id="boss${i}"><div class="center"><b>Câu ${i+1}</b><br><div class="vertical">${verticalHTML(a,b,false)}</div></div><p class="center"><input class="ans" inputmode="numeric" placeholder="?"></p><div class="feedback"></div></div>`));
+  $('#bossFeedback').textContent='';
+}
+function checkBoss(){let right=0;boss.forEach(([a,b],i)=>{let c=$('#boss'+i),v=+c.querySelector('input').value;c.classList.remove('correct','wrong');if(v===a+b){right++;c.classList.add('correct');c.querySelector('.feedback').innerHTML='<span class="ok">✓</span>'}else{c.classList.add('wrong');c.querySelector('.feedback').innerHTML=`<span class="no">${a+b}</span>`}});$('#bossFeedback').innerHTML= right>=9?`<span class="ok">Chiến thắng Boss! Đúng ${right}/10.</span>`:`<span class="warn">Đúng ${right}/10. Cố thêm nhé!</span>`;if(right>=9)reward(8);else if(right>=7)reward(4);else if(right>=5)reward(2);else miss()}
+setupBoss();
 </script>
 </body>
 </html>
