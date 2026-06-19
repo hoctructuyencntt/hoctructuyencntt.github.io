@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CSSStudent - Hành trình xây dựng MyWeb</title>
+<style>
+:root{--ink:#102033;--muted:#64748b;--line:rgba(148,163,184,.34);--panel:rgba(255,255,255,.93);--blue:#2563eb;--cyan:#06b6d4;--green:#16a34a;--orange:#f97316;--purple:#7c3aed;--red:#ef4444;--soft:#eff6ff;--shadow:0 20px 50px rgba(15,23,42,.13);--radius:26px;--code:#0f172a}*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:"Segoe UI",system-ui,sans-serif;color:var(--ink);background:radial-gradient(circle at top left,rgba(37,99,235,.20),transparent 30%),radial-gradient(circle at top right,rgba(249,115,22,.18),transparent 28%),linear-gradient(135deg,#f8fbff,#edf8ff 55%,#fff7ed)}button,input,textarea,select{font-family:inherit}.app{max-width:1500px;margin:auto;padding:16px}.topbar{position:sticky;top:10px;z-index:60;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--line);border-radius:30px;background:rgba(255,255,255,.88);backdrop-filter:blur(16px);box-shadow:var(--shadow)}.brand{display:flex;gap:12px;align-items:center;min-width:280px}.logo{width:58px;height:58px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(135deg,var(--blue),var(--cyan));color:white;font-weight:950;font-size:20px;box-shadow:inset 0 -5px 0 rgba(0,0,0,.13)}h1,h2,h3{margin:0}.brand p,.small{color:var(--muted);font-size:13px;line-height:1.45}.stats{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.pill{display:inline-flex;align-items:center;gap:7px;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:#f8fafc;font-weight:850;font-size:13px;white-space:nowrap}.pill.user{background:#fff7ed;color:#9a3412}.pill.ok{background:#ecfdf5;color:#166534}.btn{border:0;border-radius:16px;padding:11px 14px;font-weight:900;color:white;background:linear-gradient(135deg,var(--blue),var(--cyan));cursor:pointer;box-shadow:0 10px 20px rgba(37,99,235,.16);transition:.18s;white-space:nowrap}.btn:hover{transform:translateY(-1px);filter:brightness(1.03)}.btn.secondary{background:linear-gradient(135deg,#ffab19,var(--orange))}.btn.success{background:linear-gradient(135deg,#22c55e,var(--green))}.btn.ghost{background:#f1f5f9;color:#334155;box-shadow:none;border:1px solid var(--line)}.btn.danger{background:linear-gradient(135deg,#fb7185,var(--red))}.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}.path{margin-top:16px;padding:14px}.path-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap;margin-bottom:12px}.progress-wrap{height:12px;background:#e2e8f0;border-radius:999px;overflow:hidden}.progress-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--green),var(--cyan),var(--blue));transition:.3s}.stage-strip{margin-top:12px;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.stage-chip{position:relative;min-height:116px;padding:13px 12px 12px 16px;border:2px solid transparent;border-radius:20px;background:#f8fafc;cursor:pointer;transition:.18s;overflow:hidden}.stage-chip:before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:#cbd5e1}.stage-chip.active{background:#eff6ff;border-color:rgba(37,99,235,.42);transform:translateY(-1px)}.stage-chip.active:before{background:var(--blue)}.stage-chip.done{background:#f0fdf4}.stage-chip.done:before{background:var(--green)}.stage-chip.preview{opacity:.72}.stage-chip b{display:block;line-height:1.25;font-size:14px}.stage-chip span{display:block;margin-top:7px;color:var(--muted);font-size:12px;line-height:1.35}.workspace{margin-top:16px;display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:16px}.screen-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap;padding:16px 18px;border-bottom:1px solid var(--line)}.screen-head h2{font-size:22px}.actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}.main-body{padding:16px;display:grid;gap:16px}.mentor{border:1px solid var(--line);border-radius:22px;background:linear-gradient(rgba(255,255,255,.78),rgba(255,255,255,.78)),radial-gradient(circle at top left,rgba(37,99,235,.13),transparent 26%),radial-gradient(circle at bottom right,rgba(249,115,22,.13),transparent 26%);overflow:hidden}.chat-body{height:150px;overflow:auto;padding:14px}.msg{display:flex;gap:10px;margin-bottom:12px}.msg.user{flex-direction:row-reverse}.avatar{width:38px;height:38px;border-radius:14px;display:grid;place-items:center;flex:0 0 auto}.bot .avatar{background:linear-gradient(135deg,#ffab19,var(--orange))}.user .avatar{background:linear-gradient(135deg,var(--blue),var(--cyan));color:white}.bubble{max-width:88%;padding:12px 14px;border-radius:18px;line-height:1.5;font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere}.bot .bubble{background:white;border:1px solid rgba(148,163,184,.25);border-top-left-radius:6px}.user .bubble{background:#dbeafe;border:1px solid rgba(59,130,246,.25);border-top-right-radius:6px}.panel{border:1px solid var(--line);border-radius:22px;background:white;overflow:hidden}.panel-title{padding:13px 15px;border-bottom:1px solid var(--line);background:#f8fafc;display:flex;justify-content:space-between;gap:10px;align-items:center}.panel-title h3{font-size:16px}.form-grid{display:grid;gap:12px;padding:16px}.field{display:grid;gap:7px}label{font-weight:850;font-size:14px}input,textarea{border:1px solid rgba(148,163,184,.48);border-radius:15px;padding:12px 13px;background:#f8fafc;outline:none;color:var(--ink)}input:focus,textarea:focus{border-color:var(--blue);background:white;box-shadow:0 0 0 4px rgba(37,99,235,.12)}textarea{resize:vertical;min-height:96px;line-height:1.45}.repo-grid{display:grid;grid-template-columns:1fr;gap:10px}.editors{display:grid;grid-template-columns:1fr 1fr;gap:14px}.codebox{border:1px solid rgba(15,23,42,.18);border-radius:20px;overflow:hidden;background:var(--code)}.codebar{padding:10px 13px;background:#111827;color:#dbeafe;font-size:13px;font-weight:850;display:flex;justify-content:space-between;gap:10px}.codebox textarea{width:100%;min-height:430px;border:0;border-radius:0;background:var(--code);color:#dbeafe;font-family:Consolas,Monaco,"Courier New",monospace;font-size:13px;line-height:1.5;padding:14px;box-shadow:none}.preview{width:100%;height:430px;border:1px solid var(--line);border-radius:20px;background:white}.feedback{padding:13px 14px;border-radius:18px;border:1px solid var(--line);background:#f8fafc;color:#475569;line-height:1.45}.feedback.good{background:#f0fdf4;color:#166534;border-color:rgba(34,197,94,.35)}.feedback.bad{background:#fff1f2;color:#9f1239;border-color:rgba(244,63,94,.35)}.checklist{display:grid;gap:7px}.check-item{display:flex;gap:8px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:13px;background:#f8fafc;color:#475569;font-size:13px}.check-item.ok{background:#f0fdf4;color:#166534}.check-item.bad{background:#fff1f2;color:#9f1239}.side-body{padding:16px;display:grid;gap:14px}.brief-card{border:1px solid var(--line);border-radius:22px;background:white;padding:15px}.brief-card p,.brief-card li{color:var(--muted);line-height:1.45;font-size:14px}.brief-card ul{padding-left:18px;margin:8px 0 0}.timeline{display:grid;gap:8px;max-height:360px;overflow:auto}.time-row{display:grid;grid-template-columns:1fr auto;gap:8px;border:1px solid var(--line);border-radius:13px;background:#f8fafc;padding:9px;font-size:12px}.login{position:fixed;inset:0;z-index:300;display:flex;justify-content:center;align-items:center;background:rgba(15,23,42,.68);padding:20px}.login.hide{display:none}.login-box{width:min(650px,100%);background:white;border-radius:30px;padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.25)}.notice{border-radius:16px;background:#fff7ed;color:#9a3412;padding:12px 14px;line-height:1.45;font-size:14px;margin:12px 0}.source-link{display:inline-flex;gap:6px;align-items:center;padding:7px 10px;border-radius:999px;background:#eff6ff;color:#1d4ed8;text-decoration:none;font-weight:850;font-size:12px}.summary-table{width:100%;border-collapse:collapse}.summary-table th,.summary-table td{border-bottom:1px solid var(--line);padding:8px;text-align:left;font-size:13px}.mini-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:#f5f3ff;color:#6d28d9;font-weight:900;font-size:12px}@media(max-width:1220px){.workspace{grid-template-columns:1fr}.stage-strip{grid-template-columns:repeat(2,1fr)}}@media(max-width:820px){.topbar{position:static;align-items:flex-start;flex-direction:column}.editors{grid-template-columns:1fr}.stage-strip{grid-template-columns:1fr}.preview{height:360px}.codebox textarea{min-height:340px}.app{padding:10px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="logo">CSS</div><div><h1>CSSStudent</h1><p>Hành trình xây dựng 1 website hoàn chỉnh · Repo bắt buộc: MyWeb/html, MyWeb/img, MyWeb/css</p></div></div>
+    <div class="stats">
+      <div class="pill user">👤 <span id="studentName">Chưa đăng nhập</span></div>
+      <div class="pill ok">✅ <span id="doneCount">0/10</span></div>
+      <div class="pill">⌨️ HTML: <span id="htmlChars">0</span></div>
+      <div class="pill">🎨 CSS: <span id="cssChars">0</span></div>
+      <div class="pill">🖼️ Ảnh: <span id="imageCount">0</span></div>
+      <div class="pill">📄 PDF: <span id="pdfClicks">0</span></div>
+      <button class="btn ghost" onclick="syncNow()">☁️ Đồng bộ</button>
+      <button class="btn success" onclick="restoreFromServer()">♻️ Khôi phục từ Server</button>
+      <button class="btn danger" onclick="logoutOnly()">Đổi người học</button>
+    </div>
+  </header>
+
+  <section class="card path">
+    <div class="path-head">
+      <div><h2>🗺️ 10 chặng xây dựng MyWeb bằng CSS</h2><p class="small">Có thể bấm xem mọi chặng. Tuy nhiên chỉ được nộp/cập nhật khi đã hoàn thành chặng trước. Từ chặng 1 trở đi, mã HTML/CSS luôn kế thừa sản phẩm ở chặng trước.</p></div>
+      <button class="btn ghost" onclick="resetProgress()">↻ Xóa tiến trình người học này</button>
+    </div>
+    <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+    <div class="stage-strip" id="stageStrip"></div>
+  </section>
+
+  <main class="workspace">
+    <section class="card">
+      <div class="screen-head"><div><h2 id="screenTitle">CSS Journey</h2><p id="screenSub">Đăng nhập để bắt đầu.</p></div><div class="actions"><button class="btn secondary" onclick="loadStarter()">Nạp mã gợi ý</button><button class="btn ghost" onclick="updatePreview()">Xem trước</button><button class="btn" onclick="submitCurrentStage()" id="submitBtn">Nộp bài</button></div></div>
+      <div class="main-body">
+        <section class="mentor"><div class="chat-body" id="chatBody"></div></section>
+        <section id="stageBox"></section>
+      </div>
+    </section>
+    <aside class="card"><div class="side-body">
+      <div class="brief-card"><h3 id="briefTitle">Nội dung</h3><p id="briefText"></p><p><a class="source-link" href="https://hoctructuyencntt.github.io/bai02tkweb.pdf" target="_blank" rel="noopener" onclick="trackPdfOpen()">📄 Mở PDF Bài 2 CSS</a></p></div>
+      <div class="brief-card"><h3>📌 Quy tắc nghiêm ngặt</h3><ul><li>Repo phải tên đúng <b>MyWeb</b>, phân biệt hoa/thường.</li><li>3 link thư mục phải đúng dạng <b>https://github.com/abc/MyWeb/html</b>, <b>/img</b>, <b>/css</b>.</li><li>Chỉ <b>abc</b> được thay đổi theo tài khoản cá nhân; phần còn lại kiểm tra nghiêm ngặt.</li><li>Mỗi chặng phải có mô tả ảnh, mã HTML, mã CSS và nhập lại đúng 3 link.</li><li>Dữ liệu được lưu cục bộ, đồng bộ server và phục hồi qua snapshot tiến trình đầy đủ.</li></ul></div>
+      <div class="brief-card"><h3>🕒 Tiến trình</h3><div class="timeline" id="timeline"></div></div>
+    </div></aside>
+  </main>
+</div>
+
+<div class="login" id="login"><div class="login-box"><h2>Đăng nhập người học</h2><p class="small">Nhập họ tên và mã làm bài. Cặp thông tin này dùng để lưu/khôi phục tiến trình cục bộ và trên Server.</p><div class="notice" id="loginNotice">Mã làm bài có thể là mã sinh viên, mã lớp hoặc mã do giáo viên cấp.</div><div class="form-grid"><label>Họ và tên</label><input id="loginName" placeholder="Ví dụ: Nguyễn Văn An"><label>Mã làm bài</label><input id="loginCode" placeholder="Ví dụ: CSS01-AN"><button class="btn success" onclick="loginStudent()">Bắt đầu / Làm tiếp</button></div></div></div>
+
+<script>
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby9dKT3b8gzCZDH8lLvpeXjZ80cVGegOLD3tIY1EuMLyCtZ6Rh0k2Eg7EtG7R93kpPjhQ/exec";
+const COURSE_NAME = "CSS Learning Journey - Bài 2: Định dạng và bố cục với CSS";
+const PDF_SOURCE = "https://hoctructuyencntt.github.io/bai02tkweb.pdf";
+const STAGES = [
+  {
+    "id": "setup",
+    "title": "0. Mở đầu - Repo MyWeb",
+    "icon": "🚀",
+    "goal": "Tạo repo GitHub cá nhân tên MyWeb, bên trong có đúng 3 thư mục html, img, css và nộp đủ 3 link thư mục.",
+    "sourceFocus": "Cấu trúc dự án, tách HTML/CSS/ảnh.",
+    "imageMin": 0,
+    "htmlMust": [],
+    "cssMust": []
+  },
+  {
+    "id": "stage-1",
+    "title": "1. Gắn CSS ngoài",
+    "icon": "🔗",
+    "goal": "Viết tệp HTML đầu tiên trong thư mục html và liên kết tới ../css/style.css. CSS dùng selector cơ bản để định dạng nền, chữ và liên kết.",
+    "sourceFocus": "2.1.1-2.1.2: selector, declaration block và CSS tệp ngoài.",
+    "imageMin": 1,
+    "imageGuide": "Tối thiểu 1 ảnh đại diện, ví dụ hero.jpg 1600x900.",
+    "htmlFile": "index.html",
+    "cssFile": "style.css",
+    "htmlTemplate": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>MyWeb - 1. Gắn CSS ngoài</title>\n  <link rel=\"stylesheet\" href=\"../css/style.css\">\n</head>\n<body>\n<header class=\"site-header\" id=\"top\">\n  <div class=\"brand\">MyWeb</div>\n  <nav class=\"main-nav\" aria-label=\"Điều hướng chính\">\n    <a href=\"#hero\">Trang chủ</a>\n    <a href=\"#about\">Giới thiệu</a>\n    <a href=\"#gallery\">Thư viện</a>\n    <a href=\"#contact\">Liên hệ</a>\n  </nav>\n</header>\n\n<main>\n  <section class=\"hero\" id=\"hero\">\n    <p class=\"eyebrow\">Website cá nhân theo chủ đề tự chọn</p>\n    <h1 id=\"main-title\">Hành trình xây dựng MyWeb</h1>\n    <p class=\"intro\">Thay nội dung này bằng chủ đề cá nhân của em: du lịch, ẩm thực, âm nhạc, thể thao, công nghệ, học tập hoặc một sở thích riêng.</p>\n    <a class=\"primary-button\" href=\"#about\">Khám phá chủ đề</a>\n  </section>\n</main>\n</body>\n</html>",
+    "cssTemplate": "/* Chặng 1: liên kết CSS ngoài và selector cơ bản */\n* {\n  box-sizing: border-box;\n}\n\nbody {\n  margin: 0;\n  font-family: Arial, sans-serif;\n  color: #1f2937;\n  background-color: #f8fafc;\n}\n\nh1, h2, h3, p {\n  margin-top: 0;\n}\n\na {\n  color: #2563eb;\n}\n",
+    "htmlMust": [
+      "<!DOCTYPE html>",
+      "<link rel=\"stylesheet\" href=\"../css/style.css\"",
+      "<main",
+      "class=\"hero\""
+    ],
+    "cssMust": [
+      "box-sizing",
+      "body",
+      "font-family",
+      "background-color"
+    ]
+  },
+  {
+    "id": "stage-2",
+    "title": "2. Selector, class, id",
+    "icon": "🎯",
+    "goal": "Mở rộng HTML với header, nav, about. CSS dùng selector theo thẻ, class, id và selector kết hợp.",
+    "sourceFocus": "2.1: selector, cascade, kế thừa và lỗi thường gặp.",
+    "imageMin": 1,
+    "imageGuide": "Tối thiểu 1 ảnh liên quan chủ đề; ghi rõ tên file và kích thước.",
+    "htmlFile": "index.html",
+    "cssFile": "style.css",
+    "htmlTemplate": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>MyWeb - 2. Selector, class, id</title>\n  <link rel=\"stylesheet\" href=\"../css/style.css\">\n</head>\n<body>\n<header class=\"site-header\" id=\"top\">\n  <div class=\"brand\">MyWeb</div>\n  <nav class=\"main-nav\" aria-label=\"Điều hướng chính\">\n    <a href=\"#hero\">Trang chủ</a>\n    <a href=\"#about\">Giới thiệu</a>\n    <a href=\"#gallery\">Thư viện</a>\n    <a href=\"#contact\">Liên hệ</a>\n  </nav>\n</header>\n\n<main>\n  <section class=\"hero\" id=\"hero\">\n    <p class=\"eyebrow\">Website cá nhân theo chủ đề tự chọn</p>\n    <h1 id=\"main-title\">Hành trình xây dựng MyWeb</h1>\n    <p class=\"intro\">Thay nội dung này bằng chủ đề cá nhân của em: du lịch, ẩm thực, âm nhạc, thể thao, công nghệ, học tập hoặc một sở thích riêng.</p>\n    <a class=\"primary-button\" href=\"#about\">Khám phá chủ đề</a>\n  </section>\n\n  <section class=\"section about-section\" id=\"about\">\n    <h2>Giới thiệu chủ đề</h2>\n    <p>Viết 2 đến 3 đoạn giới thiệu vì sao em chọn chủ đề này, đối tượng người xem là ai và website đem lại giá trị gì.</p>\n    <ul class=\"topic-list\">\n      <li>Điểm nổi bật 1 của chủ đề cá nhân.</li>\n      <li>Điểm nổi bật 2 gắn với hình ảnh minh họa.</li>\n      <li>Điểm nổi bật 3 thể hiện phong cách riêng.</li>\n    </ul>\n  </section>\n</main>\n</body>\n</html>",
+    "cssTemplate": "/* Chặng 1: liên kết CSS ngoài và selector cơ bản */\n* {\n  box-sizing: border-box;\n}\n\nbody {\n  margin: 0;\n  font-family: Arial, sans-serif;\n  color: #1f2937;\n  background-color: #f8fafc;\n}\n\nh1, h2, h3, p {\n  margin-top: 0;\n}\n\na {\n  color: #2563eb;\n}\n\n\n/* Chặng 2: class, id, selector kết hợp và cascade */\n.site-header {\n  padding: 18px 8%;\n  background-color: #ffffff;\n  border-bottom: 1px solid #e5e7eb;\n}\n\n.brand {\n  font-weight: 800;\n  font-size: 24px;\n}\n\n.main-nav a {\n  margin-right: 16px;\n  text-decoration: none;\n  font-weight: 700;\n}\n\n#main-title {\n  color: #1d4ed8;\n}\n",
+    "htmlMust": [
+      "<!DOCTYPE html>",
+      "<link rel=\"stylesheet\" href=\"../css/style.css\"",
+      "<main",
+      "class=\"hero\"",
+      "class=\"site-header\"",
+      "class=\"main-nav\"",
+      "id=\"about\"",
+      "class=\"topic-list\""
+    ],
+    "cssMust": [
+      "box-sizing",
+      "body",
+      "font-family",
+      "background-color",
+      ".site-header",
+      ".main-nav a",
+      "#main-title",
+      "text-decoration"
+    ]
+  },
+  {
+    "id": "stage-3",
+    "title": "3. Màu sắc và nền",
+    "icon": "🎨",
+    "goal": "Xây dựng bảng phong cách theo chủ đề cá nhân: màu chính, màu nhấn, nền, nút kêu gọi hành động.",
+    "sourceFocus": "2.2.1: color, background-color, giá trị màu và nhận diện thị giác.",
+    "imageMin": 2,
+    "imageGuide": "Tối thiểu 2 ảnh để hỗ trợ bảng màu và cảm hứng thiết kế.",
+    "htmlFile": "index.html",
+    "cssFile": "style.css",
+    "htmlTemplate": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>MyWeb - 3. Màu sắc và nền</title>\n  <link rel=\"stylesheet\" href=\"../css/style.css\">\n</head>\n<body>\n<header class=\"site-header\" id=\"top\">\n  <div class=\"brand\">MyWeb</div>\n  <nav class=\"main-nav\" aria-label=\"Điều hướng chính\">\n    <a href=\"#hero\">Trang chủ</a>\n    <a href=\"#about\">Giới thiệu</a>\n    <a href=\"#gallery\">Thư viện</a>\n    <a href=\"#contact\">Liên hệ</a>\n  </nav>\n</header>\n\n<main>\n  <section class=\"hero\" id=\"hero\">\n    <p class=\"eyebrow\">Website cá nhân theo chủ đề tự chọn</p>\n    <h1 id=\"main-title\">Hành trình xây dựng MyWeb</h1>\n    <p class=\"intro\">Thay nội dung này bằng chủ đề cá nhân của em: du lịch, ẩm thực, âm nhạc, thể thao, công nghệ, học tập hoặc một sở thích riêng.</p>\n    <a class=\"primary-button\" href=\"#about\">Khám phá chủ đề</a>\n  </section>\n\n  <section class=\"section about-section\" id=\"about\">\n    <h2>Giới thiệu chủ đề</h2>\n    <p>Viết 2 đến 3 đoạn giới thiệu vì sao em chọn chủ đề này, đối tượng người xem là ai và website đem lại giá trị gì.</p>\n    <ul class=\"topic-list\">\n      <li>Điểm nổi bật 1 của chủ đề cá nhân.</li>\n      <li>Điểm nổi bật 2 gắn với hình ảnh minh họa.</li>\n      <li>Điểm nổi bật 3 thể hiện phong cách riêng.</li>\n    </ul>\n  </section>\n\n  <section class=\"section style-guide\" id=\"style-guide\">\n    <h2>Bảng phong cách</h2>\n    <div class=\"swatches\">\n      <div class=\"swatch swatch-primary\">Màu chính</div>\n      <div class=\"swatch swatch-accent\">Màu nhấn</div>\n      <div class=\"swatch swatch-soft\">Nền nhẹ</div>\n    </div>\n  </section>\n</main>\n</body>\n</html>",
+    "cssTemplate": "/* Chặng 1: liên kết CSS ngoài và selector cơ bản */\n* {\n  box-sizing: border-box;\n}\n\nbody {\n  margin: 0;\n  font-family: Arial, sans-serif;\n  color: #1f2937;\n  background-color: #f8fafc;\n}\n\nh1, h2, h3, p {\n  margin-top: 0;\n}\n\na {\n  color: #2563eb;\n}\n\n\n/* Chặng 2: class, id, selector kết hợp và cascade */\n.site-header {\n  padding: 18px 8%;\n  background-color: #ffffff;\n  border-bottom: 1px solid #e5e7eb;\n}\n\n.brand {\n  font-weight: 800;\n  font-size: 24px;\n}\n\n.main-nav a {\n  margin-right: 16px;\n  text-decoration: none;\n  font-weight: 700;\n}\n\n#main-title {\n  color: #1d4ed8;\n}\n\n\n/* Chặng 3: màu sắc, nền và phong cách nhận diện */\n:root {\n  --primary: #2563eb;\n  --accent: #f97316;\n  --soft: #eff6ff;\n  --dark: #111827;\n}\n\n.hero {\n  padding: 80px 8%;\n  color: white;\n  background: linear-gradient(135deg, var(--primary), #06b6d4);\n}\n\n.primary-button {\n  display: inline-block;\n  padding: 12px 18px;\n  background-color: var(--accent);\n  color: #fff;\n  border-radius: 999px;\n  text-decoration: none;\n}\n\n.swatches {\n  display: flex;\n  gap: 12px;\n}\n\n.swatch {\n  padding: 18px;\n  border-radius: 16px;\n  color: white;\n}\n\n.swatch-primary { background-color: var(--primary); }\n.swatch-accent { background-color: var(--accent); }\n.swatch-soft { color: var(--dark); background-color: var(--soft); }\n",
+    "htmlMust": [
+      "<!DOCTYPE html>",
+      "<link rel=\"stylesheet\" href=\"../css/style.css\"",
+      "<main",
+      "class=\"hero\"",
+      "class=\"site-header\"",
+      "class=\"main-nav\"",
+      "id=\"about\"",
+      "class=\"topic-list\"",
+      "id=\"style-guide\"",
+      "class=\"swatches\"",
+      "class=\"primary-button\""
+    ],
+    "cssMust": [
+      "box-sizing",
+      "body",
+      "font-family",
+      "background-color",
+      ".site-header",
+      ".main-nav a",
+      "#main-title",
+      "text-decoration",
+      ":root",
+      "--primary",
+      "linear-gradient",
+      "border-radius"
+    ]
+  },
+  {
+    "id": "stage-4",
+    "title": "4. Typography",
+    "icon": "🔤",
+    "goal": "Hoàn thiện hệ thống chữ: font-family, font-size, font-weight, text-align, line-height cho tiêu đề, đoạn văn, trích dẫn.",
+    "sourceFocus": "2.2.1: định dạng văn bản, căn chỉnh, line-height.",
+    "imageMin": 2,
+    "imageGuide": "Tối thiểu 2 ảnh minh họa nội dung/câu chuyện.",
+    "htmlFile": "index.html",
+    "cssFile": "style.css",
+    "htmlTemplate": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>MyWeb - 4. Typography</title>\n  <link rel=\"stylesheet\" href=\"../css/style.css\">\n</head>\n<body>\n<header class=\"site-header\" id=\"top\">\n  <div class=\"brand\">MyWeb</div>\n  <nav class=\"main-nav\" aria-label=\"Điều hướng chính\">\n    <a href=\"#hero\">Trang chủ</a>\n    <a href=\"#about\">Giới thiệu</a>\n    <a href=\"#gallery\">Thư viện</a>\n    <a href=\"#contact\">Liên hệ</a>\n  </nav>\n</header>\n\n<main>\n  <section class=\"hero\" id=\"hero\">\n    <p class=\"eyebrow\">Website cá nhân theo chủ đề tự chọn</p>\n    <h1 id=\"main-title\">Hành trình xây dựng MyWeb</h1>\n    <p class=\"intro\">Thay nội dung này bằng chủ đề cá nhân của em: du lịch, ẩm thực, âm nhạc, thể thao, công nghệ, học tập hoặc một sở thích riêng.</p>\n    <a class=\"primary-button\" href=\"#about\">Khám phá chủ đề</a>\n  </section>\n\n  <section class=\"section about-section\" id=\"about\">\n    <h2>Giới thiệu chủ đề</h2>\n    <p>Viết 2 đến 3 đoạn giới thiệu vì sao em chọn chủ đề này, đối tượng người xem là ai và website đem lại giá trị gì.</p>\n    <ul class=\"topic-list\">\n      <li>Điểm nổi bật 1 của chủ đề cá nhân.</li>\n      <li>Điểm nổi bật 2 gắn với hình ảnh minh họa.</li>\n      <li>Điểm nổi bật 3 thể hiện phong cách riêng.</li>\n    </ul>\n  </section>\n\n  <section class=\"section style-guide\" id=\"style-guide\">\n    <h2>Bảng phong cách</h2>\n    <div class=\"swatches\">\n      <div class=\"swatch swatch-primary\">Màu chính</div>\n      <div class=\"swatch swatch-accent\">Màu nhấn</div>\n      <div class=\"swatch swatch-soft\">Nền nhẹ</div>\n    </div>\n  </section>\n\n  <section class=\"section story-section\" id=\"story\">\n    <h2>Câu chuyện chính</h2>\n    <p class=\"lead\">Đoạn mở đầu cần có giọng văn rõ ràng, dễ đọc và phù hợp với người xem mục tiêu.</p>\n    <blockquote>\"Một website tốt không chỉ đẹp, mà còn dễ đọc, dễ dùng và nhất quán.\"</blockquote>\n  </section>\n</main>\n</body>\n</html>",
+    "cssTemplate": "/* Chặng 1: liên kết CSS ngoài và selector cơ bản */\n* {\n  box-sizing: border-box;\n}\n\nbody {\n  margin: 0;\n  font-family: Arial, sans-serif;\n  color: #1f2937;\n  background-color: #f8fafc;\n}\n\nh1, h2, h3, p {\n  margin-top: 0;\n}\n\na {\n  color: #2563eb;\n}\n\n\n/* Chặng 2: class, id, selector kết hợp và cascade */\n.site-header {\n  padding: 18px 8%;\n  background-color: #ffffff;\n  border-bottom: 1px solid #e5e7eb;\n}\n\n.brand {\n  font-weight: 800;\n  font-size: 24px;\n}\n\n.main-nav a {\n  margin-right: 16px;\n  text-decoration: none;\n  font-weight: 700;\n}\n\n#main-title {\n  color: #1d4ed8;\n}\n\n\n/* Chặng 3: màu sắc, nền và phong cách nhận diện */\n:root {\n  --primary: #2563eb;\n  --accent: #f97316;\n  --soft: #eff6ff;\n  --dark: #111827;\n}\n\n.hero {\n  padding: 80px 8%;\n  color: white;\n  background: linear-gradient(135deg, var(--primary), #06b6d4);\n}\n\n.primary-button {\n  display: inline-block;\n  padding: 12px 18px;\n  background-color: var(--accent);\n  color: #fff;\n  border-radius: 999px;\n  text-decoration: none;\n}\n\n.swatches {\n  display: flex;\n  gap: 12px;\n}\n\n.swatch {\n  padding: 18px;\n  border-radius: 16px;\n  color: white;\n}\n\n.swatch-primary { background-color: var(--primary); }\n.swatch-accent { background-color: var(--accent); }\n.swatch-soft { color: var(--dark); background-color: var(--soft); }\n\n\n/* Chặng 4: typography, căn chỉnh, line-height */\n.section {\n  padding: 56px 8%;\n}\n\nh1 {\n  font-size: clamp(36px, 6vw, 72px);\n  line-height: 1.05;\n}\n\nh2 {\n  font-size: 32px;\n  color: var(--dark);\n  text-align: center;\n}\n\np, li {\n  font-size: 18px;\n  line-height: 1.7;\n}\n\n.lead {\n  font-size: 22px;\n  font-weight: 600;\n}\n\nblockquote {\n  font-size: 24px;\n  font-style: italic;\n  text-align: center;\n}\n",
+    "htmlMust": [
+      "<!DOCTYPE html>",
+      "<link rel=\"stylesheet\" href=\"../css/style.css\"",
+      "<main",
+      "class=\"hero\"",
+      "class=\"site-header\"",
+      "class=\"main-nav\"",
+      "id=\"about\"",
+      "class=\"topic-list\"",
+      "id=\"style-guide\"",
+      "class=\"swatches\"",
+      "class=\"primary-button\"",
+      "class=\"lead\"",
+      "<blockquote",
+      "id=\"story\""
+    ],
+    "cssMust": [
+      "box-sizing",
+      "body",
+      "font-family",
+      "background-color",
+      ".site-header",
+      ".main-nav a",
+      "#main-title",
+      "text-decoration",
+      ":root",
+      "--primary",
+      "linear-gradient",
+      "border-radius",
+      "font-size",
+      "line-height",
+      "text-align",
+      "blockquote"
+    ]
+  },
+  {
+    "id": "stage-5",
+    "title": "5. Box model và card",
+    "icon": "📦",
+    "goal": "Tạo các khối nội dung/card rõ ràng bằng padding, margin, border, border-radius, box-shadow, box-sizing.",
+    "sourceFocus": "2.2.2-2.2.3: content, padding, border, margin, box-sizing.",
+    "imageMin": 2,
+    "imageGuide": "Tối thiểu 2 ảnh cho các card nội dung.",
+    "htmlFile": "index.html",
+    "cssFile": "style.css",
+    "htmlTemplate": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>MyWeb - 5. Box model và card</title>\n  <link rel=\"stylesheet\" href=\"../css/style.css\">\n</head>\n<body>\n<header class=\"site-header\" id=\"top\">\n  <div class=\"brand\">MyWeb</div>\n  <nav class=\"main-nav\" aria-label=\"Điều hướng chính\">\n    <a href=\"#hero\">Trang chủ</a>\n    <a href=\"#about\">Giới thiệu</a>\n    <a href=\"#gallery\">Thư viện</a>\n    <a href=\"#contact\">Liên hệ</a>\n  </nav>\n</header>\n\n<main>\n  <section class=\"hero\" id=\"hero\">\n    <p class=\"eyebrow\">Website cá nhân theo chủ đề tự chọn</p>\n    <h1 id=\"main-title\">Hành trình xây dựng MyWeb</h1>\n    <p class=\"intro\">Thay nội dung này bằng chủ đề cá nhân của em: du lịch, ẩm thực, âm nhạc, thể thao, công nghệ, học tập hoặc một sở thích riêng.</p>\n    <a class=\"primary-button\" href=\"#about\">Khám phá chủ đề</a>\n  </section>\n\n  <section class=\"section about-section\" id=\"about\">\n    <h2>Giới thiệu chủ đề</h2>\n    <p>Viết 2 đến 3 đoạn giới thiệu vì sao em chọn chủ đề này, đối tượng người xem là ai và website đem lại giá trị gì.</p>\n    <ul class=\"topic-list\">\n      <li>Điểm nổi bật 1 của chủ đề cá nhân.</li>\n      <li>Điểm nổi bật 2 gắn với hình ảnh minh họa.</li>\n      <li>Điểm nổi bật 3 thể hiện phong cách riêng.</li>\n    </ul>\n  </section>\n\n  <section class=\"section style-guide\" id=\"style-guide\">\n    <h2>Bảng phong cách</h2>\n    <div class=\"swatches\">\n      <div class=\"swatch swatch-primary\">Màu chính</div>\n      <div class=\"swatch swatch-accent\">Màu nhấn</div>\n      <div class=\"swatch swatch-soft\">Nền nhẹ</div>\n    </div>\n  </section>\n\n  <section class=\"section story-section\" id=\"story\">\n    <h2>Câu chuyện chính</h2>\n    <p class=\"lead\">Đoạn mở đầu cần có giọng văn rõ ràng, dễ đọc và phù hợp với người xem mục tiêu.</p>\n    <blockquote>\"Một website tốt không chỉ đẹp, mà còn dễ đọc, dễ dùng và nhất quán.\"</blockquote>\n  </section>\n\n  <section class=\"section feature-section\" id=\"features\">\n    <h2>Nội dung nổi bật</h2>\n    <div class=\"card-row\">\n      <article class=\"feature-card\"><h3>Mục 1</h3><p>Mô tả nội dung nổi bật đầu tiên.</p></article>\n      <article class=\"feature-card\"><h3>Mục 2</h3><p>Mô tả nội dung nổi bật thứ hai.</p></article>\n      <article class=\"feature-card\"><h3>Mục 3</h3><p>Mô tả nội dung nổi bật thứ ba.</p></article>\n    </div>\n  </section>\n</main>\n</body>\n</html>",
+    "cssTemplate": "/* Chặng 1: liên kết CSS ngoài và selector cơ bản */\n* {\n  box-sizing: border-box;\n}\n\nbody {\n  margin: 0;\n  font-family: Arial, sans-serif;\n  color: #1f2937;\n  background-color: #f8fafc;\n}\n\nh1, h2, h3, p {\n  margin-top: 0;\n}\n\na {\n  color: #2563eb;\n}\n\n\n/* Chặng 2: class, id, selector kết hợp và cascade */\n.site-header {\n  padding: 18px 8%;\n  background-color: #ffffff;\n  border-bottom: 1px solid #e5e7eb;\n}\n\n.brand {\n  font-weight: 800;\n  font-size: 24px;\n}\n\n.main-nav a {\n  margin-right: 16px;\n  text-decoration: none;\n  font-weight: 700;\n}\n\n#main-title {\n  color: #1d4ed8;\n}\n\n\n/* Chặng 3: màu sắc, nền và phong cách nhận diện */\n:root {\n  --primary: #2563eb;\n  --accent: #f97316;\n  --soft: #eff6ff;\n  --dark: #111827;\n}\n\n.hero {\n  padding: 80px 8%;\n  color: white;\n  background: linear-gradient(135deg, var(--primary), #06b6d4);\n}\n\n.primary-button {\n  display: inline-block;\n  padding: 12px 18px;\n  background-color: var(--accent);\n  color: #fff;\n  border-radius: 999px;\n  text-decoration: none;\n}\n\n.swatches {\n  display: flex;\n  gap: 12px;\n}\n\n.swatch {\n  padding: 18px;\n  border-radius: 16px;\n  color: white;\n}\n\n.swatch-primary { background-color: var(--primary); }\n.swatch-accent { background-color: var(--accent); }\n.swatch-soft { color: var(--dark); background-color: var(--soft); }\n\n\n/* Chặng 4: typography, căn chỉnh, line-height */\n.section {\n  padding: 56px 8%;\n}\n\nh1 {\n  font-size: clamp(36px, 6vw, 72px);\n  line-height: 1.05;\n}\n\nh2 {\n  font-size: 32px;\n  color: var(--dark);\n  text-align: center;\n}\n\np, li {\n  font-size: 18px;\n  line-height: 1.7;\n}\n\n.lead {\n  font-size: 22px;\n  font-weight: 600;\n}\n\nblockquote {\n  font-size: 24px;\n  font-style: italic;\n  text-align: center;\n}\n\n\n/* Chặng 5: box model, padding, margin, border, card */\n.about-section, .story-section, .feature-section {\n  max-width: 1100px;\n  margin: 0 auto;\n}\n\n.card-row {\n  display: block;\n}\n\n.feature-card {\n  margin: 18px 0;\n  padding: 24px;\n  border: 1px solid #dbe3ef;\n  border-radius: 22px;\n  background-color: #ffffff;\n  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);\n}\n",
+    "htmlMust": [
+      "<!DOCTYPE html>",
+      "<link rel=\"stylesheet\" href=\"../css/style.css\"",
+      "<main",
+      "class=\"hero\"",
+      "class=\"site-header\"",
+      "class=\"main-nav\"",
+      "id=\"about\"",
+      "class=\"topic-list\"",
+      "id=\"style-guide\"",
+      "class=\"swatches\"",
+      "class=\"primary-button\"",
+      "class=\"lead\"",
+      "<blockquote",
+      "id=\"story\"",
+      "class=\"feature-card\"",
+      "class=\"card-row\"",
+      "id=\"features\""
+    ],
+    "cssMust": [
+      "box-sizing",
+      "body",
+      "font-family",
+      "background-color",
+      ".site-header",
+      ".main-nav a",
+      "#main-title",
+      "text-decoration",
+      ":root",
+      "--primary",
+      "linear-gradient",
+      "border-radius",
+      "font-size",
+      "line-height",
+      "text-align",
+      "blockquote",
+      "padding",
+      "margin",
+      "border",
+      "box-shadow"
+    ]
+  },
+  {
+    "id": "stage-6",
+    "title": "6. Ảnh, nút, trạng thái",
+    "icon": "🖼️",
+    "goal": "Bổ sung thư viện ảnh theo chủ đề cá nhân, định dạng img responsive, figure, figcaption, hover cho link/nút.",
+    "sourceFocus": "2.2-2.3: định dạng khối, hình ảnh và trạng thái giao diện.",
+    "imageMin": 3,
+    "imageGuide": "Tối thiểu 3 ảnh đúng tên gợi ý: hero.jpg, detail-1.jpg, detail-2.jpg.",
+    "htmlFile": "index.html",
+    "cssFile": "style.css",
+    "htmlTemplate": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>MyWeb - 6. Ảnh, nút, trạng thái</title>\n  <link rel=\"stylesheet\" href=\"../css/style.css\">\n</head>\n<body>\n<header class=\"site-header\" id=\"top\">\n  <div class=\"brand\">MyWeb</div>\n  <nav class=\"main-nav\" aria-label=\"Điều hướng chính\">\n    <a href=\"#hero\">Trang chủ</a>\n    <a href=\"#about\">Giới thiệu</a>\n    <a href=\"#gallery\">Thư viện</a>\n    <a href=\"#contact\">Liên hệ</a>\n  </nav>\n</header>\n\n<main>\n  <section class=\"hero\" id=\"hero\">\n    <p class=\"eyebrow\">Website cá nhân theo chủ đề tự chọn</p>\n    <h1 id=\"main-title\">Hành trình xây dựng MyWeb</h1>\n    <p class=\"intro\">Thay nội dung này bằng chủ đề cá nhân của em: du lịch, ẩm thực, âm nhạc, thể thao, công nghệ, học tập hoặc một sở thích riêng.</p>\n    <a class=\"primary-button\" href=\"#about\">Khám phá chủ đề</a>\n  </section>\n\n  <section class=\"section about-section\" id=\"about\">\n    <h2>Giới thiệu chủ đề</h2>\n    <p>Viết 2 đến 3 đoạn giới thiệu vì sao em chọn chủ đề này, đối tượng người xem là ai và website đem lại giá trị gì.</p>\n    <ul class=\"topic-list\">\n      <li>Điểm nổi bật 1 của chủ đề cá nhân.</li>\n      <li>Điểm nổi bật 2 gắn với hình ảnh minh họa.</li>\n      <li>Điểm nổi bật 3 thể hiện phong cách riêng.</li>\n    </ul>\n  </section>\n\n  <section class=\"section style-guide\" id=\"style-guide\">\n    <h2>Bảng phong cách</h2>\n    <div class=\"swatches\">\n      <div class=\"swatch swatch-primary\">Màu chính</div>\n      <div class=\"swatch swatch-accent\">Màu nhấn</div>\n      <div class=\"swatch swatch-soft\">Nền nhẹ</div>\n    </div>\n  </section>\n\n  <section class=\"section story-section\" id=\"story\">\n    <h2>Câu chuyện chính</h2>\n    <p class=\"lead\">Đoạn mở đầu cần có giọng văn rõ ràng, dễ đọc và phù hợp với người xem mục tiêu.</p>\n    <blockquote>\"Một website tốt không chỉ đẹp, mà còn dễ đọc, dễ dùng và nhất quán.\"</blockquote>\n  </section>\n\n  <section class=\"section feature-section\" id=\"features\">\n    <h2>Nội dung nổi bật</h2>\n    <div class=\"card-row\">\n      <article class=\"feature-card\"><h3>Mục 1</h3><p>Mô tả nội dung nổi bật đầu tiên.</p></article>\n      <article class=\"feature-card\"><h3>Mục 2</h3><p>Mô tả nội dung nổi bật thứ hai.</p></article>\n      <article class=\"feature-card\"><h3>Mục 3</h3><p>Mô tả nội dung nổi bật thứ ba.</p></article>\n    </div>\n  </section>\n\n  <section class=\"section gallery-section\" id=\"gallery\">\n    <h2>Thư viện ảnh</h2>\n    <div class=\"image-strip\">\n      <figure><img src=\"../img/hero.jpg\" alt=\"Ảnh chính của chủ đề\"><figcaption>Ảnh chính</figcaption></figure>\n      <figure><img src=\"../img/detail-1.jpg\" alt=\"Chi tiết 1 của chủ đề\"><figcaption>Chi tiết 1</figcaption></figure>\n      <figure><img src=\"../img/detail-2.jpg\" alt=\"Chi tiết 2 của chủ đề\"><figcaption>Chi tiết 2</figcaption></figure>\n    </div>\n  </section>\n</main>\n</body>\n</html>",
+    "cssTemplate": "/* Chặng 1: liên kết CSS ngoài và selector cơ bản */\n* {\n  box-sizing: border-box;\n}\n\nbody {\n  margin: 0;\n  font-family: Arial, sans-serif;\n  color: #1f2937;\n  background-color: #f8fafc;\n}\n\nh1, h2, h3, p {\n  margin-top: 0;\n}\n\na {\n  color: #2563eb;\n}\n\n\n/* Chặng 2: class, id, selector kết hợp và cascade */\n.site-header {\n  padding: 18px 8%;\n  background-color: #ffffff;\n  border-bottom: 1px solid #e5e7eb;\n}\n\n.brand {\n  font-weight: 800;\n  font-size: 24px;\n}\n\n.main-nav a {\n  margin-right: 16px;\n  text-decoration: none;\n  font-weight: 700;\n}\n\n#main-title {\n  color: #1d4ed8;\n}\n\n\n/* Chặng 3: màu sắc, nền và phong cách nhận diện */\n:root {\n  --primary: #2563eb;\n  --accent: #f97316;\n  --soft: #eff6ff;\n  --dark: #111827;\n}\n\n.hero {\n  padding: 80px 8%;\n  color: white;\n  background: linear-gradient(135deg, var(--primary), #06b6d4);\n}\n\n.primary-button {\n  display: inline-block;\n  padding: 12px 18px;\n  background-color: var(--accent);\n  color: #fff;\n  border-radius: 999px;\n  text-decoration: none;\n}\n\n.swatches {\n  display: flex;\n  gap: 12px;\n}\n\n.swatch {\n  padding: 18px;\n  border-radius: 16px;\n  color: white;\n}\n\n.swatch-primary { background-color: var(--primary); }\n.swatch-accent { background-color: var(--accent); }\n.swatch-soft { color: var(--dark); background-color: var(--soft); }\n\n\n/* Chặng 4: typography, căn chỉnh, line-height */\n.section {\n  padding: 56px 8%;\n}\n\nh1 {\n  font-size: clamp(36px, 6vw, 72px);\n  line-height: 1.05;\n}\n\nh2 {\n  font-size: 32px;\n  color: var(--dark);\n  text-align: center;\n}\n\np, li {\n  font-size: 18px;\n  line-height: 1.7;\n}\n\n.lead {\n  font-size: 22px;\n  font-weight: 600;\n}\n\nblockquote {\n  font-size: 24px;\n  font-style: italic;\n  text-align: center;\n}\n\n\n/* Chặng 5: box model, padding, margin, border, card */\n.about-section, .story-section, .feature-section {\n  max-width: 1100px;\n  margin: 0 auto;\n}\n\n.card-row {\n  display: block;\n}\n\n.feature-card {\n  margin: 18px 0;\n  padding: 24px;\n  border: 1px solid #dbe3ef;\n  border-radius: 22px;\n  background-color: #ffffff;\n  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);\n}\n\n\n/* Chặng 6: ảnh, liên kết, nút và trạng thái hover */\nimg {\n  max-width: 100%;\n  height: auto;\n  display: block;\n  border-radius: 18px;\n}\n\n.image-strip figure {\n  margin: 0 0 20px;\n  padding: 12px;\n  border: 1px solid #e5e7eb;\n  border-radius: 24px;\n  background-color: white;\n}\n\n.main-nav a:hover, .primary-button:hover, button:hover {\n  opacity: 0.86;\n  transform: translateY(-1px);\n}\n\nbutton {\n  padding: 12px 18px;\n  border: 0;\n  border-radius: 14px;\n  color: white;\n  background-color: var(--primary);\n}\n",
+    "htmlMust": [
+      "<!DOCTYPE html>",
+      "<link rel=\"stylesheet\" href=\"../css/style.css\"",
+      "<main",
+      "class=\"hero\"",
+      "class=\"site-header\"",
+      "class=\"main-nav\"",
+      "id=\"about\"",
+      "class=\"topic-list\"",
+      "id=\"style-guide\"",
+      "class=\"swatches\"",
+      "class=\"primary-button\"",
+      "class=\"lead\"",
+      "<blockquote",
+      "id=\"story\"",
+      "class=\"feature-card\"",
+      "class=\"card-row\"",
+      "id=\"features\"",
+      "<img",
+      "../img/hero.jpg",
+      "<figure",
+      "<figcaption"
+    ],
+    "cssMust": [
+      "box-sizing",
+      "body",
+      "font-family",
+      "background-color",
+      ".site-header",
+      ".main-nav a",
+      "#main-title",
+      "text-decoration",
+      ":root",
+      "--primary",
+      "linear-gradient",
+      "border-radius",
+      "font-size",
+      "line-height",
+      "text-align",
+      "blockquote",
+      "padding",
+      "margin",
+      "border",
+      "box-shadow",
+      "img",
+      "max-width",
+      "height: auto",
+      ":hover"
+    ]
+  },
+  {
+    "id": "stage-7",
+    "title": "7. Flexbox layout",
+    "icon": "🧭",
+    "goal": "Tổ chức header, menu, card, ảnh và bố cục hai vùng bằng Flexbox.",
+    "sourceFocus": "2.3.1-2.3.2: container, item, display:flex, justify-content, align-items, gap.",
+    "imageMin": 3,
+    "imageGuide": "Tối thiểu 3 ảnh, ưu tiên cùng tỉ lệ để Flexbox cân đối.",
+    "htmlFile": "index.html",
+    "cssFile": "style.css",
+    "htmlTemplate": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>MyWeb - 7. Flexbox layout</title>\n  <link rel=\"stylesheet\" href=\"../css/style.css\">\n</head>\n<body>\n<header class=\"site-header\" id=\"top\">\n  <div class=\"brand\">MyWeb</div>\n  <nav class=\"main-nav\" aria-label=\"Điều hướng chính\">\n    <a href=\"#hero\">Trang chủ</a>\n    <a href=\"#about\">Giới thiệu</a>\n    <a href=\"#gallery\">Thư viện</a>\n    <a href=\"#contact\">Liên hệ</a>\n  </nav>\n</header>\n\n<main>\n  <section class=\"hero\" id=\"hero\">\n    <p class=\"eyebrow\">Website cá nhân theo chủ đề tự chọn</p>\n    <h1 id=\"main-title\">Hành trình xây dựng MyWeb</h1>\n    <p class=\"intro\">Thay nội dung này bằng chủ đề cá nhân của em: du lịch, ẩm thực, âm nhạc, thể thao, công nghệ, học tập hoặc một sở thích riêng.</p>\n    <a class=\"primary-button\" href=\"#about\">Khám phá chủ đề</a>\n  </section>\n\n  <section class=\"section about-section\" id=\"about\">\n    <h2>Giới thiệu chủ đề</h2>\n    <p>Viết 2 đến 3 đoạn giới thiệu vì sao em chọn chủ đề này, đối tượng người xem là ai và website đem lại giá trị gì.</p>\n    <ul class=\"topic-list\">\n      <li>Điểm nổi bật 1 của chủ đề cá nhân.</li>\n      <li>Điểm nổi bật 2 gắn với hình ảnh minh họa.</li>\n      <li>Điểm nổi bật 3 thể hiện phong cách riêng.</li>\n    </ul>\n  </section>\n\n  <section class=\"section style-guide\" id=\"style-guide\">\n    <h2>Bảng phong cách</h2>\n    <div class=\"swatches\">\n      <div class=\"swatch swatch-primary\">Màu chính</div>\n      <div class=\"swatch swatch-accent\">Màu nhấn</div>\n      <div class=\"swatch swatch-soft\">Nền nhẹ</div>\n    </div>\n  </section>\n\n  <section class=\"section story-section\" id=\"story\">\n    <h2>Câu chuyện chính</h2>\n    <p class=\"lead\">Đoạn mở đầu cần có giọng văn rõ ràng, dễ đọc và phù hợp với người xem mục tiêu.</p>\n    <blockquote>\"Một website tốt không chỉ đẹp, mà còn dễ đọc, dễ dùng và nhất quán.\"</blockquote>\n  </section>\n\n  <section class=\"section feature-section\" id=\"features\">\n    <h2>Nội dung nổi bật</h2>\n    <div class=\"card-row\">\n      <article class=\"feature-card\"><h3>Mục 1</h3><p>Mô tả nội dung nổi bật đầu tiên.</p></article>\n      <article class=\"feature-card\"><h3>Mục 2</h3><p>Mô tả nội dung nổi bật thứ hai.</p></article>\n      <article class=\"feature-card\"><h3>Mục 3</h3><p>Mô tả nội dung nổi bật thứ ba.</p></article>\n    </div>\n  </section>\n\n  <section class=\"section gallery-section\" id=\"gallery\">\n    <h2>Thư viện ảnh</h2>\n    <div class=\"image-strip\">\n      <figure><img src=\"../img/hero.jpg\" alt=\"Ảnh chính của chủ đề\"><figcaption>Ảnh chính</figcaption></figure>\n      <figure><img src=\"../img/detail-1.jpg\" alt=\"Chi tiết 1 của chủ đề\"><figcaption>Chi tiết 1</figcaption></figure>\n      <figure><img src=\"../img/detail-2.jpg\" alt=\"Chi tiết 2 của chủ đề\"><figcaption>Chi tiết 2</figcaption></figure>\n    </div>\n  </section>\n\n  <section class=\"section layout-section\" id=\"layout\">\n    <h2>Bố cục hai vùng bằng Flexbox</h2>\n    <div class=\"content-layout\">\n      <article class=\"main-content\"><h3>Nội dung chính</h3><p>Trình bày thông tin quan trọng nhất của website.</p></article>\n      <aside class=\"side-panel\"><h3>Thông tin phụ</h3><p>Ghi chú, liên kết hoặc dữ kiện ngắn.</p></aside>\n    </div>\n  </section>\n</main>\n</body>\n</html>",
+    "cssTemplate": "/* Chặng 1: liên kết CSS ngoài và selector cơ bản */\n* {\n  box-sizing: border-box;\n}\n\nbody {\n  margin: 0;\n  font-family: Arial, sans-serif;\n  color: #1f2937;\n  background-color: #f8fafc;\n}\n\nh1, h2, h3, p {\n  margin-top: 0;\n}\n\na {\n  color: #2563eb;\n}\n\n\n/* Chặng 2: class, id, selector kết hợp và cascade */\n.site-header {\n  padding: 18px 8%;\n  background-color: #ffffff;\n  border-bottom: 1px solid #e5e7eb;\n}\n\n.brand {\n  font-weight: 800;\n  font-size: 24px;\n}\n\n.main-nav a {\n  margin-right: 16px;\n  text-decoration: none;\n  font-weight: 700;\n}\n\n#main-title {\n  color: #1d4ed8;\n}\n\n\n/* Chặng 3: màu sắc, nền và phong cách nhận diện */\n:root {\n  --primary: #2563eb;\n  --accent: #f97316;\n  --soft: #eff6ff;\n  --dark: #111827;\n}\n\n.hero {\n  padding: 80px 8%;\n  color: white;\n  background: linear-gradient(135deg, var(--primary), #06b6d4);\n}\n\n.primary-button {\n  display: inline-block;\n  padding: 12px 18px;\n  background-color: var(--accent);\n  color: #fff;\n  border-radius: 999px;\n  text-decoration: none;\n}\n\n.swatches {\n  display: flex;\n  gap: 12px;\n}\n\n.swatch {\n  padding: 18px;\n  border-radius: 16px;\n  color: white;\n}\n\n.swatch-primary { background-color: var(--primary); }\n.swatch-accent { background-color: var(--accent); }\n.swatch-soft { color: var(--dark); background-color: var(--soft); }\n\n\n/* Chặng 4: typography, căn chỉnh, line-height */\n.section {\n  padding: 56px 8%;\n}\n\nh1 {\n  font-size: clamp(36px, 6vw, 72px);\n  line-height: 1.05;\n}\n\nh2 {\n  font-size: 32px;\n  color: var(--dark);\n  text-align: center;\n}\n\np, li {\n  font-size: 18px;\n  line-height: 1.7;\n}\n\n.lead {\n  font-size: 22px;\n  font-weight: 600;\n}\n\nblockquote {\n  font-size: 24px;\n  font-style: italic;\n  text-align: center;\n}\n\n\n/* Chặng 5: box model, padding, margin, border, card */\n.about-section, .story-section, .feature-section {\n  max-width: 1100px;\n  margin: 0 auto;\n}\n\n.card-row {\n  display: block;\n}\n\n.feature-card {\n  margin: 18px 0;\n  padding: 24px;\n  border: 1px solid #dbe3ef;\n  border-radius: 22px;\n  background-color: #ffffff;\n  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);\n}\n\n\n/* Chặng 6: ảnh, liên kết, nút và trạng thái hover */\nimg {\n  max-width: 100%;\n  height: auto;\n  display: block;\n  border-radius: 18px;\n}\n\n.image-strip figure {\n  margin: 0 0 20px;\n  padding: 12px;\n  border: 1px solid #e5e7eb;\n  border-radius: 24px;\n  background-color: white;\n}\n\n.main-nav a:hover, .primary-button:hover, button:hover {\n  opacity: 0.86;\n  transform: translateY(-1px);\n}\n\nbutton {\n  padding: 12px 18px;\n  border: 0;\n  border-radius: 14px;\n  color: white;\n  background-color: var(--primary);\n}\n\n\n/* Chặng 7: bố cục Flexbox */\n.site-header, .main-nav, .card-row, .content-layout, .image-strip {\n  display: flex;\n  gap: 20px;\n}\n\n.site-header {\n  justify-content: space-between;\n  align-items: center;\n}\n\n.card-row, .image-strip {\n  align-items: stretch;\n}\n\n.feature-card, .image-strip figure {\n  flex: 1;\n}\n\n.main-content {\n  flex: 2;\n}\n\n.side-panel {\n  flex: 1;\n  padding: 24px;\n  border-radius: 22px;\n  background-color: var(--soft);\n}\n",
+    "htmlMust": [
+      "<!DOCTYPE html>",
+      "<link rel=\"stylesheet\" href=\"../css/style.css\"",
+      "<main",
+      "class=\"hero\"",
+      "class=\"site-header\"",
+      "class=\"main-nav\"",
+      "id=\"about\"",
+      "class=\"topic-list\"",
+      "id=\"style-guide\"",
+      "class=\"swatches\"",
+      "class=\"primary-button\"",
+      "class=\"lead\"",
+      "<blockquote",
+      "id=\"story\"",
+      "class=\"feature-card\"",
+      "class=\"card-row\"",
+      "id=\"features\"",
+      "<img",
+      "../img/hero.jpg",
+      "<figure",
+      "<figcaption",
+      "class=\"content-layout\"",
+      "class=\"main-content\"",
+      "class=\"side-panel\""
+    ],
+    "cssMust": [
+      "box-sizing",
+      "body",
+      "font-family",
+      "background-color",
+      ".site-header",
+      ".main-nav a",
+      "#main-title",
+      "text-decoration",
+      ":root",
+      "--primary",
+      "linear-gradient",
+      "border-radius",
+      "font-size",
+      "line-height",
+      "text-align",
+      "blockquote",
+      "padding",
+      "margin",
+      "border",
+      "box-shadow",
+      "img",
+      "max-width",
+      "height: auto",
+      ":hover",
+      "display: flex",
+      "justify-content",
+      "align-items",
+      "gap"
+    ]
+  },
+  {
+    "id": "stage-8",
+    "title": "8. Grid gallery",
+    "icon": "🔲",
+    "goal": "Tạo lưới nội dung/portfolio bằng CSS Grid, grid-template-columns, repeat, fr và gap.",
+    "sourceFocus": "2.3.3: Grid phù hợp cho thư viện ảnh, dashboard, danh sách theo lưới.",
+    "imageMin": 4,
+    "imageGuide": "Tối thiểu 4 ảnh/nội dung cho lưới Grid.",
+    "htmlFile": "index.html",
+    "cssFile": "style.css",
+    "htmlTemplate": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>MyWeb - 8. Grid gallery</title>\n  <link rel=\"stylesheet\" href=\"../css/style.css\">\n</head>\n<body>\n<header class=\"site-header\" id=\"top\">\n  <div class=\"brand\">MyWeb</div>\n  <nav class=\"main-nav\" aria-label=\"Điều hướng chính\">\n    <a href=\"#hero\">Trang chủ</a>\n    <a href=\"#about\">Giới thiệu</a>\n    <a href=\"#gallery\">Thư viện</a>\n    <a href=\"#contact\">Liên hệ</a>\n  </nav>\n</header>\n\n<main>\n  <section class=\"hero\" id=\"hero\">\n    <p class=\"eyebrow\">Website cá nhân theo chủ đề tự chọn</p>\n    <h1 id=\"main-title\">Hành trình xây dựng MyWeb</h1>\n    <p class=\"intro\">Thay nội dung này bằng chủ đề cá nhân của em: du lịch, ẩm thực, âm nhạc, thể thao, công nghệ, học tập hoặc một sở thích riêng.</p>\n    <a class=\"primary-button\" href=\"#about\">Khám phá chủ đề</a>\n  </section>\n\n  <section class=\"section about-section\" id=\"about\">\n    <h2>Giới thiệu chủ đề</h2>\n    <p>Viết 2 đến 3 đoạn giới thiệu vì sao em chọn chủ đề này, đối tượng người xem là ai và website đem lại giá trị gì.</p>\n    <ul class=\"topic-list\">\n      <li>Điểm nổi bật 1 của chủ đề cá nhân.</li>\n      <li>Điểm nổi bật 2 gắn với hình ảnh minh họa.</li>\n      <li>Điểm nổi bật 3 thể hiện phong cách riêng.</li>\n    </ul>\n  </section>\n\n  <section class=\"section style-guide\" id=\"style-guide\">\n    <h2>Bảng phong cách</h2>\n    <div class=\"swatches\">\n      <div class=\"swatch swatch-primary\">Màu chính</div>\n      <div class=\"swatch swatch-accent\">Màu nhấn</div>\n      <div class=\"swatch swatch-soft\">Nền nhẹ</div>\n    </div>\n  </section>\n\n  <section class=\"section story-section\" id=\"story\">\n    <h2>Câu chuyện chính</h2>\n    <p class=\"lead\">Đoạn mở đầu cần có giọng văn rõ ràng, dễ đọc và phù hợp với người xem mục tiêu.</p>\n    <blockquote>\"Một website tốt không chỉ đẹp, mà còn dễ đọc, dễ dùng và nhất quán.\"</blockquote>\n  </section>\n\n  <section class=\"section feature-section\" id=\"features\">\n    <h2>Nội dung nổi bật</h2>\n    <div class=\"card-row\">\n      <article class=\"feature-card\"><h3>Mục 1</h3><p>Mô tả nội dung nổi bật đầu tiên.</p></article>\n      <article class=\"feature-card\"><h3>Mục 2</h3><p>Mô tả nội dung nổi bật thứ hai.</p></article>\n      <article class=\"feature-card\"><h3>Mục 3</h3><p>Mô tả nội dung nổi bật thứ ba.</p></article>\n    </div>\n  </section>\n\n  <section class=\"section gallery-section\" id=\"gallery\">\n    <h2>Thư viện ảnh</h2>\n    <div class=\"image-strip\">\n      <figure><img src=\"../img/hero.jpg\" alt=\"Ảnh chính của chủ đề\"><figcaption>Ảnh chính</figcaption></figure>\n      <figure><img src=\"../img/detail-1.jpg\" alt=\"Chi tiết 1 của chủ đề\"><figcaption>Chi tiết 1</figcaption></figure>\n      <figure><img src=\"../img/detail-2.jpg\" alt=\"Chi tiết 2 của chủ đề\"><figcaption>Chi tiết 2</figcaption></figure>\n    </div>\n  </section>\n\n  <section class=\"section layout-section\" id=\"layout\">\n    <h2>Bố cục hai vùng bằng Flexbox</h2>\n    <div class=\"content-layout\">\n      <article class=\"main-content\"><h3>Nội dung chính</h3><p>Trình bày thông tin quan trọng nhất của website.</p></article>\n      <aside class=\"side-panel\"><h3>Thông tin phụ</h3><p>Ghi chú, liên kết hoặc dữ kiện ngắn.</p></aside>\n    </div>\n  </section>\n\n  <section class=\"section portfolio-section\" id=\"portfolio\">\n    <h2>Lưới nội dung</h2>\n    <div class=\"portfolio-grid\">\n      <article>Dự án 1</article>\n      <article>Dự án 2</article>\n      <article>Dự án 3</article>\n      <article>Dự án 4</article>\n      <article>Dự án 5</article>\n      <article>Dự án 6</article>\n    </div>\n  </section>\n</main>\n</body>\n</html>",
+    "cssTemplate": "/* Chặng 1: liên kết CSS ngoài và selector cơ bản */\n* {\n  box-sizing: border-box;\n}\n\nbody {\n  margin: 0;\n  font-family: Arial, sans-serif;\n  color: #1f2937;\n  background-color: #f8fafc;\n}\n\nh1, h2, h3, p {\n  margin-top: 0;\n}\n\na {\n  color: #2563eb;\n}\n\n\n/* Chặng 2: class, id, selector kết hợp và cascade */\n.site-header {\n  padding: 18px 8%;\n  background-color: #ffffff;\n  border-bottom: 1px solid #e5e7eb;\n}\n\n.brand {\n  font-weight: 800;\n  font-size: 24px;\n}\n\n.main-nav a {\n  margin-right: 16px;\n  text-decoration: none;\n  font-weight: 700;\n}\n\n#main-title {\n  color: #1d4ed8;\n}\n\n\n/* Chặng 3: màu sắc, nền và phong cách nhận diện */\n:root {\n  --primary: #2563eb;\n  --accent: #f97316;\n  --soft: #eff6ff;\n  --dark: #111827;\n}\n\n.hero {\n  padding: 80px 8%;\n  color: white;\n  background: linear-gradient(135deg, var(--primary), #06b6d4);\n}\n\n.primary-button {\n  display: inline-block;\n  padding: 12px 18px;\n  background-color: var(--accent);\n  color: #fff;\n  border-radius: 999px;\n  text-decoration: none;\n}\n\n.swatches {\n  display: flex;\n  gap: 12px;\n}\n\n.swatch {\n  padding: 18px;\n  border-radius: 16px;\n  color: white;\n}\n\n.swatch-primary { background-color: var(--primary); }\n.swatch-accent { background-color: var(--accent); }\n.swatch-soft { color: var(--dark); background-color: var(--soft); }\n\n\n/* Chặng 4: typography, căn chỉnh, line-height */\n.section {\n  padding: 56px 8%;\n}\n\nh1 {\n  font-size: clamp(36px, 6vw, 72px);\n  line-height: 1.05;\n}\n\nh2 {\n  font-size: 32px;\n  color: var(--dark);\n  text-align: center;\n}\n\np, li {\n  font-size: 18px;\n  line-height: 1.7;\n}\n\n.lead {\n  font-size: 22px;\n  font-weight: 600;\n}\n\nblockquote {\n  font-size: 24px;\n  font-style: italic;\n  text-align: center;\n}\n\n\n/* Chặng 5: box model, padding, margin, border, card */\n.about-section, .story-section, .feature-section {\n  max-width: 1100px;\n  margin: 0 auto;\n}\n\n.card-row {\n  display: block;\n}\n\n.feature-card {\n  margin: 18px 0;\n  padding: 24px;\n  border: 1px solid #dbe3ef;\n  border-radius: 22px;\n  background-color: #ffffff;\n  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);\n}\n\n\n/* Chặng 6: ảnh, liên kết, nút và trạng thái hover */\nimg {\n  max-width: 100%;\n  height: auto;\n  display: block;\n  border-radius: 18px;\n}\n\n.image-strip figure {\n  margin: 0 0 20px;\n  padding: 12px;\n  border: 1px solid #e5e7eb;\n  border-radius: 24px;\n  background-color: white;\n}\n\n.main-nav a:hover, .primary-button:hover, button:hover {\n  opacity: 0.86;\n  transform: translateY(-1px);\n}\n\nbutton {\n  padding: 12px 18px;\n  border: 0;\n  border-radius: 14px;\n  color: white;\n  background-color: var(--primary);\n}\n\n\n/* Chặng 7: bố cục Flexbox */\n.site-header, .main-nav, .card-row, .content-layout, .image-strip {\n  display: flex;\n  gap: 20px;\n}\n\n.site-header {\n  justify-content: space-between;\n  align-items: center;\n}\n\n.card-row, .image-strip {\n  align-items: stretch;\n}\n\n.feature-card, .image-strip figure {\n  flex: 1;\n}\n\n.main-content {\n  flex: 2;\n}\n\n.side-panel {\n  flex: 1;\n  padding: 24px;\n  border-radius: 22px;\n  background-color: var(--soft);\n}\n\n\n/* Chặng 8: CSS Grid cho thư viện/danh sách nội dung */\n.portfolio-grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 20px;\n}\n\n.portfolio-grid article {\n  min-height: 120px;\n  padding: 24px;\n  border-radius: 22px;\n  background-color: #ffffff;\n  border: 1px solid #dbe3ef;\n  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);\n}\n",
+    "htmlMust": [
+      "<!DOCTYPE html>",
+      "<link rel=\"stylesheet\" href=\"../css/style.css\"",
+      "<main",
+      "class=\"hero\"",
+      "class=\"site-header\"",
+      "class=\"main-nav\"",
+      "id=\"about\"",
+      "class=\"topic-list\"",
+      "id=\"style-guide\"",
+      "class=\"swatches\"",
+      "class=\"primary-button\"",
+      "class=\"lead\"",
+      "<blockquote",
+      "id=\"story\"",
+      "class=\"feature-card\"",
+      "class=\"card-row\"",
+      "id=\"features\"",
+      "<img",
+      "../img/hero.jpg",
+      "<figure",
+      "<figcaption",
+      "class=\"content-layout\"",
+      "class=\"main-content\"",
+      "class=\"side-panel\"",
+      "class=\"portfolio-grid\"",
+      "id=\"portfolio\""
+    ],
+    "cssMust": [
+      "box-sizing",
+      "body",
+      "font-family",
+      "background-color",
+      ".site-header",
+      ".main-nav a",
+      "#main-title",
+      "text-decoration",
+      ":root",
+      "--primary",
+      "linear-gradient",
+      "border-radius",
+      "font-size",
+      "line-height",
+      "text-align",
+      "blockquote",
+      "padding",
+      "margin",
+      "border",
+      "box-shadow",
+      "img",
+      "max-width",
+      "height: auto",
+      ":hover",
+      "display: flex",
+      "justify-content",
+      "align-items",
+      "gap",
+      "display: grid",
+      "grid-template-columns",
+      "repeat(3, 1fr)"
+    ]
+  },
+  {
+    "id": "stage-9",
+    "title": "9. Responsive hoàn chỉnh",
+    "icon": "📱",
+    "goal": "Hoàn thiện form, footer và media query để website thích ứng trên điện thoại/máy tính bảng.",
+    "sourceFocus": "2.4: responsive web design, đơn vị linh hoạt, media queries.",
+    "imageMin": 5,
+    "imageGuide": "Tối thiểu 5 ảnh hoặc hình minh họa cho website hoàn chỉnh.",
+    "htmlFile": "index.html",
+    "cssFile": "style.css",
+    "htmlTemplate": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>MyWeb - 9. Responsive hoàn chỉnh</title>\n  <link rel=\"stylesheet\" href=\"../css/style.css\">\n</head>\n<body>\n<header class=\"site-header\" id=\"top\">\n  <div class=\"brand\">MyWeb</div>\n  <nav class=\"main-nav\" aria-label=\"Điều hướng chính\">\n    <a href=\"#hero\">Trang chủ</a>\n    <a href=\"#about\">Giới thiệu</a>\n    <a href=\"#gallery\">Thư viện</a>\n    <a href=\"#contact\">Liên hệ</a>\n  </nav>\n</header>\n\n<main>\n  <section class=\"hero\" id=\"hero\">\n    <p class=\"eyebrow\">Website cá nhân theo chủ đề tự chọn</p>\n    <h1 id=\"main-title\">Hành trình xây dựng MyWeb</h1>\n    <p class=\"intro\">Thay nội dung này bằng chủ đề cá nhân của em: du lịch, ẩm thực, âm nhạc, thể thao, công nghệ, học tập hoặc một sở thích riêng.</p>\n    <a class=\"primary-button\" href=\"#about\">Khám phá chủ đề</a>\n  </section>\n\n  <section class=\"section about-section\" id=\"about\">\n    <h2>Giới thiệu chủ đề</h2>\n    <p>Viết 2 đến 3 đoạn giới thiệu vì sao em chọn chủ đề này, đối tượng người xem là ai và website đem lại giá trị gì.</p>\n    <ul class=\"topic-list\">\n      <li>Điểm nổi bật 1 của chủ đề cá nhân.</li>\n      <li>Điểm nổi bật 2 gắn với hình ảnh minh họa.</li>\n      <li>Điểm nổi bật 3 thể hiện phong cách riêng.</li>\n    </ul>\n  </section>\n\n  <section class=\"section style-guide\" id=\"style-guide\">\n    <h2>Bảng phong cách</h2>\n    <div class=\"swatches\">\n      <div class=\"swatch swatch-primary\">Màu chính</div>\n      <div class=\"swatch swatch-accent\">Màu nhấn</div>\n      <div class=\"swatch swatch-soft\">Nền nhẹ</div>\n    </div>\n  </section>\n\n  <section class=\"section story-section\" id=\"story\">\n    <h2>Câu chuyện chính</h2>\n    <p class=\"lead\">Đoạn mở đầu cần có giọng văn rõ ràng, dễ đọc và phù hợp với người xem mục tiêu.</p>\n    <blockquote>\"Một website tốt không chỉ đẹp, mà còn dễ đọc, dễ dùng và nhất quán.\"</blockquote>\n  </section>\n\n  <section class=\"section feature-section\" id=\"features\">\n    <h2>Nội dung nổi bật</h2>\n    <div class=\"card-row\">\n      <article class=\"feature-card\"><h3>Mục 1</h3><p>Mô tả nội dung nổi bật đầu tiên.</p></article>\n      <article class=\"feature-card\"><h3>Mục 2</h3><p>Mô tả nội dung nổi bật thứ hai.</p></article>\n      <article class=\"feature-card\"><h3>Mục 3</h3><p>Mô tả nội dung nổi bật thứ ba.</p></article>\n    </div>\n  </section>\n\n  <section class=\"section gallery-section\" id=\"gallery\">\n    <h2>Thư viện ảnh</h2>\n    <div class=\"image-strip\">\n      <figure><img src=\"../img/hero.jpg\" alt=\"Ảnh chính của chủ đề\"><figcaption>Ảnh chính</figcaption></figure>\n      <figure><img src=\"../img/detail-1.jpg\" alt=\"Chi tiết 1 của chủ đề\"><figcaption>Chi tiết 1</figcaption></figure>\n      <figure><img src=\"../img/detail-2.jpg\" alt=\"Chi tiết 2 của chủ đề\"><figcaption>Chi tiết 2</figcaption></figure>\n    </div>\n  </section>\n\n  <section class=\"section layout-section\" id=\"layout\">\n    <h2>Bố cục hai vùng bằng Flexbox</h2>\n    <div class=\"content-layout\">\n      <article class=\"main-content\"><h3>Nội dung chính</h3><p>Trình bày thông tin quan trọng nhất của website.</p></article>\n      <aside class=\"side-panel\"><h3>Thông tin phụ</h3><p>Ghi chú, liên kết hoặc dữ kiện ngắn.</p></aside>\n    </div>\n  </section>\n\n  <section class=\"section portfolio-section\" id=\"portfolio\">\n    <h2>Lưới nội dung</h2>\n    <div class=\"portfolio-grid\">\n      <article>Dự án 1</article>\n      <article>Dự án 2</article>\n      <article>Dự án 3</article>\n      <article>Dự án 4</article>\n      <article>Dự án 5</article>\n      <article>Dự án 6</article>\n    </div>\n  </section>\n\n  <section class=\"section contact-section\" id=\"contact\">\n    <h2>Liên hệ</h2>\n    <form class=\"contact-form\" action=\"#\" method=\"post\">\n      <label for=\"fullName\">Họ tên</label>\n      <input id=\"fullName\" name=\"fullName\" type=\"text\" placeholder=\"Nhập họ tên\">\n      <label for=\"message\">Thông điệp</label>\n      <textarea id=\"message\" name=\"message\" rows=\"4\" placeholder=\"Nội dung liên hệ\"></textarea>\n      <button type=\"submit\">Gửi thông tin</button>\n    </form>\n  </section>\n</main>\n\n<footer class=\"site-footer\">\n  <p>© 2026 MyWeb. Website cá nhân hoàn chỉnh bằng HTML và CSS.</p>\n</footer>\n</body>\n</html>",
+    "cssTemplate": "/* Chặng 1: liên kết CSS ngoài và selector cơ bản */\n* {\n  box-sizing: border-box;\n}\n\nbody {\n  margin: 0;\n  font-family: Arial, sans-serif;\n  color: #1f2937;\n  background-color: #f8fafc;\n}\n\nh1, h2, h3, p {\n  margin-top: 0;\n}\n\na {\n  color: #2563eb;\n}\n\n\n/* Chặng 2: class, id, selector kết hợp và cascade */\n.site-header {\n  padding: 18px 8%;\n  background-color: #ffffff;\n  border-bottom: 1px solid #e5e7eb;\n}\n\n.brand {\n  font-weight: 800;\n  font-size: 24px;\n}\n\n.main-nav a {\n  margin-right: 16px;\n  text-decoration: none;\n  font-weight: 700;\n}\n\n#main-title {\n  color: #1d4ed8;\n}\n\n\n/* Chặng 3: màu sắc, nền và phong cách nhận diện */\n:root {\n  --primary: #2563eb;\n  --accent: #f97316;\n  --soft: #eff6ff;\n  --dark: #111827;\n}\n\n.hero {\n  padding: 80px 8%;\n  color: white;\n  background: linear-gradient(135deg, var(--primary), #06b6d4);\n}\n\n.primary-button {\n  display: inline-block;\n  padding: 12px 18px;\n  background-color: var(--accent);\n  color: #fff;\n  border-radius: 999px;\n  text-decoration: none;\n}\n\n.swatches {\n  display: flex;\n  gap: 12px;\n}\n\n.swatch {\n  padding: 18px;\n  border-radius: 16px;\n  color: white;\n}\n\n.swatch-primary { background-color: var(--primary); }\n.swatch-accent { background-color: var(--accent); }\n.swatch-soft { color: var(--dark); background-color: var(--soft); }\n\n\n/* Chặng 4: typography, căn chỉnh, line-height */\n.section {\n  padding: 56px 8%;\n}\n\nh1 {\n  font-size: clamp(36px, 6vw, 72px);\n  line-height: 1.05;\n}\n\nh2 {\n  font-size: 32px;\n  color: var(--dark);\n  text-align: center;\n}\n\np, li {\n  font-size: 18px;\n  line-height: 1.7;\n}\n\n.lead {\n  font-size: 22px;\n  font-weight: 600;\n}\n\nblockquote {\n  font-size: 24px;\n  font-style: italic;\n  text-align: center;\n}\n\n\n/* Chặng 5: box model, padding, margin, border, card */\n.about-section, .story-section, .feature-section {\n  max-width: 1100px;\n  margin: 0 auto;\n}\n\n.card-row {\n  display: block;\n}\n\n.feature-card {\n  margin: 18px 0;\n  padding: 24px;\n  border: 1px solid #dbe3ef;\n  border-radius: 22px;\n  background-color: #ffffff;\n  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);\n}\n\n\n/* Chặng 6: ảnh, liên kết, nút và trạng thái hover */\nimg {\n  max-width: 100%;\n  height: auto;\n  display: block;\n  border-radius: 18px;\n}\n\n.image-strip figure {\n  margin: 0 0 20px;\n  padding: 12px;\n  border: 1px solid #e5e7eb;\n  border-radius: 24px;\n  background-color: white;\n}\n\n.main-nav a:hover, .primary-button:hover, button:hover {\n  opacity: 0.86;\n  transform: translateY(-1px);\n}\n\nbutton {\n  padding: 12px 18px;\n  border: 0;\n  border-radius: 14px;\n  color: white;\n  background-color: var(--primary);\n}\n\n\n/* Chặng 7: bố cục Flexbox */\n.site-header, .main-nav, .card-row, .content-layout, .image-strip {\n  display: flex;\n  gap: 20px;\n}\n\n.site-header {\n  justify-content: space-between;\n  align-items: center;\n}\n\n.card-row, .image-strip {\n  align-items: stretch;\n}\n\n.feature-card, .image-strip figure {\n  flex: 1;\n}\n\n.main-content {\n  flex: 2;\n}\n\n.side-panel {\n  flex: 1;\n  padding: 24px;\n  border-radius: 22px;\n  background-color: var(--soft);\n}\n\n\n/* Chặng 8: CSS Grid cho thư viện/danh sách nội dung */\n.portfolio-grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 20px;\n}\n\n.portfolio-grid article {\n  min-height: 120px;\n  padding: 24px;\n  border-radius: 22px;\n  background-color: #ffffff;\n  border: 1px solid #dbe3ef;\n  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);\n}\n\n\n/* Chặng 9: responsive web design và hoàn thiện */\n.contact-form {\n  max-width: 720px;\n  margin: 0 auto;\n  display: grid;\n  gap: 12px;\n}\n\ninput, textarea {\n  width: 100%;\n  padding: 13px 14px;\n  border: 1px solid #cbd5e1;\n  border-radius: 14px;\n  font: inherit;\n}\n\n.site-footer {\n  padding: 28px 8%;\n  text-align: center;\n  color: white;\n  background-color: var(--dark);\n}\n\n@media (max-width: 768px) {\n  .site-header, .main-nav, .card-row, .content-layout, .image-strip {\n    flex-direction: column;\n  }\n\n  .portfolio-grid {\n    grid-template-columns: 1fr;\n  }\n\n  .hero, .section {\n    padding: 42px 6%;\n  }\n}\n",
+    "htmlMust": [
+      "<!DOCTYPE html>",
+      "<link rel=\"stylesheet\" href=\"../css/style.css\"",
+      "<main",
+      "class=\"hero\"",
+      "class=\"site-header\"",
+      "class=\"main-nav\"",
+      "id=\"about\"",
+      "class=\"topic-list\"",
+      "id=\"style-guide\"",
+      "class=\"swatches\"",
+      "class=\"primary-button\"",
+      "class=\"lead\"",
+      "<blockquote",
+      "id=\"story\"",
+      "class=\"feature-card\"",
+      "class=\"card-row\"",
+      "id=\"features\"",
+      "<img",
+      "../img/hero.jpg",
+      "<figure",
+      "<figcaption",
+      "class=\"content-layout\"",
+      "class=\"main-content\"",
+      "class=\"side-panel\"",
+      "class=\"portfolio-grid\"",
+      "id=\"portfolio\"",
+      "class=\"contact-form\"",
+      "<footer",
+      "<textarea",
+      "type=\"submit\""
+    ],
+    "cssMust": [
+      "box-sizing",
+      "body",
+      "font-family",
+      "background-color",
+      ".site-header",
+      ".main-nav a",
+      "#main-title",
+      "text-decoration",
+      ":root",
+      "--primary",
+      "linear-gradient",
+      "border-radius",
+      "font-size",
+      "line-height",
+      "text-align",
+      "blockquote",
+      "padding",
+      "margin",
+      "border",
+      "box-shadow",
+      "img",
+      "max-width",
+      "height: auto",
+      ":hover",
+      "display: flex",
+      "justify-content",
+      "align-items",
+      "gap",
+      "display: grid",
+      "grid-template-columns",
+      "repeat(3, 1fr)",
+      "@media",
+      "max-width: 768px",
+      "grid-template-columns: 1fr",
+      "flex-direction: column"
+    ]
+  }
+];
+const STORAGE_USERS = "css_journey_users_v2";
+let student=null,current=0,progress=freshProgress();
+const $=id=>document.getElementById(id);
+const els={studentName:$('studentName'),doneCount:$('doneCount'),htmlChars:$('htmlChars'),cssChars:$('cssChars'),imageCount:$('imageCount'),pdfClicks:$('pdfClicks'),progressBar:$('progressBar'),stageStrip:$('stageStrip'),stageBox:$('stageBox'),chatBody:$('chatBody'),screenTitle:$('screenTitle'),screenSub:$('screenSub'),submitBtn:$('submitBtn'),briefTitle:$('briefTitle'),briefText:$('briefText'),timeline:$('timeline')};
+function freshProgress(){return{repo:{user:'',html:'',img:'',css:''},stages:STAGES.map((s,i)=>({done:false,time:'',theme:'',imageSpec:'',imageFiles:[],htmlCode:i?STAGES[i].htmlTemplate||'':'',cssCode:i?STAGES[i].cssTemplate||'':'',htmlChars:0,cssChars:0,imageCount:0,errors:[]})),events:[],pending:[],metrics:{htmlTypedChars:0,cssTypedChars:0,pdfOpenCount:0,totalImages:0},lastSyncAt:''}}
+function normalize(s){return String(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ')}
+function keyOf(name,code){return normalize(name)+'__'+String(code||'').trim()}
+function profileKey(){return 'css_journey_progress_'+keyOf(student.name,student.code)}
+function chatKey(){return 'css_journey_chat_'+keyOf(student.name,student.code)}
+function users(){try{return JSON.parse(localStorage.getItem(STORAGE_USERS)||'{}')}catch(e){return {}}}
+function saveUsers(u){localStorage.setItem(STORAGE_USERS,JSON.stringify(u))}
+function nowVN(){return new Date().toLocaleString('vi-VN',{hour12:false})}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function cleanCode(s){return normalize(s).replace(/[;\s]+/g,'').replace(/[“”]/g,'"').replace(/[‘’]/g,"'")}
+function init(){const u=users();const count=Object.keys(u).length;if(count)$('loginNotice').textContent=`Trình duyệt này có ${count} hồ sơ. Nhập đúng họ tên và mã để làm tiếp.`;$('login').classList.remove('hide')}
+function loginStudent(){const name=$('loginName').value.trim(),code=$('loginCode').value.trim();if(!name||!code){$('loginNotice').textContent='Vui lòng nhập đủ họ tên và mã làm bài.';return}const k=keyOf(name,code);const u=users();if(!u[k])u[k]={name,code,firstLoginAt:nowVN()};saveUsers(u);student=u[k];loadProgress();loadChatHistory();$('login').classList.add('hide');selectCurrent();renderAll();botSay(`Chào <strong>${esc(student.name)}</strong>! Hãy bắt đầu bằng chặng Mở đầu: tạo repo <strong>MyWeb</strong> và 3 thư mục <strong>html, img, css</strong>.`);recordEvent('Hệ thống','Đăng nhập','Người học đăng nhập CSSStudent')}
+function logoutOnly(){saveChatHistory();student=null;current=0;progress=freshProgress();els.chatBody.innerHTML='';els.studentName.textContent='Chưa đăng nhập';$('login').classList.remove('hide')}
+function loadProgress(){progress=freshProgress();const raw=localStorage.getItem(profileKey());if(raw){try{const old=JSON.parse(raw);progress={...progress,...old};if(!Array.isArray(progress.stages)||progress.stages.length!==STAGES.length)progress.stages=freshProgress().stages}catch(e){}}ensureProgress()}
+function ensureProgress(){if(!progress.repo)progress.repo={user:'',html:'',img:'',css:''};if(!progress.metrics)progress.metrics={htmlTypedChars:0,cssTypedChars:0,pdfOpenCount:0,totalImages:0};progress.stages.forEach((st,i)=>{st.htmlCode=st.htmlCode||STAGES[i].htmlTemplate||'';st.cssCode=st.cssCode||STAGES[i].cssTemplate||'';st.imageSpec=st.imageSpec||'';st.theme=st.theme||'';st.imageFiles=Array.isArray(st.imageFiles)?st.imageFiles:[];st.errors=Array.isArray(st.errors)?st.errors:[]})}
+function saveProgress(){if(student)localStorage.setItem(profileKey(),JSON.stringify(progress))}
+function completedCount(){return progress.stages.filter(s=>s.done).length}
+function selectCurrent(){current=progress.stages.findIndex(s=>!s.done);if(current<0)current=STAGES.length-1}
+function canSubmit(i){return i===0 || progress.stages[i-1].done}
+function renderAll(){renderPath();renderStage();renderTimeline();updateStats();saveProgress()}
+function renderPath(){els.stageStrip.innerHTML='';STAGES.forEach((s,i)=>{const chip=document.createElement('div');chip.className='stage-chip';if(i===current)chip.classList.add('active');if(progress.stages[i].done)chip.classList.add('done');if(!canSubmit(i))chip.classList.add('preview');chip.innerHTML=`<b>${progress.stages[i].done?'✅':s.icon} ${esc(s.title)}</b><span>${canSubmit(i)?'Có thể nộp/cập nhật':'Chỉ xem trước'} · ${esc(s.sourceFocus||'')}</span>`;chip.onclick=()=>{current=i;renderAll()};els.stageStrip.appendChild(chip)})}
+function updateStats(){const done=completedCount();els.doneCount.textContent=`${done}/${STAGES.length}`;els.progressBar.style.width=`${Math.round(done/STAGES.length*100)}%`;els.studentName.textContent=student?student.name:'Chưa đăng nhập';const latest=latestStageData();els.htmlChars.textContent=latest.htmlCode.length||0;els.cssChars.textContent=latest.cssCode.length||0;els.imageCount.textContent=progress.metrics.totalImages||0;els.pdfClicks.textContent=progress.metrics.pdfOpenCount||0}
+function latestStageData(){for(let i=STAGES.length-1;i>=0;i--){if(progress.stages[i].done||i===current)return progress.stages[i]}return progress.stages[0]}
+function renderStage(){const s=STAGES[current],st=progress.stages[current];els.screenTitle.textContent=s.title;els.screenSub.textContent=s.goal;els.briefTitle.textContent=`${s.icon} ${s.title}`;els.briefText.textContent=`${s.goal} Nguồn: ${s.sourceFocus||'Bài 2 CSS'}`;els.submitBtn.textContent=current===0?'Nộp bài':'Cập nhật';if(current===0)renderSetup();else renderBuildStage();updateStats()}
+function renderSetup(){const r=progress.repo;els.stageBox.innerHTML=`<div class="panel"><div class="panel-title"><h3>🚀 Chặng Mở đầu: nộp 3 link thư mục GitHub</h3><span class="mini-badge">Kiểm tra nghiêm ngặt hoa/thường</span></div><div class="form-grid"><p class="small">Yêu cầu: tạo repo cá nhân tên <b>MyWeb</b>, bên trong có đúng các thư mục <b>html</b>, <b>img</b>, <b>css</b>. Chỉ phần tài khoản <b>abc</b> được thay đổi.</p><div class="repo-grid"><div class="field"><label>Link thư mục html</label><input id="repoHtml" value="${esc(r.html)}" placeholder="https://github.com/abc/MyWeb/html"></div><div class="field"><label>Link thư mục img</label><input id="repoImg" value="${esc(r.img)}" placeholder="https://github.com/abc/MyWeb/img"></div><div class="field"><label>Link thư mục css</label><input id="repoCss" value="${esc(r.css)}" placeholder="https://github.com/abc/MyWeb/css"></div></div><div class="feedback" id="stageFeedback">Nhấn Nộp bài để kiểm tra đủ 3 link.</div><div id="checkList" class="checklist"></div></div></div>`}
+function renderBuildStage(){const s=STAGES[current],st=progress.stages[current];if(!st.htmlCode)st.htmlCode=previousCode('htmlCode')||s.htmlTemplate||'';if(!st.cssCode)st.cssCode=previousCode('cssCode')||s.cssTemplate||'';els.stageBox.innerHTML=`<div class="panel"><div class="panel-title"><h3>${esc(s.goal)}</h3><span class="mini-badge">${esc(s.cssFile||'style.css')}</span></div><div class="form-grid"><div class="field"><label>Chủ đề cá nhân</label><input id="themeInput" value="${esc(st.theme)}" placeholder="Ví dụ: Du lịch Nha Trang, Ẩm thực Việt, CLB bóng đá..."></div><div class="field"><label>Bổ sung ảnh vào repo img</label><textarea id="imageSpec" placeholder="Mỗi dòng 1 ảnh. Ví dụ: hero.jpg - 1600x900 - ảnh bìa chủ đề">${esc(st.imageSpec)}</textarea><p class="small">${esc(s.imageGuide||'Ghi tên file, kích thước ảnh và số lượng ảnh.')} Tối thiểu: <b>${s.imageMin}</b> ảnh.</p></div><div class="repo-grid"><div class="field"><label>Link html</label><input id="repoHtml" value="${esc(progress.repo.html)}" placeholder="https://github.com/abc/MyWeb/html"></div><div class="field"><label>Link img</label><input id="repoImg" value="${esc(progress.repo.img)}" placeholder="https://github.com/abc/MyWeb/img"></div><div class="field"><label>Link css</label><input id="repoCss" value="${esc(progress.repo.css)}" placeholder="https://github.com/abc/MyWeb/css"></div></div><div class="editors"><div class="codebox"><div class="codebar"><span>html/${esc(s.htmlFile)}</span><span id="hLen">0 ký tự</span></div><textarea id="htmlEditor" spellcheck="false"></textarea></div><div class="codebox"><div class="codebar"><span>css/${esc(s.cssFile)}</span><span id="cLen">0 ký tự</span></div><textarea id="cssEditor" spellcheck="false"></textarea></div></div><iframe class="preview" id="preview" title="Xem trước MyWeb"></iframe><div class="feedback" id="stageFeedback">Nhấn Cập nhật để kiểm tra ảnh, HTML, CSS và 3 link GitHub.</div><div id="checkList" class="checklist"></div></div></div>`;$('htmlEditor').value=st.htmlCode;$('cssEditor').value=st.cssCode;wireEditors();updatePreview()}
+function previousCode(key){for(let i=current-1;i>=1;i--){if(progress.stages[i][key])return progress.stages[i][key]}return ''}
+function wireEditors(){const h=$('htmlEditor'),c=$('cssEditor');function rec(){const st=progress.stages[current];st.htmlCode=h.value;st.cssCode=c.value;st.htmlChars=h.value.length;st.cssChars=c.value.length;progress.metrics.htmlTypedChars=Math.max(progress.metrics.htmlTypedChars,h.value.length);progress.metrics.cssTypedChars=Math.max(progress.metrics.cssTypedChars,c.value.length);$('hLen').textContent=h.value.length+' ký tự';$('cLen').textContent=c.value.length+' ký tự';saveProgress()}h.addEventListener('input',rec);c.addEventListener('input',rec);rec()}
+function loadStarter(){if(current===0){botSay('Chặng Mở đầu không có mã mẫu. Hãy nhập 3 link GitHub đúng dạng.');return}if(!confirm('Nạp lại mã gợi ý của chặng này? Mã đang gõ trong chặng hiện tại sẽ bị thay thế.'))return;progress.stages[current].htmlCode=STAGES[current].htmlTemplate||previousCode('htmlCode')||'';progress.stages[current].cssCode=STAGES[current].cssTemplate||previousCode('cssCode')||'';renderStage();saveProgress()}
+function updatePreview(){if(current===0)return;const h=$('htmlEditor')?.value||'';const c=$('cssEditor')?.value||'';const doc=h.includes('</head>')?h.replace('</head>','<style>'+c.replace(/<\/style/gi,'')+'</style></head>'):'<style>'+c+'</style>'+h;const frame=$('preview');if(frame)frame.srcdoc=doc}
+function validateRepoSet(html,img,css){const res={ok:false,user:'',errors:[],items:[]};const expected={html:'html',img:'img',css:'css'};const vals={html:html.trim(),img:img.trim(),css:css.trim()};let user='';for(const key of ['html','img','css']){const label=key;const raw=vals[key];try{const u=new URL(raw);const parts=u.pathname.split('/').filter(Boolean);if(u.protocol!=='https:')res.errors.push(`${label}: phải dùng https://`);if(u.hostname!=='github.com')res.errors.push(`${label}: hostname phải đúng github.com, không viết hoa/khác tên miền.`);if(parts.length!==3)res.errors.push(`${label}: đường dẫn phải đúng 3 phần /abc/MyWeb/${expected[key]}, không thêm /tree/main hay dấu / cuối.`);if(parts[1]!=='MyWeb')res.errors.push(`${label}: repo phải đúng MyWeb, phân biệt hoa/thường.`);if(parts[2]!==expected[key])res.errors.push(`${label}: thư mục phải đúng ${expected[key]}, phân biệt hoa/thường.`);if(!parts[0])res.errors.push(`${label}: thiếu tài khoản abc.`);if(user && parts[0]!==user)res.errors.push(`${label}: tài khoản GitHub không trùng với link trước. Chỉ được dùng một abc.`);if(!user)user=parts[0];const exact=`https://github.com/${parts[0]||'abc'}/MyWeb/${expected[key]}`;if(raw!==exact)res.errors.push(`${label}: phải đúng chính xác ${exact}`);res.items.push({key,raw,exact})}catch(e){res.errors.push(`${label}: không phải URL hợp lệ.`)}}res.user=user;res.ok=res.errors.length===0;return res}
+function parseImageSpec(text){const files=(text.match(/[\w.-]+\.(?:jpg|jpeg|png|webp|gif|svg)/gi)||[]).map(x=>x.trim());const dims=(text.match(/\b\d{2,5}\s*x\s*\d{2,5}\b/gi)||[]).map(x=>x.replace(/\s+/g,''));return{files:[...new Set(files)],dims,count:files.length}}
+function checkTokens(code,tokens){const c=cleanCode(code);return tokens.filter(t=>!c.includes(cleanCode(t)))}
+function submitCurrentStage(){if(!student){alert('Vui lòng đăng nhập.');return}if(!canSubmit(current)){setFeedback('❌ Cần hoàn thành chặng trước rồi mới được cập nhật chặng này.','bad');return}if(current===0)return submitSetup();return submitBuild()}
+function submitSetup(){const v=validateRepoSet($('repoHtml').value,$('repoImg').value,$('repoCss').value);renderChecks(v.errors, v.ok?['3 link đúng tuyệt đối theo mẫu.']:[]);if(!v.ok){setFeedback('❌ Chưa đạt. Lỗi chi tiết đã liệt kê bên dưới.','bad');return}progress.repo={user:v.user,html:$('repoHtml').value.trim(),img:$('repoImg').value.trim(),css:$('repoCss').value.trim()};completeStage(0,`Hoàn thành mở đầu - GitHub user: ${v.user} - HTML: ${progress.repo.html} - IMG: ${progress.repo.img} - CSS: ${progress.repo.css}`);setFeedback('✅ Thành công. Đã ghi nhận repo MyWeb và 3 thư mục html/img/css.','good');setTimeout(()=>{current=1;renderAll()},500)}
+function submitBuild(){const s=STAGES[current],st=progress.stages[current];st.theme=$('themeInput').value.trim();st.imageSpec=$('imageSpec').value.trim();st.htmlCode=$('htmlEditor').value;st.cssCode=$('cssEditor').value;st.htmlChars=st.htmlCode.length;st.cssChars=st.cssCode.length;const repo=validateRepoSet($('repoHtml').value,$('repoImg').value,$('repoCss').value);const img=parseImageSpec(st.imageSpec);st.imageFiles=img.files;st.imageCount=img.count;const errors=[];const oks=[];if(!st.theme||st.theme.length<4)errors.push('Chủ đề cá nhân còn thiếu hoặc quá ngắn.');else oks.push('Có chủ đề cá nhân.');if(img.count<s.imageMin)errors.push(`Thiếu ảnh: yêu cầu tối thiểu ${s.imageMin}, hiện phát hiện ${img.count} tên file ảnh.`);else oks.push(`Đủ số lượng ảnh: ${img.count}/${s.imageMin}.`);if(img.dims.length<img.count)errors.push('Mỗi ảnh cần ghi kích thước dạng 1600x900 hoặc tương tự.');else if(img.count>0)oks.push('Có kích thước cho ảnh.');const missingH=checkTokens(st.htmlCode,s.htmlMust||[]);const missingC=checkTokens(st.cssCode,s.cssMust||[]);if(st.htmlCode.length<260)errors.push('HTML còn quá ngắn, chưa thể hiện nội dung kế thừa.');if(st.cssCode.length<180)errors.push('CSS còn quá ngắn, chưa đủ định dạng theo chặng.');if(missingH.length)errors.push('HTML thiếu: '+missingH.join(', '));else oks.push('HTML đạt các thành phần bắt buộc.');if(missingC.length)errors.push('CSS thiếu: '+missingC.join(', '));else oks.push('CSS đạt thuộc tính/chức năng bắt buộc.');if(!repo.ok)errors.push(...repo.errors);else oks.push('3 link GitHub vẫn đúng nghiêm ngặt.');renderChecks(errors,oks);st.errors=errors;progress.repo={user:repo.user||progress.repo.user,html:$('repoHtml').value.trim(),img:$('repoImg').value.trim(),css:$('repoCss').value.trim()};progress.metrics.totalImages=Math.max(...progress.stages.map(x=>x.imageCount||0),img.count,0);saveProgress();if(errors.length){setFeedback('❌ Chưa đạt. Hãy sửa theo lỗi chi tiết rồi bấm Cập nhật lại.','bad');recordEvent(s.title,'Kiểm tra chưa đạt',errors.join(' | '));return}completeStage(current,`Hoàn thành ${s.title} - Theme: ${st.theme} - Images: ${img.files.join(', ')} - HTML: ${progress.repo.html} - IMG: ${progress.repo.img} - CSS: ${progress.repo.css}`);setFeedback('✅ Cập nhật thành công. Chặng này đã được lưu cục bộ và đưa vào hàng chờ đồng bộ Server.','good');updatePreview();setTimeout(()=>{if(current+1<STAGES.length){current++;inheritFromPrevious(current);renderAll()}else{renderAll();botSay('🏆 Hoàn thành 10 chặng. Website MyWeb đã có đủ HTML, CSS, ảnh, Flexbox/Grid và responsive.')}},650)}
+function inheritFromPrevious(i){if(i<=0)return;const st=progress.stages[i];const prev=progress.stages[i-1];if(!st.theme)st.theme=prev.theme||'';if(!st.imageSpec)st.imageSpec=prev.imageSpec||'';if(!st.htmlCode)st.htmlCode=STAGES[i].htmlTemplate||prev.htmlCode||'';if(!st.cssCode)st.cssCode=STAGES[i].cssTemplate||prev.cssCode||'';}
+function renderChecks(errors,oks){const box=$('checkList');if(!box)return;box.innerHTML=[...oks.map(x=>`<div class="check-item ok">✅ <span>${esc(x)}</span></div>`),...errors.map(x=>`<div class="check-item bad">❌ <span>${esc(x)}</span></div>`)].join('')}
+function setFeedback(txt,type){const f=$('stageFeedback');if(f){f.textContent=txt;f.className='feedback '+(type||'')}}
+function completeStage(i,result){const st=progress.stages[i];if(!st.done){st.done=true;st.time=nowVN()}recordEvent(STAGES[i].title,i===0?'Nộp bài':'Cập nhật',result);saveProgress();renderTimeline();updateStats();syncNow()}
+function renderTimeline(){const rows=[];progress.stages.forEach((st,i)=>{if(st.done)rows.push(`<div class="time-row"><b>${esc(STAGES[i].title)}</b><span>${esc(st.time)}</span></div>`)});els.timeline.innerHTML=rows.length?rows.join(''):'<div class="small">Chưa có mốc hoàn thành.</div>'}
+function appendChat(role,html,save=true){const msg=document.createElement('div');msg.className='msg '+(role==='user'?'user':'bot');msg.innerHTML=role==='user'?`<div class="avatar">👨‍💻</div><div class="bubble">${html}</div>`:`<div class="avatar">🤖</div><div class="bubble">${html}</div>`;els.chatBody.appendChild(msg);els.chatBody.scrollTop=els.chatBody.scrollHeight;if(save)saveChatHistory()}
+function botSay(html){appendChat('bot',html,true)}
+function saveChatHistory(){if(!student)return;const data=[...els.chatBody.querySelectorAll('.msg')].map(m=>({role:m.classList.contains('user')?'user':'bot',html:(m.querySelector('.bubble')||{}).innerHTML||''})).slice(-120);localStorage.setItem(chatKey(),JSON.stringify(data))}
+function loadChatHistory(){els.chatBody.innerHTML='';if(!student)return;try{JSON.parse(localStorage.getItem(chatKey())||'[]').forEach(m=>appendChat(m.role,m.html,false))}catch(e){}}
+function safeJson(obj){try{return JSON.stringify(obj)}catch(e){return '{}'}}
+function snapshot(){ensureProgress();return{version:'css-student-snapshot-v2',time:nowVN(),course:COURSE_NAME,name:student?.name||'',code:student?.code||'',userKey:student?keyOf(student.name,student.code):'',currentStage:current,currentStageTitle:STAGES[current]?.title||'',percent:Math.round(completedCount()/STAGES.length*100),repo:progress.repo,metrics:progress.metrics,stages:progress.stages.map((st,i)=>({id:STAGES[i].id,title:STAGES[i].title,done:!!st.done,time:st.time||'',theme:st.theme||'',imageSpec:st.imageSpec||'',imageFiles:st.imageFiles||[],imageCount:st.imageCount||0,htmlChars:(st.htmlCode||'').length,cssChars:(st.cssCode||'').length,htmlCode:st.htmlCode||'',cssCode:st.cssCode||'',errors:st.errors||[]}))}}
+function snapshotEvent(label){const snap=snapshot();return{time:nowVN(),name:student.name,code:student.code,course:COURSE_NAME,topic:STAGES[current]?.title||'Hệ thống',task:label||'Snapshot tiến trình',result:'Đồng bộ snapshot tiến trình đầy đủ CSSStudent',stage:current,currentTopicIndex:current,currentTopicTitle:STAGES[current]?.title||'',xp:completedCount()*10,percent:snap.percent,topicPercent:progress.stages[current]?.done?100:0,htmlChars:latestStageData().htmlCode.length||0,cssChars:latestStageData().cssCode.length||0,imageCount:progress.metrics.totalImages||0,pdfOpenCount:progress.metrics.pdfOpenCount||0,repoHtml:progress.repo.html,repoImg:progress.repo.img,repoCss:progress.repo.css,progressSnapshot:safeJson(snap),userKey:snap.userKey}}
+function recordEvent(topic,task,result){if(!student)return;const ev=snapshotEvent(task);ev.topic=topic;ev.task=task;ev.result=result;progress.events.push(ev);progress.pending.push(ev);saveProgress()}
+function cleanAppsScriptUrl(url){return String(url||'').trim().replace(/\/dev(\?.*)?$/,'/exec').replace(/\?.*$/,'')}
+function postPayloadToServer(payload){const url=cleanAppsScriptUrl(APPS_SCRIPT_URL);const iframeName='syncFrame_'+Date.now();const iframe=document.createElement('iframe');iframe.name=iframeName;iframe.style.display='none';const form=document.createElement('form');form.method='POST';form.action=url;form.target=iframeName;form.style.display='none';const input=document.createElement('input');input.type='hidden';input.name='payload';input.value=JSON.stringify(payload);form.appendChild(input);document.body.appendChild(iframe);document.body.appendChild(form);form.submit();setTimeout(()=>{try{form.remove();iframe.remove()}catch(e){}},5000)}
+function syncNow(){if(!student)return;const url=cleanAppsScriptUrl(APPS_SCRIPT_URL);if(!url||!url.includes('script.google.com')||!url.endsWith('/exec')){botSay('⚠️ APPS_SCRIPT_URL chưa đúng. URL Web App phải kết thúc bằng /exec.');return}if(!progress.pending.length){progress.pending.push(snapshotEvent('Snapshot tiến trình'));saveProgress()}const payload={action:'saveEvents',events:[...progress.pending],snapshot:snapshot()};let queued=false;try{if(navigator.sendBeacon)queued=navigator.sendBeacon(url,new Blob([JSON.stringify(payload)],{type:'text/plain'}))}catch(e){queued=false}if(!queued){try{postPayloadToServer(payload);queued=true}catch(e){queued=false}}if(queued){progress.pending=[];progress.lastSyncAt=nowVN();saveProgress();botSay('☁️ Đã gửi snapshot tiến trình CSSStudent lên Server. Mở CSSTeacher và bấm Tải dữ liệu để kiểm tra.')}else botSay('⚠️ Chưa gửi được dữ liệu. Hàng chờ vẫn lưu cục bộ, không mất tiến trình.')}
+function restoreFromServer(){if(!student){alert('Vui lòng đăng nhập trước.');return}const url=cleanAppsScriptUrl(APPS_SCRIPT_URL);if(!url||!url.includes('script.google.com')||!url.endsWith('/exec')){botSay('⚠️ APPS_SCRIPT_URL chưa đúng.');return}botSay('♻️ Đang đọc tiến trình CSSStudent từ Server...');const cb='restoreCss_'+Date.now()+'_'+Math.floor(Math.random()*100000);const script=document.createElement('script');const timeout=setTimeout(()=>{cleanup();botSay('⚠️ Không tải được Server. Kiểm tra quyền Web App: Execute as Me và Anyone.')},15000);function cleanup(){clearTimeout(timeout);try{delete window[cb]}catch(e){window[cb]=undefined}if(script.parentNode)script.parentNode.removeChild(script)}window[cb]=data=>{cleanup();if(!data||data.ok===false||!Array.isArray(data.rows)){botSay('⚠️ Server phản hồi không hợp lệ. Cần doGet action=read hỗ trợ JSONP.');return}const restored=rebuildFromRows(data.rows);if(!restored){botSay(`⚠️ Chưa tìm thấy tiến trình CSSStudent cho ${esc(student.name)} - ${esc(student.code)}.`);return}progress=restored;ensureProgress();saveProgress();selectCurrent();renderAll();botSay(`✅ Đã khôi phục từ Server: ${completedCount()}/10 chặng, HTML ${latestStageData().htmlCode.length} ký tự, CSS ${latestStageData().cssCode.length} ký tự.`)};script.onerror=()=>{cleanup();botSay('⚠️ Không kết nối được Apps Script hoặc bị chặn quyền.')};script.src=url+(url.includes('?')?'&':'?')+'action=read&callback='+encodeURIComponent(cb)+'&t='+Date.now();document.body.appendChild(script)}
+function isCourseRow(r){const c=normalize(r.course||'');return c.includes(normalize(COURSE_NAME))||c.includes('css learning journey')||c.includes('bai 2')||c.includes('định dạng và bố cục')}
+function rebuildFromRows(rows){const matched=(rows||[]).filter(r=>normalize(r.name)===normalize(student.name)&&String(r.code||'').trim()===String(student.code||'').trim()&&isCourseRow(r));if(!matched.length)return null;const latest=[...matched].reverse().find(r=>r.progressSnapshot||r.snapshot||r.Snapshot||r['progress snapshot']);if(latest){try{const text=latest.progressSnapshot||latest.snapshot||latest.Snapshot||latest['progress snapshot'];const snap=typeof text==='string'?JSON.parse(text):text;if(snap&&String(snap.version||'').startsWith('css-student-snapshot')){const p=freshProgress();p.repo=snap.repo||p.repo;p.metrics=snap.metrics||p.metrics;p.stages=(snap.stages||[]).map((x,i)=>({...p.stages[i],done:!!x.done,time:x.time||'',theme:x.theme||'',imageSpec:x.imageSpec||'',imageFiles:x.imageFiles||[],imageCount:Number(x.imageCount||0),htmlCode:x.htmlCode||p.stages[i].htmlCode,cssCode:x.cssCode||p.stages[i].cssCode,htmlChars:Number(x.htmlChars||0),cssChars:Number(x.cssChars||0),errors:x.errors||[]}));p.events=matched;p.pending=[];return p}}catch(e){}}
+const p=freshProgress();matched.forEach(r=>{const title=normalize(r.topic||'');const idx=STAGES.findIndex(s=>title.includes(normalize(s.title).slice(0,10)));if(idx>=0){p.stages[idx].done=true;p.stages[idx].time=r.time||p.stages[idx].time||nowVN()}p.repo.html=r.repoHtml||p.repo.html;p.repo.img=r.repoImg||p.repo.img;p.repo.css=r.repoCss||p.repo.css;p.metrics.htmlTypedChars=Math.max(p.metrics.htmlTypedChars,Number(r.htmlChars||0));p.metrics.cssTypedChars=Math.max(p.metrics.cssTypedChars,Number(r.cssChars||0));p.metrics.totalImages=Math.max(p.metrics.totalImages,Number(r.imageCount||0));p.metrics.pdfOpenCount=Math.max(p.metrics.pdfOpenCount,Number(r.pdfOpenCount||0))});p.events=matched;p.pending=[];return p}
+function trackPdfOpen(){progress.metrics.pdfOpenCount=Number(progress.metrics.pdfOpenCount||0)+1;recordEvent(STAGES[current]?.title||'PDF','Mở PDF Bài 2 CSS','Người học mở tài liệu Bài 2 CSS');saveProgress();updateStats();syncNow()}
+function resetProgress(){if(!student){alert('Chưa đăng nhập.');return}if(!confirm('Xóa tiến trình và lịch sử chat của người học hiện tại trên trình duyệt này?'))return;localStorage.removeItem(profileKey());localStorage.removeItem(chatKey());progress=freshProgress();current=0;els.chatBody.innerHTML='';renderAll()}
+init();
+</script>
+</body>
+</html>
