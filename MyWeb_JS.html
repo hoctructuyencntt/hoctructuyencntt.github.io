@@ -1,23 +1,315 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MyWeb JS Practice Guide - Bài 03 JavaScript</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyWeb JS Practice Guide FIX Layout - Bài 03 JavaScript</title>
 <style>
 :root{
-  --ink:#102033;--muted:#64748b;--line:#d7dee8;--panel:#ffffff;--soft:#f8fafc;
-  --blue:#2563eb;--cyan:#06b6d4;--green:#16a34a;--orange:#f97316;--red:#ef4444;--purple:#7c3aed;
-  --shadow:0 18px 45px rgba(15,23,42,.11);--radius:24px;--code:#0f172a;
+  --ink:#102033;
+  --muted:#64748b;
+  --line:#d8e1ec;
+  --paper:#ffffff;
+  --bg1:#f8fbff;
+  --bg2:#fff7ed;
+  --blue:#2563eb;
+  --cyan:#06b6d4;
+  --green:#16a34a;
+  --orange:#f97316;
+  --red:#ef4444;
+  --purple:#7c3aed;
+  --dark:#0f172a;
+  --soft:#eff6ff;
+  --shadow:0 18px 45px rgba(15,23,42,.10);
+  --radius:24px;
 }
-*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:"Segoe UI",system-ui,sans-serif;color:var(--ink);background:linear-gradient(135deg,#f8fbff,#edf8ff 55%,#fff7ed)}
-button,input,textarea{font-family:inherit} a{color:var(--blue)}
-.app{max-width:1450px;margin:auto;padding:16px}.topbar{position:sticky;top:10px;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:15px 16px;border:1px solid var(--line);border-radius:30px;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);box-shadow:var(--shadow)}
-.brand{display:flex;gap:12px;align-items:center}.logo{width:58px;height:58px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(135deg,var(--orange),var(--blue));color:#fff;font-weight:950;font-size:20px;box-shadow:inset 0 -5px rgba(0,0,0,.13)}
-h1,h2,h3,h4,p{margin:0}.brand p,.small{font-size:13px;color:var(--muted);line-height:1.45}.actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.btn{border:0;border-radius:16px;padding:11px 14px;font-weight:900;color:white;background:linear-gradient(135deg,var(--blue),var(--cyan));cursor:pointer;box-shadow:0 10px 20px rgba(37,99,235,.15)}.btn.ghost{background:#f1f5f9;color:#334155;border:1px solid var(--line);box-shadow:none}.btn.orange{background:linear-gradient(135deg,#ffab19,var(--orange))}.btn.green{background:linear-gradient(135deg,#22c55e,var(--green))}
-.hero{margin-top:16px;padding:22px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(239,246,255,.96));box-shadow:var(--shadow)}.hero-grid{display:grid;grid-template-columns:1.25fr .85fr;gap:16px;align-items:start}.hero h2{font-size:30px;line-height:1.18}.badge{display:inline-flex;gap:6px;align-items:center;padding:6px 10px;border-radius:999px;background:#fff7ed;color:#9a3412;font-weight:900;font-size:12px;margin-bottom:10px}.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.pill{display:inline-flex;gap:7px;align-items:center;padding:8px 11px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:13px;font-weight:850}.notice{padding:14px;border-radius:18px;border:1px solid rgba(249,115,22,.28);background:#fff7ed;color:#7c2d12;line-height:1.5}.layout{display:grid;grid-template-columns:310px minmax(0,1fr);gap:16px;margin-top:16px}.side{position:sticky;top:104px;align-self:start;border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.94);box-shadow:var(--shadow);padding:15px}.search{width:100%;padding:12px;border:1px solid var(--line);border-radius:15px;background:#f8fafc;outline:none}.nav{display:grid;gap:8px;margin-top:12px}.nav a{text-decoration:none;color:var(--ink);padding:10px 12px;border-radius:15px;background:#f8fafc;border:1px solid var(--line);font-size:13px;font-weight:850}.nav a:hover{background:#eff6ff;border-color:rgba(37,99,235,.28)}.main{display:grid;gap:14px}.card{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);box-shadow:var(--shadow);overflow:hidden}.card-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;padding:16px 18px;background:#f8fafc;border-bottom:1px solid var(--line)}.card-head h3{font-size:20px}.level{white-space:nowrap;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:950}.level.easy{background:#ecfdf5;color:#166534}.level.mid{background:#eff6ff;color:#1d4ed8}.level.hard{background:#fff7ed;color:#9a3412}.card-body{padding:16px 18px;display:grid;gap:14px}.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.box{padding:14px;border:1px solid var(--line);border-radius:18px;background:#fff}.box h4{font-size:15px;margin-bottom:8px}.box ul,.box ol{margin:8px 0 0;padding-left:20px}.box li{margin:6px 0;line-height:1.45}.submit{border-color:rgba(22,163,74,.28);background:#f0fdf4}.warn{border-color:rgba(239,68,68,.24);background:#fff1f2}.tip{border-color:rgba(37,99,235,.25);background:#eff6ff}.repo{font-family:Consolas,Monaco,"Courier New",monospace;font-size:13px;line-height:1.55;background:#0f172a;color:#dbeafe;border-radius:16px;padding:12px;overflow:auto}.code-wrap{border-radius:18px;overflow:hidden;border:1px solid rgba(15,23,42,.18);background:var(--code)}.codebar{display:flex;justify-content:space-between;gap:10px;align-items:center;background:#111827;color:#dbeafe;padding:9px 12px;font-weight:850;font-size:13px}.copy{border:1px solid rgba(255,255,255,.2);border-radius:999px;background:#243247;color:white;padding:6px 9px;font-size:12px;cursor:pointer}.code{margin:0;padding:14px;color:#dbeafe;font-family:Consolas,Monaco,"Courier New",monospace;font-size:13px;line-height:1.5;white-space:pre;overflow:auto;max-height:360px}.checklist{display:grid;gap:8px}.check{display:flex;gap:9px;align-items:flex-start;padding:10px 11px;border:1px solid var(--line);border-radius:14px;background:#fff}.check input{margin-top:3px}.footer{padding:18px;border:1px solid var(--line);border-radius:var(--radius);background:white;box-shadow:var(--shadow)}.hidden{display:none!important}.print-only{display:none}
-@media(max-width:1100px){.layout,.hero-grid,.grid-2{grid-template-columns:1fr}.side{position:static}.topbar{position:static;align-items:flex-start;flex-direction:column}}
-@media print{body{background:white}.topbar,.side,.actions,.copy{display:none}.layout,.hero-grid,.grid-2{display:block}.card,.hero,.footer{box-shadow:none;break-inside:avoid;margin-bottom:12px}.app{max-width:none}.print-only{display:block}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:"Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at top left,rgba(37,99,235,.18),transparent 28%),
+    radial-gradient(circle at top right,rgba(249,115,22,.16),transparent 26%),
+    linear-gradient(135deg,var(--bg1),#edf8ff 58%,var(--bg2));
+}
+a{color:var(--blue)}
+h1,h2,h3,p{margin:0}
+code,kbd,pre{font-family:Consolas,Monaco,"Courier New",monospace}
+.app{max-width:1480px;margin:auto;padding:18px}
+.topbar{
+  position:sticky;
+  top:12px;
+  z-index:30;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  padding:15px 18px;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(14px);
+  border:1px solid var(--line);
+  border-radius:30px;
+  box-shadow:var(--shadow);
+}
+.brand{display:flex;gap:13px;align-items:center}
+.logo{
+  width:60px;height:60px;border-radius:20px;
+  display:grid;place-items:center;
+  color:white;font-weight:950;font-size:22px;
+  background:linear-gradient(135deg,var(--blue),var(--cyan));
+  box-shadow:inset 0 -6px rgba(0,0,0,.14);
+}
+.brand p,.small{color:var(--muted);font-size:13px;line-height:1.55}
+.actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.btn{
+  border:0;
+  border-radius:16px;
+  padding:11px 14px;
+  font-weight:900;
+  cursor:pointer;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  color:white;
+  background:linear-gradient(135deg,var(--blue),var(--cyan));
+  box-shadow:0 10px 20px rgba(37,99,235,.14);
+}
+.btn.ghost{background:#f8fafc;color:#334155;border:1px solid var(--line);box-shadow:none}
+.btn.orange{background:linear-gradient(135deg,#ffb22e,var(--orange))}
+.layout{display:grid;grid-template-columns:310px minmax(0,1fr);gap:18px;margin-top:18px}
+.sidebar{
+  position:sticky;
+  top:104px;
+  align-self:start;
+  max-height:calc(100vh - 124px);
+  overflow:auto;
+  padding:16px;
+  background:rgba(255,255,255,.92);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.nav{display:grid;gap:8px;margin-top:12px}
+.nav a{
+  display:block;
+  padding:11px 12px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:#f8fafc;
+  color:#1e293b;
+  font-weight:850;
+  text-decoration:none;
+  line-height:1.35;
+}
+.nav a small{display:block;color:var(--muted);font-weight:600;margin-top:3px}
+.card{
+  background:rgba(255,255,255,.94);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.hero{
+  padding:24px;
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr);
+  gap:18px;
+  align-items:stretch;
+}
+.hero h1{font-size:34px;line-height:1.15;margin-bottom:10px}
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:7px 11px;
+  border-radius:999px;
+  background:#fff7ed;
+  color:#9a3412;
+  font-weight:900;
+  font-size:13px;
+  margin-bottom:10px;
+}
+.repo-box{
+  border:1px dashed rgba(37,99,235,.40);
+  border-radius:22px;
+  padding:16px;
+  background:#eff6ff;
+  line-height:1.55;
+}
+.repo-box code{background:white;padding:2px 6px;border-radius:8px;color:#1d4ed8}
+.note-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.note{
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:#f8fafc;
+  line-height:1.5;
+}
+.note b{display:block;margin-bottom:5px}
+.section{
+  margin-top:18px;
+  padding:18px;
+}
+.stage{
+  border:1px solid var(--line);
+  border-radius:22px;
+  overflow:hidden;
+  background:white;
+  margin-bottom:16px;
+}
+.stage-head{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  gap:14px;
+  align-items:start;
+  padding:16px;
+  background:linear-gradient(90deg,#f8fafc,#eef6ff);
+  border-bottom:1px solid var(--line);
+}
+.num{
+  width:46px;height:46px;border-radius:16px;
+  display:grid;place-items:center;
+  color:white;font-weight:950;
+  background:linear-gradient(135deg,var(--blue),var(--cyan));
+}
+.level{
+  padding:6px 10px;border-radius:999px;
+  font-size:12px;font-weight:900;
+  background:#ecfdf5;color:#166534;
+  white-space:nowrap;
+}
+.level.medium{background:#fff7ed;color:#9a3412}
+.level.hard{background:#f5f3ff;color:#6d28d9}
+.stage-body{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 380px;
+  gap:16px;
+  padding:16px;
+}
+.block{display:grid;gap:10px}
+.panel{
+  padding:13px 14px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:#f8fafc;
+  line-height:1.55;
+}
+.panel.good{background:#f0fdf4;border-color:rgba(22,163,74,.25)}
+.panel.warn{background:#fff7ed;border-color:rgba(249,115,22,.25)}
+.panel.blue{background:#eff6ff;border-color:rgba(37,99,235,.25)}
+.panel h4{margin:0 0 8px;font-size:15px}
+ul,ol{margin:8px 0 0;padding-left:20px}
+li{margin:6px 0;line-height:1.5}
+pre{
+  margin:0;
+  padding:14px;
+  border-radius:18px;
+  overflow:auto;
+  background:#111827;
+  color:#dbeafe;
+  line-height:1.5;
+  font-size:13px;
+  border:1px solid rgba(255,255,255,.08);
+}
+.copybar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  padding:10px 12px;
+  background:#0f172a;
+  color:#dbeafe;
+  border-radius:18px 18px 0 0;
+  font-size:13px;
+  font-weight:850;
+}
+.codewrap pre{border-radius:0 0 18px 18px}
+.copy{
+  border:1px solid rgba(255,255,255,.18);
+  color:white;
+  background:rgba(255,255,255,.08);
+  border-radius:999px;
+  padding:5px 9px;
+  cursor:pointer;
+}
+.check{
+  display:grid;
+  gap:8px;
+}
+.check label{
+  display:flex;
+  gap:8px;
+  align-items:flex-start;
+  padding:9px 10px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:13px;
+  line-height:1.45;
+}
+.result{
+  border-left:6px solid var(--green);
+  padding:12px 14px;
+  background:#f0fdf4;
+  border-radius:14px;
+  line-height:1.55;
+}
+.repo-submit{
+  border-left:6px solid var(--orange);
+  padding:12px 14px;
+  background:#fff7ed;
+  border-radius:14px;
+  line-height:1.55;
+}
+.footer{
+  margin-top:18px;
+  padding:18px;
+  text-align:center;
+  color:var(--muted);
+}
+@media(max-width:1180px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{position:static;max-height:none}
+  .hero,.stage-body,.note-grid{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  .app{padding:10px}
+  .topbar{position:static;align-items:flex-start;flex-direction:column}
+  .hero h1{font-size:28px}
+  .stage-head{grid-template-columns:1fr}
+}
+
+/* FIX V2: chống che nội dung ở mọi kích thước màn hình */
+main, .card, .stage, .stage-body, .block, .panel, .codewrap, pre { min-width: 0; max-width: 100%; }
+.hero { grid-template-columns: 1fr !important; }
+.stage-body { grid-template-columns: 1fr !important; }
+.stage-body > aside { width: 100%; }
+.note-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important; }
+pre {
+  white-space: pre-wrap !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+  max-width: 100% !important;
+}
+.panel, .result, .repo-submit { overflow-wrap: anywhere; }
+.repo-submit code, .panel code { white-space: normal; overflow-wrap: anywhere; }
+.copybar { border-radius: 18px 18px 0 0; }
+.codewrap pre { border-radius: 0 0 18px 18px; }
+@media (min-width:1181px){
+  .layout{grid-template-columns:280px minmax(0,1fr) !important;}
+}
+@media (max-width:1100px){
+  .layout{grid-template-columns:1fr !important;}
+  .sidebar{position:static !important;max-height:none !important;}
+}
+@media (max-width:900px){
+  .stage-head{grid-template-columns:1fr !important;}
+  .topbar{position:static !important;}
+}
+
 </style>
 </head>
 <body>
@@ -26,196 +318,531 @@ h1,h2,h3,h4,p{margin:0}.brand p,.small{font-size:13px;color:var(--muted);line-he
     <div class="brand">
       <div class="logo">JS</div>
       <div>
-        <h1>MyWeb JS Practice Guide</h1>
-        <p>Chuỗi nhiệm vụ bổ sung JavaScript vào website MyWeb đã hoàn thành HTML/CSS/IMG.</p>
+        <h1>MyWeb JS Practice Guide - Bản sửa lỗi bố cục</h1>
+        <p>Hướng dẫn sinh viên bổ sung JavaScript vào website MyWeb đã hoàn thành HTML/CSS/IMG.</p>
       </div>
     </div>
     <div class="actions">
-      <a class="btn ghost" href="https://hoctructuyencntt.github.io/bai03tkweb.pdf" target="_blank" rel="noopener" style="text-decoration:none">Mở PDF Bài 03</a>
-      <button class="btn orange" onclick="window.print()">In / Xuất PDF</button>
-      <button class="btn green" onclick="openAll()">Mở tất cả chặng</button>
-      <button class="btn ghost" onclick="closeAll()">Thu gọn</button>
+      <a class="btn ghost" href="https://hoctructuyencntt.github.io/bai03tkweb.pdf" target="_blank" rel="noopener">📄 PDF Bài 03</a>
+      <a class="btn orange" href="#stage-00">Bắt đầu</a>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="hero-grid">
-      <div>
-        <span class="badge">Giả định đầu vào: MyWeb đã có html + css + img</span>
-        <h2>Bài 03: Biến website MyWeb tĩnh thành website có tương tác bằng JavaScript</h2>
-        <p class="small" style="font-size:15px;margin-top:10px">Sinh viên không làm lại HTML/CSS từ đầu. Mỗi chặng chỉ yêu cầu <b>bổ sung chức năng JS</b> vào website cá nhân đã xây dựng trước đó. Mã chính đặt trong <b>MyWeb/js/script.js</b>; chỉ chỉnh HTML/CSS khi cần thêm <code>id</code>, <code>class</code>, nút bấm, form hoặc trạng thái hiển thị.</p>
-        <div class="pill-row">
-          <span class="pill">📁 MyWeb/html/index.html</span>
-          <span class="pill">🎨 MyWeb/css/style.css</span>
-          <span class="pill">🖼️ MyWeb/img/...</span>
-          <span class="pill">⚙️ MyWeb/js/script.js</span>
-        </div>
-      </div>
-      <div class="notice">
-        <b>Quy tắc nộp sau mỗi chặng</b><br>
-        Cập nhật repo cá nhân <b>MyWeb</b>. Kết quả chính của chặng là file trong thư mục <b>js</b>. Nộp link:<br><br>
-        <code>https://github.com/abc/MyWeb/js</code><br><br>
-        Nếu chặng có chỉnh HTML/CSS, vẫn giữ cấu trúc cũ và chỉ bổ sung phần cần thiết.
-      </div>
-    </div>
-  </section>
-
   <div class="layout">
-    <aside class="side">
-      <h2 style="font-size:18px">Bộ lọc nhiệm vụ</h2>
-      <p class="small">Tìm nhanh theo từ khóa: DOM, menu, form, gallery, submit...</p>
-      <input class="search" id="searchBox" placeholder="Tìm chặng thực hành..." oninput="filterStages()">
-      <nav class="nav" id="stageNav"></nav>
-      <div class="box tip" style="margin-top:12px">
-        <h4>Link JS đúng khi HTML ở thư mục html</h4>
-        <div class="repo">&lt;script src="../js/script.js"&gt;&lt;/script&gt;</div>
-      </div>
+    <aside class="sidebar">
+      <h2 style="font-size:20px">🧭 Lộ trình JS cho MyWeb</h2>
+      <p class="small">Không có đăng nhập, không lưu server, không kiểm tra tự động. Đây chỉ là bảng giao nhiệm vụ thực hành theo từng chặng.</p>
+      <nav class="nav">
+        <a href="#stage-00">00. Chuẩn bị thư mục js<small>Tạo script.js và liên kết vào HTML</small></a>
+        <a href="#stage-01">01. Console + biến<small>Kiểm tra JS đã chạy</small></a>
+        <a href="#stage-02">02. Đổi tiêu đề DOM<small>getElementById + textContent</small></a>
+        <a href="#stage-03">03. Nút chào mừng<small>click + addEventListener</small></a>
+        <a href="#stage-04">04. Ẩn/hiện nội dung<small>classList.toggle</small></a>
+        <a href="#stage-05">05. Menu tương tác<small>Mở/đóng menu bằng JS</small></a>
+        <a href="#stage-06">06. Chọn màu/chủ đề<small>change + classList</small></a>
+        <a href="#stage-07">07. Tìm kiếm nội dung<small>keyup + lọc card</small></a>
+        <a href="#stage-08">08. Gallery ảnh<small>Lọc ảnh theo nhóm</small></a>
+        <a href="#stage-09">09. Kiểm tra form<small>submit + preventDefault</small></a>
+        <a href="#stage-10">10. Hoàn thiện & kiểm thử<small>Kiểm thử chức năng JS</small></a>
+      </nav>
     </aside>
 
-    <main class="main" id="stageList"></main>
-  </div>
+    <main>
+      <section class="card hero">
+        <div>
+          <span class="badge">Giả định đầu vào</span>
+          <h1>Sinh viên đã có website MyWeb hoàn chỉnh bằng HTML, CSS và IMG</h1>
+          <p class="small" style="font-size:15px">Bài này không yêu cầu xây dựng lại website. Sinh viên chỉ mở website MyWeb đã làm ở bài trước, thêm thư mục <b>js</b>, viết file <b>script.js</b>, rồi bổ sung các chức năng JavaScript từ đơn giản đến nâng cao.</p>
+          <div class="note-grid">
+            <div class="note"><b>HTML</b>Đã có cấu trúc website trong <code>MyWeb/html</code>.</div>
+            <div class="note"><b>CSS</b>Đã có giao diện trong <code>MyWeb/css</code>.</div>
+            <div class="note"><b>IMG</b>Đã có hình ảnh trong <code>MyWeb/img</code>.</div>
+          </div>
+        </div>
+        <div class="repo-box">
+          <h3>📦 Kết quả nộp cuối mỗi chặng</h3>
+          <p>Sinh viên cập nhật website thật trong repo cá nhân:</p>
+          <p><code>MyWeb/html</code> — có thể cần thêm <code>id</code>, nút, form.</p>
+          <p><code>MyWeb/css</code> — có thể cần thêm class trạng thái như <code>.hidden</code>, <code>.dark-mode</code>.</p>
+          <p><code>MyWeb/js</code> — kết quả chính: <code>script.js</code>.</p>
+          <p><b>Link nộp trọng tâm:</b><br><code>https://github.com/abc/MyWeb/js</code></p>
+        </div>
+      </section>
 
-  <section class="footer" style="margin-top:16px">
-    <h2>Rubric chấm nhanh</h2>
-    <div class="grid-2" style="margin-top:12px">
-      <div class="box"><h4>Đạt yêu cầu</h4><ul><li>Website vẫn giữ nội dung, ảnh, bố cục đã làm ở MyWeb.</li><li>File <code>js/script.js</code> có mã rõ ràng, có chú thích ngắn.</li><li>Không lỗi Console nghiêm trọng.</li><li>Tương tác chạy được trên trình duyệt.</li></ul></div>
-      <div class="box warn"><h4>Không đạt</h4><ul><li>Làm lại website từ đầu, mất sản phẩm HTML/CSS/IMG cũ.</li><li>Đặt JS lẫn lộn trong HTML, không có file <code>js/script.js</code>.</li><li>Form reload trang vì quên <code>preventDefault()</code>.</li><li>Nộp sai repo hoặc sai thư mục <code>MyWeb/js</code>.</li></ul></div>
-    </div>
-  </section>
-</div>
+      <section class="card section">
+        <h2>Nguyên tắc làm bài</h2>
+        <div class="note-grid">
+          <div class="note"><b>Không phá website cũ</b>Mỗi chặng chỉ thêm chức năng JS vào website đã có.</div>
+          <div class="note"><b>Không viết JS lẫn lộn</b>Ưu tiên viết trong <code>MyWeb/js/script.js</code>.</div>
+          <div class="note"><b>Kiểm thử từng bước</b>Làm xong chặng nào mở trình duyệt kiểm tra ngay chặng đó.</div>
+        </div>
+      </section>
 
-<script>
-const stages = [
-  {
-    id:'stage-01', no:'01', level:'easy', title:'Tạo thư mục js và liên kết script.js', focus:'External JavaScript',
-    goal:'Chuẩn hóa cấu trúc MyWeb để JavaScript nằm riêng trong thư mục js, không viết lẫn vào HTML.',
-    tasks:['Trong repo MyWeb, tạo thư mục js ngang hàng với html, css, img.','Tạo file js/script.js.','Mở html/index.html và thêm thẻ script ngay trước </body>.','Kiểm tra Console thấy thông báo từ script.js.'],
-    html:`<!-- đặt cuối file html/index.html, ngay trước </body> -->
-<script src="../js/script.js"></script>`,
-    js:`console.log("MyWeb JS đã kết nối thành công");`,
-    test:['Mở website trên trình duyệt.','Nhấn F12 → Console.','Thấy dòng: MyWeb JS đã kết nối thành công.'],
-    submit:'Cập nhật MyWeb/js/script.js và nộp link https://github.com/abc/MyWeb/js'
-  },
-  {
-    id:'stage-02', no:'02', level:'easy', title:'Đổi nội dung bằng DOM', focus:'getElementById, textContent',
-    goal:'Dùng JavaScript tìm phần tử HTML và thay đổi nội dung hiển thị.',
-    tasks:['Chọn một tiêu đề chính trong website, ví dụ h1 hero.','Nếu chưa có id, thêm id="mainTitle" vào tiêu đề đó.','Trong script.js, lấy phần tử bằng document.getElementById.','Đổi nội dung hoặc thêm câu chào phù hợp chủ đề cá nhân.'],
-    html:`<h1 id="mainTitle">Website cá nhân của tôi</h1>
-<p id="welcomeText">Chào mừng bạn đến với MyWeb.</p>`,
-    js:`const mainTitle = document.getElementById("mainTitle");
+      <section class="card section" id="stage-00">
+        <article class="stage">
+          <div class="stage-head">
+            <div class="num">00</div>
+            <div>
+              <h2>Chuẩn bị thư mục JavaScript cho MyWeb</h2>
+              <p class="small">Mục tiêu: tạo cấu trúc đúng để mọi chức năng sau đều viết vào file JS riêng.</p>
+            </div>
+            <span class="level">Dễ</span>
+          </div>
+          <div class="stage-body">
+            <div class="block">
+              <div class="panel blue">
+                <h4>Yêu cầu thực hành</h4>
+                <ol>
+                  <li>Trong repo <b>MyWeb</b>, tạo thêm thư mục <b>js</b>.</li>
+                  <li>Trong <b>MyWeb/js</b>, tạo file <b>script.js</b>.</li>
+                  <li>Mở file HTML chính, thường là <b>MyWeb/html/index.html</b>.</li>
+                  <li>Trước thẻ đóng <code>&lt;/body&gt;</code>, liên kết file JavaScript.</li>
+                </ol>
+              </div>
+              <div class="codewrap">
+                <div class="copybar"><span>Thêm vào cuối file HTML</span><button class="copy" data-copy="code00">Copy</button></div>
+                <pre id="code00"><code>&lt;script src="../js/script.js"&gt;&lt;/script&gt;</code></pre>
+              </div>
+              <div class="result"><b>Kết quả cần có:</b> website vẫn hiển thị như cũ, nhưng đã sẵn sàng nhận chức năng JavaScript từ file <code>script.js</code>.</div>
+            </div>
+            <aside class="block">
+              <div class="panel warn">
+                <h4>Lỗi thường gặp</h4>
+                <ul>
+                  <li>Đặt sai đường dẫn: <code>js/script.js</code> thay vì <code>../js/script.js</code>.</li>
+                  <li>Đặt thẻ <code>script</code> quá sớm trong <code>head</code> khiến JS chạy trước khi HTML được tải.</li>
+                  <li>Tên thư mục viết hoa/lẫn lộn: nên thống nhất <code>js</code>.</li>
+                </ul>
+              </div>
+              <div class="repo-submit"><b>Nộp:</b> cập nhật repo và nộp link <code>https://github.com/abc/MyWeb/js</code>.</div>
+            </aside>
+          </div>
+        </article>
+      </section>
+
+      <section class="card section" id="stage-01">
+        <article class="stage">
+          <div class="stage-head">
+            <div class="num">01</div>
+            <div>
+              <h2>Kiểm tra JavaScript đã chạy bằng console và biến</h2>
+              <p class="small">Mục tiêu: biết file script.js đã liên kết đúng và ôn lại biến, kiểu dữ liệu.</p>
+            </div>
+            <span class="level">Dễ</span>
+          </div>
+          <div class="stage-body">
+            <div class="block">
+              <div class="panel blue">
+                <h4>Yêu cầu thực hành</h4>
+                <ol>
+                  <li>Mở <code>MyWeb/js/script.js</code>.</li>
+                  <li>Khai báo các biến mô tả website cá nhân: tên website, chủ đề, số lượng ảnh, trạng thái hoàn thành.</li>
+                  <li>Dùng <code>console.log()</code> để in ra thông tin.</li>
+                  <li>Mở DevTools → Console để kiểm tra kết quả.</li>
+                </ol>
+              </div>
+              <div class="codewrap">
+                <div class="copybar"><span>Gợi ý script.js</span><button class="copy" data-copy="code01">Copy</button></div>
+                <pre id="code01"><code>const siteName = "MyWeb";
+let topic = "Chủ đề website cá nhân của em";
+let imageCount = 5;
+let isReady = true;
+
+console.log("Website:", siteName);
+console.log("Chủ đề:", topic);
+console.log("Số ảnh:", imageCount);
+console.log("Đã sẵn sàng dùng JS?", isReady);
+console.log("Kiểu dữ liệu topic:", typeof topic);</code></pre>
+              </div>
+              <div class="result"><b>Kết quả cần thấy:</b> Console hiển thị đủ thông tin website, không có lỗi màu đỏ.</div>
+            </div>
+            <aside class="block">
+              <div class="panel good">
+                <h4>Kiến thức liên quan</h4>
+                <ul>
+                  <li><code>const</code>: dùng cho giá trị không gán lại.</li>
+                  <li><code>let</code>: dùng khi giá trị có thể thay đổi.</li>
+                  <li><code>typeof</code>: kiểm tra kiểu dữ liệu.</li>
+                </ul>
+              </div>
+              <div class="repo-submit"><b>Nộp:</b> file <code>MyWeb/js/script.js</code> có phần kiểm tra console.</div>
+            </aside>
+          </div>
+        </article>
+      </section>
+
+      <section class="card section" id="stage-02">
+        <article class="stage">
+          <div class="stage-head">
+            <div class="num">02</div>
+            <div>
+              <h2>Đổi nội dung tiêu đề bằng DOM</h2>
+              <p class="small">Mục tiêu: dùng JavaScript tìm phần tử HTML và thay đổi nội dung hiển thị.</p>
+            </div>
+            <span class="level">Dễ</span>
+          </div>
+          <div class="stage-body">
+            <div class="block">
+              <div class="panel blue">
+                <h4>Yêu cầu thực hành</h4>
+                <ol>
+                  <li>Chọn một tiêu đề chính trong website, ví dụ thẻ <code>h1</code> ở hero.</li>
+                  <li>Nếu chưa có, thêm <code>id="mainTitle"</code> cho tiêu đề đó.</li>
+                  <li>Trong <code>script.js</code>, dùng <code>document.getElementById()</code>.</li>
+                  <li>Đổi nội dung tiêu đề hoặc thêm lời chào phù hợp chủ đề cá nhân.</li>
+                </ol>
+              </div>
+              <div class="codewrap">
+                <div class="copybar"><span>HTML cần có</span><button class="copy" data-copy="code02a">Copy</button></div>
+                <pre id="code02a"><code>&lt;h1 id="mainTitle"&gt;Website cá nhân của tôi&lt;/h1&gt;
+&lt;p id="welcomeText"&gt;Chào mừng bạn đến với MyWeb.&lt;/p&gt;</code></pre>
+              </div>
+              <div class="codewrap">
+                <div class="copybar"><span>Gợi ý script.js</span><button class="copy" data-copy="code02b">Copy</button></div>
+                <pre id="code02b"><code>const mainTitle = document.getElementById("mainTitle");
 const welcomeText = document.getElementById("welcomeText");
 
 if (mainTitle && welcomeText) {
   mainTitle.textContent = "MyWeb đã có JavaScript!";
   welcomeText.textContent = "Nội dung này được cập nhật bằng file js/script.js.";
-}`,
-    test:['Tải lại trang.','Tiêu đề hoặc đoạn chào thay đổi sau khi trang chạy.','Console không báo lỗi null hoặc undefined.'],
-    submit:'Nộp MyWeb/js, trong script.js có phần DOM đổi nội dung.'
-  },
-  {
-    id:'stage-03', no:'03', level:'easy', title:'Nút bấm phản hồi người dùng', focus:'click event',
-    goal:'Thêm một nút vào website và xử lý sự kiện click để giao diện phản hồi.',
-    tasks:['Thêm nút vào phần hero hoặc giới thiệu.','Gắn id="helloBtn" cho nút.','Thêm vùng thông báo id="helloResult".','Trong script.js, dùng addEventListener("click", ...).'],
-    html:`<button id="helloBtn" type="button">Nhấn để xem lời chào</button>
-<p id="helloResult"></p>`,
-    js:`const helloBtn = document.getElementById("helloBtn");
+}</code></pre>
+              </div>
+              <div class="result"><b>Kết quả cần thấy:</b> khi tải lại trang, tiêu đề hoặc đoạn chào thay đổi sau khi JavaScript chạy.</div>
+            </div>
+            <aside class="block">
+              <div class="panel warn">
+                <h4>Lỗi thường gặp</h4>
+                <ul>
+                  <li>Trong HTML là <code>id="main-title"</code> nhưng JS gọi <code>mainTitle</code>.</li>
+                  <li>Gọi sai chữ hoa/chữ thường trong id.</li>
+                  <li>Quên kiểm tra phần tử có tồn tại trước khi đổi nội dung.</li>
+                </ul>
+              </div>
+              <div class="repo-submit"><b>Nộp:</b> cập nhật <code>index.html</code> và <code>script.js</code>, trọng tâm là link <code>MyWeb/js</code>.</div>
+            </aside>
+          </div>
+        </article>
+      </section>
+
+      <section class="card section" id="stage-03">
+        <article class="stage">
+          <div class="stage-head">
+            <div class="num">03</div>
+            <div>
+              <h2>Thêm nút chào mừng bằng sự kiện click</h2>
+              <p class="small">Mục tiêu: hiểu cách người dùng thao tác và JavaScript phản hồi.</p>
+            </div>
+            <span class="level">Dễ</span>
+          </div>
+          <div class="stage-body">
+            <div class="block">
+              <div class="panel blue">
+                <h4>Yêu cầu thực hành</h4>
+                <ol>
+                  <li>Thêm một nút trong phần hero hoặc giới thiệu.</li>
+                  <li>Gán <code>id="helloBtn"</code> cho nút.</li>
+                  <li>Thêm vùng hiển thị kết quả <code>id="helloResult"</code>.</li>
+                  <li>Trong <code>script.js</code>, dùng <code>addEventListener("click", ...)</code>.</li>
+                </ol>
+              </div>
+              <div class="codewrap">
+                <div class="copybar"><span>HTML cần có</span><button class="copy" data-copy="code03a">Copy</button></div>
+                <pre id="code03a"><code>&lt;button id="helloBtn"&gt;Nhấn để xem lời chào&lt;/button&gt;
+&lt;p id="helloResult"&gt;&lt;/p&gt;</code></pre>
+              </div>
+              <div class="codewrap">
+                <div class="copybar"><span>Gợi ý script.js</span><button class="copy" data-copy="code03b">Copy</button></div>
+                <pre id="code03b"><code>const helloBtn = document.getElementById("helloBtn");
 const helloResult = document.getElementById("helloResult");
 
 if (helloBtn && helloResult) {
   helloBtn.addEventListener("click", function () {
     helloResult.textContent = "Cảm ơn bạn đã ghé thăm MyWeb!";
   });
-}`,
-    test:['Bấm nút.','Thông báo xuất hiện ngay trên trang, không dùng alert là tốt hơn.','Bấm nhiều lần vẫn ổn định.'],
-    submit:'Nộp MyWeb/js, trong script.js có sự kiện click cho nút.'
-  },
-  {
-    id:'stage-04', no:'04', level:'easy', title:'Ẩn / hiện nội dung giới thiệu', focus:'classList.toggle',
-    goal:'Tạo hiệu ứng mở/thu gọn một vùng nội dung đã có trong website.',
-    tasks:['Chọn phần giới thiệu, câu chuyện hoặc mô tả dài.','Bọc nội dung bằng id="aboutContent".','Thêm nút id="toggleAboutBtn".','Trong CSS thêm class .hidden nếu chưa có.','Trong JS dùng classList.toggle("hidden").'],
-    html:`<button id="toggleAboutBtn" type="button">Ẩn / hiện giới thiệu</button>
-<div id="aboutContent">
-  <p>Nội dung giới thiệu website cá nhân...</p>
-</div>`,
-    css:`.hidden {
+}</code></pre>
+              </div>
+              <div class="result"><b>Kết quả cần thấy:</b> bấm nút thì thông báo xuất hiện ngay trong trang, không dùng <code>alert</code> là tốt hơn.</div>
+            </div>
+            <aside class="block">
+              <div class="panel good">
+                <h4>Kiến thức liên quan</h4>
+                <ul>
+                  <li><code>click</code>: sự kiện xảy ra khi người dùng bấm.</li>
+                  <li><code>addEventListener</code>: cách gắn sự kiện chuẩn, tách HTML và JS rõ hơn.</li>
+                </ul>
+              </div>
+              <div class="repo-submit"><b>Nộp:</b> trong <code>MyWeb/js/script.js</code> có xử lý sự kiện click cho nút.</div>
+            </aside>
+          </div>
+        </article>
+      </section>
+
+      <section class="card section" id="stage-04">
+        <article class="stage">
+          <div class="stage-head">
+            <div class="num">04</div>
+            <div>
+              <h2>Ẩn/hiện nội dung giới thiệu</h2>
+              <p class="small">Mục tiêu: thay đổi trạng thái giao diện bằng class CSS và JavaScript.</p>
+            </div>
+            <span class="level">Dễ</span>
+          </div>
+          <div class="stage-body">
+            <div class="block">
+              <div class="panel blue">
+                <h4>Yêu cầu thực hành</h4>
+                <ol>
+                  <li>Chọn một đoạn giới thiệu hoặc một khối nội dung dài.</li>
+                  <li>Bọc nội dung đó bằng phần tử có <code>id="aboutContent"</code>.</li>
+                  <li>Thêm nút <code>id="toggleAboutBtn"</code>.</li>
+                  <li>Trong CSS, tạo class <code>.hidden</code>.</li>
+                  <li>Trong JS, dùng <code>classList.toggle("hidden")</code>.</li>
+                </ol>
+              </div>
+              <div class="codewrap">
+                <div class="copybar"><span>CSS cần có</span><button class="copy" data-copy="code04a">Copy</button></div>
+                <pre id="code04a"><code>.hidden {
   display: none;
-}`,
-    js:`const toggleAboutBtn = document.getElementById("toggleAboutBtn");
+}</code></pre>
+              </div>
+              <div class="codewrap">
+                <div class="copybar"><span>Gợi ý script.js</span><button class="copy" data-copy="code04b">Copy</button></div>
+                <pre id="code04b"><code>const toggleAboutBtn = document.getElementById("toggleAboutBtn");
 const aboutContent = document.getElementById("aboutContent");
 
 if (toggleAboutBtn && aboutContent) {
   toggleAboutBtn.addEventListener("click", function () {
     aboutContent.classList.toggle("hidden");
   });
-}`,
-    test:['Bấm nút lần 1: nội dung ẩn.','Bấm nút lần 2: nội dung hiện lại.','Không làm vỡ bố cục CSS đã có.'],
-    submit:'Nộp MyWeb/js, nếu có thêm .hidden thì CSS cũng cần được cập nhật.'
-  },
-  {
-    id:'stage-05', no:'05', level:'mid', title:'Menu mở/đóng trên màn hình nhỏ', focus:'menu động',
-    goal:'Bổ sung nút menu để website dễ dùng hơn trên thiết bị di động.',
-    tasks:['Tìm nav chính của website.','Thêm nút id="menuToggle" trước nav.','Gắn id="mainMenu" cho nav.','Trong JS, bấm nút thì thêm/xóa class open cho menu.','Trong CSS, quy định trạng thái menu khi có class open.'],
-    html:`<button id="menuToggle" class="menu-toggle" type="button">☰ Menu</button>
-<nav id="mainMenu" class="main-nav">
-  <a href="#hero">Trang chủ</a>
-  <a href="#about">Giới thiệu</a>
-  <a href="#gallery">Thư viện</a>
-</nav>`,
-    css:`@media (max-width: 768px) {
-  .main-nav { display: none; }
-  .main-nav.open { display: flex; flex-direction: column; }
-}`,
-    js:`const menuToggle = document.getElementById("menuToggle");
+}</code></pre>
+              </div>
+              <div class="result"><b>Kết quả cần thấy:</b> bấm nút lần 1 nội dung ẩn, bấm lần 2 nội dung hiện lại.</div>
+            </div>
+            <aside class="block">
+              <div class="panel warn">
+                <h4>Chú ý</h4>
+                <ul>
+                  <li>Không nên xóa hẳn nội dung bằng JS; chỉ ẩn/hiện bằng class.</li>
+                  <li>Class <code>.hidden</code> nên đặt trong <code>style.css</code>.</li>
+                </ul>
+              </div>
+              <div class="repo-submit"><b>Nộp:</b> có chức năng ẩn/hiện nội dung trên website thật.</div>
+            </aside>
+          </div>
+        </article>
+      </section>
+
+      <section class="card section" id="stage-05">
+        <article class="stage">
+          <div class="stage-head">
+            <div class="num">05</div>
+            <div>
+              <h2>Menu tương tác cho website</h2>
+              <p class="small">Mục tiêu: thêm nút mở/đóng menu, phù hợp website responsive.</p>
+            </div>
+            <span class="level medium">Trung bình</span>
+          </div>
+          <div class="stage-body">
+            <div class="block">
+              <div class="panel blue">
+                <h4>Yêu cầu thực hành</h4>
+                <ol>
+                  <li>Trong header, thêm nút menu có <code>id="menuToggle"</code>.</li>
+                  <li>Thanh menu chính cần có <code>id="mainMenu"</code>.</li>
+                  <li>CSS tạo class <code>.menu-open</code> hoặc <code>.active</code>.</li>
+                  <li>JS bấm nút sẽ thêm/xóa class cho menu.</li>
+                </ol>
+              </div>
+              <div class="codewrap">
+                <div class="copybar"><span>HTML gợi ý</span><button class="copy" data-copy="code05a">Copy</button></div>
+                <pre id="code05a"><code>&lt;button id="menuToggle" class="menu-toggle"&gt;☰ Menu&lt;/button&gt;
+&lt;nav id="mainMenu" class="main-menu"&gt;
+  &lt;a href="#home"&gt;Trang chủ&lt;/a&gt;
+  &lt;a href="#about"&gt;Giới thiệu&lt;/a&gt;
+  &lt;a href="#gallery"&gt;Thư viện&lt;/a&gt;
+  &lt;a href="#contact"&gt;Liên hệ&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+              </div>
+              <div class="codewrap">
+                <div class="copybar"><span>Gợi ý script.js</span><button class="copy" data-copy="code05b">Copy</button></div>
+                <pre id="code05b"><code>const menuToggle = document.getElementById("menuToggle");
 const mainMenu = document.getElementById("mainMenu");
 
 if (menuToggle && mainMenu) {
   menuToggle.addEventListener("click", function () {
-    mainMenu.classList.toggle("open");
+    mainMenu.classList.toggle("active");
   });
-}`,
-    test:['Thu nhỏ màn hình hoặc mở DevTools mobile.','Bấm Menu thấy nav mở/đóng.','Các link trong menu vẫn điều hướng đúng.'],
-    submit:'Nộp MyWeb/js; nếu chỉnh CSS menu, cập nhật MyWeb/css.'
-  },
-  {
-    id:'stage-06', no:'06', level:'mid', title:'Đổi màu giao diện theo lựa chọn', focus:'change event',
-    goal:'Dùng sự kiện change để thay đổi trạng thái giao diện theo lựa chọn của người dùng.',
-    tasks:['Thêm select chọn chủ đề màu.','Tạo các class theme-blue, theme-green, theme-orange trong CSS.','Trong JS, khi select thay đổi, đổi class của body.','Giữ màu hài hòa với website cũ.'],
-    html:`<label for="themeSelect">Chọn màu giao diện</label>
-<select id="themeSelect">
-  <option value="theme-blue">Xanh</option>
-  <option value="theme-green">Xanh lá</option>
-  <option value="theme-orange">Cam</option>
-</select>`,
-    css:`body.theme-blue { --primary: #2563eb; }
-body.theme-green { --primary: #16a34a; }
-body.theme-orange { --primary: #f97316; }`,
-    js:`const themeSelect = document.getElementById("themeSelect");
+}</code></pre>
+              </div>
+              <div class="result"><b>Kết quả cần thấy:</b> menu có thể mở/đóng bằng nút, đặc biệt hữu ích khi xem trên điện thoại.</div>
+            </div>
+            <aside class="block">
+              <div class="panel good">
+                <h4>Mở rộng</h4>
+                <ul>
+                  <li>Khi bấm một liên kết trong menu, có thể tự đóng menu.</li>
+                  <li>Đổi chữ nút từ “☰ Menu” sang “Đóng menu”.</li>
+                </ul>
+              </div>
+              <div class="repo-submit"><b>Nộp:</b> website MyWeb có menu tương tác bằng JS trong <code>MyWeb/js</code>.</div>
+            </aside>
+          </div>
+        </article>
+      </section>
+
+      <section class="card section" id="stage-06">
+        <article class="stage">
+          <div class="stage-head">
+            <div class="num">06</div>
+            <div>
+              <h2>Chọn màu hoặc chủ đề giao diện</h2>
+              <p class="small">Mục tiêu: dùng sự kiện change để thay đổi trạng thái giao diện.</p>
+            </div>
+            <span class="level medium">Trung bình</span>
+          </div>
+          <div class="stage-body">
+            <div class="block">
+              <div class="panel blue">
+                <h4>Yêu cầu thực hành</h4>
+                <ol>
+                  <li>Thêm hộp chọn màu/chủ đề cho website.</li>
+                  <li>Gán <code>id="themeSelect"</code> cho thẻ <code>select</code>.</li>
+                  <li>Khi người dùng đổi lựa chọn, JS thay đổi class của <code>body</code>.</li>
+                  <li>CSS định nghĩa ít nhất 2 trạng thái giao diện.</li>
+                </ol>
+              </div>
+              <div class="codewrap">
+                <div class="copybar"><span>HTML gợi ý</span><button class="copy" data-copy="code06a">Copy</button></div>
+                <pre id="code06a"><code>&lt;select id="themeSelect"&gt;
+  &lt;option value=""&gt;Giao diện mặc định&lt;/option&gt;
+  &lt;option value="dark-mode"&gt;Nền tối&lt;/option&gt;
+  &lt;option value="warm-mode"&gt;Nền ấm&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+              </div>
+              <div class="codewrap">
+                <div class="copybar"><span>Gợi ý script.js</span><button class="copy" data-copy="code06b">Copy</button></div>
+                <pre id="code06b"><code>const themeSelect = document.getElementById("themeSelect");
 
 if (themeSelect) {
   themeSelect.addEventListener("change", function () {
-    document.body.classList.remove("theme-blue", "theme-green", "theme-orange");
-    document.body.classList.add(themeSelect.value);
+    document.body.classList.remove("dark-mode", "warm-mode");
+    if (themeSelect.value !== "") {
+      document.body.classList.add(themeSelect.value);
+    }
   });
-}`,
-    test:['Chọn từng màu.','Giao diện đổi trạng thái hoặc biến màu chính.','Không mất khả năng đọc chữ.'],
-    submit:'Nộp MyWeb/js với đoạn xử lý change; CSS có class theme nếu dùng.'
-  },
-  {
-    id:'stage-07', no:'07', level:'mid', title:'Lọc thư viện ảnh / card theo chủ đề', focus:'dataset, loop',
-    goal:'Dùng JavaScript duyệt danh sách phần tử và lọc nội dung theo loại.',
-    tasks:['Chọn các card hoặc ảnh trong gallery.','Thêm thuộc tính data-category cho từng item.','Thêm các nút lọc: Tất cả, Nổi bật, Mới, Yêu thích.','Trong JS, duyệt danh sách item và ẩn/hiện theo category.'],
-    html:`<div class="filter-buttons">
-  <button type="button" data-filter="all">Tất cả</button>
-  <button type="button" data-filter="featured">Nổi bật</button>
-  <button type="button" data-filter="new">Mới</button>
-</div>
+}</code></pre>
+              </div>
+              <div class="result"><b>Kết quả cần thấy:</b> chọn một chủ đề thì giao diện đổi màu ngay.</div>
+            </div>
+            <aside class="block">
+              <div class="panel warn">
+                <h4>Gợi ý CSS</h4>
+                <pre style="font-size:12px">.dark-mode {
+  background:#111827;
+  color:#f8fafc;
+}
 
-<article class="gallery-item" data-category="featured">Ảnh 1</article>
-<article class="gallery-item" data-category="new">Ảnh 2</article>`,
-    css:`.gallery-item.hidden {
-  display: none;
-}`, 
-    js:`const filterButtons = document.querySelectorAll("[data-filter]");
+.warm-mode {
+  background:#fff7ed;
+}</pre>
+              </div>
+              <div class="repo-submit"><b>Nộp:</b> <code>script.js</code> có xử lý sự kiện <code>change</code>.</div>
+            </aside>
+          </div>
+        </article>
+      </section>
+
+      <section class="card section" id="stage-07">
+        <article class="stage">
+          <div class="stage-head">
+            <div class="num">07</div>
+            <div>
+              <h2>Tìm kiếm nhanh nội dung trong website</h2>
+              <p class="small">Mục tiêu: dùng sự kiện keyup/input để lọc nội dung đang có.</p>
+            </div>
+            <span class="level medium">Trung bình</span>
+          </div>
+          <div class="stage-body">
+            <div class="block">
+              <div class="panel blue">
+                <h4>Yêu cầu thực hành</h4>
+                <ol>
+                  <li>Thêm ô tìm kiếm có <code>id="searchInput"</code>.</li>
+                  <li>Các thẻ nội dung cần tìm kiếm gán class <code>search-item</code>.</li>
+                  <li>Khi người dùng gõ, JS lọc các thẻ có chứa từ khóa.</li>
+                  <li>Không phân biệt chữ hoa/chữ thường.</li>
+                </ol>
+              </div>
+              <div class="codewrap">
+                <div class="copybar"><span>Gợi ý script.js</span><button class="copy" data-copy="code07">Copy</button></div>
+                <pre id="code07"><code>const searchInput = document.getElementById("searchInput");
+const searchItems = document.querySelectorAll(".search-item");
+
+if (searchInput && searchItems.length > 0) {
+  searchInput.addEventListener("keyup", function () {
+    const keyword = searchInput.value.toLowerCase().trim();
+
+    searchItems.forEach(function (item) {
+      const text = item.textContent.toLowerCase();
+      if (text.includes(keyword)) {
+        item.style.display = "";
+      } else {
+        item.style.display = "none";
+      }
+    });
+  });
+}</code></pre>
+              </div>
+              <div class="result"><b>Kết quả cần thấy:</b> gõ từ khóa thì chỉ còn các nội dung phù hợp được hiển thị.</div>
+            </div>
+            <aside class="block">
+              <div class="panel good">
+                <h4>Áp dụng vào đâu?</h4>
+                <ul>
+                  <li>Danh sách bài viết.</li>
+                  <li>Danh sách sản phẩm/dự án.</li>
+                  <li>Danh sách ảnh hoặc chủ đề cá nhân.</li>
+                </ul>
+              </div>
+              <div class="repo-submit"><b>Nộp:</b> website có ô tìm kiếm hoạt động bằng JS.</div>
+            </aside>
+          </div>
+        </article>
+      </section>
+
+      <section class="card section" id="stage-08">
+        <article class="stage">
+          <div class="stage-head">
+            <div class="num">08</div>
+            <div>
+              <h2>Lọc gallery ảnh theo nhóm</h2>
+              <p class="small">Mục tiêu: dùng data attribute, click và điều kiện để lọc ảnh.</p>
+            </div>
+            <span class="level hard">Khó hơn</span>
+          </div>
+          <div class="stage-body">
+            <div class="block">
+              <div class="panel blue">
+                <h4>Yêu cầu thực hành</h4>
+                <ol>
+                  <li>Trong gallery, mỗi ảnh/card có class <code>gallery-item</code>.</li>
+                  <li>Mỗi item có thuộc tính <code>data-category</code>, ví dụ <code>food</code>, <code>travel</code>, <code>study</code>.</li>
+                  <li>Tạo các nút lọc có class <code>filter-btn</code>.</li>
+                  <li>JS bấm nút nào thì chỉ hiện nhóm tương ứng.</li>
+                </ol>
+              </div>
+              <div class="codewrap">
+                <div class="copybar"><span>HTML gợi ý</span><button class="copy" data-copy="code08a">Copy</button></div>
+                <pre id="code08a"><code>&lt;button class="filter-btn" data-filter="all"&gt;Tất cả&lt;/button&gt;
+&lt;button class="filter-btn" data-filter="travel"&gt;Du lịch&lt;/button&gt;
+&lt;button class="filter-btn" data-filter="study"&gt;Học tập&lt;/button&gt;
+
+&lt;article class="gallery-item" data-category="travel"&gt;Ảnh du lịch&lt;/article&gt;
+&lt;article class="gallery-item" data-category="study"&gt;Ảnh học tập&lt;/article&gt;</code></pre>
+              </div>
+              <div class="codewrap">
+                <div class="copybar"><span>Gợi ý script.js</span><button class="copy" data-copy="code08b">Copy</button></div>
+                <pre id="code08b"><code>const filterButtons = document.querySelectorAll(".filter-btn");
 const galleryItems = document.querySelectorAll(".gallery-item");
 
 filterButtons.forEach(function (button) {
@@ -223,156 +850,185 @@ filterButtons.forEach(function (button) {
     const filter = button.dataset.filter;
 
     galleryItems.forEach(function (item) {
-      const match = filter === "all" || item.dataset.category === filter;
-      item.classList.toggle("hidden", !match);
+      const category = item.dataset.category;
+      if (filter === "all" || category === filter) {
+        item.style.display = "";
+      } else {
+        item.style.display = "none";
+      }
     });
   });
-});`,
-    test:['Bấm Tất cả: hiện toàn bộ.','Bấm từng nhóm: chỉ hiện đúng nhóm.','Không xóa phần tử khỏi HTML, chỉ ẩn/hiện bằng class.'],
-    submit:'Nộp MyWeb/js với chức năng lọc gallery/card.'
-  },
-  {
-    id:'stage-08', no:'08', level:'mid', title:'Tìm kiếm nội dung khi đang gõ', focus:'keyup hoặc input event',
-    goal:'Dùng sự kiện nhập liệu để lọc card theo từ khóa thời gian thực.',
-    tasks:['Thêm ô input tìm kiếm phía trên danh sách card.','Gắn class searchable-item cho các card cần tìm.','Trong JS, lấy value.trim().toLowerCase().','Duyệt card và ẩn/hiện theo nội dung textContent.'],
-    html:`<input id="searchInput" type="text" placeholder="Tìm trong MyWeb...">
+});</code></pre>
+              </div>
+              <div class="result"><b>Kết quả cần thấy:</b> bấm nút lọc thì gallery thay đổi theo nhóm ảnh.</div>
+            </div>
+            <aside class="block">
+              <div class="panel warn">
+                <h4>Chú ý</h4>
+                <ul>
+                  <li><code>data-category</code> trong HTML phải khớp với <code>data-filter</code> trên nút.</li>
+                  <li>Nên có nút “Tất cả” để khôi phục toàn bộ gallery.</li>
+                </ul>
+              </div>
+              <div class="repo-submit"><b>Nộp:</b> <code>script.js</code> có chức năng lọc gallery.</div>
+            </aside>
+          </div>
+        </article>
+      </section>
 
-<article class="searchable-item">Du lịch Nha Trang</article>
-<article class="searchable-item">Ẩm thực địa phương</article>`,
-    css:`.searchable-item.hidden {
-  display: none;
-}`,
-    js:`const searchInput = document.getElementById("searchInput");
-const searchableItems = document.querySelectorAll(".searchable-item");
-
-if (searchInput) {
-  searchInput.addEventListener("keyup", function () {
-    const keyword = searchInput.value.trim().toLowerCase();
-
-    searchableItems.forEach(function (item) {
-      const content = item.textContent.toLowerCase();
-      item.classList.toggle("hidden", !content.includes(keyword));
-    });
-  });
-}`,
-    test:['Gõ một từ có trong card.','Danh sách tự lọc khi nhả phím.','Xóa từ khóa thì danh sách hiện lại.'],
-    submit:'Nộp MyWeb/js với chức năng tìm kiếm theo keyup/input.'
-  },
-  {
-    id:'stage-09', no:'09', level:'hard', title:'Kiểm tra form liên hệ', focus:'submit, preventDefault, trim',
-    goal:'Chặn gửi form mặc định, kiểm tra dữ liệu rỗng và hiển thị thông báo lỗi rõ ràng.',
-    tasks:['Tìm form liên hệ đã có trong website.','Gắn id="contactForm" cho form.','Gắn id cho input họ tên, email, nội dung.','Thêm vùng thông báo id="formMessage".','Trong JS, dùng event.preventDefault(), trim(), điều kiện if.'],
-    html:`<form id="contactForm" novalidate>
-  <input id="fullName" type="text" placeholder="Họ tên">
-  <input id="email" type="email" placeholder="Email">
-  <textarea id="message" placeholder="Nội dung"></textarea>
-  <button type="submit">Gửi</button>
-</form>
-<p id="formMessage"></p>`,
-    js:`const contactForm = document.getElementById("contactForm");
+      <section class="card section" id="stage-09">
+        <article class="stage">
+          <div class="stage-head">
+            <div class="num">09</div>
+            <div>
+              <h2>Kiểm tra form liên hệ trước khi gửi</h2>
+              <p class="small">Mục tiêu: dùng submit, trim và preventDefault để kiểm tra dữ liệu.</p>
+            </div>
+            <span class="level hard">Khó hơn</span>
+          </div>
+          <div class="stage-body">
+            <div class="block">
+              <div class="panel blue">
+                <h4>Yêu cầu thực hành</h4>
+                <ol>
+                  <li>Form liên hệ có <code>id="contactForm"</code>.</li>
+                  <li>Ô họ tên có <code>id="fullName"</code>.</li>
+                  <li>Ô email có <code>id="email"</code>.</li>
+                  <li>Vùng báo lỗi/thành công có <code>id="formMessage"</code>.</li>
+                  <li>Khi submit, JS chặn hành vi mặc định và kiểm tra dữ liệu.</li>
+                </ol>
+              </div>
+              <div class="codewrap">
+                <div class="copybar"><span>Gợi ý script.js</span><button class="copy" data-copy="code09">Copy</button></div>
+                <pre id="code09"><code>const contactForm = document.getElementById("contactForm");
 const fullName = document.getElementById("fullName");
 const email = document.getElementById("email");
-const message = document.getElementById("message");
 const formMessage = document.getElementById("formMessage");
 
-if (contactForm) {
+if (contactForm && fullName && email && formMessage) {
   contactForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
     const nameValue = fullName.value.trim();
     const emailValue = email.value.trim();
-    const messageValue = message.value.trim();
 
-    if (nameValue === "" || emailValue === "" || messageValue === "") {
-      formMessage.textContent = "Vui lòng nhập đầy đủ thông tin.";
-      formMessage.style.color = "#ef4444";
+    if (nameValue === "") {
+      formMessage.textContent = "Vui lòng nhập họ tên.";
+      formMessage.style.color = "red";
       return;
     }
 
-    formMessage.textContent = "Gửi thông tin thành công!";
-    formMessage.style.color = "#16a34a";
-  });
-}`,
-    test:['Bấm gửi khi bỏ trống: hiện lỗi, trang không reload.','Nhập toàn khoảng trắng: vẫn báo lỗi.','Nhập đủ: báo thành công.'],
-    submit:'Nộp MyWeb/js với xử lý submit form. Đây là chặng bắt buộc.'
-  },
-  {
-    id:'stage-10', no:'10', level:'hard', title:'Hoàn thiện tương tác và kiểm thử tổng hợp', focus:'tổng hợp, kiểm thử',
-    goal:'Kết hợp các chức năng đã làm, kiểm tra toàn bộ website MyWeb sau khi có JavaScript.',
-    tasks:['Thêm nút quay lại đầu trang.','Khi cuộn xuống, nút mới hiện ra.','Bấm nút thì scroll về đầu trang.','Kiểm tra lại menu, gallery, tìm kiếm, form.','Dọn console.log không cần thiết, giữ lại chú thích rõ ràng.'],
-    html:`<button id="backToTop" type="button" class="back-to-top">↑</button>`,
-    css:`.back-to-top {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  display: none;
-}
-.back-to-top.show {
-  display: block;
-}`,
-    js:`const backToTop = document.getElementById("backToTop");
+    if (emailValue === "" || !emailValue.includes("@")) {
+      formMessage.textContent = "Vui lòng nhập email hợp lệ.";
+      formMessage.style.color = "red";
+      return;
+    }
 
-if (backToTop) {
-  window.addEventListener("scroll", function () {
-    backToTop.classList.toggle("show", window.scrollY > 300);
+    formMessage.textContent = "Thông tin đã hợp lệ. Cảm ơn bạn!";
+    formMessage.style.color = "green";
   });
+}</code></pre>
+              </div>
+              <div class="result"><b>Kết quả cần thấy:</b> form không tải lại trang; nếu thiếu dữ liệu thì báo lỗi; nếu hợp lệ thì báo thành công.</div>
+            </div>
+            <aside class="block">
+              <div class="panel good">
+                <h4>Kiến thức quan trọng</h4>
+                <ul>
+                  <li><code>submit</code>: sự kiện khi gửi form.</li>
+                  <li><code>event.preventDefault()</code>: chặn trình duyệt gửi form/tải lại trang.</li>
+                  <li><code>trim()</code>: loại bỏ khoảng trắng đầu/cuối.</li>
+                  <li><code>return</code>: dừng xử lý khi gặp lỗi.</li>
+                </ul>
+              </div>
+              <div class="repo-submit"><b>Nộp:</b> form liên hệ trên MyWeb có kiểm tra dữ liệu bằng JS.</div>
+            </aside>
+          </div>
+        </article>
+      </section>
 
-  backToTop.addEventListener("click", function () {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-}`,
-    test:['Cuộn xuống hơn 300px, nút hiện ra.','Bấm nút, trang cuộn lên đầu.','Mở Console không có lỗi đỏ.','Kiểm thử trên Chrome và điện thoại hoặc chế độ responsive.'],
-    submit:'Nộp link cuối cùng https://github.com/abc/MyWeb/js và đảm bảo website MyWeb chạy đủ chức năng.'
-  }
-];
+      <section class="card section" id="stage-10">
+        <article class="stage">
+          <div class="stage-head">
+            <div class="num">10</div>
+            <div>
+              <h2>Hoàn thiện, kiểm thử và nộp kết quả JS</h2>
+              <p class="small">Mục tiêu: kiểm tra website hoạt động ổn định sau khi thêm JavaScript.</p>
+            </div>
+            <span class="level hard">Tổng hợp</span>
+          </div>
+          <div class="stage-body">
+            <div class="block">
+              <div class="panel blue">
+                <h4>Yêu cầu kiểm thử</h4>
+                <ol>
+                  <li>Mở website bằng trình duyệt, kiểm tra Console không có lỗi đỏ.</li>
+                  <li>Kiểm tra từng chức năng: menu, nút, ẩn/hiện, tìm kiếm, lọc ảnh, form.</li>
+                  <li>Kiểm tra trên kích thước màn hình nhỏ.</li>
+                  <li>Kiểm tra đường dẫn <code>../js/script.js</code> hoạt động đúng từ file HTML.</li>
+                  <li>Đẩy toàn bộ thay đổi lên GitHub.</li>
+                </ol>
+              </div>
+              <div class="panel good">
+                <h4>Tiêu chí đạt</h4>
+                <ul>
+                  <li>Website cũ không bị vỡ bố cục sau khi thêm JS.</li>
+                  <li>Ít nhất 5 chức năng JavaScript hoạt động.</li>
+                  <li>JS được viết trong file riêng <code>MyWeb/js/script.js</code>.</li>
+                  <li>HTML chỉ thêm id/class/nút/form cần thiết, không trộn quá nhiều JS inline.</li>
+                  <li>Có thông báo lỗi thân thiện khi form nhập sai.</li>
+                </ul>
+              </div>
+              <div class="result"><b>Kết quả cuối cùng:</b> website MyWeb từ trang tĩnh trở thành website có tương tác: người dùng bấm, gõ, chọn, gửi form và thấy phản hồi ngay.</div>
+            </div>
+            <aside class="block">
+              <div class="repo-submit">
+                <b>Nộp cuối cùng:</b>
+                <ul>
+                  <li><code>https://github.com/abc/MyWeb/html</code></li>
+                  <li><code>https://github.com/abc/MyWeb/css</code></li>
+                  <li><code>https://github.com/abc/MyWeb/js</code></li>
+                </ul>
+                Trong đó <code>MyWeb/js/script.js</code> là minh chứng chính của Bài 03.
+              </div>
+              <div class="panel warn">
+                <h4>Không đạt nếu</h4>
+                <ul>
+                  <li>Chỉ nộp file JS rỗng.</li>
+                  <li>Không liên kết được JS vào HTML.</li>
+                  <li>Copy code nhưng id trong HTML không khớp nên chức năng không chạy.</li>
+                  <li>Form submit làm trang tải lại mà không kiểm tra dữ liệu.</li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </article>
+      </section>
 
-function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
-function levelText(level){return level==='easy'?'Cơ bản':level==='mid'?'Trung bình':'Nâng cao'}
-function render(){
-  const nav=document.getElementById('stageNav');
-  const list=document.getElementById('stageList');
-  nav.innerHTML=stages.map(s=>`<a href="#${s.id}">${s.no}. ${esc(s.title)}<br><span class="small">${esc(s.focus)}</span></a>`).join('');
-  list.innerHTML=stages.map(stageCard).join('');
-}
-function codeBlock(label, code){
-  if(!code) return '';
-  return `<div class="code-wrap"><div class="codebar"><span>${esc(label)}</span><button class="copy" onclick="copyCode(this)">Copy</button></div><pre class="code"><code>${esc(code)}</code></pre></div>`;
-}
-function stageCard(s){
-  return `<article class="card stage" id="${s.id}" data-text="${esc((s.title+' '+s.focus+' '+s.goal+' '+s.tasks.join(' ')).toLowerCase())}">
-    <div class="card-head">
-      <div><h3>${s.no}. ${esc(s.title)}</h3><p class="small">Trọng tâm: ${esc(s.focus)}</p></div>
-      <span class="level ${s.level}">${levelText(s.level)}</span>
-    </div>
-    <div class="card-body">
-      <div class="box tip"><h4>Mục tiêu chặng</h4><p>${esc(s.goal)}</p></div>
-      <div class="grid-2">
-        <div class="box"><h4>Yêu cầu thực hành</h4><ol>${s.tasks.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></div>
-        <div class="box submit"><h4>Kết quả cần có trong repo</h4><p>${esc(s.submit)}</p><div class="repo">https://github.com/abc/MyWeb/js</div></div>
-      </div>
-      ${s.html?codeBlock('HTML bổ sung nếu cần',s.html):''}
-      ${s.css?codeBlock('CSS bổ sung nếu cần',s.css):''}
-      ${codeBlock('MyWeb/js/script.js',s.js)}
-      <div class="grid-2">
-        <div class="box"><h4>Cách kiểm tra</h4><ul>${s.test.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
-        <div class="box warn"><h4>Lưu ý tránh lỗi</h4><ul><li>Không xóa sản phẩm HTML/CSS/IMG đã làm ở bài trước.</li><li>Không đổi tên repo <b>MyWeb</b>.</li><li>Đặt script ở cuối <code>body</code> để tránh lỗi phần tử chưa tồn tại.</li><li>Khi lấy phần tử bằng id, id trong HTML và JS phải giống tuyệt đối.</li></ul></div>
-      </div>
-    </div>
-  </article>`;
-}
-function copyCode(btn){
-  const code=btn.closest('.code-wrap').querySelector('code').textContent;
-  navigator.clipboard.writeText(code).then(()=>{btn.textContent='Đã copy';setTimeout(()=>btn.textContent='Copy',1000)}).catch(()=>alert('Không copy được. Hãy bôi đen mã và copy thủ công.'));
-}
-function filterStages(){
-  const q=document.getElementById('searchBox').value.trim().toLowerCase();
-  document.querySelectorAll('.stage').forEach(card=>{
-    card.classList.toggle('hidden', q && !card.dataset.text.includes(q));
+      <footer class="card footer">
+        <b>MyWeb JS Practice Guide</b><br>
+        UI này chỉ dùng để giao nhiệm vụ thực hành. Sinh viên làm trực tiếp trong repo MyWeb cá nhân và nộp kết quả trong thư mục <code>MyWeb/js</code>.
+      </footer>
+    </main>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll(".copy").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    const id = btn.getAttribute("data-copy");
+    const target = document.getElementById(id);
+    if(!target) return;
+    const text = target.innerText;
+    navigator.clipboard.writeText(text).then(function(){
+      const old = btn.textContent;
+      btn.textContent = "Đã copy";
+      setTimeout(function(){ btn.textContent = old; }, 1200);
+    }).catch(function(){
+      alert("Không copy được. Hãy bôi đen đoạn mã và copy thủ công.");
+    });
   });
-}
-function openAll(){document.querySelectorAll('.stage').forEach(x=>x.classList.remove('hidden'));document.getElementById('searchBox').value=''}
-function closeAll(){window.scrollTo({top:0,behavior:'smooth'})}
-render();
+});
 </script>
 </body>
 </html>
