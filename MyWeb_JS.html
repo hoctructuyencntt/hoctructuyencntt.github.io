@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MyWeb JS Practice Guide - Bài 03 JavaScript</title>
+<style>
+:root{
+  --ink:#102033;--muted:#64748b;--line:#d7dee8;--panel:#ffffff;--soft:#f8fafc;
+  --blue:#2563eb;--cyan:#06b6d4;--green:#16a34a;--orange:#f97316;--red:#ef4444;--purple:#7c3aed;
+  --shadow:0 18px 45px rgba(15,23,42,.11);--radius:24px;--code:#0f172a;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:"Segoe UI",system-ui,sans-serif;color:var(--ink);background:linear-gradient(135deg,#f8fbff,#edf8ff 55%,#fff7ed)}
+button,input,textarea{font-family:inherit} a{color:var(--blue)}
+.app{max-width:1450px;margin:auto;padding:16px}.topbar{position:sticky;top:10px;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:15px 16px;border:1px solid var(--line);border-radius:30px;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);box-shadow:var(--shadow)}
+.brand{display:flex;gap:12px;align-items:center}.logo{width:58px;height:58px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(135deg,var(--orange),var(--blue));color:#fff;font-weight:950;font-size:20px;box-shadow:inset 0 -5px rgba(0,0,0,.13)}
+h1,h2,h3,h4,p{margin:0}.brand p,.small{font-size:13px;color:var(--muted);line-height:1.45}.actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.btn{border:0;border-radius:16px;padding:11px 14px;font-weight:900;color:white;background:linear-gradient(135deg,var(--blue),var(--cyan));cursor:pointer;box-shadow:0 10px 20px rgba(37,99,235,.15)}.btn.ghost{background:#f1f5f9;color:#334155;border:1px solid var(--line);box-shadow:none}.btn.orange{background:linear-gradient(135deg,#ffab19,var(--orange))}.btn.green{background:linear-gradient(135deg,#22c55e,var(--green))}
+.hero{margin-top:16px;padding:22px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(239,246,255,.96));box-shadow:var(--shadow)}.hero-grid{display:grid;grid-template-columns:1.25fr .85fr;gap:16px;align-items:start}.hero h2{font-size:30px;line-height:1.18}.badge{display:inline-flex;gap:6px;align-items:center;padding:6px 10px;border-radius:999px;background:#fff7ed;color:#9a3412;font-weight:900;font-size:12px;margin-bottom:10px}.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.pill{display:inline-flex;gap:7px;align-items:center;padding:8px 11px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:13px;font-weight:850}.notice{padding:14px;border-radius:18px;border:1px solid rgba(249,115,22,.28);background:#fff7ed;color:#7c2d12;line-height:1.5}.layout{display:grid;grid-template-columns:310px minmax(0,1fr);gap:16px;margin-top:16px}.side{position:sticky;top:104px;align-self:start;border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.94);box-shadow:var(--shadow);padding:15px}.search{width:100%;padding:12px;border:1px solid var(--line);border-radius:15px;background:#f8fafc;outline:none}.nav{display:grid;gap:8px;margin-top:12px}.nav a{text-decoration:none;color:var(--ink);padding:10px 12px;border-radius:15px;background:#f8fafc;border:1px solid var(--line);font-size:13px;font-weight:850}.nav a:hover{background:#eff6ff;border-color:rgba(37,99,235,.28)}.main{display:grid;gap:14px}.card{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);box-shadow:var(--shadow);overflow:hidden}.card-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;padding:16px 18px;background:#f8fafc;border-bottom:1px solid var(--line)}.card-head h3{font-size:20px}.level{white-space:nowrap;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:950}.level.easy{background:#ecfdf5;color:#166534}.level.mid{background:#eff6ff;color:#1d4ed8}.level.hard{background:#fff7ed;color:#9a3412}.card-body{padding:16px 18px;display:grid;gap:14px}.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.box{padding:14px;border:1px solid var(--line);border-radius:18px;background:#fff}.box h4{font-size:15px;margin-bottom:8px}.box ul,.box ol{margin:8px 0 0;padding-left:20px}.box li{margin:6px 0;line-height:1.45}.submit{border-color:rgba(22,163,74,.28);background:#f0fdf4}.warn{border-color:rgba(239,68,68,.24);background:#fff1f2}.tip{border-color:rgba(37,99,235,.25);background:#eff6ff}.repo{font-family:Consolas,Monaco,"Courier New",monospace;font-size:13px;line-height:1.55;background:#0f172a;color:#dbeafe;border-radius:16px;padding:12px;overflow:auto}.code-wrap{border-radius:18px;overflow:hidden;border:1px solid rgba(15,23,42,.18);background:var(--code)}.codebar{display:flex;justify-content:space-between;gap:10px;align-items:center;background:#111827;color:#dbeafe;padding:9px 12px;font-weight:850;font-size:13px}.copy{border:1px solid rgba(255,255,255,.2);border-radius:999px;background:#243247;color:white;padding:6px 9px;font-size:12px;cursor:pointer}.code{margin:0;padding:14px;color:#dbeafe;font-family:Consolas,Monaco,"Courier New",monospace;font-size:13px;line-height:1.5;white-space:pre;overflow:auto;max-height:360px}.checklist{display:grid;gap:8px}.check{display:flex;gap:9px;align-items:flex-start;padding:10px 11px;border:1px solid var(--line);border-radius:14px;background:#fff}.check input{margin-top:3px}.footer{padding:18px;border:1px solid var(--line);border-radius:var(--radius);background:white;box-shadow:var(--shadow)}.hidden{display:none!important}.print-only{display:none}
+@media(max-width:1100px){.layout,.hero-grid,.grid-2{grid-template-columns:1fr}.side{position:static}.topbar{position:static;align-items:flex-start;flex-direction:column}}
+@media print{body{background:white}.topbar,.side,.actions,.copy{display:none}.layout,.hero-grid,.grid-2{display:block}.card,.hero,.footer{box-shadow:none;break-inside:avoid;margin-bottom:12px}.app{max-width:none}.print-only{display:block}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">JS</div>
+      <div>
+        <h1>MyWeb JS Practice Guide</h1>
+        <p>Chuỗi nhiệm vụ bổ sung JavaScript vào website MyWeb đã hoàn thành HTML/CSS/IMG.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <a class="btn ghost" href="https://hoctructuyencntt.github.io/bai03tkweb.pdf" target="_blank" rel="noopener" style="text-decoration:none">Mở PDF Bài 03</a>
+      <button class="btn orange" onclick="window.print()">In / Xuất PDF</button>
+      <button class="btn green" onclick="openAll()">Mở tất cả chặng</button>
+      <button class="btn ghost" onclick="closeAll()">Thu gọn</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <span class="badge">Giả định đầu vào: MyWeb đã có html + css + img</span>
+        <h2>Bài 03: Biến website MyWeb tĩnh thành website có tương tác bằng JavaScript</h2>
+        <p class="small" style="font-size:15px;margin-top:10px">Sinh viên không làm lại HTML/CSS từ đầu. Mỗi chặng chỉ yêu cầu <b>bổ sung chức năng JS</b> vào website cá nhân đã xây dựng trước đó. Mã chính đặt trong <b>MyWeb/js/script.js</b>; chỉ chỉnh HTML/CSS khi cần thêm <code>id</code>, <code>class</code>, nút bấm, form hoặc trạng thái hiển thị.</p>
+        <div class="pill-row">
+          <span class="pill">📁 MyWeb/html/index.html</span>
+          <span class="pill">🎨 MyWeb/css/style.css</span>
+          <span class="pill">🖼️ MyWeb/img/...</span>
+          <span class="pill">⚙️ MyWeb/js/script.js</span>
+        </div>
+      </div>
+      <div class="notice">
+        <b>Quy tắc nộp sau mỗi chặng</b><br>
+        Cập nhật repo cá nhân <b>MyWeb</b>. Kết quả chính của chặng là file trong thư mục <b>js</b>. Nộp link:<br><br>
+        <code>https://github.com/abc/MyWeb/js</code><br><br>
+        Nếu chặng có chỉnh HTML/CSS, vẫn giữ cấu trúc cũ và chỉ bổ sung phần cần thiết.
+      </div>
+    </div>
+  </section>
+
+  <div class="layout">
+    <aside class="side">
+      <h2 style="font-size:18px">Bộ lọc nhiệm vụ</h2>
+      <p class="small">Tìm nhanh theo từ khóa: DOM, menu, form, gallery, submit...</p>
+      <input class="search" id="searchBox" placeholder="Tìm chặng thực hành..." oninput="filterStages()">
+      <nav class="nav" id="stageNav"></nav>
+      <div class="box tip" style="margin-top:12px">
+        <h4>Link JS đúng khi HTML ở thư mục html</h4>
+        <div class="repo">&lt;script src="../js/script.js"&gt;&lt;/script&gt;</div>
+      </div>
+    </aside>
+
+    <main class="main" id="stageList"></main>
+  </div>
+
+  <section class="footer" style="margin-top:16px">
+    <h2>Rubric chấm nhanh</h2>
+    <div class="grid-2" style="margin-top:12px">
+      <div class="box"><h4>Đạt yêu cầu</h4><ul><li>Website vẫn giữ nội dung, ảnh, bố cục đã làm ở MyWeb.</li><li>File <code>js/script.js</code> có mã rõ ràng, có chú thích ngắn.</li><li>Không lỗi Console nghiêm trọng.</li><li>Tương tác chạy được trên trình duyệt.</li></ul></div>
+      <div class="box warn"><h4>Không đạt</h4><ul><li>Làm lại website từ đầu, mất sản phẩm HTML/CSS/IMG cũ.</li><li>Đặt JS lẫn lộn trong HTML, không có file <code>js/script.js</code>.</li><li>Form reload trang vì quên <code>preventDefault()</code>.</li><li>Nộp sai repo hoặc sai thư mục <code>MyWeb/js</code>.</li></ul></div>
+    </div>
+  </section>
+</div>
+
+<script>
+const stages = [
+  {
+    id:'stage-01', no:'01', level:'easy', title:'Tạo thư mục js và liên kết script.js', focus:'External JavaScript',
+    goal:'Chuẩn hóa cấu trúc MyWeb để JavaScript nằm riêng trong thư mục js, không viết lẫn vào HTML.',
+    tasks:['Trong repo MyWeb, tạo thư mục js ngang hàng với html, css, img.','Tạo file js/script.js.','Mở html/index.html và thêm thẻ script ngay trước </body>.','Kiểm tra Console thấy thông báo từ script.js.'],
+    html:`<!-- đặt cuối file html/index.html, ngay trước </body> -->
+<script src="../js/script.js"></script>`,
+    js:`console.log("MyWeb JS đã kết nối thành công");`,
+    test:['Mở website trên trình duyệt.','Nhấn F12 → Console.','Thấy dòng: MyWeb JS đã kết nối thành công.'],
+    submit:'Cập nhật MyWeb/js/script.js và nộp link https://github.com/abc/MyWeb/js'
+  },
+  {
+    id:'stage-02', no:'02', level:'easy', title:'Đổi nội dung bằng DOM', focus:'getElementById, textContent',
+    goal:'Dùng JavaScript tìm phần tử HTML và thay đổi nội dung hiển thị.',
+    tasks:['Chọn một tiêu đề chính trong website, ví dụ h1 hero.','Nếu chưa có id, thêm id="mainTitle" vào tiêu đề đó.','Trong script.js, lấy phần tử bằng document.getElementById.','Đổi nội dung hoặc thêm câu chào phù hợp chủ đề cá nhân.'],
+    html:`<h1 id="mainTitle">Website cá nhân của tôi</h1>
+<p id="welcomeText">Chào mừng bạn đến với MyWeb.</p>`,
+    js:`const mainTitle = document.getElementById("mainTitle");
+const welcomeText = document.getElementById("welcomeText");
+
+if (mainTitle && welcomeText) {
+  mainTitle.textContent = "MyWeb đã có JavaScript!";
+  welcomeText.textContent = "Nội dung này được cập nhật bằng file js/script.js.";
+}`,
+    test:['Tải lại trang.','Tiêu đề hoặc đoạn chào thay đổi sau khi trang chạy.','Console không báo lỗi null hoặc undefined.'],
+    submit:'Nộp MyWeb/js, trong script.js có phần DOM đổi nội dung.'
+  },
+  {
+    id:'stage-03', no:'03', level:'easy', title:'Nút bấm phản hồi người dùng', focus:'click event',
+    goal:'Thêm một nút vào website và xử lý sự kiện click để giao diện phản hồi.',
+    tasks:['Thêm nút vào phần hero hoặc giới thiệu.','Gắn id="helloBtn" cho nút.','Thêm vùng thông báo id="helloResult".','Trong script.js, dùng addEventListener("click", ...).'],
+    html:`<button id="helloBtn" type="button">Nhấn để xem lời chào</button>
+<p id="helloResult"></p>`,
+    js:`const helloBtn = document.getElementById("helloBtn");
+const helloResult = document.getElementById("helloResult");
+
+if (helloBtn && helloResult) {
+  helloBtn.addEventListener("click", function () {
+    helloResult.textContent = "Cảm ơn bạn đã ghé thăm MyWeb!";
+  });
+}`,
+    test:['Bấm nút.','Thông báo xuất hiện ngay trên trang, không dùng alert là tốt hơn.','Bấm nhiều lần vẫn ổn định.'],
+    submit:'Nộp MyWeb/js, trong script.js có sự kiện click cho nút.'
+  },
+  {
+    id:'stage-04', no:'04', level:'easy', title:'Ẩn / hiện nội dung giới thiệu', focus:'classList.toggle',
+    goal:'Tạo hiệu ứng mở/thu gọn một vùng nội dung đã có trong website.',
+    tasks:['Chọn phần giới thiệu, câu chuyện hoặc mô tả dài.','Bọc nội dung bằng id="aboutContent".','Thêm nút id="toggleAboutBtn".','Trong CSS thêm class .hidden nếu chưa có.','Trong JS dùng classList.toggle("hidden").'],
+    html:`<button id="toggleAboutBtn" type="button">Ẩn / hiện giới thiệu</button>
+<div id="aboutContent">
+  <p>Nội dung giới thiệu website cá nhân...</p>
+</div>`,
+    css:`.hidden {
+  display: none;
+}`,
+    js:`const toggleAboutBtn = document.getElementById("toggleAboutBtn");
+const aboutContent = document.getElementById("aboutContent");
+
+if (toggleAboutBtn && aboutContent) {
+  toggleAboutBtn.addEventListener("click", function () {
+    aboutContent.classList.toggle("hidden");
+  });
+}`,
+    test:['Bấm nút lần 1: nội dung ẩn.','Bấm nút lần 2: nội dung hiện lại.','Không làm vỡ bố cục CSS đã có.'],
+    submit:'Nộp MyWeb/js, nếu có thêm .hidden thì CSS cũng cần được cập nhật.'
+  },
+  {
+    id:'stage-05', no:'05', level:'mid', title:'Menu mở/đóng trên màn hình nhỏ', focus:'menu động',
+    goal:'Bổ sung nút menu để website dễ dùng hơn trên thiết bị di động.',
+    tasks:['Tìm nav chính của website.','Thêm nút id="menuToggle" trước nav.','Gắn id="mainMenu" cho nav.','Trong JS, bấm nút thì thêm/xóa class open cho menu.','Trong CSS, quy định trạng thái menu khi có class open.'],
+    html:`<button id="menuToggle" class="menu-toggle" type="button">☰ Menu</button>
+<nav id="mainMenu" class="main-nav">
+  <a href="#hero">Trang chủ</a>
+  <a href="#about">Giới thiệu</a>
+  <a href="#gallery">Thư viện</a>
+</nav>`,
+    css:`@media (max-width: 768px) {
+  .main-nav { display: none; }
+  .main-nav.open { display: flex; flex-direction: column; }
+}`,
+    js:`const menuToggle = document.getElementById("menuToggle");
+const mainMenu = document.getElementById("mainMenu");
+
+if (menuToggle && mainMenu) {
+  menuToggle.addEventListener("click", function () {
+    mainMenu.classList.toggle("open");
+  });
+}`,
+    test:['Thu nhỏ màn hình hoặc mở DevTools mobile.','Bấm Menu thấy nav mở/đóng.','Các link trong menu vẫn điều hướng đúng.'],
+    submit:'Nộp MyWeb/js; nếu chỉnh CSS menu, cập nhật MyWeb/css.'
+  },
+  {
+    id:'stage-06', no:'06', level:'mid', title:'Đổi màu giao diện theo lựa chọn', focus:'change event',
+    goal:'Dùng sự kiện change để thay đổi trạng thái giao diện theo lựa chọn của người dùng.',
+    tasks:['Thêm select chọn chủ đề màu.','Tạo các class theme-blue, theme-green, theme-orange trong CSS.','Trong JS, khi select thay đổi, đổi class của body.','Giữ màu hài hòa với website cũ.'],
+    html:`<label for="themeSelect">Chọn màu giao diện</label>
+<select id="themeSelect">
+  <option value="theme-blue">Xanh</option>
+  <option value="theme-green">Xanh lá</option>
+  <option value="theme-orange">Cam</option>
+</select>`,
+    css:`body.theme-blue { --primary: #2563eb; }
+body.theme-green { --primary: #16a34a; }
+body.theme-orange { --primary: #f97316; }`,
+    js:`const themeSelect = document.getElementById("themeSelect");
+
+if (themeSelect) {
+  themeSelect.addEventListener("change", function () {
+    document.body.classList.remove("theme-blue", "theme-green", "theme-orange");
+    document.body.classList.add(themeSelect.value);
+  });
+}`,
+    test:['Chọn từng màu.','Giao diện đổi trạng thái hoặc biến màu chính.','Không mất khả năng đọc chữ.'],
+    submit:'Nộp MyWeb/js với đoạn xử lý change; CSS có class theme nếu dùng.'
+  },
+  {
+    id:'stage-07', no:'07', level:'mid', title:'Lọc thư viện ảnh / card theo chủ đề', focus:'dataset, loop',
+    goal:'Dùng JavaScript duyệt danh sách phần tử và lọc nội dung theo loại.',
+    tasks:['Chọn các card hoặc ảnh trong gallery.','Thêm thuộc tính data-category cho từng item.','Thêm các nút lọc: Tất cả, Nổi bật, Mới, Yêu thích.','Trong JS, duyệt danh sách item và ẩn/hiện theo category.'],
+    html:`<div class="filter-buttons">
+  <button type="button" data-filter="all">Tất cả</button>
+  <button type="button" data-filter="featured">Nổi bật</button>
+  <button type="button" data-filter="new">Mới</button>
+</div>
+
+<article class="gallery-item" data-category="featured">Ảnh 1</article>
+<article class="gallery-item" data-category="new">Ảnh 2</article>`,
+    css:`.gallery-item.hidden {
+  display: none;
+}`, 
+    js:`const filterButtons = document.querySelectorAll("[data-filter]");
+const galleryItems = document.querySelectorAll(".gallery-item");
+
+filterButtons.forEach(function (button) {
+  button.addEventListener("click", function () {
+    const filter = button.dataset.filter;
+
+    galleryItems.forEach(function (item) {
+      const match = filter === "all" || item.dataset.category === filter;
+      item.classList.toggle("hidden", !match);
+    });
+  });
+});`,
+    test:['Bấm Tất cả: hiện toàn bộ.','Bấm từng nhóm: chỉ hiện đúng nhóm.','Không xóa phần tử khỏi HTML, chỉ ẩn/hiện bằng class.'],
+    submit:'Nộp MyWeb/js với chức năng lọc gallery/card.'
+  },
+  {
+    id:'stage-08', no:'08', level:'mid', title:'Tìm kiếm nội dung khi đang gõ', focus:'keyup hoặc input event',
+    goal:'Dùng sự kiện nhập liệu để lọc card theo từ khóa thời gian thực.',
+    tasks:['Thêm ô input tìm kiếm phía trên danh sách card.','Gắn class searchable-item cho các card cần tìm.','Trong JS, lấy value.trim().toLowerCase().','Duyệt card và ẩn/hiện theo nội dung textContent.'],
+    html:`<input id="searchInput" type="text" placeholder="Tìm trong MyWeb...">
+
+<article class="searchable-item">Du lịch Nha Trang</article>
+<article class="searchable-item">Ẩm thực địa phương</article>`,
+    css:`.searchable-item.hidden {
+  display: none;
+}`,
+    js:`const searchInput = document.getElementById("searchInput");
+const searchableItems = document.querySelectorAll(".searchable-item");
+
+if (searchInput) {
+  searchInput.addEventListener("keyup", function () {
+    const keyword = searchInput.value.trim().toLowerCase();
+
+    searchableItems.forEach(function (item) {
+      const content = item.textContent.toLowerCase();
+      item.classList.toggle("hidden", !content.includes(keyword));
+    });
+  });
+}`,
+    test:['Gõ một từ có trong card.','Danh sách tự lọc khi nhả phím.','Xóa từ khóa thì danh sách hiện lại.'],
+    submit:'Nộp MyWeb/js với chức năng tìm kiếm theo keyup/input.'
+  },
+  {
+    id:'stage-09', no:'09', level:'hard', title:'Kiểm tra form liên hệ', focus:'submit, preventDefault, trim',
+    goal:'Chặn gửi form mặc định, kiểm tra dữ liệu rỗng và hiển thị thông báo lỗi rõ ràng.',
+    tasks:['Tìm form liên hệ đã có trong website.','Gắn id="contactForm" cho form.','Gắn id cho input họ tên, email, nội dung.','Thêm vùng thông báo id="formMessage".','Trong JS, dùng event.preventDefault(), trim(), điều kiện if.'],
+    html:`<form id="contactForm" novalidate>
+  <input id="fullName" type="text" placeholder="Họ tên">
+  <input id="email" type="email" placeholder="Email">
+  <textarea id="message" placeholder="Nội dung"></textarea>
+  <button type="submit">Gửi</button>
+</form>
+<p id="formMessage"></p>`,
+    js:`const contactForm = document.getElementById("contactForm");
+const fullName = document.getElementById("fullName");
+const email = document.getElementById("email");
+const message = document.getElementById("message");
+const formMessage = document.getElementById("formMessage");
+
+if (contactForm) {
+  contactForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const nameValue = fullName.value.trim();
+    const emailValue = email.value.trim();
+    const messageValue = message.value.trim();
+
+    if (nameValue === "" || emailValue === "" || messageValue === "") {
+      formMessage.textContent = "Vui lòng nhập đầy đủ thông tin.";
+      formMessage.style.color = "#ef4444";
+      return;
+    }
+
+    formMessage.textContent = "Gửi thông tin thành công!";
+    formMessage.style.color = "#16a34a";
+  });
+}`,
+    test:['Bấm gửi khi bỏ trống: hiện lỗi, trang không reload.','Nhập toàn khoảng trắng: vẫn báo lỗi.','Nhập đủ: báo thành công.'],
+    submit:'Nộp MyWeb/js với xử lý submit form. Đây là chặng bắt buộc.'
+  },
+  {
+    id:'stage-10', no:'10', level:'hard', title:'Hoàn thiện tương tác và kiểm thử tổng hợp', focus:'tổng hợp, kiểm thử',
+    goal:'Kết hợp các chức năng đã làm, kiểm tra toàn bộ website MyWeb sau khi có JavaScript.',
+    tasks:['Thêm nút quay lại đầu trang.','Khi cuộn xuống, nút mới hiện ra.','Bấm nút thì scroll về đầu trang.','Kiểm tra lại menu, gallery, tìm kiếm, form.','Dọn console.log không cần thiết, giữ lại chú thích rõ ràng.'],
+    html:`<button id="backToTop" type="button" class="back-to-top">↑</button>`,
+    css:`.back-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  display: none;
+}
+.back-to-top.show {
+  display: block;
+}`,
+    js:`const backToTop = document.getElementById("backToTop");
+
+if (backToTop) {
+  window.addEventListener("scroll", function () {
+    backToTop.classList.toggle("show", window.scrollY > 300);
+  });
+
+  backToTop.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}`,
+    test:['Cuộn xuống hơn 300px, nút hiện ra.','Bấm nút, trang cuộn lên đầu.','Mở Console không có lỗi đỏ.','Kiểm thử trên Chrome và điện thoại hoặc chế độ responsive.'],
+    submit:'Nộp link cuối cùng https://github.com/abc/MyWeb/js và đảm bảo website MyWeb chạy đủ chức năng.'
+  }
+];
+
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
+function levelText(level){return level==='easy'?'Cơ bản':level==='mid'?'Trung bình':'Nâng cao'}
+function render(){
+  const nav=document.getElementById('stageNav');
+  const list=document.getElementById('stageList');
+  nav.innerHTML=stages.map(s=>`<a href="#${s.id}">${s.no}. ${esc(s.title)}<br><span class="small">${esc(s.focus)}</span></a>`).join('');
+  list.innerHTML=stages.map(stageCard).join('');
+}
+function codeBlock(label, code){
+  if(!code) return '';
+  return `<div class="code-wrap"><div class="codebar"><span>${esc(label)}</span><button class="copy" onclick="copyCode(this)">Copy</button></div><pre class="code"><code>${esc(code)}</code></pre></div>`;
+}
+function stageCard(s){
+  return `<article class="card stage" id="${s.id}" data-text="${esc((s.title+' '+s.focus+' '+s.goal+' '+s.tasks.join(' ')).toLowerCase())}">
+    <div class="card-head">
+      <div><h3>${s.no}. ${esc(s.title)}</h3><p class="small">Trọng tâm: ${esc(s.focus)}</p></div>
+      <span class="level ${s.level}">${levelText(s.level)}</span>
+    </div>
+    <div class="card-body">
+      <div class="box tip"><h4>Mục tiêu chặng</h4><p>${esc(s.goal)}</p></div>
+      <div class="grid-2">
+        <div class="box"><h4>Yêu cầu thực hành</h4><ol>${s.tasks.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></div>
+        <div class="box submit"><h4>Kết quả cần có trong repo</h4><p>${esc(s.submit)}</p><div class="repo">https://github.com/abc/MyWeb/js</div></div>
+      </div>
+      ${s.html?codeBlock('HTML bổ sung nếu cần',s.html):''}
+      ${s.css?codeBlock('CSS bổ sung nếu cần',s.css):''}
+      ${codeBlock('MyWeb/js/script.js',s.js)}
+      <div class="grid-2">
+        <div class="box"><h4>Cách kiểm tra</h4><ul>${s.test.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
+        <div class="box warn"><h4>Lưu ý tránh lỗi</h4><ul><li>Không xóa sản phẩm HTML/CSS/IMG đã làm ở bài trước.</li><li>Không đổi tên repo <b>MyWeb</b>.</li><li>Đặt script ở cuối <code>body</code> để tránh lỗi phần tử chưa tồn tại.</li><li>Khi lấy phần tử bằng id, id trong HTML và JS phải giống tuyệt đối.</li></ul></div>
+      </div>
+    </div>
+  </article>`;
+}
+function copyCode(btn){
+  const code=btn.closest('.code-wrap').querySelector('code').textContent;
+  navigator.clipboard.writeText(code).then(()=>{btn.textContent='Đã copy';setTimeout(()=>btn.textContent='Copy',1000)}).catch(()=>alert('Không copy được. Hãy bôi đen mã và copy thủ công.'));
+}
+function filterStages(){
+  const q=document.getElementById('searchBox').value.trim().toLowerCase();
+  document.querySelectorAll('.stage').forEach(card=>{
+    card.classList.toggle('hidden', q && !card.dataset.text.includes(q));
+  });
+}
+function openAll(){document.querySelectorAll('.stage').forEach(x=>x.classList.remove('hidden'));document.getElementById('searchBox').value=''}
+function closeAll(){window.scrollTo({top:0,behavior:'smooth'})}
+render();
+</script>
+</body>
+</html>
