@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buổi 1 Thiết kế web – Học sinh</title>
+<style>
+:root{--ink:#172033;--muted:#64748b;--brand:#4f46e5;--bg:#f5f7fb;--line:#e2e8f0}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,Arial,sans-serif}header{padding:40px 7vw;background:linear-gradient(135deg,#312e81,#4f46e5,#0f766e);color:#fff}h1{font-size:clamp(2rem,4vw,3.2rem);line-height:1.1;margin:14px 0}header p{max-width:780px;color:#e0e7ff}.wrap{max-width:1050px;margin:auto;padding:24px 5vw 60px}section{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:18px 0;box-shadow:0 8px 24px #1720330a}h2{margin-top:0;color:#312e81}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.card{padding:15px;border:1px solid var(--line);border-radius:14px;background:#fbfdff}.note,.task{padding:14px 16px;border-left:4px solid var(--brand);background:#eef2ff;border-radius:0 10px 10px 0}.task{border-left-color:#0f766e;background:#ecfdf5}.ai{border-left-color:#f59e0b;background:#fffbeb}pre{background:#111827;color:#e5e7eb;padding:14px;border-radius:12px;overflow:auto}code{background:#eef2ff;color:#3730a3;padding:2px 5px;border-radius:4px}input[type=text],textarea{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:9px;font:inherit;margin:5px 0 12px}textarea{min-height:72px;resize:vertical}.step{display:flex;gap:12px;align-items:flex-start;margin:12px 0}.num{background:var(--brand);color:#fff;border-radius:50%;min-width:30px;height:30px;text-align:center;line-height:30px;font-weight:800}.check label{display:block;padding:8px 0}.check input{margin-right:8px;accent-color:var(--brand)}button{border:0;background:var(--brand);color:#fff;padding:10px 14px;border-radius:9px;font-weight:700;cursor:pointer}.saved{display:none;background:#dcfce7;color:#166534;padding:10px;border-radius:8px;margin-top:10px}.small{color:var(--muted);font-size:.9rem}
+</style>
+<style>
+.pdfbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 16px;border:1px solid #c7d2fe;background:#eef2ff;border-radius:14px;margin-bottom:18px}.pdfbar p{margin:0;color:#3730a3}.pdfbar button{white-space:nowrap}.print-help{font-size:.9rem;color:var(--muted);margin:.4rem 0 0}
+@media print{body{background:#fff;font-size:11pt}header{color:#111827;background:#fff;padding:0 0 16px;border-bottom:2px solid #111827}header p{color:#334155}.pdfbar,.small,.task.ai,button{display:none!important}.wrap{max-width:none;padding:0}section{box-shadow:none;border:0;border-bottom:1px solid #cbd5e1;border-radius:0;margin:0;padding:16px 0;break-inside:avoid}h2{color:#111827}pre{white-space:pre-wrap;color:#111827;background:#f8fafc;border:1px solid #cbd5e1}textarea,input[type=text]{border:0;border-bottom:1px solid #64748b;border-radius:0;padding:4px 0;min-height:36px}.check input{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<header><strong>PHIẾU HỌC TẬP · BUỔI 1 · 240 PHÚT</strong><h1>Từ người lướt web thành người làm web</h1><p>Em sẽ tự tạo một trang giới thiệu cá nhân bằng HTML và CSS. AI là trợ giảng: em hỏi, thử, kiểm tra và hiểu.</p></header>
+<div class="pdfbar"><div><strong>Hoàn thành và xuất PDF</strong><p class="print-help">Bấm nút, chọn <strong>Save as PDF / Lưu dưới dạng PDF</strong>, rồi nộp tệp cho giáo viên.</p></div><button type="button" onclick="window.print()">🖨 In / Xuất PDF</button></div>
+<main class="wrap">
+<section class="student-info"><h2>Thông tin nộp bài</h2><label>Họ và tên</label><input type="text" placeholder="Nguyễn Văn A"><label>Lớp / nhóm</label><input type="text" placeholder="Lớp ..."><label>Ngày thực hiện</label><input type="text" placeholder="dd/mm/yyyy"><p class="small">Tên PDF nên đặt theo mẫu: <code>HoTen_Buoi1_ThietKeWeb.pdf</code></p></section>
+<section><h2>Em sẽ làm được gì?</h2><div class="grid"><div class="card"><h3>HTML</h3><p>Tạo nội dung và cấu trúc.</p></div><div class="card"><h3>CSS</h3><p>Làm trang dễ đọc và đẹp hơn.</p></div><div class="card"><h3>AI</h3><p>Hỏi việc nhỏ và kiểm chứng câu trả lời.</p></div></div><div class="note"><strong>Sản phẩm:</strong> <code>index.html</code> mở được, có nội dung của em và ít nhất 3 thay đổi trình bày.</div></section>
+<section><h2>1. Khởi động</h2><label>Em chọn giao diện nào? Vì sao?</label><textarea id="q1" placeholder="Ví dụ: chữ dễ đọc hơn..."></textarea><label>Em muốn trang web tạo cảm giác gì?</label><input id="q2" type="text" placeholder="Vui vẻ, chuyên nghiệp, năng động..."></section>
+<section><h2>2. Ba thành phần</h2><div class="grid"><div class="card"><strong>HTML = khung xương</strong><p>Nội dung và thứ tự.</p></div><div class="card"><strong>CSS = quần áo</strong><p>Màu, cỡ chữ, khoảng cách.</p></div><div class="card"><strong>JavaScript = hành động</strong><p>Điều xảy ra khi tương tác.</p></div></div><div class="task">Thêm dòng “Món bán chạy” → <input type="text" placeholder="HTML / CSS / JavaScript">Đổi dòng đó sang màu cam → <input type="text" placeholder="HTML / CSS / JavaScript">Bấm nút để tính tổng tiền → <input type="text" placeholder="HTML / CSS / JavaScript"></div></section>
+<section><h2>3. Tạo trang đầu tiên</h2><p>Nhớ vòng lặp: <strong>sửa → lưu → tải lại trình duyệt</strong>.</p><div class="step"><span class="num">1</span><div>Tạo đúng tên <code>index.html</code>.</div></div><div class="step"><span class="num">2</span><div>Mở mã khởi đầu và sửa nội dung.</div></div><div class="step"><span class="num">3</span><div>Mở tệp bằng trình duyệt; nếu chưa đổi, kiểm tra đã lưu.</div></div><pre><code>&lt;!doctype html&gt;
+&lt;html lang="vi"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Trang đầu tiên của mình&lt;/title&gt;
+  &lt;style&gt;
+    body { font-family: Arial; background:#edf2ff; color:#1f2937; padding:24px; }
+    h1 { color:#4338ca; font-size:36px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Xin chào, mình là An!&lt;/h1&gt;
+  &lt;p&gt;Mình đang học cách tạo trang web đầu tiên.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></section>
+<section><h2>4. Nhiệm vụ bắt buộc</h2><div class="task"><div class="step"><span class="num">1</span><div>Đổi “An” thành tên hoặc biệt danh của em.</div></div><div class="step"><span class="num">2</span><div>Viết một câu giới thiệu thật sự của em.</div></div><div class="step"><span class="num">3</span><div>Thêm danh sách ba điều yêu thích bằng <code>&lt;ul&gt;</code> và <code>&lt;li&gt;</code>.</div></div><div class="step"><span class="num">4</span><div>Thêm một liên kết hữu ích.</div></div><div class="step"><span class="num">5</span><div>Đổi màu nền, màu tiêu đề và kích thước tiêu đề.</div></div></div><p><strong>Chủ đề:</strong> Tôi là ai? · Góc đam mê · Nghề tôi muốn làm.</p></section>
+<section><h2>5. AI như trợ giảng</h2><div class="note"><strong>5 bước:</strong> nêu việc → hỏi nhỏ → dự đoán → chạy thử → giải thích.</div><p>Prompt mẫu:</p><pre><code>Tôi mới học HTML và CSS.
+Tôi muốn đổi màu tiêu đề h1.
+Chỉ đưa phần CSS cần sửa, giải thích ngắn từng dòng
+và hỏi tôi một câu để kiểm tra tôi có hiểu không.
+Không viết lại toàn bộ trang.</code></pre><div class="task ai"><strong>Khi lỗi:</strong> nói rõ em muốn gì, đã sửa gì, kết quả hiện tại và đoạn mã liên quan. Đừng hỏi “làm hộ em”.</div><label>AI đã gợi ý gì?</label><textarea id="ai1"></textarea><label>Em đã thử và thấy gì?</label><textarea id="ai2"></textarea><label>Em giữ hoặc bỏ gợi ý vì sao?</label><textarea id="ai3"></textarea></section>
+<section><h2>6. Checklist trước khi nộp</h2><div class="check"><label><input type="checkbox"> Tệp đúng tên <code>index.html</code> và mở được.</label><label><input type="checkbox"> Có tiêu đề, giới thiệu, danh sách 3 mục.</label><label><input type="checkbox"> Có một liên kết bấm được.</label><label><input type="checkbox"> Đã đổi ít nhất 3 chi tiết trình bày.</label><label><input type="checkbox"> Giải thích được 2 đoạn mã.</label><label><input type="checkbox"> Đã ghi lại việc kiểm chứng AI.</label></div><button onclick="saveProgress()">Lưu phiếu trên máy này</button><div id="saved" class="saved">Đã lưu tiến độ trên trình duyệt này.</div></section>
+<section><h2>7. Phiếu ra về</h2><label>HTML giúp làm gì?</label><textarea></textarea><label>Muốn đổi màu chữ, em dùng gì?</label><textarea></textarea><label>Hôm nay em làm được việc nào?</label><textarea></textarea><label>Em còn cần hỗ trợ gì?</label><textarea></textarea><p class="small">Nộp <code>index.html</code> cùng phần ghi nhận sử dụng AI. Không đưa thông tin riêng tư lên trang.</p></section>
+</main>
+<script>function saveProgress(){const d={q1:document.querySelector('#q1').value,q2:document.querySelector('#q2').value,ai1:document.querySelector('#ai1').value,ai2:document.querySelector('#ai2').value,ai3:document.querySelector('#ai3').value};localStorage.setItem('buoi1_web_hocsinh',JSON.stringify(d));document.querySelector('#saved').style.display='block'}window.addEventListener('DOMContentLoaded',()=>{try{const d=JSON.parse(localStorage.getItem('buoi1_web_hocsinh')||'{}');Object.entries(d).forEach(([k,v])=>{const e=document.querySelector('#'+k);if(e)e.value=v})}catch(e){}})</script>
+<style>
+.print-answer{display:none}
+@page{size:A4;margin:16mm}
+@media print{
+  textarea,input[type=text]{display:none!important}
+  .print-answer{display:block!important;white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;height:auto!important;max-height:none!important;overflow:visible!important;border-bottom:1px solid #94a3b8;padding:6px 0 10px;margin:4px 0 14px;min-height:24px;break-inside:auto;orphans:2;widows:2}
+  section,.note,.task,.card{break-inside:auto!important;height:auto!important;max-height:none!important;overflow:visible!important}
+  h2,h3,label{break-after:avoid}
+  .saved{display:none!important}
+}
+</style>
+<script>
+// Plain text blocks can flow across printed pages; textarea controls cannot.
+function preparePrintAnswers(){
+  document.querySelectorAll('.print-answer').forEach(node=>node.remove());
+  document.querySelectorAll('textarea,input[type="text"]').forEach(field=>{
+    const answer=document.createElement('div');
+    answer.className='print-answer';
+    answer.textContent=field.value || '(Chưa nhập)';
+    field.insertAdjacentElement('afterend',answer);
+  });
+}
+window.addEventListener('beforeprint',preparePrintAnswers);
+window.addEventListener('afterprint',()=>document.querySelectorAll('.print-answer').forEach(node=>node.remove()));
+</script>
+</body>
+</html>
